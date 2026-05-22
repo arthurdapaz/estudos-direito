@@ -1,0 +1,742 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pirâmide de Kelsen - Ordenamento Jurídico Brasileiro</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #06070a;
+      color: #f8fafc;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      overflow: hidden;
+    }
+
+    body {
+      background:
+        radial-gradient(circle at 50% 14%, rgba(255, 196, 87, 0.16), transparent 32%),
+        linear-gradient(180deg, #090b12 0%, #05070a 68%, #030405 100%);
+    }
+
+    #scene {
+      position: fixed;
+      inset: 0;
+    }
+
+    .hud {
+      position: fixed;
+      top: clamp(14px, 2vw, 26px);
+      left: clamp(14px, 2vw, 28px);
+      z-index: 3;
+      width: min(380px, calc(100vw - 28px));
+      pointer-events: none;
+      text-shadow: 0 2px 16px rgba(0, 0, 0, 0.75);
+    }
+
+    .hud h1 {
+      margin: 0;
+      font-size: clamp(1.1rem, 2.2vw, 2.05rem);
+      font-weight: 760;
+      line-height: 1.03;
+      letter-spacing: 0;
+    }
+
+    .hud p {
+      margin: 8px 0 0;
+      max-width: 32rem;
+      color: #c7d2fe;
+      font-size: clamp(0.74rem, 1vw, 0.95rem);
+      line-height: 1.45;
+    }
+
+    .label {
+      width: clamp(142px, 17vw, 236px);
+      padding: 7px 9px;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      background: rgba(7, 11, 18, 0.68);
+      box-shadow: 0 14px 34px rgba(0, 0, 0, 0.36);
+      color: #f8fafc;
+      font-size: clamp(0.58rem, 0.82vw, 0.78rem);
+      font-weight: 650;
+      line-height: 1.25;
+      text-align: center;
+      white-space: pre-line;
+      backdrop-filter: blur(10px);
+      border-radius: 7px;
+    }
+
+    .label.layer {
+      transform: translateY(-50%);
+    }
+
+    .label.grundnorm {
+      width: clamp(150px, 16vw, 220px);
+      border-color: rgba(255, 214, 120, 0.62);
+      background: rgba(38, 23, 7, 0.72);
+      color: #fff7d6;
+      text-transform: uppercase;
+      letter-spacing: 0;
+    }
+
+    .label.grundnorm span {
+      display: block;
+      margin-top: 2px;
+      color: #ffe3a3;
+      font-size: 0.76em;
+      font-weight: 720;
+      text-transform: none;
+    }
+
+    .loading {
+      position: fixed;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      z-index: 2;
+      color: #e2e8f0;
+      font-size: 0.9rem;
+      letter-spacing: 0;
+      background: #06070a;
+      transition: opacity 220ms ease;
+    }
+
+    .loading.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .scheme-panel {
+      position: fixed;
+      top: clamp(14px, 2vw, 26px);
+      right: clamp(14px, 2vw, 28px);
+      z-index: 4;
+      width: min(274px, calc(100vw - 28px));
+      padding: 10px;
+      border: 1px solid rgba(255, 214, 120, 0.28);
+      border-radius: 7px;
+      background: rgba(7, 11, 18, 0.74);
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.36);
+      backdrop-filter: blur(12px);
+    }
+
+    .scheme-panel label {
+      display: block;
+      margin-bottom: 6px;
+      color: #ffe3a3;
+      font-size: 0.68rem;
+      font-weight: 760;
+      line-height: 1.1;
+      text-transform: uppercase;
+    }
+
+    .scheme-panel select {
+      width: 100%;
+      min-height: 34px;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      border-radius: 6px;
+      background: #111827;
+      color: #f8fafc;
+      font: inherit;
+      font-size: 0.84rem;
+      outline: none;
+    }
+
+    .scheme-panel select:focus {
+      border-color: rgba(255, 214, 120, 0.78);
+      box-shadow: 0 0 0 3px rgba(255, 214, 120, 0.16);
+    }
+
+    .scheme-note {
+      margin: 7px 0 0;
+      color: #c7d2fe;
+      font-size: 0.68rem;
+      line-height: 1.32;
+    }
+
+    @media (max-width: 640px) {
+      .hud {
+        top: 12px;
+        left: 12px;
+        width: min(178px, calc(100vw - 24px));
+      }
+
+      .hud h1 {
+        font-size: 0.98rem;
+        line-height: 1.05;
+      }
+
+      .hud p {
+        margin-top: 6px;
+        font-size: 0.7rem;
+        line-height: 1.36;
+      }
+
+      .label {
+        width: min(128px, 34vw);
+        padding: 5px 6px;
+        font-size: 0.54rem;
+        line-height: 1.18;
+      }
+
+      .label.grundnorm {
+        width: 138px;
+        font-size: 0.52rem;
+      }
+
+      .scheme-panel {
+        top: auto;
+        right: 12px;
+        bottom: 12px;
+        width: 176px;
+        padding: 8px;
+      }
+
+      .scheme-panel label {
+        font-size: 0.58rem;
+      }
+
+      .scheme-panel select {
+        min-height: 30px;
+        font-size: 0.72rem;
+      }
+
+      .scheme-note {
+        font-size: 0.58rem;
+      }
+    }
+  </style>
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://cdn.jsdelivr.net/npm/three@0.184.0/build/three.module.js",
+        "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.184.0/examples/jsm/"
+      }
+    }
+  </script>
+</head>
+<body>
+  <main id="scene" aria-label="Pirâmide de Kelsen em 3D"></main>
+  <section class="hud" aria-hidden="true">
+    <h1>Pirâmide de Kelsen</h1>
+    <p>Ordenamento jurídico brasileiro com a Grundnorm irradiando sobre a Constituição e as normas inferiores.</p>
+  </section>
+  <section class="scheme-panel" aria-label="Esquema da pirâmide normativa">
+    <label for="schemeSelect">Esquema</label>
+    <select id="schemeSelect">
+      <option value="mayara" selected>Prof. Mayara da Paixão</option>
+      <option value="stf">STF geral</option>
+      <option value="original">Original expandido</option>
+    </select>
+    <p class="scheme-note" id="schemeNote"></p>
+  </section>
+  <div class="loading" id="loading">Carregando cena 3D</div>
+
+  <script type="module">
+    import * as THREE from 'three';
+    import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+    import { CSS2DObject, CSS2DRenderer } from 'three/addons/renderers/CSS2DRenderer.js';
+
+    const container = document.querySelector('#scene');
+    const loading = document.querySelector('#loading');
+    const schemeSelect = document.querySelector('#schemeSelect');
+    const schemeNote = document.querySelector('#schemeNote');
+
+    const scene = new THREE.Scene();
+    scene.fog = new THREE.FogExp2(0x07090d, 0.055);
+
+    const camera = new THREE.PerspectiveCamera(42, window.innerWidth / window.innerHeight, 0.1, 90);
+    camera.position.set(5.6, 4.25, 8.8);
+
+    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.outputColorSpace = THREE.SRGBColorSpace;
+    renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    renderer.toneMappingExposure = 1.08;
+    renderer.shadowMap.enabled = true;
+    renderer.shadowMap.type = THREE.PCFShadowMap;
+    container.appendChild(renderer.domElement);
+
+    const labelRenderer = new CSS2DRenderer();
+    labelRenderer.setSize(window.innerWidth, window.innerHeight);
+    labelRenderer.domElement.style.position = 'fixed';
+    labelRenderer.domElement.style.inset = '0';
+    labelRenderer.domElement.style.pointerEvents = 'none';
+    document.body.appendChild(labelRenderer.domElement);
+
+    const controls = new OrbitControls(camera, renderer.domElement);
+    controls.enableDamping = true;
+    controls.dampingFactor = 0.06;
+    controls.minDistance = 5.2;
+    controls.maxDistance = 16;
+    controls.maxPolarAngle = Math.PI * 0.49;
+    controls.target.set(0, 1.9, 0);
+
+    const defaultCameraPosition = new THREE.Vector3();
+    const defaultControlsTarget = new THREE.Vector3();
+    const worldUp = new THREE.Vector3(0, 1, 0);
+    const eyeRight = new THREE.Vector3();
+    const eyeUp = new THREE.Vector3();
+    const eyeDirection = new THREE.Vector3();
+    const eyeMatrix = new THREE.Matrix4();
+    const eyeTargetQuaternion = new THREE.Quaternion();
+    const constitutionFocusWorld = new THREE.Vector3();
+
+    scene.add(new THREE.HemisphereLight(0xaec6ff, 0x121015, 1.15));
+
+    const keyLight = new THREE.DirectionalLight(0xfff4da, 2.4);
+    keyLight.position.set(4.5, 7.5, 5.2);
+    keyLight.castShadow = true;
+    keyLight.shadow.mapSize.set(2048, 2048);
+    keyLight.shadow.camera.near = 0.5;
+    keyLight.shadow.camera.far = 22;
+    keyLight.shadow.camera.left = -7;
+    keyLight.shadow.camera.right = 7;
+    keyLight.shadow.camera.top = 7;
+    keyLight.shadow.camera.bottom = -5;
+    scene.add(keyLight);
+
+    const rimLight = new THREE.DirectionalLight(0x5ad7ff, 1.45);
+    rimLight.position.set(-5, 3.5, -4.5);
+    scene.add(rimLight);
+
+    const floor = new THREE.Mesh(
+      new THREE.CircleGeometry(8.2, 96),
+      new THREE.MeshStandardMaterial({
+        color: 0x10151d,
+        roughness: 0.9,
+        metalness: 0.02,
+        transparent: true,
+        opacity: 0.92
+      })
+    );
+    floor.rotation.x = -Math.PI / 2;
+    floor.position.y = -0.02;
+    floor.receiveShadow = true;
+    scene.add(floor);
+
+    const grid = new THREE.GridHelper(15, 30, 0x667085, 0x283041);
+    grid.material.transparent = true;
+    grid.material.opacity = 0.2;
+    grid.position.y = 0.004;
+    scene.add(grid);
+
+    addStars();
+
+    const pyramid = new THREE.Group();
+    scene.add(pyramid);
+
+    const schemes = {
+      mayara: {
+        note: 'Organização em 4 níveis conforme indicação da Prof. Mayara da Paixão.',
+        layers: [
+          '4º nível\nDecretos\nRegulamentos\nResoluções\nNormas Inferiores',
+          '3º nível\nTratado Internacional\nLei Complementar / Lei Ordinária\nMP / LD / DL\n(DL não pode mais ser criada)',
+          '2º nível\nTIVDH simples\nSUPRALEGAL',
+          '1º nível\nConstituição Federal (CF)\nTratado Internacional\nque versa sobre Direitos Humanos\n(TIVDH)'
+        ]
+      },
+      stf: {
+        note: 'STF: TIDH qualificado equivale a emenda; TIDH simples é supralegal; tratado comum fica, em regra, no plano legal.',
+        layers: [
+          'Atos infralegais\nDecretos regulamentares\nPortarias / Instruções Normativas',
+          'Plano legal\nTratados internacionais comuns\nLC / LO / MP / LD / DL / Resoluções',
+          'Tratados Internacionais\nde Direitos Humanos\nsem rito do art. 5º, §3º\nSUPRALEGAL',
+          'Constituição Federal\nEmendas Constitucionais\nTIDH do art. 5º, §3º'
+        ]
+      },
+      original: {
+        note: 'Versão expandida usada na primeira visualização.',
+        layers: [
+          'Portarias\nInstruções Normativas\nAtos Administrativos',
+          'Decretos Regulamentares\nRegulamentos',
+          'Leis Delegadas\nDecretos Legislativos\nResoluções',
+          'Leis Complementares\nLeis Ordinárias\nMedidas Provisórias\nTratados Internacionais\nsem matéria de Direitos Humanos',
+          'Constituição Federal\nEmendas Constitucionais\nTratados de DH do art. 5º, §3º'
+        ]
+      }
+    };
+
+    const layerHeight = 0.58;
+    const layerGap = 0.035;
+    const layerColors = [0x256d85, 0x2f8f6d, 0x965f2d, 0x8f3442, 0xd3a83b];
+    const layerEmissives = [0x08252f, 0x09281e, 0x2a1606, 0x2a070c, 0x3a2705];
+    let totalHeight = 0;
+    const constitutionFocusLocal = new THREE.Vector3();
+
+    const apexLight = new THREE.PointLight(0xffcb6b, 14, 13, 1.65);
+    scene.add(apexLight);
+
+    const eyeGroup = createGrundnormEye();
+    scene.add(eyeGroup);
+
+    const grundnormLabel = createLabel('GRUNDNORM<span>Norma Fundamental Hipotética</span>', 'grundnorm', true);
+    scene.add(grundnormLabel);
+
+    const startedAt = performance.now();
+    frameCamera();
+    const requestedScheme = new URLSearchParams(window.location.search).get('scheme');
+    setScheme(requestedScheme && Object.hasOwn(schemes, requestedScheme) ? requestedScheme : schemeSelect.value);
+    schemeSelect.addEventListener('change', () => {
+      const url = new URL(window.location.href);
+      url.searchParams.set('scheme', schemeSelect.value);
+      window.history.replaceState(null, '', url);
+      setScheme(schemeSelect.value);
+    });
+    requestAnimationFrame(animate);
+    window.addEventListener('resize', resize);
+
+    loading.classList.add('hidden');
+
+    function setScheme(key) {
+      const scheme = schemes[key] ?? schemes.mayara;
+      schemeSelect.value = Object.hasOwn(schemes, key) ? key : 'mayara';
+      schemeNote.textContent = scheme.note;
+
+      clearPyramid();
+      buildPyramid(scheme.layers);
+
+      totalHeight = scheme.layers.length * (layerHeight + layerGap) - layerGap;
+      constitutionFocusLocal.set(0, totalHeight - 0.18, 0.85);
+      apexLight.position.set(0, totalHeight + 1.12, 0.35);
+      eyeGroup.position.set(0, totalHeight + 1.08, 0);
+      grundnormLabel.position.set(1.16, totalHeight + 2.25, 0.18);
+      updateEyeGaze();
+    }
+
+    function buildPyramid(labels) {
+      const radii = createRadii(labels.length);
+
+      labels.forEach((labelText, index) => {
+        const paletteIndex = Math.round(index * (layerColors.length - 1) / Math.max(labels.length - 1, 1));
+        const bottomRadius = radii[index];
+        const topRadius = radii[index + 1];
+        const y = index * (layerHeight + layerGap) + layerHeight / 2;
+
+        const geometry = new THREE.CylinderGeometry(topRadius, bottomRadius, layerHeight, 4, 1, false);
+        geometry.rotateY(Math.PI / 4);
+
+        const material = new THREE.MeshStandardMaterial({
+          color: layerColors[paletteIndex],
+          emissive: layerEmissives[paletteIndex],
+          roughness: 0.54,
+          metalness: 0.18
+        });
+
+        const mesh = new THREE.Mesh(geometry, material);
+        mesh.position.y = y;
+        mesh.castShadow = true;
+        mesh.receiveShadow = true;
+        pyramid.add(mesh);
+
+        const edgeLines = new THREE.LineSegments(
+          new THREE.EdgesGeometry(geometry),
+          new THREE.LineBasicMaterial({
+            color: 0xffffff,
+            transparent: true,
+            opacity: 0.24
+          })
+        );
+        edgeLines.position.copy(mesh.position);
+        pyramid.add(edgeLines);
+
+        const label = createLabel(labelText, 'layer');
+        label.position.set(0.32, y + 0.02, bottomRadius * 0.63 + 0.34);
+        pyramid.add(label);
+      });
+    }
+
+    function createRadii(layerCount) {
+      const bottom = 3.75;
+      const top = layerCount <= 3 ? 0.66 : 0.42;
+      const radii = [];
+
+      for (let i = 0; i <= layerCount; i++) {
+        const t = i / layerCount;
+        radii.push(THREE.MathUtils.lerp(bottom, top, Math.pow(t, 0.92)));
+      }
+
+      return radii;
+    }
+
+    function clearPyramid() {
+      while (pyramid.children.length > 0) {
+        disposeObject(pyramid.children.pop());
+      }
+    }
+
+    function disposeObject(object) {
+      object.traverse((child) => {
+        child.element?.remove();
+        child.geometry?.dispose();
+
+        if (Array.isArray(child.material)) {
+          child.material.forEach((material) => material.dispose());
+        } else {
+          child.material?.dispose();
+        }
+      });
+    }
+
+    function animate() {
+      const elapsed = (performance.now() - startedAt) / 1000;
+
+      pyramid.rotation.y = Math.sin(elapsed * 0.16) * 0.08;
+      eyeGroup.position.y = totalHeight + 1.08 + Math.sin(elapsed * 1.3) * 0.04;
+      controls.update();
+      updateEyeGaze();
+      eyeGroup.userData.rays.rotation.z = elapsed * 0.12;
+      eyeGroup.userData.innerRays.rotation.z = -elapsed * 0.2;
+      eyeGroup.userData.pupil.scale.setScalar(1 + Math.sin(elapsed * 2.1) * 0.035);
+      apexLight.intensity = 13 + Math.sin(elapsed * 2.4) * 2.5;
+
+      renderer.render(scene, camera);
+      labelRenderer.render(scene, camera);
+      requestAnimationFrame(animate);
+    }
+
+    function resize() {
+      const width = window.innerWidth;
+      const height = window.innerHeight;
+      camera.aspect = width / height;
+      camera.updateProjectionMatrix();
+      renderer.setSize(width, height);
+      labelRenderer.setSize(width, height);
+      frameCamera();
+    }
+
+    function frameCamera() {
+      const aspect = window.innerWidth / window.innerHeight;
+
+      if (aspect < 0.68) {
+        camera.fov = 48;
+        camera.position.set(2.2, 4.35, 13.2);
+        controls.target.set(0.05, 1.85, 0);
+      } else if (aspect < 1.05) {
+        camera.fov = 45;
+        camera.position.set(4.2, 4.25, 10.7);
+        controls.target.set(0, 1.85, 0);
+      } else {
+        camera.fov = 42;
+        camera.position.set(5.6, 4.25, 8.8);
+        controls.target.set(0, 1.9, 0);
+      }
+
+      camera.aspect = aspect;
+      camera.updateProjectionMatrix();
+      controls.update();
+      defaultCameraPosition.copy(camera.position);
+      defaultControlsTarget.copy(controls.target);
+    }
+
+    function updateEyeGaze() {
+      const cameraIsDefault =
+        camera.position.distanceTo(defaultCameraPosition) < 0.08 &&
+        controls.target.distanceTo(defaultControlsTarget) < 0.04;
+      constitutionFocusWorld.copy(constitutionFocusLocal);
+      pyramid.localToWorld(constitutionFocusWorld);
+      const gazeTarget = cameraIsDefault ? constitutionFocusWorld : camera.position;
+
+      eyeDirection.copy(gazeTarget).sub(eyeGroup.position).normalize();
+      eyeRight.crossVectors(worldUp, eyeDirection);
+      if (eyeRight.lengthSq() < 0.0001) {
+        eyeRight.set(1, 0, 0);
+      } else {
+        eyeRight.normalize();
+      }
+      eyeUp.crossVectors(eyeDirection, eyeRight).normalize();
+      eyeMatrix.makeBasis(eyeRight, eyeUp, eyeDirection);
+      eyeTargetQuaternion.setFromRotationMatrix(eyeMatrix);
+      eyeGroup.quaternion.slerp(eyeTargetQuaternion, cameraIsDefault ? 0.08 : 0.16);
+    }
+
+    function createLabel(content, variant, html = false) {
+      const div = document.createElement('div');
+      div.className = `label ${variant}`;
+      if (html) {
+        div.innerHTML = content;
+      } else {
+        div.textContent = content;
+      }
+      return new CSS2DObject(div);
+    }
+
+    function createGrundnormEye() {
+      const group = new THREE.Group();
+      const face = new THREE.Group();
+      group.add(face);
+      group.userData.face = face;
+
+      const halo = new THREE.Mesh(
+        new THREE.RingGeometry(1.18, 1.78, 96),
+        new THREE.MeshBasicMaterial({
+          color: 0xffce7a,
+          side: THREE.DoubleSide,
+          transparent: true,
+          opacity: 0.33,
+          blending: THREE.AdditiveBlending,
+          depthWrite: false
+        })
+      );
+      halo.position.z = -0.12;
+      face.add(halo);
+
+      const rays = createRayBurst(42, 1.32, 3.12, 0xffd88a, 0.55);
+      rays.position.z = -0.18;
+      face.add(rays);
+      group.userData.rays = rays;
+
+      const innerRays = createRayBurst(26, 0.92, 2.12, 0xfff1ba, 0.35);
+      innerRays.position.z = -0.14;
+      face.add(innerRays);
+      group.userData.innerRays = innerRays;
+
+      const sclera = new THREE.Mesh(
+        new THREE.SphereGeometry(0.86, 72, 36),
+        new THREE.MeshStandardMaterial({
+          color: 0xfff3d0,
+          emissive: 0x5c3c14,
+          roughness: 0.38,
+          metalness: 0.05
+        })
+      );
+      sclera.scale.set(1.75, 0.78, 0.14);
+      sclera.castShadow = false;
+      face.add(sclera);
+
+      const rim = new THREE.Mesh(
+        new THREE.TorusGeometry(0.91, 0.025, 12, 128),
+        new THREE.MeshBasicMaterial({
+          color: 0xffc66d,
+          transparent: true,
+          opacity: 0.86
+        })
+      );
+      rim.scale.set(1.67, 0.74, 1);
+      rim.position.z = 0.1;
+      face.add(rim);
+
+      const iris = new THREE.Mesh(
+        new THREE.CircleGeometry(0.31, 64),
+        new THREE.MeshStandardMaterial({
+          color: 0x4dd0e1,
+          emissive: 0x105c6b,
+          roughness: 0.34,
+          metalness: 0.22,
+          side: THREE.DoubleSide
+        })
+      );
+      iris.position.z = 0.18;
+      face.add(iris);
+
+      const irisRing = new THREE.Mesh(
+        new THREE.RingGeometry(0.23, 0.32, 72),
+        new THREE.MeshBasicMaterial({
+          color: 0xf8df82,
+          side: THREE.DoubleSide,
+          transparent: true,
+          opacity: 0.72
+        })
+      );
+      irisRing.position.z = 0.19;
+      face.add(irisRing);
+
+      const pupil = new THREE.Mesh(
+        new THREE.CircleGeometry(0.13, 48),
+        new THREE.MeshBasicMaterial({
+          color: 0x060606,
+          side: THREE.DoubleSide
+        })
+      );
+      pupil.position.z = 0.205;
+      face.add(pupil);
+      group.userData.pupil = pupil;
+
+      const highlight = new THREE.Mesh(
+        new THREE.CircleGeometry(0.045, 24),
+        new THREE.MeshBasicMaterial({
+          color: 0xffffff,
+          transparent: true,
+          opacity: 0.9,
+          side: THREE.DoubleSide
+        })
+      );
+      highlight.position.set(-0.075, 0.078, 0.215);
+      face.add(highlight);
+
+      return group;
+    }
+
+    function createRayBurst(count, innerRadius, outerRadius, color, opacity) {
+      const positions = [];
+
+      for (let i = 0; i < count; i++) {
+        const angle = (i / count) * Math.PI * 2;
+        const lengthJitter = 0.78 + ((i * 17) % 11) / 30;
+        const start = innerRadius;
+        const end = outerRadius * lengthJitter;
+        positions.push(Math.cos(angle) * start, Math.sin(angle) * start, 0);
+        positions.push(Math.cos(angle) * end, Math.sin(angle) * end, 0);
+      }
+
+      const geometry = new THREE.BufferGeometry();
+      geometry.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3));
+
+      return new THREE.LineSegments(
+        geometry,
+        new THREE.LineBasicMaterial({
+          color,
+          transparent: true,
+          opacity,
+          blending: THREE.AdditiveBlending,
+          depthWrite: false
+        })
+      );
+    }
+
+    function addStars() {
+      const positions = [];
+      const colors = [];
+      const color = new THREE.Color();
+
+      for (let i = 0; i < 280; i++) {
+        const radius = 18 + Math.random() * 20;
+        const theta = Math.random() * Math.PI * 2;
+        const y = Math.random() * 12 + 1.5;
+        positions.push(Math.cos(theta) * radius, y, Math.sin(theta) * radius);
+
+        color.setHSL(0.58 + Math.random() * 0.12, 0.42, 0.62 + Math.random() * 0.28);
+        colors.push(color.r, color.g, color.b);
+      }
+
+      const geometry = new THREE.BufferGeometry();
+      geometry.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3));
+      geometry.setAttribute('color', new THREE.Float32BufferAttribute(colors, 3));
+
+      const stars = new THREE.Points(
+        geometry,
+        new THREE.PointsMaterial({
+          size: 0.035,
+          vertexColors: true,
+          transparent: true,
+          opacity: 0.7,
+          depthWrite: false
+        })
+      );
+      scene.add(stars);
+    }
+  </script>
+</body>
+</html>
