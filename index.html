@@ -62,7 +62,7 @@
     }
 
     .label {
-      width: clamp(142px, 17vw, 236px);
+      width: clamp(150px, 17vw, 236px);
       padding: 7px 9px;
       border: 1px solid rgba(255, 255, 255, 0.18);
       background: rgba(7, 11, 18, 0.68);
@@ -77,8 +77,57 @@
       border-radius: 7px;
     }
 
-    .label.layer {
+    .level-label {
+      width: clamp(232px, 25vw, 360px);
+      padding: 8px;
       transform: translateY(-50%);
+    }
+
+    .level-title {
+      margin-bottom: 7px;
+      color: #e0f2fe;
+      font-size: 0.7rem;
+      font-weight: 780;
+      line-height: 1.18;
+      text-transform: uppercase;
+    }
+
+    .norm-stack {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 5px;
+    }
+
+    .norm-chip {
+      min-height: 27px;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.76);
+      color: #f8fafc;
+      cursor: pointer;
+      font: inherit;
+      font-size: 0.66rem;
+      font-weight: 760;
+      line-height: 1.08;
+      padding: 5px 8px;
+      pointer-events: auto;
+      transition: background 160ms ease, border-color 160ms ease, transform 160ms ease, color 160ms ease;
+    }
+
+    .norm-chip:hover,
+    .norm-chip:focus-visible {
+      border-color: rgba(255, 214, 120, 0.8);
+      background: rgba(255, 214, 120, 0.18);
+      color: #fff7d6;
+      outline: none;
+      transform: translateY(-1px);
+    }
+
+    .norm-chip.active {
+      border-color: rgba(77, 208, 225, 0.95);
+      background: rgba(77, 208, 225, 0.2);
+      color: #e0fbff;
     }
 
     .label.grundnorm {
@@ -122,8 +171,8 @@
       top: clamp(14px, 2vw, 26px);
       right: clamp(14px, 2vw, 28px);
       z-index: 4;
-      width: min(274px, calc(100vw - 28px));
-      padding: 10px;
+      width: min(302px, calc(100vw - 28px));
+      padding: 11px 12px;
       border: 1px solid rgba(255, 214, 120, 0.28);
       border-radius: 7px;
       background: rgba(7, 11, 18, 0.74);
@@ -131,9 +180,8 @@
       backdrop-filter: blur(12px);
     }
 
-    .scheme-panel label {
-      display: block;
-      margin-bottom: 6px;
+    .scheme-kicker {
+      margin: 0 0 5px;
       color: #ffe3a3;
       font-size: 0.68rem;
       font-weight: 760;
@@ -141,21 +189,11 @@
       text-transform: uppercase;
     }
 
-    .scheme-panel select {
-      width: 100%;
-      min-height: 34px;
-      border: 1px solid rgba(255, 255, 255, 0.18);
-      border-radius: 6px;
-      background: #111827;
+    .scheme-panel h2 {
+      margin: 0;
       color: #f8fafc;
-      font: inherit;
-      font-size: 0.84rem;
-      outline: none;
-    }
-
-    .scheme-panel select:focus {
-      border-color: rgba(255, 214, 120, 0.78);
-      box-shadow: 0 0 0 3px rgba(255, 214, 120, 0.16);
+      font-size: 0.98rem;
+      line-height: 1.12;
     }
 
     .scheme-note {
@@ -163,6 +201,152 @@
       color: #c7d2fe;
       font-size: 0.68rem;
       line-height: 1.32;
+    }
+
+    .connector-layer {
+      position: fixed;
+      inset: 0;
+      z-index: 5;
+      width: 100vw;
+      height: 100vh;
+      overflow: visible;
+      pointer-events: none;
+    }
+
+    .connector-line {
+      opacity: 0;
+      stroke: rgba(255, 214, 120, 0.86);
+      stroke-width: 2;
+      stroke-dasharray: 5 7;
+      filter: drop-shadow(0 0 8px rgba(255, 214, 120, 0.55));
+      transition: opacity 160ms ease;
+    }
+
+    .connector-layer.active .connector-line {
+      opacity: 1;
+    }
+
+    .detail-panel {
+      position: fixed;
+      top: 150px;
+      right: clamp(14px, 2vw, 28px);
+      z-index: 6;
+      width: min(390px, calc(100vw - 28px));
+      max-height: min(68vh, 650px);
+      overflow: auto;
+      border: 1px solid rgba(77, 208, 225, 0.36);
+      border-radius: 8px;
+      background: rgba(7, 11, 18, 0.9);
+      box-shadow: 0 24px 70px rgba(0, 0, 0, 0.48);
+      color: #f8fafc;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(8px) scale(0.985);
+      transition: opacity 180ms ease, transform 180ms ease;
+      backdrop-filter: blur(16px);
+    }
+
+    .detail-panel.open {
+      opacity: 1;
+      pointer-events: auto;
+      transform: none;
+    }
+
+    .detail-header {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 10px;
+      padding: 14px 14px 10px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .detail-level {
+      color: #93c5fd;
+      font-size: 0.68rem;
+      font-weight: 780;
+      line-height: 1.2;
+      text-transform: uppercase;
+    }
+
+    .detail-title {
+      margin: 4px 0 0;
+      color: #fff7d6;
+      font-size: 1.1rem;
+      line-height: 1.15;
+    }
+
+    .detail-status {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      align-self: start;
+      min-height: 24px;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      border-radius: 999px;
+      color: #e0fbff;
+      background: rgba(77, 208, 225, 0.15);
+      font-size: 0.66rem;
+      font-weight: 780;
+      padding: 4px 8px;
+      white-space: nowrap;
+    }
+
+    .detail-status[data-state="warning"] {
+      color: #ffedc2;
+      background: rgba(255, 196, 87, 0.14);
+      border-color: rgba(255, 196, 87, 0.34);
+    }
+
+    .detail-status[data-state="inactive"] {
+      color: #fecaca;
+      background: rgba(239, 68, 68, 0.14);
+      border-color: rgba(239, 68, 68, 0.34);
+    }
+
+    .detail-close {
+      width: 28px;
+      height: 28px;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.72);
+      color: #f8fafc;
+      cursor: pointer;
+      font-size: 1.1rem;
+      line-height: 1;
+    }
+
+    .detail-body {
+      display: grid;
+      gap: 11px;
+      padding: 12px 14px 14px;
+    }
+
+    .detail-section h3 {
+      margin: 0 0 5px;
+      color: #c7d2fe;
+      font-size: 0.72rem;
+      line-height: 1.2;
+      text-transform: uppercase;
+    }
+
+    .detail-section p,
+    .detail-section li {
+      color: #e5e7eb;
+      font-size: 0.78rem;
+      line-height: 1.42;
+    }
+
+    .detail-section p {
+      margin: 0;
+    }
+
+    .detail-section ul {
+      margin: 0;
+      padding-left: 1rem;
+    }
+
+    .detail-section li + li {
+      margin-top: 4px;
     }
 
     @media (max-width: 640px) {
@@ -184,10 +368,30 @@
       }
 
       .label {
-        width: min(128px, 34vw);
+        width: min(138px, 35vw);
         padding: 5px 6px;
         font-size: 0.54rem;
         line-height: 1.18;
+      }
+
+      .level-label {
+        width: min(190px, 52vw);
+        padding: 6px;
+      }
+
+      .level-title {
+        margin-bottom: 5px;
+        font-size: 0.56rem;
+      }
+
+      .norm-stack {
+        gap: 4px;
+      }
+
+      .norm-chip {
+        min-height: 23px;
+        padding: 4px 6px;
+        font-size: 0.52rem;
       }
 
       .label.grundnorm {
@@ -196,24 +400,42 @@
       }
 
       .scheme-panel {
-        top: auto;
+        top: 106px;
         right: 12px;
-        bottom: 12px;
-        width: 176px;
+        bottom: auto;
+        width: 178px;
         padding: 8px;
       }
 
-      .scheme-panel label {
+      .scheme-kicker {
+        margin-bottom: 4px;
         font-size: 0.58rem;
       }
 
-      .scheme-panel select {
-        min-height: 30px;
-        font-size: 0.72rem;
+      .scheme-panel h2 {
+        font-size: 0.78rem;
       }
 
       .scheme-note {
         font-size: 0.58rem;
+      }
+
+      .detail-panel {
+        top: auto;
+        right: 12px;
+        bottom: 12px;
+        left: 12px;
+        width: auto;
+        max-height: 45vh;
+      }
+
+      .detail-title {
+        font-size: 0.95rem;
+      }
+
+      .detail-section p,
+      .detail-section li {
+        font-size: 0.72rem;
       }
     }
   </style>
@@ -233,14 +455,26 @@
     <p>Ordenamento jurídico brasileiro com a Grundnorm irradiando sobre a Constituição e as normas inferiores.</p>
   </section>
   <section class="scheme-panel" aria-label="Esquema da pirâmide normativa">
-    <label for="schemeSelect">Esquema</label>
-    <select id="schemeSelect">
-      <option value="mayara" selected>Prof. Mayara da Paixão</option>
-      <option value="stf">STF geral</option>
-      <option value="original">Original expandido</option>
-    </select>
+    <p class="scheme-kicker">Esquema único</p>
+    <h2>Compreensão geral do STF</h2>
     <p class="scheme-note" id="schemeNote"></p>
   </section>
+  <svg class="connector-layer" id="connectorLayer" aria-hidden="true">
+    <line class="connector-line" id="connectorLine" x1="0" y1="0" x2="0" y2="0"></line>
+  </svg>
+  <aside class="detail-panel" id="normDetail" aria-live="polite" aria-label="Detalhamento da norma">
+    <header class="detail-header">
+      <div>
+        <div class="detail-level" id="detailLevel"></div>
+        <h2 class="detail-title" id="detailTitle"></h2>
+      </div>
+      <div>
+        <button class="detail-close" id="detailClose" type="button" aria-label="Fechar detalhes">×</button>
+        <div class="detail-status" id="detailStatus"></div>
+      </div>
+    </header>
+    <div class="detail-body" id="detailBody"></div>
+  </aside>
   <div class="loading" id="loading">Carregando cena 3D</div>
 
   <script type="module">
@@ -250,8 +484,15 @@
 
     const container = document.querySelector('#scene');
     const loading = document.querySelector('#loading');
-    const schemeSelect = document.querySelector('#schemeSelect');
     const schemeNote = document.querySelector('#schemeNote');
+    const connectorLayer = document.querySelector('#connectorLayer');
+    const connectorLine = document.querySelector('#connectorLine');
+    const normDetail = document.querySelector('#normDetail');
+    const detailLevel = document.querySelector('#detailLevel');
+    const detailTitle = document.querySelector('#detailTitle');
+    const detailStatus = document.querySelector('#detailStatus');
+    const detailBody = document.querySelector('#detailBody');
+    const detailClose = document.querySelector('#detailClose');
 
     const scene = new THREE.Scene();
     scene.fog = new THREE.FogExp2(0x07090d, 0.055);
@@ -339,32 +580,524 @@
     scene.add(pyramid);
 
     const schemes = {
-      mayara: {
-        note: 'Organização em 4 níveis conforme indicação da Prof. Mayara da Paixão.',
-        layers: [
-          '4º nível\nDecretos\nRegulamentos\nResoluções\nNormas Inferiores',
-          '3º nível\nTratado Internacional\nLei Complementar / Lei Ordinária\nMP / LD / DL\n(DL não pode mais ser criada)',
-          '2º nível\nTIVDH simples\nSUPRALEGAL',
-          '1º nível\nConstituição Federal (CF)\nTratado Internacional\nque versa sobre Direitos Humanos\n(TIVDH)'
-        ]
-      },
       stf: {
-        note: 'STF: TIDH qualificado equivale a emenda; TIDH simples é supralegal; tratado comum fica, em regra, no plano legal.',
+        note: 'Clique em uma norma para ver como ela nasce, quem participa, prazos, quórum e situação atual.',
         layers: [
-          'Atos infralegais\nDecretos regulamentares\nPortarias / Instruções Normativas',
-          'Plano legal\nTratados internacionais comuns\nLC / LO / MP / LD / DL / Resoluções',
-          'Tratados Internacionais\nde Direitos Humanos\nsem rito do art. 5º, §3º\nSUPRALEGAL',
-          'Constituição Federal\nEmendas Constitucionais\nTIDH do art. 5º, §3º'
-        ]
-      },
-      original: {
-        note: 'Versão expandida usada na primeira visualização.',
-        layers: [
-          'Portarias\nInstruções Normativas\nAtos Administrativos',
-          'Decretos Regulamentares\nRegulamentos',
-          'Leis Delegadas\nDecretos Legislativos\nResoluções',
-          'Leis Complementares\nLeis Ordinárias\nMedidas Provisórias\nTratados Internacionais\nsem matéria de Direitos Humanos',
-          'Constituição Federal\nEmendas Constitucionais\nTratados de DH do art. 5º, §3º'
+          {
+            id: 'infralegal',
+            title: 'Atos infralegais',
+            norms: [
+              {
+                id: 'decreto-regulamentar',
+                name: 'Decreto regulamentar',
+                short: 'Decreto',
+                status: 'Criável',
+                statusKind: 'active',
+                sections: [
+                  {
+                    title: 'Como é criado',
+                    items: [
+                      'É expedido pelo Presidente da República para dar fiel execução à lei.',
+                      'Não passa pelo processo legislativo ordinário e não tem sanção ou veto, porque é ato do Executivo.'
+                    ]
+                  },
+                  {
+                    title: 'Quem faz',
+                    items: [
+                      'Presidente da República, normalmente com preparação técnica dos ministérios competentes.',
+                      'Pode ser controlado pelo Congresso Nacional se exorbitar do poder regulamentar.'
+                    ]
+                  },
+                  {
+                    title: 'Limites e situação',
+                    items: [
+                      'Continua existindo e pode ser criado.',
+                      'Não pode inovar contra a lei nem criar obrigação primária sem fundamento legal.',
+                      'Base: CF, art. 84, IV e VI; art. 49, V.'
+                    ]
+                  }
+                ]
+              },
+              {
+                id: 'regulamento',
+                name: 'Regulamento',
+                short: 'Regulamento',
+                status: 'Criável',
+                statusKind: 'active',
+                sections: [
+                  {
+                    title: 'Como é criado',
+                    items: [
+                      'É editado para detalhar a execução de uma lei ou organizar atuação administrativa dentro de competência legal.',
+                      'Pode aparecer formalmente por decreto ou por ato normativo de órgão ou entidade com poder regulatório.'
+                    ]
+                  },
+                  {
+                    title: 'Quem faz',
+                    items: [
+                      'Poder Executivo, ministérios, agências reguladoras e autoridades administrativas competentes.',
+                      'A autoridade precisa ter competência atribuída por Constituição, lei ou regulamento superior.'
+                    ]
+                  },
+                  {
+                    title: 'Limites e situação',
+                    items: [
+                      'Continua existindo e pode ser criado.',
+                      'Fica abaixo da Constituição, dos tratados supralegais e das leis.',
+                      'Serve para executar, especificar e operacionalizar; não substitui lei.'
+                    ]
+                  }
+                ]
+              },
+              {
+                id: 'portaria',
+                name: 'Portaria',
+                short: 'Portaria',
+                status: 'Criável',
+                statusKind: 'active',
+                sections: [
+                  {
+                    title: 'Como é criada',
+                    items: [
+                      'É assinada por ministro, secretário, dirigente de órgão ou autoridade administrativa competente.',
+                      'Pode organizar serviços, fixar procedimentos internos ou concretizar regra já prevista em norma superior.'
+                    ]
+                  },
+                  {
+                    title: 'Quem faz',
+                    items: [
+                      'Autoridades administrativas dentro do órgão ou entidade competente.',
+                      'Não depende de votação do Congresso nem de sanção presidencial.'
+                    ]
+                  },
+                  {
+                    title: 'Limites e situação',
+                    items: [
+                      'Continua existindo e pode ser criada.',
+                      'Não pode contrariar lei, decreto ou Constituição.',
+                      'Para estudo: pense nela como ato infralegal de execução ou organização.'
+                    ]
+                  }
+                ]
+              },
+              {
+                id: 'instrucao-normativa',
+                name: 'Instrução normativa',
+                short: 'IN',
+                status: 'Criável',
+                statusKind: 'active',
+                sections: [
+                  {
+                    title: 'Como é criada',
+                    items: [
+                      'É editada por autoridade administrativa para orientar a aplicação uniforme de leis, decretos ou regulamentos.',
+                      'É comum em órgãos técnicos, fiscais, previdenciários, ambientais e regulatórios.'
+                    ]
+                  },
+                  {
+                    title: 'Quem faz',
+                    items: [
+                      'Autoridade administrativa competente, como secretarias, autarquias, agências e órgãos fiscais.',
+                      'A competência deve vir de norma superior.'
+                    ]
+                  },
+                  {
+                    title: 'Limites e situação',
+                    items: [
+                      'Continua existindo e pode ser criada.',
+                      'Não cria lei; detalha como a administração aplicará a norma superior.',
+                      'Se extrapolar, pode ser invalidada judicial ou administrativamente.'
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            id: 'legal',
+            title: 'Plano legal',
+            norms: [
+              {
+                id: 'tratado-comum',
+                name: 'Tratado internacional comum',
+                short: 'Tratado comum',
+                status: 'Criável',
+                statusKind: 'active',
+                sections: [
+                  {
+                    title: 'Como é criado',
+                    items: [
+                      'O Presidente da República celebra o tratado no plano internacional.',
+                      'O Congresso resolve definitivamente sobre o texto quando houver encargos ou compromissos gravosos, em geral por decreto legislativo.',
+                      'Depois vêm ratificação internacional e promulgação interna por decreto presidencial.'
+                    ]
+                  },
+                  {
+                    title: 'Posição hierárquica',
+                    items: [
+                      'Na compreensão geral, tratado comum ingressa com força de lei ordinária.',
+                      'Há ressalvas constitucionais específicas, como a prevalência de tratados de transporte internacional no Tema 210 do STF.'
+                    ]
+                  },
+                  {
+                    title: 'Situação',
+                    items: [
+                      'Continua existindo e pode ser celebrado.',
+                      'Base: CF, art. 49, I; art. 84, VIII; entendimento clássico de paridade com lei ordinária.'
+                    ]
+                  }
+                ]
+              },
+              {
+                id: 'lei-complementar',
+                name: 'Lei complementar',
+                short: 'LC',
+                status: 'Criável',
+                statusKind: 'active',
+                sections: [
+                  {
+                    title: 'Como é criada',
+                    items: [
+                      'Nasce de projeto de lei sobre matéria que a Constituição reservou à lei complementar.',
+                      'Tramita no Congresso e depende de aprovação por maioria absoluta.'
+                    ]
+                  },
+                  {
+                    title: 'Quem participa',
+                    items: [
+                      'Pode ter iniciativa dos legitimados do art. 61 da Constituição, conforme a matéria.',
+                      'Depois da aprovação, segue para sanção ou veto presidencial, salvo hipóteses constitucionais específicas.'
+                    ]
+                  },
+                  {
+                    title: 'Prazos e situação',
+                    items: [
+                      'Não tem prazo constitucional geral de caducidade como a medida provisória.',
+                      'Continua existindo e pode ser criada.',
+                      'Base: CF, art. 61 e art. 69.'
+                    ]
+                  }
+                ]
+              },
+              {
+                id: 'lei-ordinaria',
+                name: 'Lei ordinária',
+                short: 'LO',
+                status: 'Criável',
+                statusKind: 'active',
+                sections: [
+                  {
+                    title: 'Como é criada',
+                    items: [
+                      'Nasce de projeto de lei, é discutida e votada nas Casas do Congresso Nacional.',
+                      'Em regra, aprova-se por maioria simples, presente a maioria absoluta, salvo quórum especial previsto na Constituição.'
+                    ]
+                  },
+                  {
+                    title: 'Quem participa',
+                    items: [
+                      'Iniciativa: parlamentares, comissões, Presidente, STF, tribunais superiores, PGR e cidadãos, conforme a Constituição.',
+                      'Depois da aprovação, normalmente vai à sanção ou veto do Presidente.'
+                    ]
+                  },
+                  {
+                    title: 'Prazos e situação',
+                    items: [
+                      'Não tem prazo constitucional geral de caducidade.',
+                      'Continua existindo e pode ser criada.',
+                      'Base: CF, art. 47, art. 61, arts. 64 a 67.'
+                    ]
+                  }
+                ]
+              },
+              {
+                id: 'medida-provisoria',
+                name: 'Medida provisória',
+                short: 'MP',
+                status: 'Criável',
+                statusKind: 'warning',
+                sections: [
+                  {
+                    title: 'Como é criada',
+                    items: [
+                      'É editada pelo Presidente da República em caso de relevância e urgência.',
+                      'Nasce com força de lei e deve ser submetida imediatamente ao Congresso Nacional.'
+                    ]
+                  },
+                  {
+                    title: 'Prazos',
+                    items: [
+                      'Vigência inicial de 60 dias, prorrogável uma vez por igual período.',
+                      'Se não for apreciada em 45 dias, entra em regime de urgência e sobresta deliberações da Casa em que estiver tramitando.',
+                      'Se não for convertida em lei no prazo constitucional, perde eficácia desde a edição.'
+                    ]
+                  },
+                  {
+                    title: 'Limites e situação',
+                    items: [
+                      'Continua existindo e pode ser criada, mas tem matérias vedadas.',
+                      'Não cabe sobre matéria reservada a lei complementar, entre outras vedações do art. 62.',
+                      'Base: CF, art. 62.'
+                    ]
+                  }
+                ]
+              },
+              {
+                id: 'lei-delegada',
+                name: 'Lei delegada',
+                short: 'LD',
+                status: 'Criável rara',
+                statusKind: 'warning',
+                sections: [
+                  {
+                    title: 'Como é criada',
+                    items: [
+                      'É elaborada pelo Presidente da República após solicitar delegação ao Congresso Nacional.',
+                      'A delegação vem por resolução do Congresso, que especifica conteúdo e termos de exercício.'
+                    ]
+                  },
+                  {
+                    title: 'Limites',
+                    items: [
+                      'Não pode tratar de atos de competência exclusiva do Congresso, competência privativa da Câmara ou do Senado, matéria reservada a lei complementar, nem das matérias vedadas no art. 68.',
+                      'Se a resolução exigir apreciação pelo Congresso, a votação é única e sem emendas.'
+                    ]
+                  },
+                  {
+                    title: 'Situação',
+                    items: [
+                      'Ainda existe na Constituição e pode ser criada, embora seja muito rara.',
+                      'Não confundir com decreto-lei, que não pode mais ser criado na ordem constitucional de 1988.',
+                      'Base: CF, art. 68.'
+                    ]
+                  }
+                ]
+              },
+              {
+                id: 'decreto-legislativo',
+                name: 'Decreto legislativo',
+                short: 'Decreto legislativo',
+                status: 'Criável',
+                statusKind: 'active',
+                sections: [
+                  {
+                    title: 'Como é criado',
+                    items: [
+                      'É ato do Congresso Nacional para matérias de sua competência exclusiva.',
+                      'Não vai à sanção ou veto presidencial.'
+                    ]
+                  },
+                  {
+                    title: 'Usos típicos',
+                    items: [
+                      'Aprovação de tratados internacionais quando exigida a deliberação do Congresso.',
+                      'Sustação de atos normativos do Executivo que exorbitem do poder regulamentar ou dos limites de delegação legislativa.'
+                    ]
+                  },
+                  {
+                    title: 'Situação',
+                    items: [
+                      'Continua existindo e pode ser criado.',
+                      'Base: CF, art. 49 e art. 59, VI.'
+                    ]
+                  }
+                ]
+              },
+              {
+                id: 'resolucao-legislativa',
+                name: 'Resolução legislativa',
+                short: 'Resolução',
+                status: 'Criável',
+                statusKind: 'active',
+                sections: [
+                  {
+                    title: 'Como é criada',
+                    items: [
+                      'É ato normativo usado por Câmara, Senado ou Congresso para matérias de sua competência interna ou constitucionalmente reservada.',
+                      'Não depende de sanção presidencial.'
+                    ]
+                  },
+                  {
+                    title: 'Exemplos de uso',
+                    items: [
+                      'Regimentos internos, organização de trabalhos legislativos e algumas competências privativas.',
+                      'No caso da lei delegada, a delegação ao Presidente toma forma de resolução do Congresso Nacional.'
+                    ]
+                  },
+                  {
+                    title: 'Situação',
+                    items: [
+                      'Continua existindo e pode ser criada.',
+                      'Base: CF, art. 59, VII; art. 68, §2º.'
+                    ]
+                  }
+                ]
+              },
+              {
+                id: 'decreto-lei',
+                name: 'Decreto-lei',
+                short: 'Decreto-lei',
+                status: 'Não criável',
+                statusKind: 'inactive',
+                sections: [
+                  {
+                    title: 'Como era criado',
+                    items: [
+                      'Era espécie normativa de regimes constitucionais anteriores, editada pelo chefe do Executivo em hipóteses previstas na ordem constitucional então vigente.',
+                      'A Constituição de 1988 não incluiu o decreto-lei entre as espécies do art. 59.'
+                    ]
+                  },
+                  {
+                    title: 'Situação atual',
+                    items: [
+                      'Não pode mais ser criado na ordem constitucional vigente.',
+                      'Decretos-leis anteriores podem continuar válidos se foram recepcionados pela Constituição de 1988 e não revogados.'
+                    ]
+                  },
+                  {
+                    title: 'Para prova',
+                    items: [
+                      'Não confunda decreto-lei com decreto legislativo nem com lei delegada.',
+                      'Base: CF, art. 59 não lista decreto-lei.'
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            id: 'supralegal',
+            title: 'Tratados de Direitos Humanos supralegais',
+            norms: [
+              {
+                id: 'tidh-supralegal',
+                name: 'TIDH sem rito do art. 5º, §3º',
+                short: 'TIDH supralegal',
+                status: 'Criável',
+                statusKind: 'active',
+                sections: [
+                  {
+                    title: 'Como é criado',
+                    items: [
+                      'É tratado internacional sobre direitos humanos celebrado pelo Presidente e aprovado pelo Congresso sem o rito qualificado do art. 5º, §3º.',
+                      'Depois segue a etapa internacional de ratificação e a promulgação interna.'
+                    ]
+                  },
+                  {
+                    title: 'Posição hierárquica',
+                    items: [
+                      'Para o STF, fica acima das leis e abaixo da Constituição.',
+                      'Essa posição foi consolidada no julgamento do RE 466.343/SP.'
+                    ]
+                  },
+                  {
+                    title: 'Situação',
+                    items: [
+                      'Continua existindo e pode ser celebrado.',
+                      'Pode paralisar a eficácia de leis incompatíveis, por estar no bloco supralegal.'
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            id: 'constitucional',
+            title: 'Bloco constitucional',
+            norms: [
+              {
+                id: 'constituicao',
+                name: 'Constituição Federal',
+                short: 'CF',
+                status: 'Vigente',
+                statusKind: 'active',
+                sections: [
+                  {
+                    title: 'Como nasceu',
+                    items: [
+                      'Foi promulgada pela Assembleia Nacional Constituinte em 5 de outubro de 1988.',
+                      'Não nasce por lei ordinária; resulta do poder constituinte originário.'
+                    ]
+                  },
+                  {
+                    title: 'Como muda',
+                    items: [
+                      'Pode ser alterada por emenda constitucional, respeitados os limites formais, circunstanciais e materiais.',
+                      'Serve como parâmetro máximo de validade das normas infraconstitucionais.'
+                    ]
+                  },
+                  {
+                    title: 'Situação',
+                    items: [
+                      'Está vigente.',
+                      'Base central da hierarquia normativa brasileira.'
+                    ]
+                  }
+                ]
+              },
+              {
+                id: 'emenda-constitucional',
+                name: 'Emenda constitucional',
+                short: 'EC',
+                status: 'Criável',
+                statusKind: 'active',
+                sections: [
+                  {
+                    title: 'Como é criada',
+                    items: [
+                      'A proposta pode vir de um terço dos membros da Câmara ou do Senado, do Presidente da República ou de mais da metade das Assembleias Legislativas.',
+                      'É votada em dois turnos em cada Casa do Congresso e precisa de três quintos dos votos dos respectivos membros.'
+                    ]
+                  },
+                  {
+                    title: 'Limites',
+                    items: [
+                      'Não pode ser votada durante intervenção federal, estado de defesa ou estado de sítio.',
+                      'Não pode abolir cláusulas pétreas: federação, voto direto/secreto/universal/periódico, separação dos Poderes e direitos e garantias individuais.'
+                    ]
+                  },
+                  {
+                    title: 'Situação',
+                    items: [
+                      'Continua existindo e pode ser criada.',
+                      'Não há sanção ou veto presidencial; a promulgação é feita pelas Mesas da Câmara e do Senado.',
+                      'Base: CF, art. 60.'
+                    ]
+                  }
+                ]
+              },
+              {
+                id: 'tidh-qualificado',
+                name: 'TIDH qualificado',
+                short: 'TIDH art. 5º, §3º',
+                status: 'Criável',
+                statusKind: 'active',
+                sections: [
+                  {
+                    title: 'Como é criado',
+                    items: [
+                      'É tratado ou convenção internacional sobre direitos humanos aprovado em cada Casa do Congresso.',
+                      'O rito exige dois turnos e três quintos dos votos dos respectivos membros.'
+                    ]
+                  },
+                  {
+                    title: 'Efeito',
+                    items: [
+                      'Quando aprovado por esse rito, é equivalente a emenda constitucional.',
+                      'Fica no bloco constitucional da pirâmide.'
+                    ]
+                  },
+                  {
+                    title: 'Situação',
+                    items: [
+                      'Continua existindo e pode ser aprovado.',
+                      'Base: CF, art. 5º, §3º.'
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
         ]
       }
     };
@@ -374,6 +1107,8 @@
     const layerColors = [0x256d85, 0x2f8f6d, 0x965f2d, 0x8f3442, 0xd3a83b];
     const layerEmissives = [0x08252f, 0x09281e, 0x2a1606, 0x2a070c, 0x3a2705];
     let totalHeight = 0;
+    let activeNormButton = null;
+    let activeNormAnchor = null;
     const constitutionFocusLocal = new THREE.Vector3();
 
     const apexLight = new THREE.PointLight(0xffcb6b, 14, 13, 1.65);
@@ -387,13 +1122,12 @@
 
     const startedAt = performance.now();
     frameCamera();
-    const requestedScheme = new URLSearchParams(window.location.search).get('scheme');
-    setScheme(requestedScheme && Object.hasOwn(schemes, requestedScheme) ? requestedScheme : schemeSelect.value);
-    schemeSelect.addEventListener('change', () => {
-      const url = new URL(window.location.href);
-      url.searchParams.set('scheme', schemeSelect.value);
-      window.history.replaceState(null, '', url);
-      setScheme(schemeSelect.value);
+    setScheme('stf');
+    detailClose.addEventListener('click', closeNormDetail);
+    window.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') {
+        closeNormDetail();
+      }
     });
     requestAnimationFrame(animate);
     window.addEventListener('resize', resize);
@@ -401,12 +1135,12 @@
     loading.classList.add('hidden');
 
     function setScheme(key) {
-      const scheme = schemes[key] ?? schemes.mayara;
-      schemeSelect.value = Object.hasOwn(schemes, key) ? key : 'mayara';
+      const scheme = schemes[key] ?? schemes.stf;
       schemeNote.textContent = scheme.note;
 
       clearPyramid();
       buildPyramid(scheme.layers);
+      closeNormDetail();
 
       totalHeight = scheme.layers.length * (layerHeight + layerGap) - layerGap;
       constitutionFocusLocal.set(0, totalHeight - 0.18, 0.85);
@@ -416,11 +1150,11 @@
       updateEyeGaze();
     }
 
-    function buildPyramid(labels) {
-      const radii = createRadii(labels.length);
+    function buildPyramid(layers) {
+      const radii = createRadii(layers.length);
 
-      labels.forEach((labelText, index) => {
-        const paletteIndex = Math.round(index * (layerColors.length - 1) / Math.max(labels.length - 1, 1));
+      layers.forEach((layer, index) => {
+        const paletteIndex = Math.round(index * (layerColors.length - 1) / Math.max(layers.length - 1, 1));
         const bottomRadius = radii[index];
         const topRadius = radii[index + 1];
         const y = index * (layerHeight + layerGap) + layerHeight / 2;
@@ -452,8 +1186,14 @@
         edgeLines.position.copy(mesh.position);
         pyramid.add(edgeLines);
 
-        const label = createLabel(labelText, 'layer');
-        label.position.set(0.32, y + 0.02, bottomRadius * 0.63 + 0.34);
+        const label = createLevelLabel(layer);
+        const labelLayout = [
+          { x: -1.18, y: -0.04, zFactor: 0.72, zPad: 0.72 },
+          { x: 0.38, y: 0.04, zFactor: 0.58, zPad: 0.42 },
+          { x: -0.36, y: 0.1, zFactor: 0.58, zPad: 0.38 },
+          { x: 0.24, y: 0.14, zFactor: 0.62, zPad: 0.36 }
+        ][index] ?? { x: index % 2 === 0 ? -0.26 : 0.38, y: 0.05, zFactor: 0.58, zPad: 0.4 };
+        label.position.set(labelLayout.x, y + labelLayout.y, bottomRadius * labelLayout.zFactor + labelLayout.zPad);
         pyramid.add(label);
       });
     }
@@ -504,6 +1244,7 @@
 
       renderer.render(scene, camera);
       labelRenderer.render(scene, camera);
+      updateConnector();
       requestAnimationFrame(animate);
     }
 
@@ -515,6 +1256,7 @@
       renderer.setSize(width, height);
       labelRenderer.setSize(width, height);
       frameCamera();
+      updateConnector();
     }
 
     function frameCamera() {
@@ -560,6 +1302,117 @@
       eyeMatrix.makeBasis(eyeRight, eyeUp, eyeDirection);
       eyeTargetQuaternion.setFromRotationMatrix(eyeMatrix);
       eyeGroup.quaternion.slerp(eyeTargetQuaternion, cameraIsDefault ? 0.08 : 0.16);
+    }
+
+    function createLevelLabel(layer) {
+      const div = document.createElement('div');
+      div.className = 'label level-label';
+
+      const title = document.createElement('div');
+      title.className = 'level-title';
+      title.textContent = layer.title;
+      div.appendChild(title);
+
+      const stack = document.createElement('div');
+      stack.className = 'norm-stack';
+      div.appendChild(stack);
+
+      layer.norms.forEach((norm) => {
+        const button = document.createElement('button');
+        button.className = 'norm-chip';
+        button.type = 'button';
+        button.textContent = norm.short ?? norm.name;
+        button.setAttribute('aria-pressed', 'false');
+        button.addEventListener('pointerdown', (event) => {
+          event.stopPropagation();
+        });
+        button.addEventListener('click', (event) => {
+          event.preventDefault();
+          event.stopPropagation();
+          openNormDetail({ ...norm, levelTitle: layer.title }, button);
+        });
+        stack.appendChild(button);
+      });
+
+      return new CSS2DObject(div);
+    }
+
+    function openNormDetail(norm, button) {
+      if (activeNormButton) {
+        activeNormButton.classList.remove('active');
+        activeNormButton.setAttribute('aria-pressed', 'false');
+      }
+
+      activeNormButton = button;
+      activeNormAnchor = button;
+      activeNormButton.classList.add('active');
+      activeNormButton.setAttribute('aria-pressed', 'true');
+
+      detailLevel.textContent = norm.levelTitle;
+      detailTitle.textContent = norm.name;
+      detailStatus.textContent = norm.status;
+      detailStatus.dataset.state = norm.statusKind;
+      detailBody.replaceChildren(...norm.sections.map(createDetailSection));
+
+      normDetail.classList.add('open');
+      connectorLayer.classList.add('active');
+      requestAnimationFrame(updateConnector);
+    }
+
+    function closeNormDetail() {
+      if (activeNormButton) {
+        activeNormButton.classList.remove('active');
+        activeNormButton.setAttribute('aria-pressed', 'false');
+      }
+
+      activeNormButton = null;
+      activeNormAnchor = null;
+      normDetail.classList.remove('open');
+      connectorLayer.classList.remove('active');
+    }
+
+    function createDetailSection(section) {
+      const wrapper = document.createElement('section');
+      wrapper.className = 'detail-section';
+
+      const title = document.createElement('h3');
+      title.textContent = section.title;
+      wrapper.appendChild(title);
+
+      if (section.items.length === 1) {
+        const paragraph = document.createElement('p');
+        paragraph.textContent = section.items[0];
+        wrapper.appendChild(paragraph);
+      } else {
+        const list = document.createElement('ul');
+        section.items.forEach((item) => {
+          const li = document.createElement('li');
+          li.textContent = item;
+          list.appendChild(li);
+        });
+        wrapper.appendChild(list);
+      }
+
+      return wrapper;
+    }
+
+    function updateConnector() {
+      if (!activeNormAnchor || !normDetail.classList.contains('open')) {
+        return;
+      }
+
+      const anchorRect = activeNormAnchor.getBoundingClientRect();
+      const panelRect = normDetail.getBoundingClientRect();
+      const isPanelBelow = panelRect.top > anchorRect.bottom;
+      const x1 = anchorRect.left + anchorRect.width / 2;
+      const y1 = anchorRect.top + anchorRect.height / 2;
+      const x2 = panelRect.left + (panelRect.left > x1 ? 18 : panelRect.width - 18);
+      const y2 = isPanelBelow ? panelRect.top + 8 : panelRect.top + Math.min(panelRect.height * 0.34, 110);
+
+      connectorLine.setAttribute('x1', x1.toFixed(1));
+      connectorLine.setAttribute('y1', y1.toFixed(1));
+      connectorLine.setAttribute('x2', x2.toFixed(1));
+      connectorLine.setAttribute('y2', y2.toFixed(1));
     }
 
     function createLabel(content, variant, html = false) {
