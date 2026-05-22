@@ -1591,10 +1591,10 @@
       const anchorRect = activeNormAnchor.getBoundingClientRect();
       const panelRect = normDetail.getBoundingClientRect();
       const isPanelBelow = panelRect.top > anchorRect.bottom;
-      const x1 = anchorRect.left + anchorRect.width / 2;
-      const y1 = anchorRect.top + anchorRect.height / 2;
-      const x2 = panelRect.left + (panelRect.left > x1 ? 18 : panelRect.width - 18);
+      const anchorCenterX = anchorRect.left + anchorRect.width / 2;
+      const x2 = panelRect.left + (panelRect.left > anchorCenterX ? 18 : panelRect.width - 18);
       const y2 = isPanelBelow ? panelRect.top + 8 : panelRect.top + Math.min(panelRect.height * 0.34, 110);
+      const { x: x1, y: y1 } = getNearestCorner(anchorRect, x2, y2);
       const controlX = x1 + (x2 - x1) * 0.58;
       const controlY = y1 + (y2 - y1) * 0.28 - 28;
 
@@ -1602,6 +1602,21 @@
         'd',
         `M ${x1.toFixed(1)} ${y1.toFixed(1)} Q ${controlX.toFixed(1)} ${controlY.toFixed(1)} ${x2.toFixed(1)} ${y2.toFixed(1)}`
       );
+    }
+
+    function getNearestCorner(rect, targetX, targetY) {
+      const corners = [
+        { x: rect.left, y: rect.top },
+        { x: rect.right, y: rect.top },
+        { x: rect.right, y: rect.bottom },
+        { x: rect.left, y: rect.bottom }
+      ];
+
+      return corners.reduce((nearest, corner) => {
+        const nearestDistance = Math.hypot(nearest.x - targetX, nearest.y - targetY);
+        const cornerDistance = Math.hypot(corner.x - targetX, corner.y - targetY);
+        return cornerDistance < nearestDistance ? corner : nearest;
+      });
     }
 
     function createLabel(content, variant, html = false) {
