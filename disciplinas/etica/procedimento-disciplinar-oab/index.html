@@ -1,0 +1,1582 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Estudo guiado do procedimento disciplinar da OAB, com mapa mental, fluxo interativo e áudio dos arts. 55 a 69 do Código de Ética e Disciplina.">
+  <title>Procedimento Disciplinar da OAB | Ética</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f5f7fb;
+      --paper: #ffffff;
+      --ink: #172033;
+      --muted: #56657d;
+      --soft: #748198;
+      --line: rgba(54, 67, 92, 0.16);
+      --blue: #1e5aa8;
+      --green: #25825f;
+      --orange: #d66b20;
+      --purple: #6a4fb3;
+      --pink: #d53971;
+      --teal: #10827d;
+      --amber: #c68114;
+      --shadow: 0 18px 60px rgba(47, 65, 88, 0.14);
+      --radius: 8px;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      letter-spacing: 0;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      min-height: 100vh;
+      margin: 0;
+      color: var(--ink);
+      background:
+        linear-gradient(90deg, rgba(30, 90, 168, 0.06) 1px, transparent 1px),
+        linear-gradient(180deg, rgba(30, 90, 168, 0.05) 1px, transparent 1px),
+        linear-gradient(180deg, #ffffff 0%, var(--bg) 44%, #eef3f9 100%);
+      background-size: 42px 42px, 42px 42px, auto;
+    }
+
+    button,
+    input {
+      font: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .page {
+      width: min(1240px, calc(100vw - 32px));
+      margin: 0 auto;
+      padding: 18px 0 40px;
+    }
+
+    .topbar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+
+    .crumbs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .crumb,
+    .source-link {
+      display: inline-flex;
+      align-items: center;
+      min-height: 34px;
+      padding: 0 12px;
+      border: 1px solid rgba(30, 90, 168, 0.22);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.78);
+      color: #1d4f92;
+      font-size: 0.78rem;
+      font-weight: 820;
+    }
+
+    .source-link {
+      border-color: rgba(37, 130, 95, 0.28);
+      color: #236f53;
+    }
+
+    .study-head {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(300px, 0.9fr);
+      gap: clamp(18px, 3vw, 32px);
+      align-items: end;
+      padding: clamp(16px, 3vw, 28px) 0 18px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .eyebrow {
+      margin: 0 0 8px;
+      color: var(--green);
+      font-size: 0.74rem;
+      font-weight: 860;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      max-width: 14ch;
+      margin: 0;
+      font-size: clamp(2.08rem, 6vw, 5.2rem);
+      line-height: 0.94;
+      letter-spacing: 0;
+    }
+
+    .lead {
+      max-width: 76ch;
+      margin: 14px 0 0;
+      color: var(--muted);
+      font-size: clamp(0.98rem, 1.6vw, 1.14rem);
+      line-height: 1.55;
+    }
+
+    .quick-facts {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .fact {
+      min-height: 110px;
+      display: grid;
+      align-content: space-between;
+      gap: 12px;
+      padding: 14px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(255, 255, 255, 0.82);
+      box-shadow: 0 12px 34px rgba(47, 65, 88, 0.08);
+    }
+
+    .fact strong {
+      display: block;
+      font-size: clamp(1.55rem, 4vw, 2.3rem);
+      line-height: 1;
+    }
+
+    .fact span {
+      color: var(--muted);
+      font-size: 0.78rem;
+      font-weight: 750;
+      line-height: 1.28;
+    }
+
+    .audio-bar {
+      position: sticky;
+      top: 0;
+      z-index: 5;
+      display: grid;
+      grid-template-columns: auto auto auto minmax(0, 1fr);
+      gap: 8px;
+      align-items: center;
+      margin: 16px 0;
+      padding: 10px;
+      border: 1px solid rgba(54, 67, 92, 0.18);
+      border-radius: var(--radius);
+      background: rgba(255, 255, 255, 0.92);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(12px);
+    }
+
+    .audio-bar button,
+    .inline-action,
+    .quiz-option,
+    .view-toggle {
+      min-height: 38px;
+      border: 1px solid rgba(30, 90, 168, 0.22);
+      border-radius: 999px;
+      background: #ffffff;
+      color: #1d4f92;
+      font-size: 0.84rem;
+      font-weight: 820;
+      transition: transform 160ms ease, border-color 160ms ease, background 160ms ease, color 160ms ease;
+    }
+
+    .audio-bar button {
+      padding: 0 12px;
+    }
+
+    .audio-bar button:hover,
+    .audio-bar button:focus-visible,
+    .inline-action:hover,
+    .inline-action:focus-visible,
+    .quiz-option:hover,
+    .quiz-option:focus-visible,
+    .view-toggle:hover,
+    .view-toggle:focus-visible {
+      transform: translateY(-1px);
+      border-color: rgba(30, 90, 168, 0.42);
+      background: rgba(30, 90, 168, 0.08);
+      outline: none;
+    }
+
+    .audio-bar .primary {
+      min-width: 142px;
+      border-color: rgba(37, 130, 95, 0.36);
+      background: #25825f;
+      color: #ffffff;
+    }
+
+    .audio-status {
+      min-width: 0;
+      color: var(--muted);
+      font-size: 0.86rem;
+      line-height: 1.35;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .workspace {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(340px, 0.5fr);
+      gap: 16px;
+      align-items: start;
+    }
+
+    .section-title {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 12px;
+      margin: 0 0 12px;
+    }
+
+    .section-title h2 {
+      margin: 0;
+      font-size: clamp(1.18rem, 2.2vw, 1.65rem);
+      line-height: 1.1;
+    }
+
+    .section-title span {
+      color: var(--soft);
+      font-size: 0.82rem;
+      text-align: right;
+    }
+
+    .flow-board,
+    .detail-panel,
+    .map-panel,
+    .deadline-panel,
+    .articles-panel,
+    .quiz-panel {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(255, 255, 255, 0.9);
+      box-shadow: var(--shadow);
+    }
+
+    .flow-board {
+      padding: clamp(14px, 2vw, 20px);
+    }
+
+    .flow-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .flow-card {
+      position: relative;
+      min-height: 172px;
+      display: grid;
+      gap: 12px;
+      align-content: start;
+      width: 100%;
+      padding: 15px;
+      border: 1px solid color-mix(in srgb, var(--accent) 30%, var(--line));
+      border-radius: var(--radius);
+      background:
+        linear-gradient(135deg, color-mix(in srgb, var(--accent) 11%, transparent), transparent 46%),
+        #ffffff;
+      color: var(--ink);
+      text-align: left;
+      box-shadow: 0 12px 32px rgba(47, 65, 88, 0.08);
+    }
+
+    .flow-card::after {
+      content: "";
+      position: absolute;
+      inset: auto 15px 12px 15px;
+      height: 3px;
+      border-radius: 999px;
+      background: var(--accent);
+      opacity: 0.8;
+    }
+
+    .flow-card:hover,
+    .flow-card:focus-visible,
+    .flow-card.active {
+      transform: translateY(-2px);
+      border-color: color-mix(in srgb, var(--accent) 58%, #ffffff);
+      outline: none;
+      box-shadow: 0 16px 44px rgba(47, 65, 88, 0.14);
+    }
+
+    .flow-top {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .number {
+      display: grid;
+      place-items: center;
+      width: 34px;
+      height: 34px;
+      flex: 0 0 auto;
+      border-radius: 50%;
+      background: var(--accent);
+      color: #ffffff;
+      font-weight: 880;
+    }
+
+    .flow-card h3 {
+      margin: 0;
+      font-size: clamp(1rem, 1.7vw, 1.32rem);
+      line-height: 1.12;
+    }
+
+    .article-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .article-tags span {
+      display: inline-flex;
+      align-items: center;
+      min-height: 25px;
+      padding: 0 8px;
+      border-radius: 999px;
+      background: color-mix(in srgb, var(--accent) 10%, #ffffff);
+      color: color-mix(in srgb, var(--accent) 70%, #111827);
+      font-size: 0.72rem;
+      font-weight: 820;
+    }
+
+    .flow-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.9rem;
+      line-height: 1.45;
+    }
+
+    .detail-panel {
+      position: sticky;
+      top: 84px;
+      padding: clamp(15px, 2vw, 20px);
+    }
+
+    .detail-kicker {
+      margin: 0 0 8px;
+      color: var(--detail-accent, var(--blue));
+      font-size: 0.72rem;
+      font-weight: 860;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .detail-panel h2 {
+      margin: 0;
+      font-size: clamp(1.42rem, 3vw, 2.25rem);
+      line-height: 1.02;
+    }
+
+    .detail-summary {
+      margin: 10px 0 14px;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .detail-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+
+    .inline-action {
+      padding: 0 12px;
+    }
+
+    .detail-section {
+      padding: 13px 0;
+      border-top: 1px solid var(--line);
+    }
+
+    .detail-section h3 {
+      margin: 0 0 8px;
+      font-size: 0.88rem;
+      line-height: 1.2;
+      color: var(--ink);
+      text-transform: uppercase;
+    }
+
+    .detail-section ul {
+      display: grid;
+      gap: 7px;
+      margin: 0;
+      padding-left: 18px;
+      color: var(--muted);
+      line-height: 1.42;
+      font-size: 0.9rem;
+    }
+
+    .study-row {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 16px;
+      margin-top: 16px;
+      align-items: start;
+    }
+
+    .map-panel,
+    .deadline-panel,
+    .articles-panel,
+    .quiz-panel {
+      padding: clamp(14px, 2vw, 20px);
+    }
+
+    .map-frame {
+      display: block;
+      overflow: hidden;
+      border: 1px solid rgba(54, 67, 92, 0.12);
+      border-radius: var(--radius);
+      background: #ffffff;
+    }
+
+    .map-frame img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    .deadline-grid {
+      display: grid;
+      gap: 9px;
+    }
+
+    .deadline-item {
+      display: grid;
+      grid-template-columns: 86px 1fr;
+      gap: 10px;
+      align-items: start;
+      padding: 11px 0;
+      border-top: 1px solid var(--line);
+    }
+
+    .deadline-item:first-child {
+      border-top: 0;
+    }
+
+    .deadline-item strong {
+      color: var(--amber);
+      font-size: 1.05rem;
+      line-height: 1.1;
+    }
+
+    .deadline-item span {
+      color: var(--muted);
+      font-size: 0.9rem;
+      line-height: 1.42;
+    }
+
+    .articles-panel,
+    .quiz-panel {
+      margin-top: 16px;
+    }
+
+    .article-toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+
+    .view-toggle {
+      padding: 0 12px;
+    }
+
+    .view-toggle.active {
+      border-color: rgba(37, 130, 95, 0.34);
+      background: #25825f;
+      color: #ffffff;
+    }
+
+    .article-list {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .article-card {
+      min-height: 148px;
+      display: grid;
+      gap: 8px;
+      align-content: start;
+      padding: 13px;
+      border: 1px solid var(--line);
+      border-left: 4px solid var(--article-accent, var(--blue));
+      border-radius: var(--radius);
+      background: #ffffff;
+    }
+
+    .article-card strong {
+      color: var(--article-accent, var(--blue));
+      font-size: 0.92rem;
+    }
+
+    .article-card h3 {
+      margin: 0;
+      font-size: 1rem;
+      line-height: 1.24;
+    }
+
+    .article-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.88rem;
+      line-height: 1.42;
+    }
+
+    .quiz-body {
+      display: grid;
+      grid-template-columns: minmax(0, 0.82fr) minmax(0, 1fr);
+      gap: 14px;
+      align-items: start;
+    }
+
+    .quiz-question {
+      display: grid;
+      gap: 10px;
+    }
+
+    .quiz-question h3 {
+      margin: 0;
+      font-size: clamp(1.12rem, 2vw, 1.45rem);
+      line-height: 1.2;
+    }
+
+    .quiz-options {
+      display: grid;
+      gap: 8px;
+    }
+
+    .quiz-option {
+      padding: 9px 12px;
+      border-radius: var(--radius);
+      color: var(--ink);
+      text-align: left;
+    }
+
+    .quiz-option.correct {
+      border-color: rgba(37, 130, 95, 0.42);
+      background: rgba(37, 130, 95, 0.1);
+      color: #1d6149;
+    }
+
+    .quiz-option.wrong {
+      border-color: rgba(213, 57, 113, 0.42);
+      background: rgba(213, 57, 113, 0.08);
+      color: #9c224d;
+    }
+
+    .quiz-feedback {
+      min-height: 104px;
+      padding: 13px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: #ffffff;
+      color: var(--muted);
+      line-height: 1.48;
+    }
+
+    .quiz-nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    footer {
+      margin-top: 22px;
+      padding-top: 16px;
+      border-top: 1px solid var(--line);
+      color: var(--soft);
+      font-size: 0.82rem;
+      line-height: 1.5;
+    }
+
+    audio {
+      display: none;
+    }
+
+    @media (max-width: 980px) {
+      .study-head,
+      .workspace,
+      .study-row,
+      .quiz-body {
+        grid-template-columns: 1fr;
+      }
+
+      .detail-panel {
+        position: static;
+      }
+
+      .quick-facts {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .article-list {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .page {
+        width: min(100vw - 24px, 620px);
+        padding-top: 12px;
+      }
+
+      .topbar,
+      .section-title {
+        align-items: start;
+        flex-direction: column;
+      }
+
+      .study-head {
+        padding-top: 14px;
+      }
+
+      h1 {
+        max-width: 11ch;
+      }
+
+      .flow-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .quick-facts {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .fact {
+        min-height: 78px;
+        padding: 10px;
+      }
+
+      .fact strong {
+        font-size: 1.55rem;
+      }
+
+      .fact span {
+        font-size: 0.66rem;
+      }
+
+      .audio-bar {
+        grid-template-columns: auto auto auto;
+      }
+
+      .audio-status {
+        grid-column: 1 / -1;
+        white-space: normal;
+      }
+
+      .deadline-item {
+        grid-template-columns: 1fr;
+        gap: 4px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <nav class="topbar" aria-label="Navegação">
+      <div class="crumbs">
+        <a class="crumb" href="../../../">Catálogo</a>
+        <a class="crumb" href="../">Ética</a>
+      </div>
+      <a class="source-link" href="https://www.oab.org.br/publicacoes/AbrirPDF?LivroId=0000004085" target="_blank" rel="noreferrer">Código da OAB</a>
+    </nav>
+
+    <header class="study-head">
+      <div>
+        <p class="eyebrow">Código de Ética e Disciplina da OAB</p>
+        <h1>Procedimento disciplinar</h1>
+        <p class="lead">Mapa guiado dos arts. 55 a 69: instauração, representação, admissibilidade, termo de ajustamento de conduta, defesa, instrução, julgamento, acórdão, regras complementares, revisão e reabilitação.</p>
+      </div>
+
+      <div class="quick-facts" aria-label="Resumo do material">
+        <div class="fact">
+          <strong>6</strong>
+          <span>etapas de fluxo</span>
+        </div>
+        <div class="fact">
+          <strong>17</strong>
+          <span>artigos e artigos inseridos</span>
+        </div>
+        <div class="fact">
+          <strong>9</strong>
+          <span>áudios de estudo</span>
+        </div>
+      </div>
+    </header>
+
+    <section class="audio-bar" aria-label="Áudio guiado">
+      <button type="button" id="prevAudio" aria-label="Áudio anterior">‹</button>
+      <button type="button" id="toggleGuide" class="primary">▶ Iniciar guia</button>
+      <button type="button" id="nextAudio" aria-label="Próximo áudio">›</button>
+      <div class="audio-status" id="audioStatus">Leitura pronta: visão geral do procedimento disciplinar.</div>
+      <audio id="studyAudio" preload="metadata"></audio>
+    </section>
+
+    <section class="workspace" aria-label="Fluxo principal">
+      <div class="flow-board">
+        <div class="section-title">
+          <h2>Fluxo do procedimento</h2>
+          <span>Arts. 55 a 69</span>
+        </div>
+        <div class="flow-grid" id="flowGrid"></div>
+      </div>
+
+      <aside class="detail-panel" id="detailPanel" aria-live="polite"></aside>
+    </section>
+
+    <section class="study-row" aria-label="Mapa e prazos">
+      <div class="map-panel">
+        <div class="section-title">
+          <h2>Mapa mental</h2>
+          <span>Organização visual original</span>
+        </div>
+        <a class="map-frame" href="./assets/mapa-mental-procedimento-disciplinar.png" target="_blank" rel="noreferrer">
+          <img src="./assets/mapa-mental-procedimento-disciplinar.png" alt="Mapa mental do procedimento disciplinar da OAB, organizado em seis etapas e quadro de prazos-chave." loading="lazy">
+        </a>
+      </div>
+
+      <aside class="deadline-panel">
+        <div class="section-title">
+          <h2>Prazos-chave</h2>
+          <span>Memorização rápida</span>
+        </div>
+        <div class="deadline-grid" id="deadlineGrid"></div>
+      </aside>
+    </section>
+
+    <section class="articles-panel" aria-labelledby="artigos-title">
+      <div class="section-title">
+        <h2 id="artigos-title">Artigo por artigo</h2>
+        <span>Leitura objetiva do recorte normativo</span>
+      </div>
+      <div class="article-toolbar" id="articleToolbar"></div>
+      <div class="article-list" id="articleList"></div>
+    </section>
+
+    <section class="quiz-panel" aria-labelledby="treino-title">
+      <div class="section-title">
+        <h2 id="treino-title">Treino rápido</h2>
+        <span>5 pontos de prova</span>
+      </div>
+      <div class="quiz-body">
+        <div class="quiz-question">
+          <h3 id="quizQuestion"></h3>
+          <div class="quiz-options" id="quizOptions"></div>
+          <div class="quiz-nav">
+            <button class="inline-action" type="button" id="prevQuestion">Questão anterior</button>
+            <button class="inline-action" type="button" id="nextQuestion">Próxima questão</button>
+          </div>
+        </div>
+        <div class="quiz-feedback" id="quizFeedback">Selecione uma alternativa para conferir a justificativa normativa.</div>
+      </div>
+    </section>
+
+    <footer>
+      Material de estudo com base no Código de Ética e Disciplina da OAB, arts. 55 a 69, incluindo os arts. 55-A e 58-A. Conteúdo organizado para revisão acadêmica, sem finalidade de parecer jurídico.
+    </footer>
+  </main>
+
+  <script>
+    const studyData = {
+      overview: {
+        id: "visao-geral",
+        type: "overview",
+        title: "Visão geral do procedimento disciplinar",
+        short: "O processo disciplinar da OAB nasce por atuação de ofício ou por representação, passa por admissibilidade, defesa, instrução, julgamento e acórdão, e pode ter revisão ou reabilitação depois da condenação.",
+        articles: ["55 a 69"],
+        status: "roteiro completo",
+        accent: "#1e5aa8",
+        sections: [
+          {
+            title: "Sequência",
+            items: [
+              "Primeiro vem a notícia do fato e a representação, com identificação, narrativa, provas e assinatura.",
+              "Depois há admissibilidade pelo relator, possibilidade de TAC em casos de censura e decisão de instauração ou arquivamento.",
+              "Na fase instrutória entram defesa prévia, saneamento, audiência, diligências, parecer preliminar e razões finais.",
+              "O julgamento é feito no Tribunal de Ética e Disciplina, com relator para voto, pauta, notificação, sustentação oral e acórdão.",
+              "O recorte ainda trata de consultas, sessões, conduta temerária, recursos, revisão e reabilitação."
+            ]
+          }
+        ],
+        narration: "Visão geral do procedimento disciplinar da OAB. O fluxo dos artigos 55 a 69 começa com instauração de ofício ou representação do interessado. A representação deve permitir verificar, em tese, infração disciplinar. Em seguida vem a admissibilidade: o presidente designa relator por sorteio, juntam-se dados cadastrais e antecedentes, e o relator emite parecer em 30 dias. Nos casos puníveis com censura, pode haver termo de ajustamento de conduta, se não houver repercussão negativa à advocacia. Na fase de defesa e instrução, o representado tem defesa prévia em 15 dias, pode indicar até 5 testemunhas, e o relator saneia, instrui, decide provas e profere parecer preliminar. Depois vêm razões finais em prazos sucessivos de 15 dias. O julgamento no Tribunal de Ética e Disciplina tem novo relator para voto, pauta, notificação com 15 dias de antecedência, sustentação oral e acórdão. O recorte termina com regras complementares, recursos, revisão pelo advogado punido e reabilitação após sanção disciplinar."
+      },
+      steps: [
+        {
+          id: "etapa-1-instauracao-e-representacao",
+          type: "step",
+          number: "1",
+          title: "Instauração e representação",
+          short: "Define como o processo nasce e quais requisitos mínimos a representação precisa conter.",
+          articles: ["55", "55-A", "56", "57"],
+          status: "porta de entrada",
+          accent: "#1e5aa8",
+          sections: [
+            {
+              title: "Núcleo do fluxo",
+              items: [
+                "O processo disciplinar instaura-se de ofício ou por representação do interessado.",
+                "De ofício, a origem deve ser fonte idônea ou comunicação de autoridade competente.",
+                "Denúncia anônima não é fonte idônea para instaurar o processo."
+              ]
+            },
+            {
+              title: "Representação",
+              items: [
+                "Pode ser dirigida ao Presidente do Conselho Seccional ou ao Presidente da Subseção, por escrito ou verbalmente reduzida a termo.",
+                "Se o regimento interno atribuir competência ao TED para instaurar o processo, a representação pode ser dirigida ao seu Presidente ou encaminhada a ele.",
+                "Deve conter identificação do representante, narrativa dos fatos, documentos ou provas, rol de até 5 testemunhas e assinatura ou certificação."
+              ]
+            },
+            {
+              title: "Regra transversal",
+              items: [
+                "Os procedimentos na OAB devem observar tramitação e julgamento com perspectiva de gênero e raça, reconhecida de ofício ou por solicitação da parte interessada."
+              ]
+            }
+          ],
+          narration: "Etapa 1, instauração e representação. Artigos 55, 55-A, 56 e 57. O processo disciplinar começa de ofício ou por representação do interessado. Quando a instauração é de ofício, ela depende do conhecimento do fato por fonte idônea ou comunicação de autoridade competente; denúncia anônima não é fonte idônea. A representação pode ser escrita ou verbal, caso em que deve ser reduzida a termo, e pode ser dirigida ao Presidente do Conselho Seccional ou da Subseção. Se o regimento interno der competência ao Tribunal de Ética e Disciplina para instaurar o processo, ela também pode ser dirigida ou encaminhada ao seu Presidente. A peça deve identificar o representante, narrar os fatos de modo a permitir verificar infração disciplinar em tese, juntar documentos ou indicar provas, indicar até 5 testemunhas e trazer assinatura ou certificação. O artigo 55-A acrescenta uma regra transversal: os procedimentos na OAB observam tramitação e julgamento com perspectiva de gênero e raça."
+        },
+        {
+          id: "etapa-2-admissibilidade-e-tac",
+          type: "step",
+          number: "2",
+          title: "Admissibilidade e TAC",
+          short: "Filtra a representação, organiza os antecedentes e define se haverá processo, arquivamento ou tentativa de ajuste.",
+          articles: ["58", "58-A"],
+          status: "filtro inicial",
+          accent: "#25825f",
+          sections: [
+            {
+              title: "Relatoria e documentos",
+              items: [
+                "Recebida a representação, o Presidente designa relator por sorteio para presidir a instrução.",
+                "Atos de instrução podem ser delegados ao TED conforme o regimento interno.",
+                "Antes do relator, juntam-se ficha cadastral, certidão sobre punições anteriores e certidão sobre representações em andamento."
+              ]
+            },
+            {
+              title: "Parecer de admissibilidade",
+              items: [
+                "O relator emite parecer em 30 dias, propondo instauração do processo disciplinar ou arquivamento liminar.",
+                "Se o prazo for descumprido, o feito pode ser redistribuído a outro relator, com o mesmo prazo.",
+                "O Presidente declara instaurado o processo ou determina o arquivamento, nos termos do parecer ou por fundamentos próprios."
+              ]
+            },
+            {
+              title: "Competências especiais e TAC",
+              items: [
+                "Representações contra membros do Conselho Federal, Presidentes de Seccionais e outras autoridades seguem competências próprias.",
+                "Conselhos Seccionais podem instituir Comissões de Admissibilidade no âmbito dos TEDs.",
+                "Em infração punível com censura, cabe TAC se o fato não tiver gerado repercussão negativa à advocacia."
+              ]
+            }
+          ],
+          narration: "Etapa 2, admissibilidade e termo de ajustamento de conduta. Artigos 58 e 58-A. Recebida a representação, o Presidente do Conselho Seccional ou da Subseção designa relator por sorteio. Os atos de instrução podem ser delegados ao Tribunal de Ética e Disciplina, se o regimento permitir. Antes do relator, juntam-se ficha cadastral do representado, certidão de punições anteriores e certidão sobre representações em andamento. O relator deve emitir parecer de admissibilidade em 30 dias, propondo instaurar o processo disciplinar ou arquivar liminarmente a representação. Se não cumprir o prazo, pode haver redistribuição do feito. O Presidente competente declara instaurado o processo ou determina o arquivamento. O artigo 58 também traz competências especiais para membros do Conselho Federal, dirigentes e subseções, além da possibilidade de Comissões de Admissibilidade. O artigo 58-A permite termo de ajustamento de conduta nas infrações puníveis com censura, quando o fato não tiver gerado repercussão negativa à advocacia."
+        },
+        {
+          id: "etapa-3-defesa-e-instrucao",
+          type: "step",
+          number: "3",
+          title: "Defesa e instrução",
+          short: "Concentra notificação, defesa prévia, provas, audiência, diligências, parecer preliminar e razões finais.",
+          articles: ["59"],
+          status: "fase probatória",
+          accent: "#d66b20",
+          sections: [
+            {
+              title: "Notificação e defesa",
+              items: [
+                "O relator notifica interessados para esclarecimentos ou o representado para defesa prévia, sempre em 15 dias.",
+                "A notificação vai ao endereço cadastral do inscrito.",
+                "Se o representado não for encontrado ou ficar revel, será designado defensor dativo."
+              ]
+            },
+            {
+              title: "Provas e audiência",
+              items: [
+                "A defesa prévia deve vir com documentos e rol de até 5 testemunhas.",
+                "Depois da defesa, o relator profere despacho saneador e designa audiência se for o caso.",
+                "Representante e representado levam suas testemunhas, salvo pedido justificado de notificação."
+              ]
+            },
+            {
+              title: "Fechamento da instrução",
+              items: [
+                "O relator pode determinar diligências e impulsionar oficialmente o processo.",
+                "Prova só é indeferida, de forma fundamentada, se for ilícita, impertinente, desnecessária ou protelatória.",
+                "Concluída a instrução, há parecer preliminar fundamentado com enquadramento legal e, em seguida, razões finais em prazo sucessivo de 15 dias para cada parte."
+              ]
+            }
+          ],
+          narration: "Etapa 3, defesa e instrução. Artigo 59. O relator determina a notificação dos interessados para esclarecimentos ou do representado para apresentar defesa prévia, no prazo de 15 dias. A notificação é enviada ao endereço cadastral do inscrito. Se o representado não for encontrado ou ficar revel, o Presidente competente ou o Presidente do Tribunal de Ética e Disciplina designa defensor dativo. A defesa prévia deve ser acompanhada dos documentos e do rol de testemunhas, até o limite de 5. Depois, o relator profere despacho saneador e designa audiência para ouvir representante, representado e testemunhas, se for o caso. As partes em regra providenciam o comparecimento de suas testemunhas, salvo pedido justificado de notificação. O relator pode determinar diligências e dar impulso oficial ao processo. A prova só pode ser indeferida de modo fundamentado quando for ilícita, impertinente, desnecessária ou protelatória. Encerrada a instrução, o relator profere parecer preliminar fundamentado com enquadramento legal dos fatos; depois vêm razões finais, em prazos sucessivos de 15 dias para interessado e representado."
+        },
+        {
+          id: "etapa-4-julgamento-e-acordao",
+          type: "step",
+          number: "4",
+          title: "Julgamento e acórdão",
+          short: "Leva o processo instruído ao TED, com relator para voto, pauta, sustentação oral e decisão formal.",
+          articles: ["60", "61", "62"],
+          status: "decisão colegiada",
+          accent: "#6a4fb3",
+          sections: [
+            {
+              title: "Pauta e sessão",
+              items: [
+                "Recebido o processo instruído, o Presidente do TED sorteia relator para proferir voto.",
+                "O relator do julgamento não será o mesmo da instrução quando o processo já tramitar no TED ou no Conselho competente.",
+                "O processo entra em pauta na primeira sessão após a distribuição ao relator."
+              ]
+            },
+            {
+              title: "Notificação e oralidade",
+              items: [
+                "Representante e representado são notificados com 15 dias de antecedência para a sessão.",
+                "Após o voto do relator, há sustentação oral por 15 minutos: primeiro o representante, depois o representado."
+              ]
+            },
+            {
+              title: "Acórdão",
+              items: [
+                "Do julgamento lavra-se acórdão.",
+                "Se procedente, o acórdão registra enquadramento legal, sanção, quóruns, fundamento pelo voto vencedor ou divergente, agravantes, atenuantes e eventual conversão de censura em advertência sem registro.",
+                "Todo acórdão deve ter ementa; votos condutor e divergente devem constar dos autos."
+              ]
+            }
+          ],
+          narration: "Etapa 4, julgamento e acórdão. Artigos 60, 61 e 62. Depois de instruído, o processo é recebido pelo Presidente do Tribunal de Ética e Disciplina, que designa por sorteio relator para proferir voto. Quando o processo já estiver no Tribunal de Ética e Disciplina ou no Conselho competente, o relator do julgamento não será o mesmo da instrução. O processo entra em pauta na primeira sessão após a distribuição. Representante e representado são notificados pela Secretaria do Tribunal com 15 dias de antecedência. Na sessão, depois do voto do relator, é facultada sustentação oral por 15 minutos, primeiro ao representante e depois ao representado. Do julgamento lavra-se acórdão. Se a representação for procedente, o acórdão deve registrar enquadramento legal, sanção, quórum de instalação e deliberação, base da decisão em voto do relator ou voto divergente, agravantes ou atenuantes e eventual conversão da censura em advertência sem registro. O acórdão deve ter ementa, o voto condutor deve ser lançado nos autos, e o voto divergente, ainda que vencido, também deve constar dos autos."
+        },
+        {
+          id: "etapa-5-regras-complementares",
+          type: "step",
+          number: "5",
+          title: "Regras complementares",
+          short: "Agrupa sessão especial, consultas ao TED, regimento, conduta processual e recursos.",
+          articles: ["63", "64", "65", "66", "67"],
+          status: "normas de apoio",
+          accent: "#d53971",
+          sections: [
+            {
+              title: "Sessão especial e consultas",
+              items: [
+                "Na hipótese de suspensão preventiva do art. 70, § 3º, do EAOAB, há sessão especial, com defesa, prova e sustentação oral.",
+                "Consultas ao TED têm autuação própria, relator por sorteio e, conforme complexidade, revisor.",
+                "Relator e revisor têm 10 dias cada para parecer, apresentado na primeira sessão seguinte."
+              ]
+            },
+            {
+              title: "Funcionamento e conduta",
+              items: [
+                "Sessões do TED seguem seu regimento interno e, subsidiariamente, o regimento do Conselho Seccional.",
+                "Conduta temerária, alteração da verdade dos fatos e recursos manifestamente protelatórios contrariam o Código e sujeitam os responsáveis à sanção."
+              ]
+            },
+            {
+              title: "Recursos",
+              items: [
+                "Recursos contra decisões do TED ao Conselho Seccional seguem o Estatuto, o Regulamento Geral e o Regimento Interno do Conselho Seccional.",
+                "O TED dá conhecimento de suas decisões ao Conselho Seccional para publicação periódica de julgados."
+              ]
+            }
+          ],
+          narration: "Etapa 5, regras complementares. Artigos 63, 64, 65, 66 e 67. Na hipótese de suspensão preventiva prevista no artigo 70, parágrafo terceiro, do Estatuto da Advocacia e da OAB, há sessão especial designada pelo Presidente do Tribunal, com defesa, produção de prova e sustentação oral. As consultas submetidas ao Tribunal de Ética e Disciplina têm autuação própria e relator por sorteio; conforme a complexidade, pode haver revisor. Relator e revisor têm prazo de 10 dias cada para elaborar parecer, apresentado na primeira sessão seguinte. As sessões do Tribunal obedecem ao seu regimento interno e, subsidiariamente, ao regimento do Conselho Seccional. Conduta temerária, intenção de alterar a verdade dos fatos e recursos manifestamente protelatórios contrariam os princípios do Código e sujeitam os responsáveis à sanção. Recursos contra decisões do Tribunal ao Conselho Seccional seguem o Estatuto, o Regulamento Geral e o Regimento Interno, e o Tribunal comunica suas decisões ao Conselho Seccional para publicação periódica."
+        },
+        {
+          id: "etapa-6-revisao-e-reabilitacao",
+          type: "step",
+          number: "6",
+          title: "Revisão e reabilitação",
+          short: "Trata das vias posteriores à condenação disciplinar: revisão do processo e reabilitação do advogado sancionado.",
+          articles: ["68", "69"],
+          status: "pós-decisão",
+          accent: "#10827d",
+          sections: [
+            {
+              title: "Revisão",
+              items: [
+                "Cabe revisão do processo disciplinar na forma do Estatuto, por requerimento do advogado punido.",
+                "A competência é do órgão que proferiu a condenação final; no Conselho Federal, processa-se perante a Segunda Câmara em sessão plenária.",
+                "A revisão tem autuação própria, é apensada ao processo principal e não suspende a condenação, salvo tutela cautelar do relator."
+              ]
+            },
+            {
+              title: "Participação do representante",
+              items: [
+                "Na revisão, o representante só é notificado quando o relator entender que pode haver dano ao interesse jurídico que motivou a representação."
+              ]
+            },
+            {
+              title: "Reabilitação",
+              items: [
+                "O advogado sancionado pode requerer reabilitação no prazo e nas condições do Estatuto.",
+                "A competência é do Conselho Seccional que aplicou a sanção ou do Conselho Federal nos casos de competência originária.",
+                "O pedido exige provas de bom comportamento e certificação do cumprimento da sanção; se a instrução estiver insuficiente, o relator fixa prazo para complementar, sob pena de arquivamento liminar."
+              ]
+            }
+          ],
+          narration: "Etapa 6, revisão e reabilitação. Artigos 68 e 69. A revisão do processo disciplinar cabe na forma do Estatuto da Advocacia e da OAB e pode ser requerida pelo advogado punido. A competência é do órgão de que emanou a condenação final. Se o órgão competente for o Conselho Federal, a revisão tramita perante a Segunda Câmara reunida em sessão plenária. A revisão observa o procedimento do processo disciplinar no que couber, tem autuação própria e é apensada aos autos principais. O pedido de revisão não suspende os efeitos da decisão condenatória, salvo tutela cautelar concedida pelo relator diante da relevância dos fundamentos e do risco de consequências irreparáveis. O representante só é chamado se houver possível dano ao interesse jurídico que motivou a representação. A reabilitação pode ser requerida pelo advogado que sofreu sanção disciplinar, no prazo e nas condições do Estatuto. Ela tramita no Conselho Seccional que aplicou a sanção, ou no Conselho Federal em competência originária. O pedido tem autuação própria, é apensado ao processo disciplinar, deve trazer provas de bom comportamento e certidão de cumprimento da sanção. Se estiver insuficientemente instruído, o relator assina prazo para complementação; se a determinação não for cumprida, arquiva-se liminarmente."
+        }
+      ],
+      deadlineGuide: {
+        id: "prazos-chave",
+        type: "deadlines",
+        title: "Prazos-chave",
+        short: "Os prazos mais cobrados do recorte: 30 dias, 15 dias, 10 dias e limite de 5 testemunhas.",
+        articles: ["58", "59", "60", "64"],
+        status: "memorização",
+        accent: "#c68114",
+        narration: "Prazos-chave do procedimento disciplinar da OAB. O relator tem 30 dias para emitir parecer de admissibilidade, propondo instaurar o processo disciplinar ou arquivar liminarmente a representação. O representado tem 15 dias para defesa prévia. Depois da instrução, interessado e representado têm razões finais em prazos sucessivos de 15 dias. Para a sessão de julgamento, representante e representado são notificados com 15 dias de antecedência. Nas consultas ao Tribunal de Ética e Disciplina, relator e revisor têm 10 dias cada para elaborar parecer. Em representação e defesa prévia, o rol de testemunhas é limitado a 5."
+      },
+      deadlines: [
+        {
+          label: "30 dias",
+          text: "Parecer do relator na admissibilidade, sob pena de redistribuição."
+        },
+        {
+          label: "15 dias",
+          text: "Defesa prévia ou esclarecimentos na fase de instrução."
+        },
+        {
+          label: "15 + 15",
+          text: "Razões finais em prazos sucessivos para interessado e representado."
+        },
+        {
+          label: "15 dias",
+          text: "Antecedência mínima da notificação para sessão de julgamento."
+        },
+        {
+          label: "10 + 10",
+          text: "Parecer do relator e do revisor nas consultas submetidas ao TED."
+        },
+        {
+          label: "5",
+          text: "Limite de testemunhas na representação e na defesa prévia."
+        }
+      ],
+      articleGroups: [
+        { id: "todos", label: "Todos", articles: [] },
+        { id: "entrada", label: "Entrada", articles: ["55", "55-A", "56", "57"] },
+        { id: "admissibilidade", label: "Admissibilidade", articles: ["58", "58-A"] },
+        { id: "instrucao", label: "Instrução", articles: ["59"] },
+        { id: "julgamento", label: "Julgamento", articles: ["60", "61", "62"] },
+        { id: "apoio", label: "Apoio", articles: ["63", "64", "65", "66", "67"] },
+        { id: "posterior", label: "Posterior", articles: ["68", "69"] }
+      ],
+      articleCards: [
+        { article: "55", group: "entrada", title: "Instauração", text: "Processo disciplinar nasce de ofício ou por representação. De ofício exige fonte idônea ou autoridade competente; denúncia anônima não basta.", accent: "#1e5aa8" },
+        { article: "55-A", group: "entrada", title: "Perspectiva de gênero e raça", text: "Procedimentos na OAB devem observar tramitação e julgamento com perspectiva de gênero e raça, de ofício ou por pedido da parte.", accent: "#1e5aa8" },
+        { article: "56", group: "entrada", title: "Endereçamento", text: "Representação ao Presidente do Conselho Seccional ou da Subseção, escrita ou verbal reduzida a termo; pode ir ao TED quando o regimento permitir.", accent: "#1e5aa8" },
+        { article: "57", group: "entrada", title: "Conteúdo da representação", text: "Identificação, narrativa dos fatos, documentos ou provas, até 5 testemunhas e assinatura ou certificação.", accent: "#1e5aa8" },
+        { article: "58", group: "admissibilidade", title: "Relator e admissibilidade", text: "Presidente sorteia relator, juntam-se cadastro e antecedentes, e o relator opina em 30 dias por instauração ou arquivamento liminar.", accent: "#25825f" },
+        { article: "58-A", group: "admissibilidade", title: "TAC", text: "Termo de ajustamento de conduta é admissível em infração punível com censura, sem repercussão negativa à advocacia.", accent: "#25825f" },
+        { article: "59", group: "instrucao", title: "Defesa, provas e parecer", text: "Notificação, defesa prévia em 15 dias, defensor dativo, saneamento, audiência, diligências, parecer preliminar e razões finais.", accent: "#d66b20" },
+        { article: "60", group: "julgamento", title: "Distribuição para julgamento", text: "Presidente do TED sorteia relator para voto; relator do julgamento não se confunde com o da instrução quando for o caso.", accent: "#6a4fb3" },
+        { article: "61", group: "julgamento", title: "Conteúdo do acórdão", text: "Acórdão registra enquadramento, sanção, quóruns, base da decisão, agravantes, atenuantes e eventual conversão de censura.", accent: "#6a4fb3" },
+        { article: "62", group: "julgamento", title: "Forma do acórdão", text: "Ementa obrigatória, redator do voto divergente vencedor, votos fundamentados nos autos e possível atualização de antecedentes.", accent: "#6a4fb3" },
+        { article: "63", group: "apoio", title: "Sessão especial", text: "Em suspensão preventiva, o representado ou defensor pode apresentar defesa, produzir prova e sustentar oralmente.", accent: "#d53971" },
+        { article: "64", group: "apoio", title: "Consultas ao TED", text: "Consulta tem autuação própria, relator por sorteio, possível revisor e prazos de 10 dias para cada parecer.", accent: "#d53971" },
+        { article: "65", group: "apoio", title: "Sessões do TED", text: "Sessões seguem o regimento interno do TED e, subsidiariamente, o regimento do Conselho Seccional.", accent: "#d53971" },
+        { article: "66", group: "apoio", title: "Conduta processual", text: "Temeridade, alteração da verdade e recurso protelatório violam o Código e sujeitam a sanção.", accent: "#d53971" },
+        { article: "67", group: "apoio", title: "Recursos e publicação", text: "Recursos ao Conselho Seccional seguem Estatuto, Regulamento Geral e Regimento; TED comunica decisões para publicação periódica.", accent: "#d53971" },
+        { article: "68", group: "posterior", title: "Revisão", text: "Advogado punido pode requerer revisão; competência é do órgão da condenação final; não suspende efeitos salvo tutela cautelar.", accent: "#10827d" },
+        { article: "69", group: "posterior", title: "Reabilitação", text: "Advogado sancionado pode requerer reabilitação; deve provar bom comportamento e cumprimento da sanção.", accent: "#10827d" }
+      ],
+      examGuide: {
+        id: "roteiro-de-prova",
+        type: "exam",
+        title: "Roteiro de prova",
+        short: "A lógica de cobrança costuma misturar legitimidade, prazos, relatoria, testemunhas, acórdão e efeitos da revisão.",
+        articles: ["55 a 69"],
+        status: "revisão final",
+        accent: "#d53971",
+        sections: [
+          {
+            title: "Atenção",
+            items: [
+              "Denúncia anônima não é fonte idônea para instauração de ofício.",
+              "O relator de admissibilidade tem 30 dias; defesa prévia, razões finais e notificação para julgamento giram em torno de 15 dias.",
+              "O limite de testemunhas aparece duas vezes: representação e defesa prévia.",
+              "TAC não é geral: depende de infração punível com censura e ausência de repercussão negativa à advocacia.",
+              "Revisão não suspende automaticamente a condenação; reabilitação exige prova de bom comportamento e cumprimento da sanção."
+            ]
+          }
+        ],
+        narration: "Roteiro de prova. Guarde cinco pontos. Primeiro: denúncia anônima não é fonte idônea para instaurar processo disciplinar de ofício. Segundo: no artigo 58, o relator de admissibilidade tem 30 dias para parecer. Terceiro: no artigo 59, defesa prévia e razões finais trabalham com prazos de 15 dias, e o rol de testemunhas é limitado a 5. Quarto: o termo de ajustamento de conduta não é para qualquer caso; ele depende de infração punível com censura e de ausência de repercussão negativa à advocacia. Quinto: revisão e reabilitação são posteriores à condenação. A revisão não suspende automaticamente os efeitos da decisão, enquanto a reabilitação exige provas de bom comportamento e cumprimento da sanção disciplinar."
+      },
+      quiz: [
+        {
+          question: "Qual elemento não serve como fonte idônea para instauração de ofício?",
+          options: ["Denúncia anônima", "Comunicação de autoridade competente", "Fonte idônea identificável"],
+          answer: 0,
+          explanation: "Art. 55, § 2º: denúncia anônima não é fonte idônea. A instauração de ofício depende de fonte idônea ou comunicação de autoridade competente."
+        },
+        {
+          question: "Qual é o prazo do parecer de admissibilidade do relator?",
+          options: ["30 dias", "15 dias", "10 dias"],
+          answer: 0,
+          explanation: "Art. 58, § 3º: o relator emite parecer em 30 dias, sob pena de redistribuição do feito para outro relator."
+        },
+        {
+          question: "Quando o TAC é admissível no recorte estudado?",
+          options: ["Em infração punível com censura, sem repercussão negativa à advocacia", "Em qualquer infração disciplinar antes da defesa", "Apenas depois do acórdão condenatório"],
+          answer: 0,
+          explanation: "Art. 58-A: o TAC é admissível nos casos de infração punível com censura, se o fato não tiver gerado repercussão negativa à advocacia."
+        },
+        {
+          question: "Na sessão de julgamento, qual é a ordem da sustentação oral?",
+          options: ["Primeiro representante, depois representado", "Primeiro representado, depois representante", "Somente o representado fala"],
+          answer: 0,
+          explanation: "Art. 60, § 4º: após o voto do relator, fala primeiro o representante e, em seguida, o representado, por 15 minutos cada."
+        },
+        {
+          question: "O pedido de revisão suspende automaticamente a decisão condenatória?",
+          options: ["Não; só pode suspender com tutela cautelar do relator", "Sim; a revisão sempre suspende a sanção", "Sim; desde que o representante seja notificado"],
+          answer: 0,
+          explanation: "Art. 68, § 6º: a revisão não suspende os efeitos da condenação, salvo tutela cautelar concedida pelo relator diante dos requisitos previstos."
+        }
+      ]
+    };
+
+    const flowGrid = document.querySelector("#flowGrid");
+    const detailPanel = document.querySelector("#detailPanel");
+    const deadlineGrid = document.querySelector("#deadlineGrid");
+    const articleToolbar = document.querySelector("#articleToolbar");
+    const articleList = document.querySelector("#articleList");
+    const audio = document.querySelector("#studyAudio");
+    const audioStatus = document.querySelector("#audioStatus");
+    const toggleGuide = document.querySelector("#toggleGuide");
+    const prevAudio = document.querySelector("#prevAudio");
+    const nextAudio = document.querySelector("#nextAudio");
+    const quizQuestion = document.querySelector("#quizQuestion");
+    const quizOptions = document.querySelector("#quizOptions");
+    const quizFeedback = document.querySelector("#quizFeedback");
+    const prevQuestion = document.querySelector("#prevQuestion");
+    const nextQuestion = document.querySelector("#nextQuestion");
+
+    const sequence = [studyData.overview, ...studyData.steps, studyData.deadlineGuide, studyData.examGuide];
+    let currentItem = studyData.overview;
+    let isGuidePlaying = false;
+    let quizIndex = 0;
+    let selectedArticleGroup = "todos";
+    let syntheticUtterance = null;
+
+    renderFlow();
+    renderDeadlines();
+    renderArticleToolbar();
+    renderArticles();
+    renderDetails(studyData.overview);
+    renderQuiz();
+    loadAudio(studyData.overview);
+
+    toggleGuide.addEventListener("click", () => {
+      if (isAudioActive()) {
+        pauseCurrentAudio();
+        return;
+      }
+
+      isGuidePlaying = true;
+      playCurrentAudio();
+    });
+
+    prevAudio.addEventListener("click", () => moveAudio(-1, true));
+    nextAudio.addEventListener("click", () => moveAudio(1, true));
+    audio.addEventListener("ended", () => {
+      if (isGuidePlaying) {
+        moveAudio(1, true);
+      } else {
+        updateAudioStatus(`Leitura concluída: ${currentItem.title}.`);
+        toggleGuide.textContent = "▶ Iniciar guia";
+      }
+    });
+
+    audio.addEventListener("error", () => {
+      updateAudioStatus("MP3 indisponível neste navegador. Fallback de voz pronto.");
+      toggleGuide.textContent = "▶ Narrar";
+    });
+
+    prevQuestion.addEventListener("click", () => {
+      quizIndex = (quizIndex - 1 + studyData.quiz.length) % studyData.quiz.length;
+      renderQuiz();
+    });
+
+    nextQuestion.addEventListener("click", () => {
+      quizIndex = (quizIndex + 1) % studyData.quiz.length;
+      renderQuiz();
+    });
+
+    function renderFlow() {
+      flowGrid.replaceChildren(...studyData.steps.map((step) => {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "flow-card";
+        button.style.setProperty("--accent", step.accent);
+        button.dataset.stepId = step.id;
+
+        const top = document.createElement("div");
+        top.className = "flow-top";
+
+        const number = document.createElement("span");
+        number.className = "number";
+        number.textContent = step.number;
+
+        const title = document.createElement("h3");
+        title.textContent = step.title;
+
+        top.append(number, title);
+
+        const tags = document.createElement("div");
+        tags.className = "article-tags";
+        step.articles.forEach((article) => {
+          const tag = document.createElement("span");
+          tag.textContent = `Art. ${article}`;
+          tags.append(tag);
+        });
+
+        const short = document.createElement("p");
+        short.textContent = step.short;
+
+        button.append(top, tags, short);
+        button.addEventListener("click", () => {
+          isGuidePlaying = false;
+          selectItem(step, false);
+        });
+
+        return button;
+      }));
+    }
+
+    function renderDetails(item) {
+      currentItem = item;
+      detailPanel.style.setProperty("--detail-accent", item.accent || "#1e5aa8");
+      updateFlowSelection(item.id);
+
+      const kicker = document.createElement("p");
+      kicker.className = "detail-kicker";
+      kicker.textContent = item.type === "step" ? `Etapa ${item.number} · ${formatArticles(item.articles)}` : formatArticles(item.articles);
+
+      const title = document.createElement("h2");
+      title.textContent = item.title;
+
+      const summary = document.createElement("p");
+      summary.className = "detail-summary";
+      summary.textContent = item.short;
+
+      const actions = document.createElement("div");
+      actions.className = "detail-actions";
+
+      const hear = document.createElement("button");
+      hear.className = "inline-action";
+      hear.type = "button";
+      hear.textContent = "▶ Ouvir este item";
+      hear.addEventListener("click", () => {
+        isGuidePlaying = false;
+        playCurrentAudio();
+      });
+
+      actions.append(hear);
+
+      const sections = getSectionsForDetail(item).map((section) => {
+        const wrapper = document.createElement("section");
+        wrapper.className = "detail-section";
+
+        const heading = document.createElement("h3");
+        heading.textContent = section.title;
+
+        const list = document.createElement("ul");
+        section.items.forEach((entry) => {
+          const li = document.createElement("li");
+          li.textContent = entry;
+          list.append(li);
+        });
+
+        wrapper.append(heading, list);
+        return wrapper;
+      });
+
+      detailPanel.replaceChildren(kicker, title, summary, actions, ...sections);
+      loadAudio(item);
+    }
+
+    function getSectionsForDetail(item) {
+      if (item.type === "deadlines") {
+        return [{
+          title: "Memorize",
+          items: studyData.deadlines.map((deadline) => `${deadline.label}: ${deadline.text}`)
+        }];
+      }
+
+      if (item.type === "exam") {
+        return item.sections;
+      }
+
+      return item.sections || [];
+    }
+
+    function renderDeadlines() {
+      deadlineGrid.replaceChildren(...studyData.deadlines.map((deadline) => {
+        const row = document.createElement("div");
+        row.className = "deadline-item";
+
+        const label = document.createElement("strong");
+        label.textContent = deadline.label;
+
+        const text = document.createElement("span");
+        text.textContent = deadline.text;
+
+        row.append(label, text);
+        return row;
+      }));
+    }
+
+    function renderArticleToolbar() {
+      articleToolbar.replaceChildren(...studyData.articleGroups.map((group) => {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "view-toggle";
+        button.textContent = group.label;
+        button.dataset.group = group.id;
+        button.addEventListener("click", () => {
+          selectedArticleGroup = group.id;
+          renderArticleToolbar();
+          renderArticles();
+        });
+
+        if (group.id === selectedArticleGroup) {
+          button.classList.add("active");
+        }
+
+        return button;
+      }));
+    }
+
+    function renderArticles() {
+      const group = studyData.articleGroups.find((entry) => entry.id === selectedArticleGroup);
+      const cards = studyData.articleCards.filter((card) => group.id === "todos" || group.articles.includes(card.article));
+
+      articleList.replaceChildren(...cards.map((card) => {
+        const article = document.createElement("article");
+        article.className = "article-card";
+        article.style.setProperty("--article-accent", card.accent);
+
+        const number = document.createElement("strong");
+        number.textContent = `Art. ${card.article}`;
+
+        const title = document.createElement("h3");
+        title.textContent = card.title;
+
+        const text = document.createElement("p");
+        text.textContent = card.text;
+
+        article.append(number, title, text);
+        return article;
+      }));
+    }
+
+    function renderQuiz() {
+      const current = studyData.quiz[quizIndex];
+      quizQuestion.textContent = `${quizIndex + 1}. ${current.question}`;
+      quizFeedback.textContent = "Selecione uma alternativa para conferir a justificativa normativa.";
+
+      quizOptions.replaceChildren(...current.options.map((option, index) => {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "quiz-option";
+        button.textContent = option;
+        button.addEventListener("click", () => {
+          [...quizOptions.children].forEach((child, childIndex) => {
+            child.classList.toggle("correct", childIndex === current.answer);
+            child.classList.toggle("wrong", childIndex === index && index !== current.answer);
+          });
+          quizFeedback.textContent = current.explanation;
+        });
+        return button;
+      }));
+    }
+
+    function selectItem(item, shouldPlay) {
+      renderDetails(item);
+      if (shouldPlay) {
+        playCurrentAudio();
+      }
+    }
+
+    function loadAudio(item) {
+      currentItem = item;
+      if (audio.dataset.itemId !== item.id) {
+        audio.src = `./audio/${item.id}.mp3`;
+        audio.dataset.itemId = item.id;
+        audio.load();
+      }
+      updateAudioStatus(`Leitura pronta: ${item.title}.`);
+      toggleGuide.textContent = "▶ Iniciar guia";
+    }
+
+    async function playCurrentAudio() {
+      stopSyntheticSpeech();
+      try {
+        await audio.play();
+        toggleGuide.textContent = "⏸ Pausar";
+        updateAudioStatus(`Reproduzindo: ${currentItem.title}.`);
+      } catch (error) {
+        speakFallback(currentItem);
+      }
+    }
+
+    function pauseCurrentAudio() {
+      isGuidePlaying = false;
+      audio.pause();
+      if (isSyntheticActive()) {
+        speechSynthesis.pause();
+      }
+      toggleGuide.textContent = "▶ Retomar";
+      updateAudioStatus(`Leitura pausada: ${currentItem.title}.`);
+    }
+
+    function moveAudio(direction, shouldPlay) {
+      const currentIndex = Math.max(0, sequence.findIndex((item) => item.id === currentItem.id));
+      const nextIndex = (currentIndex + direction + sequence.length) % sequence.length;
+      selectItem(sequence[nextIndex], shouldPlay);
+    }
+
+    function isAudioActive() {
+      return !audio.paused || isSyntheticActive();
+    }
+
+    function speakFallback(item) {
+      if (!("speechSynthesis" in window)) {
+        updateAudioStatus("Narração indisponível neste navegador.");
+        return;
+      }
+
+      stopSyntheticSpeech();
+      syntheticUtterance = new SpeechSynthesisUtterance(buildNarrationText(item));
+      syntheticUtterance.lang = "pt-BR";
+      syntheticUtterance.rate = 0.94;
+      syntheticUtterance.pitch = 0.82;
+      syntheticUtterance.onend = () => {
+        if (isGuidePlaying) {
+          moveAudio(1, true);
+        } else {
+          toggleGuide.textContent = "▶ Iniciar guia";
+          updateAudioStatus(`Leitura concluída: ${item.title}.`);
+        }
+      };
+      speechSynthesis.speak(syntheticUtterance);
+      toggleGuide.textContent = "⏸ Pausar";
+      updateAudioStatus(`Fallback de voz: ${item.title}.`);
+    }
+
+    function stopSyntheticSpeech() {
+      if ("speechSynthesis" in window && (speechSynthesis.speaking || speechSynthesis.pending)) {
+        speechSynthesis.cancel();
+      }
+      syntheticUtterance = null;
+    }
+
+    function isSyntheticActive() {
+      return "speechSynthesis" in window && speechSynthesis.speaking && !speechSynthesis.paused;
+    }
+
+    function buildNarrationText(item) {
+      if (item.narration) {
+        return toSpokenText(item.narration);
+      }
+
+      const sections = getSectionsForDetail(item)
+        .map((section) => [section.title, ...section.items].join(". "))
+        .join(". ");
+
+      return toSpokenText(`${item.title}. ${item.short}. ${sections}`);
+    }
+
+    function toSpokenText(text) {
+      return text
+        .replaceAll("OAB", "Ordem dos Advogados do Brasil")
+        .replaceAll("CED", "Código de Ética e Disciplina")
+        .replaceAll("EAOAB", "Estatuto da Advocacia e da Ordem dos Advogados do Brasil")
+        .replaceAll("TEDs", "Tribunais de Ética e Disciplina")
+        .replaceAll("TED", "Tribunal de Ética e Disciplina")
+        .replaceAll("TAC", "Termo de Ajustamento de Conduta")
+        .replaceAll("arts. 55 a 69", "artigos cinquenta e cinco a sessenta e nove")
+        .replaceAll("Artigos 55 a 69", "artigos cinquenta e cinco a sessenta e nove")
+        .replaceAll("artigos 55 a 69", "artigos cinquenta e cinco a sessenta e nove")
+        .replaceAll("Art. 70, § 3º", "artigo setenta, parágrafo terceiro")
+        .replaceAll("art. 70, § 3º", "artigo setenta, parágrafo terceiro")
+        .replaceAll("Art. 58-A", "artigo cinquenta e oito A")
+        .replaceAll("artigo 58-A", "artigo cinquenta e oito A")
+        .replaceAll("Art. 55-A", "artigo cinquenta e cinco A")
+        .replaceAll("artigo 55-A", "artigo cinquenta e cinco A")
+        .replaceAll("art. 58", "artigo cinquenta e oito")
+        .replaceAll("artigo 58", "artigo cinquenta e oito")
+        .replaceAll("art. 59", "artigo cinquenta e nove")
+        .replaceAll("artigo 59", "artigo cinquenta e nove")
+        .replaceAll("art. 60", "artigo sessenta")
+        .replaceAll("artigo 60", "artigo sessenta")
+        .replaceAll("art. 61", "artigo sessenta e um")
+        .replaceAll("artigo 61", "artigo sessenta e um")
+        .replaceAll("art. 62", "artigo sessenta e dois")
+        .replaceAll("artigo 62", "artigo sessenta e dois")
+        .replaceAll("art. 63", "artigo sessenta e três")
+        .replaceAll("artigo 63", "artigo sessenta e três")
+        .replaceAll("art. 64", "artigo sessenta e quatro")
+        .replaceAll("artigo 64", "artigo sessenta e quatro")
+        .replaceAll("art. 65", "artigo sessenta e cinco")
+        .replaceAll("artigo 65", "artigo sessenta e cinco")
+        .replaceAll("art. 66", "artigo sessenta e seis")
+        .replaceAll("artigo 66", "artigo sessenta e seis")
+        .replaceAll("art. 67", "artigo sessenta e sete")
+        .replaceAll("artigo 67", "artigo sessenta e sete")
+        .replaceAll("art. 68", "artigo sessenta e oito")
+        .replaceAll("artigo 68", "artigo sessenta e oito")
+        .replaceAll("art. 69", "artigo sessenta e nove")
+        .replaceAll("artigo 69", "artigo sessenta e nove")
+        .replaceAll("§ 1º", "parágrafo primeiro")
+        .replaceAll("§ 2º", "parágrafo segundo")
+        .replaceAll("§ 3º", "parágrafo terceiro")
+        .replaceAll("§ 4º", "parágrafo quarto")
+        .replaceAll("§ 5º", "parágrafo quinto")
+        .replaceAll("§ 6º", "parágrafo sexto")
+        .replaceAll("§ 7º", "parágrafo sétimo")
+        .replaceAll("§ 8º", "parágrafo oitavo");
+    }
+
+    function updateFlowSelection(itemId) {
+      document.querySelectorAll(".flow-card").forEach((card) => {
+        card.classList.toggle("active", card.dataset.stepId === itemId);
+      });
+    }
+
+    function updateAudioStatus(message) {
+      audioStatus.textContent = message;
+    }
+
+    function formatArticles(articles) {
+      return articles.map((article) => `Art. ${article}`).join(" · ");
+    }
+  </script>
+</body>
+</html>

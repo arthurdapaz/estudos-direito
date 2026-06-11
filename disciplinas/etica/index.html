@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Estudos de Ética Profissional, Estatuto da Advocacia e Código de Ética e Disciplina da OAB.">
+  <title>Ética | Estudos de Direito</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f4f7fb;
+      --ink: #172033;
+      --muted: #56657d;
+      --soft: #77849a;
+      --panel: rgba(255, 255, 255, 0.92);
+      --line: rgba(54, 67, 92, 0.16);
+      --blue: #1e5aa8;
+      --green: #25825f;
+      --orange: #d66b20;
+      --purple: #6950b8;
+      --radius: 8px;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      letter-spacing: 0;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100vh;
+      margin: 0;
+      color: var(--ink);
+      background:
+        linear-gradient(90deg, rgba(30, 90, 168, 0.07) 1px, transparent 1px),
+        linear-gradient(180deg, rgba(30, 90, 168, 0.06) 1px, transparent 1px),
+        linear-gradient(180deg, #ffffff 0%, var(--bg) 52%, #eef3f9 100%);
+      background-size: 44px 44px, 44px 44px, auto;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .page {
+      width: min(1040px, calc(100vw - 32px));
+      margin: 0 auto;
+      padding: 26px 0 42px;
+    }
+
+    .crumb {
+      display: inline-flex;
+      align-items: center;
+      min-height: 34px;
+      padding: 0 12px;
+      border: 1px solid rgba(30, 90, 168, 0.22);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.78);
+      color: #1d4f92;
+      font-size: 0.78rem;
+      font-weight: 800;
+    }
+
+    header {
+      display: grid;
+      gap: 18px;
+      padding: clamp(34px, 8vw, 86px) 0 30px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    h1 {
+      max-width: 12ch;
+      margin: 0;
+      font-size: clamp(2.4rem, 7vw, 5.3rem);
+      line-height: 0.96;
+      letter-spacing: 0;
+    }
+
+    header p {
+      max-width: 70ch;
+      margin: 0;
+      color: var(--muted);
+      font-size: clamp(1rem, 2vw, 1.16rem);
+      line-height: 1.56;
+    }
+
+    .section-head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 18px;
+      margin: 28px 0 16px;
+    }
+
+    .section-head h2 {
+      margin: 0;
+      font-size: clamp(1.18rem, 2.4vw, 1.6rem);
+    }
+
+    .section-head span {
+      color: var(--soft);
+      font-size: 0.84rem;
+    }
+
+    .study {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 24px;
+      align-items: center;
+      padding: clamp(18px, 3vw, 26px);
+      border: 1px solid rgba(37, 130, 95, 0.24);
+      border-radius: var(--radius);
+      background:
+        linear-gradient(135deg, rgba(37, 130, 95, 0.11), transparent 42%),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(255, 255, 255, 0.82));
+      box-shadow: 0 18px 58px rgba(47, 65, 88, 0.14);
+      transition: transform 170ms ease, border-color 170ms ease, box-shadow 170ms ease;
+    }
+
+    .study:hover,
+    .study:focus-visible {
+      transform: translateY(-2px);
+      border-color: rgba(37, 130, 95, 0.42);
+      box-shadow: 0 22px 66px rgba(47, 65, 88, 0.18);
+      outline: none;
+    }
+
+    .study span {
+      color: var(--green);
+      font-size: 0.72rem;
+      font-weight: 850;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .study h3 {
+      margin: 7px 0 10px;
+      font-size: clamp(1.5rem, 3.8vw, 2.8rem);
+      line-height: 1.02;
+    }
+
+    .study p {
+      max-width: 70ch;
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.52;
+    }
+
+    .open {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 42px;
+      padding: 0 14px;
+      border: 1px solid rgba(30, 90, 168, 0.3);
+      border-radius: 999px;
+      background: rgba(30, 90, 168, 0.08);
+      color: #1d4f92;
+      font-size: 0.84rem;
+      font-weight: 840;
+      white-space: nowrap;
+    }
+
+    .empty {
+      margin-top: 14px;
+      padding: 18px;
+      border: 1px dashed rgba(54, 67, 92, 0.22);
+      border-radius: var(--radius);
+      background: rgba(255, 255, 255, 0.56);
+      color: var(--soft);
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 720px) {
+      .page {
+        width: min(100vw - 24px, 620px);
+        padding-top: 18px;
+      }
+
+      .section-head,
+      .study {
+        align-items: start;
+        grid-template-columns: 1fr;
+      }
+
+      .section-head {
+        flex-direction: column;
+      }
+
+      .open {
+        justify-self: start;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <a class="crumb" href="../../">Voltar ao catálogo</a>
+
+    <header>
+      <h1>Ética</h1>
+      <p>Área dedicada ao Código de Ética e Disciplina da OAB, Estatuto da Advocacia, prerrogativas, infrações, sanções e funcionamento dos órgãos disciplinares.</p>
+    </header>
+
+    <section aria-labelledby="publicados">
+      <div class="section-head">
+        <h2 id="publicados">Estudos publicados</h2>
+        <span>1 material ativo</span>
+      </div>
+
+      <a class="study" href="./procedimento-disciplinar-oab/">
+        <div>
+          <span>Mapa mental guiado</span>
+          <h3>Procedimento disciplinar na OAB</h3>
+          <p>Fluxo dos arts. 55 a 69 do Código de Ética e Disciplina, com representação, admissibilidade, TAC, defesa, instrução, julgamento, acórdão, revisão e reabilitação.</p>
+        </div>
+        <strong class="open">Abrir estudo</strong>
+      </a>
+
+      <div class="empty">
+        Novos estudos sobre Estatuto da Advocacia, infrações disciplinares, honorários, publicidade e prerrogativas podem entrar aqui sem mudar a estrutura do site.
+      </div>
+    </section>
+  </main>
+</body>
+</html>
