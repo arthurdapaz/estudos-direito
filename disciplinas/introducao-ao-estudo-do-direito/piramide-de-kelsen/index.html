@@ -1,0 +1,1780 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pirâmide de Kelsen - Ordenamento Jurídico Brasileiro</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #06070a;
+      color: #f8fafc;
+      --panel-bg: rgba(6, 10, 18, 0.82);
+      --panel-strong: rgba(8, 13, 23, 0.94);
+      --line: rgba(148, 163, 184, 0.2);
+      --text: #f8fafc;
+      --muted: #b8c4d8;
+      --blue: #62c7ff;
+      --teal: #4dd0e1;
+      --gold: #ffd978;
+      --ruby: #fb7185;
+      --green: #79d3a7;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      overflow: hidden;
+    }
+
+    body {
+      background:
+        linear-gradient(112deg, rgba(34, 56, 85, 0.2), transparent 34%),
+        linear-gradient(180deg, #090c13 0%, #05070a 62%, #030405 100%);
+    }
+
+    #scene {
+      position: fixed;
+      inset: 0;
+    }
+
+    .hud {
+      position: fixed;
+      top: clamp(14px, 2vw, 26px);
+      left: clamp(14px, 2vw, 28px);
+      z-index: 3;
+      width: min(410px, calc(100vw - 28px));
+      padding-left: 14px;
+      pointer-events: none;
+      text-shadow: 0 2px 16px rgba(0, 0, 0, 0.75);
+    }
+
+    .hud::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 2px;
+      width: 3px;
+      height: calc(100% - 4px);
+      border-radius: 999px;
+      background: linear-gradient(180deg, var(--gold), var(--teal));
+      box-shadow: 0 0 26px rgba(255, 217, 120, 0.34);
+    }
+
+    .hud h1 {
+      margin: 0;
+      font-size: clamp(1.2rem, 2.3vw, 2.24rem);
+      font-weight: 760;
+      line-height: 1.03;
+      letter-spacing: 0;
+    }
+
+    .hud p {
+      margin: 8px 0 0;
+      max-width: 32rem;
+      color: var(--muted);
+      font-size: clamp(0.74rem, 1vw, 0.95rem);
+      line-height: 1.45;
+    }
+
+    .label {
+      width: clamp(150px, 17vw, 236px);
+      padding: 8px 10px;
+      border: 1px solid rgba(226, 232, 240, 0.14);
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.025)),
+        rgba(7, 11, 18, 0.72);
+      box-shadow: 0 18px 42px rgba(0, 0, 0, 0.42);
+      color: #f8fafc;
+      font-size: clamp(0.58rem, 0.82vw, 0.78rem);
+      font-weight: 650;
+      line-height: 1.25;
+      text-align: center;
+      white-space: pre-line;
+      backdrop-filter: blur(10px);
+      border-radius: 7px;
+    }
+
+    .level-label {
+      width: clamp(252px, 27vw, 390px);
+      padding: 0;
+      border: 0;
+      background: transparent;
+      box-shadow: none;
+      backdrop-filter: none;
+      pointer-events: none;
+      transform: translateY(-50%);
+    }
+
+    .level-label::before {
+      content: "";
+      display: block;
+      width: 38px;
+      height: 2px;
+      margin: 0 auto 6px;
+      border-radius: 999px;
+      background: var(--accent, var(--teal));
+      box-shadow: 0 0 18px color-mix(in srgb, var(--accent, var(--teal)) 48%, transparent);
+    }
+
+    .level-label[data-layer="infralegal"] {
+      --accent: var(--blue);
+    }
+
+    .level-label[data-layer="legal"] {
+      --accent: var(--green);
+    }
+
+    .level-label[data-layer="supralegal"] {
+      --accent: var(--ruby);
+    }
+
+    .level-label[data-layer="constitucional"] {
+      --accent: var(--gold);
+    }
+
+    .level-title {
+      margin-bottom: 6px;
+      color: color-mix(in srgb, var(--accent, var(--teal)) 72%, #ffffff);
+      font-size: 0.72rem;
+      font-weight: 860;
+      line-height: 1.18;
+      text-transform: uppercase;
+      text-shadow:
+        0 1px 1px rgba(0, 0, 0, 0.85),
+        0 0 18px color-mix(in srgb, var(--accent, var(--teal)) 42%, transparent);
+    }
+
+    .norm-stack {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 7px;
+      pointer-events: none;
+    }
+
+    .norm-chip {
+      min-height: 28px;
+      border: 1px solid rgba(226, 232, 240, 0.16);
+      border-radius: 7px;
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.015)),
+        rgba(10, 16, 28, 0.82);
+      color: #f8fafc;
+      cursor: pointer;
+      font: inherit;
+      font-size: 0.65rem;
+      font-weight: 760;
+      line-height: 1.08;
+      padding: 6px 9px;
+      pointer-events: auto;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08), 0 8px 14px rgba(0, 0, 0, 0.24);
+      transition: background 160ms ease, border-color 160ms ease, transform 160ms ease, color 160ms ease, box-shadow 160ms ease;
+    }
+
+    .norm-chip:hover,
+    .norm-chip:focus-visible {
+      border-color: color-mix(in srgb, var(--accent, var(--gold)) 72%, white);
+      background:
+        linear-gradient(180deg, color-mix(in srgb, var(--accent, var(--gold)) 22%, transparent), rgba(255, 255, 255, 0.02)),
+        rgba(15, 23, 42, 0.92);
+      color: #fff7d6;
+      outline: none;
+      transform: translateY(-1px);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12), 0 14px 24px rgba(0, 0, 0, 0.3);
+    }
+
+    .norm-chip.active {
+      border-color: color-mix(in srgb, var(--accent, var(--teal)) 78%, white);
+      background:
+        linear-gradient(180deg, color-mix(in srgb, var(--accent, var(--teal)) 32%, transparent), rgba(255, 255, 255, 0.025)),
+        rgba(10, 23, 32, 0.96);
+      color: #ffffff;
+      box-shadow: 0 0 0 2px color-mix(in srgb, var(--accent, var(--teal)) 20%, transparent), 0 16px 34px rgba(0, 0, 0, 0.36);
+    }
+
+    .label.grundnorm {
+      width: clamp(150px, 16vw, 220px);
+      border-color: rgba(255, 214, 120, 0.62);
+      background: rgba(38, 23, 7, 0.72);
+      color: #fff7d6;
+      text-transform: uppercase;
+      letter-spacing: 0;
+    }
+
+    .label.grundnorm span {
+      display: block;
+      margin-top: 2px;
+      color: #ffe3a3;
+      font-size: 0.76em;
+      font-weight: 720;
+      text-transform: none;
+    }
+
+    .loading {
+      position: fixed;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      z-index: 2;
+      color: #e2e8f0;
+      font-size: 0.9rem;
+      letter-spacing: 0;
+      background: #06070a;
+      transition: opacity 220ms ease;
+    }
+
+    .loading.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .scheme-panel {
+      position: fixed;
+      top: clamp(14px, 2vw, 26px);
+      right: clamp(14px, 2vw, 28px);
+      z-index: 4;
+      width: min(318px, calc(100vw - 28px));
+      padding: 12px 13px;
+      border: 1px solid rgba(255, 217, 120, 0.24);
+      border-radius: 8px;
+      background:
+        linear-gradient(135deg, rgba(255, 217, 120, 0.08), rgba(77, 208, 225, 0.04)),
+        var(--panel-bg);
+      box-shadow: 0 18px 46px rgba(0, 0, 0, 0.42);
+      backdrop-filter: blur(16px);
+    }
+
+    .scheme-panel::after {
+      content: "";
+      position: absolute;
+      left: 12px;
+      right: 12px;
+      bottom: -1px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255, 217, 120, 0.72), transparent);
+    }
+
+    .scheme-kicker {
+      margin: 0 0 5px;
+      color: #ffe3a3;
+      font-size: 0.68rem;
+      font-weight: 760;
+      line-height: 1.1;
+      text-transform: uppercase;
+    }
+
+    .scheme-panel h2 {
+      margin: 0;
+      color: #f8fafc;
+      font-size: 1.02rem;
+      line-height: 1.12;
+    }
+
+    .scheme-note {
+      margin: 7px 0 0;
+      color: #c7d2fe;
+      font-size: 0.68rem;
+      line-height: 1.32;
+    }
+
+    .connector-layer {
+      position: fixed;
+      inset: 0;
+      z-index: 5;
+      width: 100vw;
+      height: 100vh;
+      overflow: visible;
+      pointer-events: none;
+    }
+
+    .connector-line {
+      opacity: 0;
+      fill: none;
+      stroke: rgba(255, 214, 120, 0.86);
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-dasharray: 4 8;
+      filter: drop-shadow(0 0 8px rgba(255, 214, 120, 0.55));
+      transition: opacity 160ms ease;
+    }
+
+    .connector-layer.active .connector-line {
+      opacity: 1;
+    }
+
+    .detail-panel {
+      position: fixed;
+      top: 146px;
+      right: clamp(14px, 2vw, 28px);
+      z-index: 6;
+      width: min(380px, calc(100vw - 28px));
+      max-height: min(58vh, 560px);
+      overflow: auto;
+      border: 1px solid rgba(77, 208, 225, 0.3);
+      border-radius: 8px;
+      background:
+        linear-gradient(180deg, rgba(77, 208, 225, 0.07), rgba(255, 255, 255, 0.018) 28%),
+        var(--panel-strong);
+      box-shadow: 0 22px 60px rgba(0, 0, 0, 0.48);
+      color: #f8fafc;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(8px) scale(0.985);
+      transition: opacity 180ms ease, transform 180ms ease;
+      backdrop-filter: blur(16px);
+      scrollbar-color: rgba(148, 163, 184, 0.45) transparent;
+    }
+
+    .detail-panel.open {
+      opacity: 1;
+      pointer-events: auto;
+      transform: none;
+    }
+
+    .detail-header {
+      display: grid;
+      grid-template-columns: 1fr max-content;
+      gap: 10px;
+      padding: 13px 14px 10px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .detail-level {
+      color: #93c5fd;
+      font-size: 0.68rem;
+      font-weight: 780;
+      line-height: 1.2;
+      text-transform: uppercase;
+    }
+
+    .detail-title {
+      margin: 4px 0 0;
+      color: #fff7d6;
+      font-size: 1.08rem;
+      line-height: 1.15;
+    }
+
+    .detail-status {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      align-self: start;
+      min-height: 24px;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      border-radius: 999px;
+      color: #e0fbff;
+      background: rgba(77, 208, 225, 0.15);
+      font-size: 0.66rem;
+      font-weight: 780;
+      padding: 4px 8px;
+      white-space: nowrap;
+    }
+
+    .detail-status[data-state="warning"] {
+      color: #ffedc2;
+      background: rgba(255, 196, 87, 0.14);
+      border-color: rgba(255, 196, 87, 0.34);
+    }
+
+    .detail-status[data-state="inactive"] {
+      color: #fecaca;
+      background: rgba(239, 68, 68, 0.14);
+      border-color: rgba(239, 68, 68, 0.34);
+    }
+
+    .detail-close {
+      width: 28px;
+      height: 28px;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      border-radius: 7px;
+      background: rgba(15, 23, 42, 0.72);
+      color: #f8fafc;
+      cursor: pointer;
+      font-size: 1.1rem;
+      line-height: 1;
+      margin-bottom: 8px;
+      transition: background 160ms ease, border-color 160ms ease;
+    }
+
+    .detail-close:hover,
+    .detail-close:focus-visible {
+      border-color: rgba(255, 217, 120, 0.55);
+      background: rgba(255, 217, 120, 0.12);
+      outline: none;
+    }
+
+    .detail-body {
+      display: grid;
+      gap: 0;
+      padding: 4px 14px 14px;
+    }
+
+    .detail-section {
+      position: relative;
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(148, 163, 184, 0.13);
+    }
+
+    .detail-section:last-child {
+      border-bottom: 0;
+      padding-bottom: 3px;
+    }
+
+    .detail-section h3 {
+      margin: 0 0 5px;
+      color: #c7d2fe;
+      font-size: 0.72rem;
+      line-height: 1.2;
+      text-transform: uppercase;
+    }
+
+    .detail-section p,
+    .detail-section li {
+      color: #e5e7eb;
+      font-size: 0.74rem;
+      line-height: 1.38;
+    }
+
+    .detail-section p {
+      margin: 0;
+    }
+
+    .detail-section ul {
+      margin: 0;
+      padding-left: 1rem;
+    }
+
+    .detail-section li + li {
+      margin-top: 4px;
+    }
+
+    @media (max-width: 640px) {
+      .hud {
+        top: 12px;
+        left: 12px;
+        width: min(178px, calc(100vw - 24px));
+        padding-left: 11px;
+      }
+
+      .hud h1 {
+        font-size: 0.98rem;
+        line-height: 1.05;
+      }
+
+      .hud p {
+        margin-top: 6px;
+        font-size: 0.7rem;
+        line-height: 1.36;
+      }
+
+      .label {
+        width: min(138px, 35vw);
+        padding: 5px 6px;
+        font-size: 0.54rem;
+        line-height: 1.18;
+      }
+
+      .level-label {
+        width: min(315px, 82vw);
+        padding: 0;
+      }
+
+      .level-label::before {
+        width: 32px;
+        margin-bottom: 5px;
+      }
+
+      .level-title {
+        margin-bottom: 5px;
+        font-size: 0.56rem;
+      }
+
+      .norm-stack {
+        gap: 5px;
+      }
+
+      .norm-chip {
+        min-height: 22px;
+        padding: 4px 5px;
+        font-size: 0.5rem;
+        border-radius: 6px;
+      }
+
+      .label.grundnorm {
+        width: 138px;
+        font-size: 0.52rem;
+      }
+
+      .scheme-panel {
+        top: 108px;
+        right: 12px;
+        bottom: auto;
+        width: 180px;
+        padding: 8px;
+      }
+
+      .scheme-kicker {
+        margin-bottom: 4px;
+        font-size: 0.58rem;
+      }
+
+      .scheme-panel h2 {
+        font-size: 0.78rem;
+      }
+
+      .scheme-note {
+        font-size: 0.58rem;
+      }
+
+      .detail-panel {
+        top: auto;
+        right: 12px;
+        bottom: 10px;
+        left: 12px;
+        width: auto;
+        max-height: 31vh;
+      }
+
+      .detail-header {
+        padding: 12px 12px 9px;
+      }
+
+      .detail-body {
+        padding: 4px 12px 12px;
+      }
+
+      .detail-title {
+        font-size: 0.9rem;
+      }
+
+      .detail-status {
+        font-size: 0.58rem;
+        min-height: 22px;
+      }
+
+      .detail-section {
+        padding: 8px 0;
+      }
+
+      .detail-section p,
+      .detail-section li {
+        font-size: 0.68rem;
+      }
+    }
+  </style>
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://cdn.jsdelivr.net/npm/three@0.184.0/build/three.module.js",
+        "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.184.0/examples/jsm/"
+      }
+    }
+  </script>
+</head>
+<body>
+  <main id="scene" aria-label="Pirâmide de Kelsen em 3D"></main>
+  <section class="hud" aria-hidden="true">
+    <h1>Pirâmide de Kelsen</h1>
+    <p>Ordenamento jurídico brasileiro com a Grundnorm irradiando sobre a Constituição e as normas inferiores.</p>
+  </section>
+  <section class="scheme-panel" aria-label="Esquema da pirâmide normativa">
+    <p class="scheme-kicker">Esquema único</p>
+    <h2>Compreensão geral do STF</h2>
+    <p class="scheme-note" id="schemeNote"></p>
+  </section>
+  <svg class="connector-layer" id="connectorLayer" aria-hidden="true">
+    <path class="connector-line" id="connectorLine" d=""></path>
+  </svg>
+  <aside class="detail-panel" id="normDetail" aria-live="polite" aria-label="Detalhamento da norma">
+    <header class="detail-header">
+      <div>
+        <div class="detail-level" id="detailLevel"></div>
+        <h2 class="detail-title" id="detailTitle"></h2>
+      </div>
+      <div>
+        <button class="detail-close" id="detailClose" type="button" aria-label="Fechar detalhes">×</button>
+        <div class="detail-status" id="detailStatus"></div>
+      </div>
+    </header>
+    <div class="detail-body" id="detailBody"></div>
+  </aside>
+  <div class="loading" id="loading">Carregando cena 3D</div>
+
+  <script type="module">
+    import * as THREE from 'three';
+    import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+    import { CSS2DObject, CSS2DRenderer } from 'three/addons/renderers/CSS2DRenderer.js';
+
+    const container = document.querySelector('#scene');
+    const loading = document.querySelector('#loading');
+    const schemeNote = document.querySelector('#schemeNote');
+    const connectorLayer = document.querySelector('#connectorLayer');
+    const connectorLine = document.querySelector('#connectorLine');
+    const normDetail = document.querySelector('#normDetail');
+    const detailLevel = document.querySelector('#detailLevel');
+    const detailTitle = document.querySelector('#detailTitle');
+    const detailStatus = document.querySelector('#detailStatus');
+    const detailBody = document.querySelector('#detailBody');
+    const detailClose = document.querySelector('#detailClose');
+
+    const scene = new THREE.Scene();
+    scene.fog = new THREE.FogExp2(0x07090d, 0.055);
+
+    const camera = new THREE.PerspectiveCamera(42, window.innerWidth / window.innerHeight, 0.1, 90);
+    camera.position.set(5.6, 4.25, 8.8);
+
+    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.outputColorSpace = THREE.SRGBColorSpace;
+    renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    renderer.toneMappingExposure = 1.08;
+    renderer.shadowMap.enabled = true;
+    renderer.shadowMap.type = THREE.PCFShadowMap;
+    container.appendChild(renderer.domElement);
+
+    const labelRenderer = new CSS2DRenderer();
+    labelRenderer.setSize(window.innerWidth, window.innerHeight);
+    labelRenderer.domElement.style.position = 'fixed';
+    labelRenderer.domElement.style.inset = '0';
+    labelRenderer.domElement.style.pointerEvents = 'none';
+    document.body.appendChild(labelRenderer.domElement);
+
+    const controls = new OrbitControls(camera, renderer.domElement);
+    controls.enableDamping = true;
+    controls.dampingFactor = 0.06;
+    controls.minDistance = 5.2;
+    controls.maxDistance = 16;
+    controls.maxPolarAngle = Math.PI * 0.49;
+    controls.target.set(0, 1.9, 0);
+
+    const defaultCameraPosition = new THREE.Vector3();
+    const defaultControlsTarget = new THREE.Vector3();
+    const worldUp = new THREE.Vector3(0, 1, 0);
+    const eyeRight = new THREE.Vector3();
+    const eyeUp = new THREE.Vector3();
+    const eyeDirection = new THREE.Vector3();
+    const eyeMatrix = new THREE.Matrix4();
+    const eyeTargetQuaternion = new THREE.Quaternion();
+    const constitutionFocusWorld = new THREE.Vector3();
+
+    scene.add(new THREE.HemisphereLight(0xaec6ff, 0x121015, 1.15));
+
+    const keyLight = new THREE.DirectionalLight(0xfff4da, 2.4);
+    keyLight.position.set(4.5, 7.5, 5.2);
+    keyLight.castShadow = true;
+    keyLight.shadow.mapSize.set(2048, 2048);
+    keyLight.shadow.camera.near = 0.5;
+    keyLight.shadow.camera.far = 22;
+    keyLight.shadow.camera.left = -7;
+    keyLight.shadow.camera.right = 7;
+    keyLight.shadow.camera.top = 7;
+    keyLight.shadow.camera.bottom = -5;
+    scene.add(keyLight);
+
+    const rimLight = new THREE.DirectionalLight(0x5ad7ff, 1.45);
+    rimLight.position.set(-5, 3.5, -4.5);
+    scene.add(rimLight);
+
+    const floor = new THREE.Mesh(
+      new THREE.CircleGeometry(8.2, 96),
+      new THREE.MeshStandardMaterial({
+        color: 0x10151d,
+        roughness: 0.9,
+        metalness: 0.02,
+        transparent: true,
+        opacity: 0.92
+      })
+    );
+    floor.rotation.x = -Math.PI / 2;
+    floor.position.y = -0.02;
+    floor.receiveShadow = true;
+    scene.add(floor);
+
+    const grid = new THREE.GridHelper(15, 30, 0x667085, 0x283041);
+    grid.material.transparent = true;
+    grid.material.opacity = 0.2;
+    grid.position.y = 0.004;
+    scene.add(grid);
+
+    addStars();
+
+    const pyramid = new THREE.Group();
+    scene.add(pyramid);
+
+    const schemes = {
+      stf: {
+        note: 'Clique em uma norma para ver como ela nasce, quem participa, prazos, quórum e situação atual.',
+        layers: [
+          {
+            id: 'infralegal',
+            title: 'Atos infralegais',
+            norms: [
+              {
+                id: 'decreto-regulamentar',
+                name: 'Decreto regulamentar',
+                short: 'Decreto',
+                status: 'Criável',
+                statusKind: 'active',
+                sections: [
+                  {
+                    title: 'Como é criado',
+                    items: [
+                      'É expedido pelo Presidente da República para dar fiel execução à lei.',
+                      'Não passa pelo processo legislativo ordinário e não tem sanção ou veto, porque é ato do Executivo.'
+                    ]
+                  },
+                  {
+                    title: 'Quem faz',
+                    items: [
+                      'Presidente da República, normalmente com preparação técnica dos ministérios competentes.',
+                      'Pode ser controlado pelo Congresso Nacional se exorbitar do poder regulamentar.'
+                    ]
+                  },
+                  {
+                    title: 'Limites e situação',
+                    items: [
+                      'Continua existindo e pode ser criado.',
+                      'Não pode inovar contra a lei nem criar obrigação primária sem fundamento legal.',
+                      'Base: CF, art. 84, IV e VI; art. 49, V.'
+                    ]
+                  }
+                ]
+              },
+              {
+                id: 'regulamento',
+                name: 'Regulamento',
+                short: 'Regulamento',
+                status: 'Criável',
+                statusKind: 'active',
+                sections: [
+                  {
+                    title: 'Como é criado',
+                    items: [
+                      'É editado para detalhar a execução de uma lei ou organizar atuação administrativa dentro de competência legal.',
+                      'Pode aparecer formalmente por decreto ou por ato normativo de órgão ou entidade com poder regulatório.'
+                    ]
+                  },
+                  {
+                    title: 'Quem faz',
+                    items: [
+                      'Poder Executivo, ministérios, agências reguladoras e autoridades administrativas competentes.',
+                      'A autoridade precisa ter competência atribuída por Constituição, lei ou regulamento superior.'
+                    ]
+                  },
+                  {
+                    title: 'Limites e situação',
+                    items: [
+                      'Continua existindo e pode ser criado.',
+                      'Fica abaixo da Constituição, dos tratados supralegais e das leis.',
+                      'Serve para executar, especificar e operacionalizar; não substitui lei.'
+                    ]
+                  }
+                ]
+              },
+              {
+                id: 'portaria',
+                name: 'Portaria',
+                short: 'Portaria',
+                status: 'Criável',
+                statusKind: 'active',
+                sections: [
+                  {
+                    title: 'Como é criada',
+                    items: [
+                      'É assinada por ministro, secretário, dirigente de órgão ou autoridade administrativa competente.',
+                      'Pode organizar serviços, fixar procedimentos internos ou concretizar regra já prevista em norma superior.'
+                    ]
+                  },
+                  {
+                    title: 'Quem faz',
+                    items: [
+                      'Autoridades administrativas dentro do órgão ou entidade competente.',
+                      'Não depende de votação do Congresso nem de sanção presidencial.'
+                    ]
+                  },
+                  {
+                    title: 'Limites e situação',
+                    items: [
+                      'Continua existindo e pode ser criada.',
+                      'Não pode contrariar lei, decreto ou Constituição.',
+                      'Para estudo: pense nela como ato infralegal de execução ou organização.'
+                    ]
+                  }
+                ]
+              },
+              {
+                id: 'instrucao-normativa',
+                name: 'Instrução normativa',
+                short: 'IN',
+                status: 'Criável',
+                statusKind: 'active',
+                sections: [
+                  {
+                    title: 'Como é criada',
+                    items: [
+                      'É editada por autoridade administrativa para orientar a aplicação uniforme de leis, decretos ou regulamentos.',
+                      'É comum em órgãos técnicos, fiscais, previdenciários, ambientais e regulatórios.'
+                    ]
+                  },
+                  {
+                    title: 'Quem faz',
+                    items: [
+                      'Autoridade administrativa competente, como secretarias, autarquias, agências e órgãos fiscais.',
+                      'A competência deve vir de norma superior.'
+                    ]
+                  },
+                  {
+                    title: 'Limites e situação',
+                    items: [
+                      'Continua existindo e pode ser criada.',
+                      'Não cria lei; detalha como a administração aplicará a norma superior.',
+                      'Se extrapolar, pode ser invalidada judicial ou administrativamente.'
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            id: 'legal',
+            title: 'Plano legal',
+            norms: [
+              {
+                id: 'tratado-comum',
+                name: 'Tratado internacional comum',
+                short: 'Tratado comum',
+                status: 'Criável',
+                statusKind: 'active',
+                sections: [
+                  {
+                    title: 'Como é criado',
+                    items: [
+                      'O Presidente da República celebra o tratado no plano internacional.',
+                      'O Congresso resolve definitivamente sobre o texto quando houver encargos ou compromissos gravosos, em geral por decreto legislativo.',
+                      'Depois vêm ratificação internacional e promulgação interna por decreto presidencial.'
+                    ]
+                  },
+                  {
+                    title: 'Posição hierárquica',
+                    items: [
+                      'Na compreensão geral, tratado comum ingressa com força de lei ordinária.',
+                      'Há ressalvas constitucionais específicas, como a prevalência de tratados de transporte internacional no Tema 210 do STF.'
+                    ]
+                  },
+                  {
+                    title: 'Situação',
+                    items: [
+                      'Continua existindo e pode ser celebrado.',
+                      'Base: CF, art. 49, I; art. 84, VIII; entendimento clássico de paridade com lei ordinária.'
+                    ]
+                  }
+                ]
+              },
+              {
+                id: 'lei-complementar',
+                name: 'Lei complementar',
+                short: 'LC',
+                status: 'Criável',
+                statusKind: 'active',
+                sections: [
+                  {
+                    title: 'Como é criada',
+                    items: [
+                      'Nasce de projeto de lei sobre matéria que a Constituição reservou à lei complementar.',
+                      'Tramita no Congresso e depende de aprovação por maioria absoluta.'
+                    ]
+                  },
+                  {
+                    title: 'Quem participa',
+                    items: [
+                      'Pode ter iniciativa dos legitimados do art. 61 da Constituição, conforme a matéria.',
+                      'Depois da aprovação, segue para sanção ou veto presidencial, salvo hipóteses constitucionais específicas.'
+                    ]
+                  },
+                  {
+                    title: 'Prazos e situação',
+                    items: [
+                      'Não tem prazo constitucional geral de caducidade como a medida provisória.',
+                      'Continua existindo e pode ser criada.',
+                      'Base: CF, art. 61 e art. 69.'
+                    ]
+                  }
+                ]
+              },
+              {
+                id: 'lei-ordinaria',
+                name: 'Lei ordinária',
+                short: 'LO',
+                status: 'Criável',
+                statusKind: 'active',
+                sections: [
+                  {
+                    title: 'Como é criada',
+                    items: [
+                      'Nasce de projeto de lei, é discutida e votada nas Casas do Congresso Nacional.',
+                      'Em regra, aprova-se por maioria simples, presente a maioria absoluta, salvo quórum especial previsto na Constituição.'
+                    ]
+                  },
+                  {
+                    title: 'Quem participa',
+                    items: [
+                      'Iniciativa: parlamentares, comissões, Presidente, STF, tribunais superiores, PGR e cidadãos, conforme a Constituição.',
+                      'Depois da aprovação, normalmente vai à sanção ou veto do Presidente.'
+                    ]
+                  },
+                  {
+                    title: 'Prazos e situação',
+                    items: [
+                      'Não tem prazo constitucional geral de caducidade.',
+                      'Continua existindo e pode ser criada.',
+                      'Base: CF, art. 47, art. 61, arts. 64 a 67.'
+                    ]
+                  }
+                ]
+              },
+              {
+                id: 'medida-provisoria',
+                name: 'Medida provisória',
+                short: 'MP',
+                status: 'Criável',
+                statusKind: 'warning',
+                sections: [
+                  {
+                    title: 'Como é criada',
+                    items: [
+                      'É editada pelo Presidente da República em caso de relevância e urgência.',
+                      'Nasce com força de lei e deve ser submetida imediatamente ao Congresso Nacional.'
+                    ]
+                  },
+                  {
+                    title: 'Prazos',
+                    items: [
+                      'Vigência inicial de 60 dias, prorrogável uma vez por igual período.',
+                      'Se não for apreciada em 45 dias, entra em regime de urgência e sobresta deliberações da Casa em que estiver tramitando.',
+                      'Se não for convertida em lei no prazo constitucional, perde eficácia desde a edição.'
+                    ]
+                  },
+                  {
+                    title: 'Limites e situação',
+                    items: [
+                      'Continua existindo e pode ser criada, mas tem matérias vedadas.',
+                      'Não cabe sobre matéria reservada a lei complementar, entre outras vedações do art. 62.',
+                      'Base: CF, art. 62.'
+                    ]
+                  }
+                ]
+              },
+              {
+                id: 'lei-delegada',
+                name: 'Lei delegada',
+                short: 'LD',
+                status: 'Criável rara',
+                statusKind: 'warning',
+                sections: [
+                  {
+                    title: 'Como é criada',
+                    items: [
+                      'É elaborada pelo Presidente da República após solicitar delegação ao Congresso Nacional.',
+                      'A delegação vem por resolução do Congresso, que especifica conteúdo e termos de exercício.'
+                    ]
+                  },
+                  {
+                    title: 'Limites',
+                    items: [
+                      'Não pode tratar de atos de competência exclusiva do Congresso, competência privativa da Câmara ou do Senado, matéria reservada a lei complementar, nem das matérias vedadas no art. 68.',
+                      'Se a resolução exigir apreciação pelo Congresso, a votação é única e sem emendas.'
+                    ]
+                  },
+                  {
+                    title: 'Situação',
+                    items: [
+                      'Ainda existe na Constituição e pode ser criada, embora seja muito rara.',
+                      'Não confundir com decreto-lei, que não pode mais ser criado na ordem constitucional de 1988.',
+                      'Base: CF, art. 68.'
+                    ]
+                  }
+                ]
+              },
+              {
+                id: 'decreto-legislativo',
+                name: 'Decreto legislativo',
+                short: 'Decreto legislativo',
+                status: 'Criável',
+                statusKind: 'active',
+                sections: [
+                  {
+                    title: 'Como é criado',
+                    items: [
+                      'É ato do Congresso Nacional para matérias de sua competência exclusiva.',
+                      'Não vai à sanção ou veto presidencial.'
+                    ]
+                  },
+                  {
+                    title: 'Usos típicos',
+                    items: [
+                      'Aprovação de tratados internacionais quando exigida a deliberação do Congresso.',
+                      'Sustação de atos normativos do Executivo que exorbitem do poder regulamentar ou dos limites de delegação legislativa.'
+                    ]
+                  },
+                  {
+                    title: 'Situação',
+                    items: [
+                      'Continua existindo e pode ser criado.',
+                      'Base: CF, art. 49 e art. 59, VI.'
+                    ]
+                  }
+                ]
+              },
+              {
+                id: 'resolucao-legislativa',
+                name: 'Resolução legislativa',
+                short: 'Resolução',
+                status: 'Criável',
+                statusKind: 'active',
+                sections: [
+                  {
+                    title: 'Como é criada',
+                    items: [
+                      'É ato normativo usado por Câmara, Senado ou Congresso para matérias de sua competência interna ou constitucionalmente reservada.',
+                      'Não depende de sanção presidencial.'
+                    ]
+                  },
+                  {
+                    title: 'Exemplos de uso',
+                    items: [
+                      'Regimentos internos, organização de trabalhos legislativos e algumas competências privativas.',
+                      'No caso da lei delegada, a delegação ao Presidente toma forma de resolução do Congresso Nacional.'
+                    ]
+                  },
+                  {
+                    title: 'Situação',
+                    items: [
+                      'Continua existindo e pode ser criada.',
+                      'Base: CF, art. 59, VII; art. 68, §2º.'
+                    ]
+                  }
+                ]
+              },
+              {
+                id: 'decreto-lei',
+                name: 'Decreto-lei',
+                short: 'Decreto-lei',
+                status: 'Não criável',
+                statusKind: 'inactive',
+                sections: [
+                  {
+                    title: 'Como era criado',
+                    items: [
+                      'Era espécie normativa de regimes constitucionais anteriores, editada pelo chefe do Executivo em hipóteses previstas na ordem constitucional então vigente.',
+                      'A Constituição de 1988 não incluiu o decreto-lei entre as espécies do art. 59.'
+                    ]
+                  },
+                  {
+                    title: 'Situação atual',
+                    items: [
+                      'Não pode mais ser criado na ordem constitucional vigente.',
+                      'Decretos-leis anteriores podem continuar válidos se foram recepcionados pela Constituição de 1988 e não revogados.'
+                    ]
+                  },
+                  {
+                    title: 'Para prova',
+                    items: [
+                      'Não confunda decreto-lei com decreto legislativo nem com lei delegada.',
+                      'Base: CF, art. 59 não lista decreto-lei.'
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            id: 'supralegal',
+            title: 'Tratados de Direitos Humanos supralegais',
+            norms: [
+              {
+                id: 'tidh-supralegal',
+                name: 'TIDH sem rito do art. 5º, §3º',
+                short: 'TIDH supralegal',
+                status: 'Criável',
+                statusKind: 'active',
+                sections: [
+                  {
+                    title: 'Como é criado',
+                    items: [
+                      'É tratado internacional sobre direitos humanos celebrado pelo Presidente e aprovado pelo Congresso sem o rito qualificado do art. 5º, §3º.',
+                      'Depois segue a etapa internacional de ratificação e a promulgação interna.'
+                    ]
+                  },
+                  {
+                    title: 'Posição hierárquica',
+                    items: [
+                      'Para o STF, fica acima das leis e abaixo da Constituição.',
+                      'Essa posição foi consolidada no julgamento do RE 466.343/SP.'
+                    ]
+                  },
+                  {
+                    title: 'Situação',
+                    items: [
+                      'Continua existindo e pode ser celebrado.',
+                      'Pode paralisar a eficácia de leis incompatíveis, por estar no bloco supralegal.'
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            id: 'constitucional',
+            title: 'Bloco constitucional',
+            norms: [
+              {
+                id: 'constituicao',
+                name: 'Constituição Federal',
+                short: 'CF',
+                status: 'Vigente',
+                statusKind: 'active',
+                sections: [
+                  {
+                    title: 'Como nasceu',
+                    items: [
+                      'Foi promulgada pela Assembleia Nacional Constituinte em 5 de outubro de 1988.',
+                      'Não nasce por lei ordinária; resulta do poder constituinte originário.'
+                    ]
+                  },
+                  {
+                    title: 'Como muda',
+                    items: [
+                      'Pode ser alterada por emenda constitucional, respeitados os limites formais, circunstanciais e materiais.',
+                      'Serve como parâmetro máximo de validade das normas infraconstitucionais.'
+                    ]
+                  },
+                  {
+                    title: 'Situação',
+                    items: [
+                      'Está vigente.',
+                      'Base central da hierarquia normativa brasileira.'
+                    ]
+                  }
+                ]
+              },
+              {
+                id: 'emenda-constitucional',
+                name: 'Emenda constitucional',
+                short: 'EC',
+                status: 'Criável',
+                statusKind: 'active',
+                sections: [
+                  {
+                    title: 'Como é criada',
+                    items: [
+                      'A proposta pode vir de um terço dos membros da Câmara ou do Senado, do Presidente da República ou de mais da metade das Assembleias Legislativas.',
+                      'É votada em dois turnos em cada Casa do Congresso e precisa de três quintos dos votos dos respectivos membros.'
+                    ]
+                  },
+                  {
+                    title: 'Limites',
+                    items: [
+                      'Não pode ser votada durante intervenção federal, estado de defesa ou estado de sítio.',
+                      'Não pode abolir cláusulas pétreas: federação, voto direto/secreto/universal/periódico, separação dos Poderes e direitos e garantias individuais.'
+                    ]
+                  },
+                  {
+                    title: 'Situação',
+                    items: [
+                      'Continua existindo e pode ser criada.',
+                      'Não há sanção ou veto presidencial; a promulgação é feita pelas Mesas da Câmara e do Senado.',
+                      'Base: CF, art. 60.'
+                    ]
+                  }
+                ]
+              },
+              {
+                id: 'tidh-qualificado',
+                name: 'TIDH qualificado',
+                short: 'TIDH art. 5º, §3º',
+                status: 'Criável',
+                statusKind: 'active',
+                sections: [
+                  {
+                    title: 'Como é criado',
+                    items: [
+                      'É tratado ou convenção internacional sobre direitos humanos aprovado em cada Casa do Congresso.',
+                      'O rito exige dois turnos e três quintos dos votos dos respectivos membros.'
+                    ]
+                  },
+                  {
+                    title: 'Efeito',
+                    items: [
+                      'Quando aprovado por esse rito, é equivalente a emenda constitucional.',
+                      'Fica no bloco constitucional da pirâmide.'
+                    ]
+                  },
+                  {
+                    title: 'Situação',
+                    items: [
+                      'Continua existindo e pode ser aprovado.',
+                      'Base: CF, art. 5º, §3º.'
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    };
+
+    const layerHeight = 0.58;
+    const layerGap = 0.035;
+    const layerColors = [0x256d85, 0x2f8f6d, 0x965f2d, 0x8f3442, 0xd3a83b];
+    const layerEmissives = [0x08252f, 0x09281e, 0x2a1606, 0x2a070c, 0x3a2705];
+    let totalHeight = 0;
+    let activeNormButton = null;
+    let activeNormAnchor = null;
+    let eyeBaseY = 0;
+    let isCompactView = false;
+    let sceneLift = 0;
+    const constitutionFocusLocal = new THREE.Vector3();
+
+    const apexLight = new THREE.PointLight(0xffcb6b, 14, 13, 1.65);
+    scene.add(apexLight);
+
+    const eyeGroup = createGrundnormEye();
+    scene.add(eyeGroup);
+
+    const grundnormLabel = createLabel('GRUNDNORM<span>Norma Fundamental Hipotética</span>', 'grundnorm', true);
+    scene.add(grundnormLabel);
+
+    const startedAt = performance.now();
+    frameCamera();
+    setScheme('stf');
+    detailClose.addEventListener('click', closeNormDetail);
+    window.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') {
+        closeNormDetail();
+      }
+    });
+    requestAnimationFrame(animate);
+    window.addEventListener('resize', resize);
+
+    loading.classList.add('hidden');
+
+    function setScheme(key) {
+      const scheme = schemes[key] ?? schemes.stf;
+      schemeNote.textContent = scheme.note;
+
+      clearPyramid();
+      buildPyramid(scheme.layers);
+      closeNormDetail();
+
+      totalHeight = scheme.layers.length * (layerHeight + layerGap) - layerGap;
+      constitutionFocusLocal.set(0, totalHeight - 0.18, 0.85);
+      apexLight.position.set(0, totalHeight + 1.12, 0.35);
+      applyResponsiveSceneScale();
+      updateEyeGaze();
+    }
+
+    function buildPyramid(layers) {
+      const radii = createRadii(layers.length);
+
+      layers.forEach((layer, index) => {
+        const paletteIndex = Math.round(index * (layerColors.length - 1) / Math.max(layers.length - 1, 1));
+        const bottomRadius = radii[index];
+        const topRadius = radii[index + 1];
+        const y = index * (layerHeight + layerGap) + layerHeight / 2;
+
+        const geometry = new THREE.CylinderGeometry(topRadius, bottomRadius, layerHeight, 4, 1, false);
+        geometry.rotateY(Math.PI / 4);
+
+        const material = new THREE.MeshStandardMaterial({
+          color: layerColors[paletteIndex],
+          emissive: layerEmissives[paletteIndex],
+          roughness: 0.54,
+          metalness: 0.18
+        });
+
+        const mesh = new THREE.Mesh(geometry, material);
+        mesh.position.y = y;
+        mesh.castShadow = true;
+        mesh.receiveShadow = true;
+        pyramid.add(mesh);
+
+        const edgeLines = new THREE.LineSegments(
+          new THREE.EdgesGeometry(geometry),
+          new THREE.LineBasicMaterial({
+            color: 0xffffff,
+            transparent: true,
+            opacity: 0.24
+          })
+        );
+        edgeLines.position.copy(mesh.position);
+        pyramid.add(edgeLines);
+
+        const label = createLevelLabel(layer);
+        const labelLayout = getLabelLayout(index);
+        label.position.set(labelLayout.x, y + labelLayout.y, bottomRadius * labelLayout.zFactor + labelLayout.zPad);
+        pyramid.add(label);
+      });
+    }
+
+    function getLabelLayout(index) {
+      const compactLayout = [
+        { x: 0.02, y: -0.12, zFactor: 0.72, zPad: 0.76 },
+        { x: 0.06, y: -0.14, zFactor: 0.62, zPad: 0.48 },
+        { x: 0.02, y: 0.2, zFactor: 0.6, zPad: 0.39 },
+        { x: 0.02, y: 0.14, zFactor: 0.62, zPad: 0.36 }
+      ];
+      const wideLayout = [
+        { x: 0.02, y: 0.34, zFactor: 0.72, zPad: 0.76 },
+        { x: 0.06, y: 0.24, zFactor: 0.6, zPad: 0.45 },
+        { x: 0.02, y: 0.18, zFactor: 0.6, zPad: 0.39 },
+        { x: 0.02, y: 0.14, zFactor: 0.62, zPad: 0.36 }
+      ];
+
+      return (isCompactView ? compactLayout : wideLayout)[index] ??
+        { x: index % 2 === 0 ? -0.26 : 0.38, y: 0.05, zFactor: 0.58, zPad: 0.4 };
+    }
+
+    function createRadii(layerCount) {
+      const bottom = 3.75;
+      const top = layerCount <= 3 ? 0.66 : 0.42;
+      const radii = [];
+
+      for (let i = 0; i <= layerCount; i++) {
+        const t = i / layerCount;
+        radii.push(THREE.MathUtils.lerp(bottom, top, Math.pow(t, 0.92)));
+      }
+
+      return radii;
+    }
+
+    function clearPyramid() {
+      while (pyramid.children.length > 0) {
+        disposeObject(pyramid.children.pop());
+      }
+    }
+
+    function disposeObject(object) {
+      object.traverse((child) => {
+        child.element?.remove();
+        child.geometry?.dispose();
+
+        if (Array.isArray(child.material)) {
+          child.material.forEach((material) => material.dispose());
+        } else {
+          child.material?.dispose();
+        }
+      });
+    }
+
+    function animate() {
+      const elapsed = (performance.now() - startedAt) / 1000;
+
+      pyramid.rotation.y = Math.sin(elapsed * 0.16) * 0.08;
+      eyeGroup.position.y = eyeBaseY + Math.sin(elapsed * 1.3) * 0.04;
+      controls.update();
+      updateEyeGaze();
+      eyeGroup.userData.rays.rotation.z = elapsed * 0.12;
+      eyeGroup.userData.innerRays.rotation.z = -elapsed * 0.2;
+      eyeGroup.userData.pupil.scale.setScalar(1 + Math.sin(elapsed * 2.1) * 0.035);
+      apexLight.intensity = 13 + Math.sin(elapsed * 2.4) * 2.5;
+
+      renderer.render(scene, camera);
+      labelRenderer.render(scene, camera);
+      updateConnector();
+      requestAnimationFrame(animate);
+    }
+
+    function resize() {
+      const width = window.innerWidth;
+      const height = window.innerHeight;
+      camera.aspect = width / height;
+      camera.updateProjectionMatrix();
+      renderer.setSize(width, height);
+      labelRenderer.setSize(width, height);
+      frameCamera();
+      updateConnector();
+    }
+
+    function frameCamera() {
+      const aspect = window.innerWidth / window.innerHeight;
+      isCompactView = aspect < 0.68;
+
+      if (isCompactView) {
+        camera.fov = 42;
+        camera.position.set(2.15, 4.05, 11.4);
+        controls.target.set(0.02, 1.45, 0);
+      } else if (aspect < 1.05) {
+        camera.fov = 45;
+        camera.position.set(4.2, 4.25, 10.7);
+        controls.target.set(0, 1.85, 0);
+      } else {
+        camera.fov = 42;
+        camera.position.set(5.6, 4.25, 8.8);
+        controls.target.set(0, 1.9, 0);
+      }
+
+      camera.aspect = aspect;
+      camera.updateProjectionMatrix();
+      controls.update();
+      defaultCameraPosition.copy(camera.position);
+      defaultControlsTarget.copy(controls.target);
+      applyResponsiveSceneScale();
+    }
+
+    function applyResponsiveSceneScale() {
+      const eyeScale = isCompactView ? 0.58 : 1;
+      const pyramidScale = isCompactView ? 0.82 : 1;
+      sceneLift = isCompactView ? 1.08 : 0;
+
+      pyramid.scale.setScalar(pyramidScale);
+      pyramid.position.y = sceneLift;
+      eyeGroup.scale.setScalar(eyeScale);
+      eyeBaseY = totalHeight + 1.08 + sceneLift;
+      eyeGroup.position.set(0, eyeBaseY, 0);
+      apexLight.position.set(0, totalHeight + 1.12 + sceneLift, 0.35);
+
+      if (isCompactView) {
+        grundnormLabel.position.set(0.82, totalHeight + 1.78 + sceneLift, 0.18);
+      } else {
+        grundnormLabel.position.set(1.16, totalHeight + 2.25, 0.18);
+      }
+    }
+
+    function updateEyeGaze() {
+      const cameraIsDefault =
+        camera.position.distanceTo(defaultCameraPosition) < 0.08 &&
+        controls.target.distanceTo(defaultControlsTarget) < 0.04;
+      constitutionFocusWorld.copy(constitutionFocusLocal);
+      pyramid.localToWorld(constitutionFocusWorld);
+      const gazeTarget = cameraIsDefault ? constitutionFocusWorld : camera.position;
+
+      eyeDirection.copy(gazeTarget).sub(eyeGroup.position).normalize();
+      eyeRight.crossVectors(worldUp, eyeDirection);
+      if (eyeRight.lengthSq() < 0.0001) {
+        eyeRight.set(1, 0, 0);
+      } else {
+        eyeRight.normalize();
+      }
+      eyeUp.crossVectors(eyeDirection, eyeRight).normalize();
+      eyeMatrix.makeBasis(eyeRight, eyeUp, eyeDirection);
+      eyeTargetQuaternion.setFromRotationMatrix(eyeMatrix);
+      eyeGroup.quaternion.slerp(eyeTargetQuaternion, cameraIsDefault ? 0.08 : 0.16);
+    }
+
+    function createLevelLabel(layer) {
+      const div = document.createElement('div');
+      div.className = 'label level-label';
+      div.dataset.layer = layer.id;
+
+      const title = document.createElement('div');
+      title.className = 'level-title';
+      title.textContent = layer.title;
+      div.appendChild(title);
+
+      const stack = document.createElement('div');
+      stack.className = 'norm-stack';
+      div.appendChild(stack);
+
+      layer.norms.forEach((norm) => {
+        const button = document.createElement('button');
+        button.className = 'norm-chip';
+        button.type = 'button';
+        button.textContent = norm.short ?? norm.name;
+        button.setAttribute('aria-pressed', 'false');
+        button.addEventListener('pointerdown', (event) => {
+          event.stopPropagation();
+        });
+        button.addEventListener('click', (event) => {
+          event.preventDefault();
+          event.stopPropagation();
+          openNormDetail({ ...norm, levelTitle: layer.title }, button);
+        });
+        stack.appendChild(button);
+      });
+
+      return new CSS2DObject(div);
+    }
+
+    function openNormDetail(norm, button) {
+      if (activeNormButton) {
+        activeNormButton.classList.remove('active');
+        activeNormButton.setAttribute('aria-pressed', 'false');
+      }
+
+      activeNormButton = button;
+      activeNormAnchor = button;
+      activeNormButton.classList.add('active');
+      activeNormButton.setAttribute('aria-pressed', 'true');
+
+      detailLevel.textContent = norm.levelTitle;
+      detailTitle.textContent = norm.name;
+      detailStatus.textContent = norm.status;
+      detailStatus.dataset.state = norm.statusKind;
+      detailBody.replaceChildren(...norm.sections.map(createDetailSection));
+
+      normDetail.classList.add('open');
+      connectorLayer.classList.add('active');
+      requestAnimationFrame(updateConnector);
+    }
+
+    function closeNormDetail() {
+      if (activeNormButton) {
+        activeNormButton.classList.remove('active');
+        activeNormButton.setAttribute('aria-pressed', 'false');
+      }
+
+      activeNormButton = null;
+      activeNormAnchor = null;
+      normDetail.classList.remove('open');
+      connectorLayer.classList.remove('active');
+    }
+
+    function createDetailSection(section) {
+      const wrapper = document.createElement('section');
+      wrapper.className = 'detail-section';
+
+      const title = document.createElement('h3');
+      title.textContent = section.title;
+      wrapper.appendChild(title);
+
+      if (section.items.length === 1) {
+        const paragraph = document.createElement('p');
+        paragraph.textContent = section.items[0];
+        wrapper.appendChild(paragraph);
+      } else {
+        const list = document.createElement('ul');
+        section.items.forEach((item) => {
+          const li = document.createElement('li');
+          li.textContent = item;
+          list.appendChild(li);
+        });
+        wrapper.appendChild(list);
+      }
+
+      return wrapper;
+    }
+
+    function updateConnector() {
+      if (!activeNormAnchor || !normDetail.classList.contains('open')) {
+        return;
+      }
+
+      const anchorRect = activeNormAnchor.getBoundingClientRect();
+      const panelRect = normDetail.getBoundingClientRect();
+      const isPanelBelow = panelRect.top > anchorRect.bottom;
+      const anchorCenterX = anchorRect.left + anchorRect.width / 2;
+      const x2 = panelRect.left + (panelRect.left > anchorCenterX ? 18 : panelRect.width - 18);
+      const y2 = isPanelBelow ? panelRect.top + 8 : panelRect.top + Math.min(panelRect.height * 0.34, 110);
+      const { x: x1, y: y1 } = getNearestCorner(anchorRect, x2, y2);
+      const controlX = x1 + (x2 - x1) * 0.58;
+      const controlY = y1 + (y2 - y1) * 0.28 - 28;
+
+      connectorLine.setAttribute(
+        'd',
+        `M ${x1.toFixed(1)} ${y1.toFixed(1)} Q ${controlX.toFixed(1)} ${controlY.toFixed(1)} ${x2.toFixed(1)} ${y2.toFixed(1)}`
+      );
+    }
+
+    function getNearestCorner(rect, targetX, targetY) {
+      const corners = [
+        { x: rect.left, y: rect.top },
+        { x: rect.right, y: rect.top },
+        { x: rect.right, y: rect.bottom },
+        { x: rect.left, y: rect.bottom }
+      ];
+
+      return corners.reduce((nearest, corner) => {
+        const nearestDistance = Math.hypot(nearest.x - targetX, nearest.y - targetY);
+        const cornerDistance = Math.hypot(corner.x - targetX, corner.y - targetY);
+        return cornerDistance < nearestDistance ? corner : nearest;
+      });
+    }
+
+    function createLabel(content, variant, html = false) {
+      const div = document.createElement('div');
+      div.className = `label ${variant}`;
+      if (html) {
+        div.innerHTML = content;
+      } else {
+        div.textContent = content;
+      }
+      return new CSS2DObject(div);
+    }
+
+    function createGrundnormEye() {
+      const group = new THREE.Group();
+      const face = new THREE.Group();
+      group.add(face);
+      group.userData.face = face;
+
+      const halo = new THREE.Mesh(
+        new THREE.RingGeometry(1.18, 1.78, 96),
+        new THREE.MeshBasicMaterial({
+          color: 0xffce7a,
+          side: THREE.DoubleSide,
+          transparent: true,
+          opacity: 0.33,
+          blending: THREE.AdditiveBlending,
+          depthWrite: false
+        })
+      );
+      halo.position.z = -0.12;
+      face.add(halo);
+
+      const rays = createRayBurst(42, 1.32, 3.12, 0xffd88a, 0.55);
+      rays.position.z = -0.18;
+      face.add(rays);
+      group.userData.rays = rays;
+
+      const innerRays = createRayBurst(26, 0.92, 2.12, 0xfff1ba, 0.35);
+      innerRays.position.z = -0.14;
+      face.add(innerRays);
+      group.userData.innerRays = innerRays;
+
+      const sclera = new THREE.Mesh(
+        new THREE.SphereGeometry(0.86, 72, 36),
+        new THREE.MeshStandardMaterial({
+          color: 0xfff3d0,
+          emissive: 0x5c3c14,
+          roughness: 0.38,
+          metalness: 0.05
+        })
+      );
+      sclera.scale.set(1.75, 0.78, 0.14);
+      sclera.castShadow = false;
+      face.add(sclera);
+
+      const rim = new THREE.Mesh(
+        new THREE.TorusGeometry(0.91, 0.025, 12, 128),
+        new THREE.MeshBasicMaterial({
+          color: 0xffc66d,
+          transparent: true,
+          opacity: 0.86
+        })
+      );
+      rim.scale.set(1.67, 0.74, 1);
+      rim.position.z = 0.1;
+      face.add(rim);
+
+      const iris = new THREE.Mesh(
+        new THREE.CircleGeometry(0.31, 64),
+        new THREE.MeshStandardMaterial({
+          color: 0x4dd0e1,
+          emissive: 0x105c6b,
+          roughness: 0.34,
+          metalness: 0.22,
+          side: THREE.DoubleSide
+        })
+      );
+      iris.position.z = 0.18;
+      face.add(iris);
+
+      const irisRing = new THREE.Mesh(
+        new THREE.RingGeometry(0.23, 0.32, 72),
+        new THREE.MeshBasicMaterial({
+          color: 0xf8df82,
+          side: THREE.DoubleSide,
+          transparent: true,
+          opacity: 0.72
+        })
+      );
+      irisRing.position.z = 0.19;
+      face.add(irisRing);
+
+      const pupil = new THREE.Mesh(
+        new THREE.CircleGeometry(0.13, 48),
+        new THREE.MeshBasicMaterial({
+          color: 0x060606,
+          side: THREE.DoubleSide
+        })
+      );
+      pupil.position.z = 0.205;
+      face.add(pupil);
+      group.userData.pupil = pupil;
+
+      const highlight = new THREE.Mesh(
+        new THREE.CircleGeometry(0.045, 24),
+        new THREE.MeshBasicMaterial({
+          color: 0xffffff,
+          transparent: true,
+          opacity: 0.9,
+          side: THREE.DoubleSide
+        })
+      );
+      highlight.position.set(-0.075, 0.078, 0.215);
+      face.add(highlight);
+
+      return group;
+    }
+
+    function createRayBurst(count, innerRadius, outerRadius, color, opacity) {
+      const positions = [];
+
+      for (let i = 0; i < count; i++) {
+        const angle = (i / count) * Math.PI * 2;
+        const lengthJitter = 0.78 + ((i * 17) % 11) / 30;
+        const start = innerRadius;
+        const end = outerRadius * lengthJitter;
+        positions.push(Math.cos(angle) * start, Math.sin(angle) * start, 0);
+        positions.push(Math.cos(angle) * end, Math.sin(angle) * end, 0);
+      }
+
+      const geometry = new THREE.BufferGeometry();
+      geometry.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3));
+
+      return new THREE.LineSegments(
+        geometry,
+        new THREE.LineBasicMaterial({
+          color,
+          transparent: true,
+          opacity,
+          blending: THREE.AdditiveBlending,
+          depthWrite: false
+        })
+      );
+    }
+
+    function addStars() {
+      const positions = [];
+      const colors = [];
+      const color = new THREE.Color();
+
+      for (let i = 0; i < 280; i++) {
+        const radius = 18 + Math.random() * 20;
+        const theta = Math.random() * Math.PI * 2;
+        const y = Math.random() * 12 + 1.5;
+        positions.push(Math.cos(theta) * radius, y, Math.sin(theta) * radius);
+
+        color.setHSL(0.58 + Math.random() * 0.12, 0.42, 0.62 + Math.random() * 0.28);
+        colors.push(color.r, color.g, color.b);
+      }
+
+      const geometry = new THREE.BufferGeometry();
+      geometry.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3));
+      geometry.setAttribute('color', new THREE.Float32BufferAttribute(colors, 3));
+
+      const stars = new THREE.Points(
+        geometry,
+        new THREE.PointsMaterial({
+          size: 0.035,
+          vertexColors: true,
+          transparent: true,
+          opacity: 0.7,
+          depthWrite: false
+        })
+      );
+      scene.add(stars);
+    }
+  </script>
+</body>
+</html>
