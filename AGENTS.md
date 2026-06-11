@@ -106,7 +106,7 @@ O primeiro estudo publicado é:
 Ao mexer nesse estudo, preserve:
 
 - O esquema único baseado na compreensão geral do STF.
-- A Grundnorm no topo com o olho.
+- A Grundnorm como vértice superior da pirâmide, sem olho, com raios ao redor da ponta.
 - Normas clicáveis pairando sobre os níveis da pirâmide.
 - Painel explicativo limpo, sem numeração fixa nas seções.
 - Conector saindo do canto do chip ativo.
