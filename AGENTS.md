@@ -107,6 +107,7 @@ Ao mexer nesse estudo, preserve:
 
 - O esquema único baseado na compreensão geral do STF.
 - A Grundnorm como vértice superior da pirâmide, sem olho, com raios ao redor da ponta.
+- O vértice da Grundnorm deve ficar levemente destacado acima do bloco constitucional e usar textura prateada quase branca.
 - Normas clicáveis pairando sobre os níveis da pirâmide.
 - Rótulos dos blocos embutidos na face direita da pirâmide, com quebra vertical de linha quando o texto for longo.
 - Painel explicativo limpo, sem numeração fixa nas seções.

@@ -1198,6 +1198,7 @@
 
     const layerHeight = 0.58;
     const layerGap = 0.035;
+    const apexGap = 0.1;
     let apexHeight = 0;
     const layerPalettes = {
       infralegal: {
@@ -1225,10 +1226,10 @@
         inscriptionStroke: 'rgba(255, 247, 215, 0.68)'
       },
       grundnorm: {
-        color: 0xf2c65b,
-        emissive: 0x493106,
-        inscription: '#35250a',
-        inscriptionStroke: 'rgba(255, 246, 204, 0.72)'
+        color: 0xf2f0e7,
+        emissive: 0x302d27,
+        inscription: '#29251d',
+        inscriptionStroke: 'rgba(255, 255, 250, 0.78)'
       }
     };
     let totalHeight = 0;
@@ -1317,8 +1318,8 @@
       const bodyHeight = layers.length * (layerHeight + layerGap) - layerGap;
       const apexBaseRadius = radii[radii.length - 1];
       apexHeight = computeApexHeight(radii);
-      createApexBlock(apexBaseRadius, bodyHeight);
-      return { bodyHeight, totalHeight: bodyHeight + apexHeight };
+      createApexBlock(apexBaseRadius, bodyHeight + apexGap);
+      return { bodyHeight, totalHeight: bodyHeight + apexGap + apexHeight };
     }
 
     function computeApexHeight(radii) {
@@ -1335,9 +1336,11 @@
 
       const material = new THREE.MeshStandardMaterial({
         color: palette.color,
+        map: createSilverTexture(),
         emissive: palette.emissive,
-        roughness: 0.58,
-        metalness: 0.14
+        emissiveIntensity: 0.2,
+        roughness: 0.28,
+        metalness: 0.68
       });
 
       const mesh = new THREE.Mesh(geometry, material);
@@ -1351,7 +1354,7 @@
         new THREE.LineBasicMaterial({
           color: 0xfff5cf,
           transparent: true,
-          opacity: 0.35
+          opacity: 0.46
         })
       );
       edgeLines.position.copy(mesh.position);
@@ -1489,6 +1492,40 @@
         context.strokeText(line, canvas.width / 2, y);
         context.fillText(line, canvas.width / 2, y);
       });
+
+      const texture = new THREE.CanvasTexture(canvas);
+      texture.colorSpace = THREE.SRGBColorSpace;
+      texture.anisotropy = renderer.capabilities.getMaxAnisotropy();
+      texture.needsUpdate = true;
+      return texture;
+    }
+
+    function createSilverTexture() {
+      const canvas = document.createElement('canvas');
+      canvas.width = 512;
+      canvas.height = 512;
+      const context = canvas.getContext('2d');
+      const gradient = context.createLinearGradient(0, 0, canvas.width, canvas.height);
+      gradient.addColorStop(0, '#fffdf2');
+      gradient.addColorStop(0.26, '#d9d6ca');
+      gradient.addColorStop(0.5, '#f5f2e9');
+      gradient.addColorStop(0.76, '#aaa79c');
+      gradient.addColorStop(1, '#f9f7ef');
+      context.fillStyle = gradient;
+      context.fillRect(0, 0, canvas.width, canvas.height);
+
+      for (let i = 0; i < 95; i++) {
+        const y = (i * 37) % canvas.height;
+        const alpha = 0.05 + ((i * 13) % 9) / 180;
+        context.strokeStyle = i % 2 === 0
+          ? `rgba(255, 255, 255, ${alpha})`
+          : `rgba(86, 82, 73, ${alpha})`;
+        context.lineWidth = 1 + (i % 3);
+        context.beginPath();
+        context.moveTo(-80, y);
+        context.lineTo(canvas.width + 80, y + Math.sin(i) * 28);
+        context.stroke();
+      }
 
       const texture = new THREE.CanvasTexture(canvas);
       texture.colorSpace = THREE.SRGBColorSpace;
