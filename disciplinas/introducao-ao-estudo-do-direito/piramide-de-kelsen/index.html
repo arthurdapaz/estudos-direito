@@ -8,13 +8,13 @@
     :root {
       color-scheme: dark;
       font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: #d4b77d;
+      background: #1b1209;
       color: #f8fafc;
       --panel-bg: rgba(37, 29, 21, 0.74);
       --panel-strong: rgba(26, 23, 19, 0.94);
       --line: rgba(245, 222, 179, 0.2);
       --text: #f8fafc;
-      --muted: #efe2c9;
+      --muted: #ead9b9;
       --blue: #62c7ff;
       --teal: #4dd0e1;
       --gold: #ffd978;
@@ -36,8 +36,9 @@
 
     body {
       background:
-        radial-gradient(circle at 22% 12%, rgba(255, 244, 202, 0.34), transparent 26rem),
-        linear-gradient(180deg, #dfc995 0%, #caa66e 54%, #a87843 100%);
+        radial-gradient(circle at 24% 12%, rgba(177, 130, 54, 0.28), transparent 28rem),
+        radial-gradient(circle at 82% 8%, rgba(99, 65, 24, 0.24), transparent 24rem),
+        linear-gradient(180deg, #2b1c0f 0%, #1b1209 54%, #0d0805 100%);
     }
 
     #scene {
@@ -210,7 +211,7 @@
       color: #fff8e8;
       font-size: 0.9rem;
       letter-spacing: 0;
-      background: #d1b276;
+      background: #1b1209;
       transition: opacity 220ms ease;
     }
 
@@ -492,7 +493,7 @@
       }
 
       .scheme-panel {
-        top: 108px;
+        top: 12px;
         right: 12px;
         bottom: auto;
         width: 180px;
@@ -564,7 +565,7 @@
     <p>Ordenamento jurídico brasileiro com a Grundnorm no vértice da pirâmide irradiando sobre as normas inferiores.</p>
   </section>
   <section class="scheme-panel" aria-label="Esquema da pirâmide normativa">
-    <p class="scheme-kicker">Esquema único</p>
+    <p class="scheme-kicker">Ordenamento jurídico</p>
     <h2>Compreensão geral do STF</h2>
     <p class="scheme-note" id="schemeNote"></p>
   </section>
@@ -604,8 +605,8 @@
     const detailClose = document.querySelector('#detailClose');
 
     const scene = new THREE.Scene();
-    scene.background = new THREE.Color(0xd8bd86);
-    scene.fog = new THREE.FogExp2(0xd2ad74, 0.045);
+    scene.background = new THREE.Color(0x21160c);
+    scene.fog = new THREE.FogExp2(0x23170d, 0.05);
 
     const camera = new THREE.PerspectiveCamera(42, window.innerWidth / window.innerHeight, 0.1, 90);
     camera.position.set(5.6, 4.25, 8.8);
@@ -616,7 +617,7 @@
     renderer.outputColorSpace = THREE.SRGBColorSpace;
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
     renderer.toneMappingExposure = 1.08;
-    renderer.shadowMap.enabled = true;
+    renderer.shadowMap.enabled = false;
     renderer.shadowMap.type = THREE.PCFShadowMap;
     container.appendChild(renderer.domElement);
 
@@ -635,11 +636,11 @@
     controls.maxPolarAngle = Math.PI * 0.49;
     controls.target.set(0, 1.9, 0);
 
-    scene.add(new THREE.HemisphereLight(0xffefc8, 0x8b643d, 1.22));
+    scene.add(new THREE.HemisphereLight(0xffdc9a, 0x140b05, 1.18));
 
-    const keyLight = new THREE.DirectionalLight(0xfff1d4, 2.75);
+    const keyLight = new THREE.DirectionalLight(0xffd27a, 2.55);
     keyLight.position.set(4.5, 7.5, 5.2);
-    keyLight.castShadow = true;
+    keyLight.castShadow = false;
     keyLight.shadow.mapSize.set(2048, 2048);
     keyLight.shadow.camera.near = 0.5;
     keyLight.shadow.camera.far = 22;
@@ -656,16 +657,15 @@
     const floor = new THREE.Mesh(
       new THREE.CircleGeometry(11.2, 128),
       new THREE.MeshStandardMaterial({
-        color: 0xcaa36a,
+        color: 0x3b2815,
         roughness: 0.96,
         metalness: 0.0,
-        transparent: true,
-        opacity: 0.96
+        transparent: false
       })
     );
     floor.rotation.x = -Math.PI / 2;
     floor.position.y = -0.02;
-    floor.receiveShadow = true;
+    floor.receiveShadow = false;
     scene.add(floor);
 
     addDesertDunes();
@@ -1198,7 +1198,7 @@
 
     const layerHeight = 0.58;
     const layerGap = 0.035;
-    const apexHeight = 0.82;
+    let apexHeight = 0;
     const layerPalettes = {
       infralegal: {
         color: 0x155f86,
@@ -1262,11 +1262,9 @@
       schemeNote.textContent = scheme.note;
 
       clearPyramid();
-      buildPyramid(scheme.layers);
+      const metrics = buildPyramid(scheme.layers);
       closeNormDetail();
-
-      const bodyHeight = scheme.layers.length * (layerHeight + layerGap) - layerGap;
-      totalHeight = bodyHeight + apexHeight;
+      totalHeight = metrics.totalHeight;
       applyResponsiveSceneScale();
     }
 
@@ -1291,8 +1289,8 @@
 
         const mesh = new THREE.Mesh(geometry, material);
         mesh.position.y = y;
-        mesh.castShadow = true;
-        mesh.receiveShadow = true;
+        mesh.castShadow = false;
+        mesh.receiveShadow = false;
         pyramid.add(mesh);
 
         const edgeLines = new THREE.LineSegments(
@@ -1318,7 +1316,16 @@
 
       const bodyHeight = layers.length * (layerHeight + layerGap) - layerGap;
       const apexBaseRadius = radii[radii.length - 1];
+      apexHeight = computeApexHeight(radii);
       createApexBlock(apexBaseRadius, bodyHeight);
+      return { bodyHeight, totalHeight: bodyHeight + apexHeight };
+    }
+
+    function computeApexHeight(radii) {
+      const topRadius = radii[radii.length - 1];
+      const previousRadius = radii[radii.length - 2];
+      const taper = Math.max(previousRadius - topRadius, 0.001);
+      return topRadius * layerHeight / taper;
     }
 
     function createApexBlock(baseRadius, baseY) {
@@ -1335,8 +1342,8 @@
 
       const mesh = new THREE.Mesh(geometry, material);
       mesh.position.y = baseY + apexHeight / 2;
-      mesh.castShadow = true;
-      mesh.receiveShadow = true;
+      mesh.castShadow = false;
+      mesh.receiveShadow = false;
       pyramid.add(mesh);
 
       const edgeLines = new THREE.LineSegments(
@@ -1351,7 +1358,7 @@
       pyramid.add(edgeLines);
 
       [
-        { face: 'right', text: 'GRUND\nNORM', width: 0.78, height: 0.27, yOffset: -0.18 }
+        { face: 'right', text: 'GRUND\nNORM', width: 0.68, height: 0.22, yOffset: -0.08 }
       ].forEach((segment) => {
         const texture = createInscriptionTexture(segment.text, palette.inscription, palette.inscriptionStroke);
         const inscription = new THREE.Mesh(
@@ -1816,9 +1823,9 @@
       scene.add(duneGroup);
 
       [
-        { y: 0.18, z: -6.7, width: 17, height: 0.62, color: 0xb88f58, opacity: 0.22, phase: 0.2 },
-        { y: 0.42, z: -7.8, width: 20, height: 0.86, color: 0xcaa36c, opacity: 0.16, phase: 1.8 },
-        { y: 0.72, z: -9.3, width: 24, height: 1.08, color: 0xe2c18a, opacity: 0.13, phase: 3.2 }
+        { y: 0.18, z: -6.7, width: 17, height: 0.62, color: 0x5b3b1b, opacity: 0.24, phase: 0.2 },
+        { y: 0.42, z: -7.8, width: 20, height: 0.86, color: 0x7a5527, opacity: 0.18, phase: 1.8 },
+        { y: 0.72, z: -9.3, width: 24, height: 1.08, color: 0xa07334, opacity: 0.12, phase: 3.2 }
       ].forEach((spec) => {
         duneGroup.add(createDuneRidge(spec));
       });
@@ -1838,9 +1845,9 @@
         const line = new THREE.Line(
           geometry,
           new THREE.LineBasicMaterial({
-            color: row % 2 === 0 ? 0xf5deb4 : 0xae8050,
+            color: row % 2 === 0 ? 0xb7833c : 0x5a371a,
             transparent: true,
-            opacity: row < 4 ? 0.16 : 0.09,
+            opacity: row < 4 ? 0.12 : 0.07,
             depthWrite: false
           })
         );
