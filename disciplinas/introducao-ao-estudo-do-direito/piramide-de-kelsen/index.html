@@ -1200,6 +1200,20 @@
     const layerGap = 0.035;
     const apexGap = 0.1;
     let apexHeight = 0;
+    const grundnormDetail = {
+      id: 'grundnorm',
+      name: 'Grundnorm',
+      levelTitle: 'Topo da pirâmide',
+      status: 'Teórica',
+      statusKind: 'warning',
+      sections: [
+        {
+          items: [
+            'A Grundnorm, ou norma fundamental hipotética, é o pressuposto teórico que dá sentido de validade ao ordenamento jurídico: ela não é criada por órgão estatal nem aparece como artigo de lei, mas funciona como ponto lógico de partida para compreender por que a Constituição pode validar as normas inferiores e por que todo o sistema deve ser lido como uma cadeia hierárquica de competências.'
+          ]
+        }
+      ]
+    };
     const layerPalettes = {
       infralegal: {
         color: 0x155f86,
@@ -1237,6 +1251,16 @@
     let activeNormAnchor = null;
     let isCompactView = false;
     let sceneLift = 0;
+    const raycaster = new THREE.Raycaster();
+    const pointer = new THREE.Vector2();
+    const scenePointer = {
+      id: null,
+      x: 0,
+      y: 0,
+      time: 0
+    };
+    const apexClickTargets = [];
+    let apexAnchor = null;
 
     const apexLight = new THREE.PointLight(0xffcb6b, 14, 13, 1.65);
     scene.add(apexLight);
@@ -1247,6 +1271,9 @@
     const startedAt = performance.now();
     frameCamera();
     setScheme('stf');
+    renderer.domElement.addEventListener('pointerdown', handleScenePointerDown);
+    renderer.domElement.addEventListener('pointerup', handleScenePointerUp);
+    renderer.domElement.addEventListener('pointermove', handleScenePointerMove);
     detailClose.addEventListener('click', closeNormDetail);
     window.addEventListener('keydown', (event) => {
       if (event.key === 'Escape') {
@@ -1347,7 +1374,26 @@
       mesh.position.y = baseY + apexHeight / 2;
       mesh.castShadow = false;
       mesh.receiveShadow = false;
+      mesh.userData.detail = grundnormDetail;
+      mesh.userData.anchor = createWorldAnchor(mesh, new THREE.Vector3(0, apexHeight / 2, 0), 18);
+      apexAnchor = mesh.userData.anchor;
       pyramid.add(mesh);
+      apexClickTargets.push(mesh);
+
+      const hitMesh = new THREE.Mesh(
+        new THREE.ConeGeometry(baseRadius * 1.2, apexHeight * 1.16, 4, 1, false),
+        new THREE.MeshBasicMaterial({
+          transparent: true,
+          opacity: 0,
+          depthWrite: false
+        })
+      );
+      hitMesh.geometry.rotateY(Math.PI / 4);
+      hitMesh.position.copy(mesh.position);
+      hitMesh.userData.detail = grundnormDetail;
+      hitMesh.userData.anchor = mesh.userData.anchor;
+      pyramid.add(hitMesh);
+      apexClickTargets.push(hitMesh);
 
       const edgeLines = new THREE.LineSegments(
         new THREE.EdgesGeometry(geometry),
@@ -1566,6 +1612,9 @@
     }
 
     function clearPyramid() {
+      apexClickTargets.length = 0;
+      apexAnchor = null;
+
       while (pyramid.children.length > 0) {
         disposeObject(pyramid.children.pop());
       }
@@ -1689,16 +1738,19 @@
       return new CSS2DObject(div);
     }
 
-    function openNormDetail(norm, button) {
+    function openNormDetail(norm, button, anchor = button) {
       if (activeNormButton) {
         activeNormButton.classList.remove('active');
         activeNormButton.setAttribute('aria-pressed', 'false');
       }
 
-      activeNormButton = button;
-      activeNormAnchor = button;
-      activeNormButton.classList.add('active');
-      activeNormButton.setAttribute('aria-pressed', 'true');
+      activeNormButton = button ?? null;
+      activeNormAnchor = anchor ?? button;
+
+      if (activeNormButton) {
+        activeNormButton.classList.add('active');
+        activeNormButton.setAttribute('aria-pressed', 'true');
+      }
 
       detailLevel.textContent = norm.levelTitle;
       detailTitle.textContent = norm.name;
@@ -1723,13 +1775,93 @@
       connectorLayer.classList.remove('active');
     }
 
+    function handleScenePointerDown(event) {
+      scenePointer.id = event.pointerId;
+      scenePointer.x = event.clientX;
+      scenePointer.y = event.clientY;
+      scenePointer.time = performance.now();
+    }
+
+    function handleScenePointerUp(event) {
+      if (scenePointer.id !== event.pointerId) {
+        return;
+      }
+
+      const moved = Math.hypot(event.clientX - scenePointer.x, event.clientY - scenePointer.y);
+      const elapsed = performance.now() - scenePointer.time;
+      scenePointer.id = null;
+
+      if (moved > 8 || elapsed > 650) {
+        return;
+      }
+
+      const apex = getApexIntersection(event);
+      if (apex) {
+        openNormDetail(apex.object.userData.detail, null, apex.object.userData.anchor);
+      } else if (isNearApex(event)) {
+        openNormDetail(grundnormDetail, null, apexAnchor);
+      }
+    }
+
+    function handleScenePointerMove(event) {
+      renderer.domElement.style.cursor = getApexIntersection(event) || isNearApex(event) ? 'pointer' : '';
+    }
+
+    function getApexIntersection(event) {
+      if (apexClickTargets.length === 0) {
+        return null;
+      }
+
+      const rect = renderer.domElement.getBoundingClientRect();
+      pointer.x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
+      pointer.y = -(((event.clientY - rect.top) / rect.height) * 2 - 1);
+      raycaster.setFromCamera(pointer, camera);
+      return raycaster.intersectObjects(apexClickTargets, false)[0] ?? null;
+    }
+
+    function isNearApex(event) {
+      if (!apexAnchor) {
+        return false;
+      }
+
+      const rect = apexAnchor.getBoundingClientRect();
+      const centerX = rect.left + rect.width / 2;
+      const centerY = rect.top + rect.height / 2;
+      const radius = isCompactView ? 58 : 38;
+      return Math.hypot(event.clientX - centerX, event.clientY - centerY) <= radius;
+    }
+
+    function createWorldAnchor(object, localPoint, size) {
+      return {
+        getBoundingClientRect() {
+          const canvasRect = renderer.domElement.getBoundingClientRect();
+          const worldPoint = object.localToWorld(localPoint.clone());
+          const screenPoint = worldPoint.project(camera);
+          const x = canvasRect.left + (screenPoint.x * 0.5 + 0.5) * canvasRect.width;
+          const y = canvasRect.top + (-screenPoint.y * 0.5 + 0.5) * canvasRect.height;
+          const half = size / 2;
+
+          return {
+            left: x - half,
+            right: x + half,
+            top: y - half,
+            bottom: y + half,
+            width: size,
+            height: size
+          };
+        }
+      };
+    }
+
     function createDetailSection(section) {
       const wrapper = document.createElement('section');
       wrapper.className = 'detail-section';
 
-      const title = document.createElement('h3');
-      title.textContent = section.title;
-      wrapper.appendChild(title);
+      if (section.title) {
+        const title = document.createElement('h3');
+        title.textContent = section.title;
+        wrapper.appendChild(title);
+      }
 
       if (section.items.length === 1) {
         const paragraph = document.createElement('p');
