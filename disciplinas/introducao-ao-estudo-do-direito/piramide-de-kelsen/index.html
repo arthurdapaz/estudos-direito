@@ -1351,8 +1351,7 @@
       pyramid.add(edgeLines);
 
       [
-        { face: 'front', text: 'GRUND', width: 0.72, height: 0.15, yOffset: -0.18 },
-        { face: 'right', text: 'NORM', width: 0.68, height: 0.15, yOffset: -0.18 }
+        { face: 'right', text: 'GRUND\nNORM', width: 0.78, height: 0.27, yOffset: -0.18 }
       ].forEach((segment) => {
         const texture = createInscriptionTexture(segment.text, palette.inscription, palette.inscriptionStroke);
         const inscription = new THREE.Mesh(
@@ -1400,21 +1399,19 @@
     }
 
     function getInscriptionSegments(layerId, title) {
-      const defaults = [{ face: 'front', text: title.toUpperCase(), width: 2.1 }];
+      const defaults = [{ face: 'right', text: title.toUpperCase(), width: 2.1 }];
       const byLayer = {
         infralegal: [
-          { face: 'front', text: 'ATOS INFRALEGAIS', width: 2.65, height: 0.24, yOffset: -0.02 }
+          { face: 'right', text: 'ATOS INFRALEGAIS', width: 2.72, height: 0.3, yOffset: -0.02 }
         ],
         legal: [
           { face: 'right', text: 'PLANO LEGAL', width: 2.42, height: 0.32, yOffset: -0.02 }
         ],
         supralegal: [
-          { face: 'front', text: 'TRATADOS DE DIREITOS', width: 2.94, height: 0.28, yOffset: -0.02 },
-          { face: 'right', text: 'HUMANOS SUPRALEGAIS', width: 2.78, height: 0.28, yOffset: -0.02 }
+          { face: 'right', text: 'TRATADO DOS DIREITOS\nHUMANOS SUPRALEGAIS', width: 2.92, height: 0.44, yOffset: -0.02 }
         ],
         constitucional: [
-          { face: 'front', text: 'BLOCO', width: 1.08, height: 0.23, yOffset: -0.17 },
-          { face: 'right', text: 'CONSTITUCIONAL', width: 1.92, height: 0.23, yOffset: -0.17 }
+          { face: 'right', text: 'BLOCO\nCONSTITUCIONAL', width: 1.92, height: 0.36, yOffset: -0.17 }
         ]
       };
 
@@ -1461,19 +1458,30 @@
       context.textAlign = 'center';
       context.textBaseline = 'middle';
       context.lineJoin = 'round';
+      const lines = text.split('\n');
 
       let fontSize = 78;
       do {
         context.font = `900 ${fontSize}px Inter, Arial, sans-serif`;
+        const widestLine = Math.max(...lines.map((line) => context.measureText(line).width));
+        const totalHeight = lines.length * fontSize * 1.08;
         fontSize -= 3;
-      } while (context.measureText(text).width > canvas.width * 0.84 && fontSize > 42);
+        if (widestLine <= canvas.width * 0.84 && totalHeight <= canvas.height * 0.72) {
+          break;
+        }
+      } while (fontSize > 34);
 
       context.font = `900 ${fontSize + 3}px Inter, Arial, sans-serif`;
       context.strokeStyle = strokeColor;
       context.lineWidth = 12;
-      context.strokeText(text, canvas.width / 2, canvas.height / 2);
       context.fillStyle = color;
-      context.fillText(text, canvas.width / 2, canvas.height / 2);
+      const lineHeight = (fontSize + 3) * 1.08;
+      const firstLineY = canvas.height / 2 - ((lines.length - 1) * lineHeight) / 2;
+      lines.forEach((line, index) => {
+        const y = firstLineY + index * lineHeight;
+        context.strokeText(line, canvas.width / 2, y);
+        context.fillText(line, canvas.width / 2, y);
+      });
 
       const texture = new THREE.CanvasTexture(canvas);
       texture.colorSpace = THREE.SRGBColorSpace;
