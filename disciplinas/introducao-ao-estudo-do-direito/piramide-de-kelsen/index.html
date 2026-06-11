@@ -2146,9 +2146,13 @@
 
     function toSpokenText(text) {
       return text
+        .replace(/\bCF\b/g, 'Constituição Federal')
         .replaceAll('TIDH', 'Tratado Internacional de Direitos Humanos')
         .replaceAll('art. 5º, §3º', 'artigo quinto, parágrafo terceiro')
         .replaceAll('art. 5º', 'artigo quinto')
+        .replaceAll('arts.', 'artigos')
+        .replaceAll('art.', 'artigo')
+        .replaceAll('§2º', 'parágrafo segundo')
         .replaceAll('§3º', 'parágrafo terceiro')
         .replaceAll('RE 466.343/SP', 'Recurso Extraordinário quatrocentos e sessenta e seis mil trezentos e quarenta e três, São Paulo');
     }
