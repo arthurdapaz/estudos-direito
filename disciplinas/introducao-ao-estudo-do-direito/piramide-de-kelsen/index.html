@@ -2130,18 +2130,27 @@
 
     function buildNarrationText(item) {
       if (item.narration) {
-        return item.narration;
+        return toSpokenText(item.narration);
       }
 
-      const intro = `${item.name}. ${item.levelTitle}. Situação: ${item.status}.`;
+      const intro = `${toSpokenText(item.name)}. ${toSpokenText(item.levelTitle)}. Situação: ${toSpokenText(item.status)}.`;
       const body = item.sections
         .map((section) => [
-          section.title ? `${section.title}.` : '',
-          ...section.items
+          section.title ? `${toSpokenText(section.title)}.` : '',
+          ...section.items.map(toSpokenText)
         ].filter(Boolean).join(' '))
         .join(' ');
 
       return `${intro} ${body}`;
+    }
+
+    function toSpokenText(text) {
+      return text
+        .replaceAll('TIDH', 'Tratado Internacional de Direitos Humanos')
+        .replaceAll('art. 5º, §3º', 'artigo quinto, parágrafo terceiro')
+        .replaceAll('art. 5º', 'artigo quinto')
+        .replaceAll('§3º', 'parágrafo terceiro')
+        .replaceAll('RE 466.343/SP', 'Recurso Extraordinário quatrocentos e sessenta e seis mil trezentos e quarenta e três, São Paulo');
     }
 
     function isCurrentAudioPlaying() {
