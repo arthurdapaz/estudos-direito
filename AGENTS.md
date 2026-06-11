@@ -112,4 +112,5 @@ Ao mexer nesse estudo, preserve:
 - Rótulos dos blocos embutidos na face direita da pirâmide, com quebra vertical de linha quando o texto for longo.
 - Painel explicativo limpo, sem numeração fixa nas seções.
 - Conector saindo do canto do chip ativo.
+- Áudios neurais em MP3 para a visão geral, Grundnorm e normas clicáveis. O gerador fica em `tools/generate-audio.mjs` dentro do estudo e usa `edge-tts` com voz `pt-BR-AntonioNeural`.
 - Layout responsivo com atenção especial ao mobile.

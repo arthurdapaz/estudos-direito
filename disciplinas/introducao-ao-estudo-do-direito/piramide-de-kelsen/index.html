@@ -269,6 +269,101 @@
       line-height: 1.32;
     }
 
+    .study-player {
+      position: fixed;
+      top: clamp(14px, 2vw, 26px);
+      left: 50%;
+      z-index: 4;
+      display: grid;
+      grid-template-columns: 38px minmax(0, 1fr) 30px;
+      align-items: center;
+      gap: 9px;
+      width: min(338px, 32vw);
+      min-width: 248px;
+      padding: 8px 9px;
+      border: 1px solid rgba(255, 217, 120, 0.28);
+      border-radius: 999px;
+      background:
+        linear-gradient(135deg, rgba(255, 217, 120, 0.12), rgba(77, 208, 225, 0.05)),
+        rgba(26, 23, 19, 0.78);
+      box-shadow: 0 18px 46px rgba(0, 0, 0, 0.42);
+      backdrop-filter: blur(16px);
+      transform: translateX(-50%);
+    }
+
+    .study-player button {
+      display: inline-grid;
+      place-items: center;
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      border-radius: 999px;
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.02)),
+        rgba(15, 23, 42, 0.78);
+      color: #fff7d6;
+      cursor: pointer;
+      line-height: 1;
+      transition: background 160ms ease, border-color 160ms ease, transform 160ms ease;
+    }
+
+    .study-player button:hover,
+    .study-player button:focus-visible {
+      border-color: rgba(255, 217, 120, 0.6);
+      background:
+        linear-gradient(180deg, rgba(255, 217, 120, 0.18), rgba(255, 255, 255, 0.03)),
+        rgba(20, 24, 31, 0.92);
+      outline: none;
+      transform: translateY(-1px);
+    }
+
+    .study-play {
+      width: 38px;
+      height: 38px;
+      font-size: 0.94rem;
+      font-weight: 900;
+    }
+
+    .study-next {
+      width: 30px;
+      height: 30px;
+      font-size: 1.18rem;
+      font-weight: 800;
+    }
+
+    .study-meta {
+      min-width: 0;
+    }
+
+    .study-kicker,
+    .study-title {
+      overflow: hidden;
+      margin: 0;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .study-kicker {
+      color: #ffe3a3;
+      font-size: 0.58rem;
+      font-weight: 820;
+      line-height: 1.08;
+      text-transform: uppercase;
+    }
+
+    .study-title {
+      margin-top: 3px;
+      color: #f8fafc;
+      font-size: 0.74rem;
+      font-weight: 740;
+      line-height: 1.12;
+    }
+
+    .study-player[data-state="playing"] {
+      border-color: rgba(77, 208, 225, 0.42);
+      box-shadow:
+        0 18px 46px rgba(0, 0, 0, 0.42),
+        0 0 26px rgba(77, 208, 225, 0.14);
+    }
+
     .connector-layer {
       position: fixed;
       inset: 0;
@@ -513,6 +608,34 @@
         font-size: 0.58rem;
       }
 
+      .study-player {
+        top: 126px;
+        grid-template-columns: 34px minmax(0, 1fr) 28px;
+        gap: 7px;
+        width: min(248px, calc(100vw - 24px));
+        min-width: 0;
+        padding: 7px;
+      }
+
+      .study-play {
+        width: 34px;
+        height: 34px;
+        font-size: 0.82rem;
+      }
+
+      .study-next {
+        width: 28px;
+        height: 28px;
+      }
+
+      .study-kicker {
+        font-size: 0.5rem;
+      }
+
+      .study-title {
+        font-size: 0.62rem;
+      }
+
       .detail-panel {
         top: auto;
         right: 12px;
@@ -569,6 +692,16 @@
     <h2>Compreensão geral do STF</h2>
     <p class="scheme-note" id="schemeNote"></p>
   </section>
+  <section class="study-player" id="studyPlayer" aria-label="Leitura guiada em áudio" data-state="idle">
+    <button class="study-play" id="studyPlay" type="button" aria-label="Reproduzir leitura guiada">
+      <span id="studyPlayIcon" aria-hidden="true">▶</span>
+    </button>
+    <div class="study-meta">
+      <p class="study-kicker" id="studyAudioMode">Áudio guia</p>
+      <p class="study-title" id="studyAudioTitle">Ouvir estudo completo</p>
+    </div>
+    <button class="study-next" id="studyNext" type="button" aria-label="Próxima leitura">›</button>
+  </section>
   <svg class="connector-layer" id="connectorLayer" aria-hidden="true">
     <path class="connector-line" id="connectorLine" d=""></path>
   </svg>
@@ -585,6 +718,7 @@
     </header>
     <div class="detail-body" id="detailBody"></div>
   </aside>
+  <audio id="studyAudio" preload="metadata"></audio>
   <div class="loading" id="loading">Carregando cena 3D</div>
 
   <script type="module">
@@ -603,6 +737,13 @@
     const detailStatus = document.querySelector('#detailStatus');
     const detailBody = document.querySelector('#detailBody');
     const detailClose = document.querySelector('#detailClose');
+    const studyPlayer = document.querySelector('#studyPlayer');
+    const studyPlay = document.querySelector('#studyPlay');
+    const studyNext = document.querySelector('#studyNext');
+    const studyPlayIcon = document.querySelector('#studyPlayIcon');
+    const studyAudioMode = document.querySelector('#studyAudioMode');
+    const studyAudioTitle = document.querySelector('#studyAudioTitle');
+    const studyAudio = document.querySelector('#studyAudio');
 
     const scene = new THREE.Scene();
     scene.background = new THREE.Color(0x21160c);
@@ -1196,6 +1337,17 @@
       }
     };
 
+    const AUDIO_BASE_PATH = './audio/';
+    const AUDIO_EXTENSION = 'mp3';
+    const overviewStudyItem = {
+      id: 'visao-geral',
+      name: 'Visão geral da pirâmide',
+      levelTitle: 'Ordenamento jurídico',
+      status: 'Guia completo',
+      statusKind: 'active',
+      isOverview: true,
+      narration: 'A Pirâmide de Kelsen organiza o ordenamento jurídico como uma cadeia de validade. No topo está a Grundnorm, a norma fundamental hipotética. Abaixo dela, no direito brasileiro, a Constituição Federal e as normas equivalentes ocupam o bloco constitucional. Depois aparecem os tratados internacionais de direitos humanos com força supralegal, acima das leis e abaixo da Constituição. No plano legal ficam leis, medidas provisórias, decretos legislativos, resoluções legislativas e tratados comuns. Na base estão os atos infralegais, como decretos regulamentares, regulamentos, portarias e instruções normativas, que executam normas superiores sem poder contrariá-las.'
+    };
     const layerHeight = 0.58;
     const layerGap = 0.035;
     const apexGap = 0.1;
@@ -1261,6 +1413,15 @@
     };
     const apexClickTargets = [];
     let apexAnchor = null;
+    const normButtonById = new Map();
+    let currentScheme = schemes.stf;
+    let studySequence = [];
+    let currentAudioItem = null;
+    let activeStudyIndex = -1;
+    let isGuidePlaying = false;
+    let isAudioFallback = false;
+    let suppressAudioError = false;
+    let syntheticUtterance = null;
 
     const apexLight = new THREE.PointLight(0xffcb6b, 14, 13, 1.65);
     scene.add(apexLight);
@@ -1274,6 +1435,12 @@
     renderer.domElement.addEventListener('pointerdown', handleScenePointerDown);
     renderer.domElement.addEventListener('pointerup', handleScenePointerUp);
     renderer.domElement.addEventListener('pointermove', handleScenePointerMove);
+    studyPlay.addEventListener('click', toggleStudyGuide);
+    studyNext.addEventListener('click', playNextStudyItem);
+    studyAudio.addEventListener('ended', handleAudioEnded);
+    studyAudio.addEventListener('play', updateAudioControls);
+    studyAudio.addEventListener('pause', updateAudioControls);
+    studyAudio.addEventListener('error', handleAudioError);
     detailClose.addEventListener('click', closeNormDetail);
     window.addEventListener('keydown', (event) => {
       if (event.key === 'Escape') {
@@ -1287,13 +1454,16 @@
 
     function setScheme(key) {
       const scheme = schemes[key] ?? schemes.stf;
+      currentScheme = scheme;
       schemeNote.textContent = scheme.note;
+      studySequence = createStudySequence(currentScheme);
 
       clearPyramid();
       const metrics = buildPyramid(scheme.layers);
       closeNormDetail();
       totalHeight = metrics.totalHeight;
       applyResponsiveSceneScale();
+      updateAudioControls();
     }
 
     function buildPyramid(layers) {
@@ -1614,6 +1784,7 @@
     function clearPyramid() {
       apexClickTargets.length = 0;
       apexAnchor = null;
+      normButtonById.clear();
 
       while (pyramid.children.length > 0) {
         disposeObject(pyramid.children.pop());
@@ -1724,13 +1895,16 @@
         button.type = 'button';
         button.textContent = norm.short ?? norm.name;
         button.setAttribute('aria-pressed', 'false');
+        normButtonById.set(norm.id, button);
         button.addEventListener('pointerdown', (event) => {
           event.stopPropagation();
         });
         button.addEventListener('click', (event) => {
           event.preventDefault();
           event.stopPropagation();
-          openNormDetail({ ...norm, levelTitle: layer.title }, button);
+          const detail = { ...norm, levelTitle: layer.title };
+          openNormDetail(detail, button);
+          playAudioItem(detail, { guide: false });
         });
         stack.appendChild(button);
       });
@@ -1775,6 +1949,220 @@
       connectorLayer.classList.remove('active');
     }
 
+    function createStudySequence(scheme) {
+      const normsTopDown = scheme.layers
+        .slice()
+        .reverse()
+        .flatMap((layer) => layer.norms.map((norm) => ({ ...norm, levelTitle: layer.title })));
+
+      return [overviewStudyItem, grundnormDetail, ...normsTopDown];
+    }
+
+    function toggleStudyGuide() {
+      if (isCurrentAudioPlaying()) {
+        pauseCurrentAudio();
+        return;
+      }
+
+      if (isGuidePlaying && currentAudioItem && !isAudioFallback && studyAudio.src && !studyAudio.ended) {
+        studyAudio.play().catch(() => handleAudioPlayBlocked(currentAudioItem));
+        return;
+      }
+
+      if (isGuidePlaying && currentAudioItem && isAudioFallback && speechSynthesis.paused) {
+        speechSynthesis.resume();
+        updateAudioControls();
+        return;
+      }
+
+      playGuideIndex(activeStudyIndex >= 0 ? activeStudyIndex : 0);
+    }
+
+    function playNextStudyItem() {
+      const currentIndex = currentAudioItem
+        ? studySequence.findIndex((item) => item.id === currentAudioItem.id)
+        : -1;
+      const nextIndex = currentIndex >= 0 ? currentIndex + 1 : 0;
+      playGuideIndex(nextIndex >= studySequence.length ? 0 : nextIndex);
+    }
+
+    function playGuideIndex(index) {
+      if (index >= studySequence.length) {
+        completeGuide();
+        return;
+      }
+
+      isGuidePlaying = true;
+      activeStudyIndex = index;
+      const item = studySequence[index];
+      openStudyItem(item);
+      playAudioItem(item, { guide: true, index });
+    }
+
+    function openStudyItem(item) {
+      if (item.isOverview) {
+        closeNormDetail();
+        return;
+      }
+
+      if (item.id === grundnormDetail.id) {
+        openNormDetail(grundnormDetail, null, apexAnchor);
+        return;
+      }
+
+      const button = normButtonById.get(item.id) ?? null;
+      openNormDetail(item, button);
+    }
+
+    function playAudioItem(item, { guide = false, index = null } = {}) {
+      stopCurrentAudio();
+      currentAudioItem = item;
+      isGuidePlaying = guide;
+      activeStudyIndex = index ?? studySequence.findIndex((entry) => entry.id === item.id);
+      isAudioFallback = false;
+      studyAudioMode.textContent = guide ? 'Estudo guiado' : 'Leitura da norma';
+      studyAudioTitle.textContent = item.name;
+
+      suppressAudioError = false;
+      studyAudio.src = getAudioPath(item);
+      studyAudio.load();
+      studyAudio.play().catch(() => handleAudioPlayBlocked(item));
+      updateAudioControls();
+    }
+
+    function pauseCurrentAudio() {
+      if (isAudioFallback && speechSynthesis.speaking) {
+        speechSynthesis.pause();
+      } else {
+        studyAudio.pause();
+      }
+
+      updateAudioControls();
+    }
+
+    function stopCurrentAudio() {
+      if (speechSynthesis.speaking || speechSynthesis.pending) {
+        speechSynthesis.cancel();
+      }
+
+      syntheticUtterance = null;
+      suppressAudioError = true;
+      studyAudio.pause();
+      studyAudio.removeAttribute('src');
+      studyAudio.load();
+      suppressAudioError = false;
+    }
+
+    function handleAudioEnded() {
+      if (isGuidePlaying) {
+        playGuideIndex(activeStudyIndex + 1);
+        return;
+      }
+
+      studyAudioMode.textContent = 'Áudio guia';
+      studyAudioTitle.textContent = currentAudioItem ? `Leitura concluída: ${currentAudioItem.name}` : 'Ouvir estudo completo';
+      updateAudioControls();
+    }
+
+    function handleAudioError() {
+      if (!currentAudioItem || suppressAudioError || isAudioFallback) {
+        return;
+      }
+
+      speakFallback(currentAudioItem);
+    }
+
+    function handleAudioPlayBlocked(item) {
+      studyAudioMode.textContent = isGuidePlaying ? 'Estudo guiado' : 'Leitura da norma';
+      studyAudioTitle.textContent = `Leitura pronta: ${item.name}`;
+      updateAudioControls();
+    }
+
+    function speakFallback(item) {
+      if (!('speechSynthesis' in window)) {
+        handleAudioUnavailable();
+        return;
+      }
+
+      isAudioFallback = true;
+      if (speechSynthesis.speaking || speechSynthesis.pending) {
+        speechSynthesis.cancel();
+      }
+
+      syntheticUtterance = new SpeechSynthesisUtterance(buildNarrationText(item));
+      syntheticUtterance.lang = 'pt-BR';
+      syntheticUtterance.rate = 0.9;
+      syntheticUtterance.pitch = 0.72;
+      syntheticUtterance.voice = chooseFallbackVoice();
+      syntheticUtterance.onend = handleAudioEnded;
+      syntheticUtterance.onerror = handleAudioUnavailable;
+      speechSynthesis.speak(syntheticUtterance);
+      updateAudioControls();
+    }
+
+    function chooseFallbackVoice() {
+      const voices = speechSynthesis.getVoices();
+      return voices.find((voice) => voice.lang === 'pt-BR' && /antonio|male|mascul|google/i.test(voice.name)) ??
+        voices.find((voice) => voice.lang === 'pt-BR') ??
+        voices.find((voice) => voice.lang.startsWith('pt')) ??
+        null;
+    }
+
+    function completeGuide() {
+      isGuidePlaying = false;
+      activeStudyIndex = -1;
+      currentAudioItem = null;
+      studyAudioMode.textContent = 'Áudio guia';
+      studyAudioTitle.textContent = 'Estudo completo concluído';
+      updateAudioControls();
+    }
+
+    function handleAudioUnavailable() {
+      isGuidePlaying = false;
+      studyAudioMode.textContent = 'Áudio guia';
+      studyAudioTitle.textContent = currentAudioItem ? `Áudio indisponível: ${currentAudioItem.name}` : 'Áudio indisponível';
+      updateAudioControls();
+    }
+
+    function getAudioPath(item) {
+      return `${AUDIO_BASE_PATH}${item.id}.${AUDIO_EXTENSION}`;
+    }
+
+    function buildNarrationText(item) {
+      if (item.narration) {
+        return item.narration;
+      }
+
+      const intro = `${item.name}. ${item.levelTitle}. Situação: ${item.status}.`;
+      const body = item.sections
+        .map((section) => [
+          section.title ? `${section.title}.` : '',
+          ...section.items
+        ].filter(Boolean).join(' '))
+        .join(' ');
+
+      return `${intro} ${body}`;
+    }
+
+    function isCurrentAudioPlaying() {
+      if (isAudioFallback) {
+        return speechSynthesis.speaking && !speechSynthesis.paused;
+      }
+
+      return !studyAudio.paused && !studyAudio.ended;
+    }
+
+    function updateAudioControls() {
+      const isPlaying = isCurrentAudioPlaying();
+      studyPlayer.dataset.state = isPlaying ? 'playing' : 'idle';
+      studyPlayIcon.textContent = isPlaying ? '❚❚' : '▶';
+      studyPlay.setAttribute('aria-label', isPlaying ? 'Pausar leitura' : 'Reproduzir leitura guiada');
+
+      if (!currentAudioItem && studyAudioTitle.textContent.trim() === '') {
+        studyAudioTitle.textContent = 'Ouvir estudo completo';
+      }
+    }
+
     function handleScenePointerDown(event) {
       scenePointer.id = event.pointerId;
       scenePointer.x = event.clientX;
@@ -1798,8 +2186,10 @@
       const apex = getApexIntersection(event);
       if (apex) {
         openNormDetail(apex.object.userData.detail, null, apex.object.userData.anchor);
+        playAudioItem(apex.object.userData.detail, { guide: false });
       } else if (isNearApex(event)) {
         openNormDetail(grundnormDetail, null, apexAnchor);
+        playAudioItem(grundnormDetail, { guide: false });
       }
     }
 
