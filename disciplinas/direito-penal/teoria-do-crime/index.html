@@ -1,0 +1,622 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Estudo interativo e narrado sobre fato típico, teoria finalista, dolo, culpa, preterdolo e art. 121 do Código Penal.">
+  <title>Do fato típico à imputação subjetiva | Direito Penal</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #0d0d0c;
+      --surface: #151614;
+      --surface-2: #1c1d1a;
+      --paper: #eee4d0;
+      --paper-2: #f7efdf;
+      --ink: #181a16;
+      --text: #f7f0e5;
+      --muted: #bbb3a5;
+      --muted-dark: #555b52;
+      --red: #df5742;
+      --red-dark: #a93625;
+      --yellow: #e2b34f;
+      --green: #6ea486;
+      --line: rgba(247, 240, 229, 0.18);
+      --line-dark: rgba(24, 26, 22, 0.2);
+      --sans: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      --serif: Georgia, "Times New Roman", serif;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      min-width: 320px;
+      min-height: 100vh;
+      margin: 0;
+      color: var(--text);
+      background:
+        linear-gradient(90deg, transparent 0 7%, rgba(223, 87, 66, 0.19) 7% calc(7% + 1px), transparent calc(7% + 1px)),
+        radial-gradient(circle at 82% 4%, rgba(223, 87, 66, 0.17), transparent 28rem),
+        var(--bg);
+      font-family: var(--sans);
+    }
+
+    body::before {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      content: "";
+      opacity: 0.16;
+      background:
+        repeating-linear-gradient(0deg, rgba(255,255,255,.08) 0 1px, transparent 1px 4px),
+        radial-gradient(circle at 30% 30%, rgba(255,255,255,.3) 0 1px, transparent 1.5px);
+      background-size: auto, 24px 24px;
+      pointer-events: none;
+    }
+
+    button, a { font: inherit; }
+    button { color: inherit; }
+    a { color: inherit; }
+
+    .skip-link {
+      position: fixed;
+      top: 10px;
+      left: 10px;
+      z-index: 30;
+      padding: 11px 14px;
+      background: var(--yellow);
+      color: var(--ink);
+      transform: translateY(-160%);
+    }
+    .skip-link:focus { transform: translateY(0); }
+
+    .page { width: min(1180px, calc(100vw - 40px)); margin: 0 auto; padding: 22px 0 68px; }
+
+    .topbar {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+      justify-content: space-between;
+      padding-bottom: 18px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .crumb {
+      display: inline-flex;
+      align-items: center;
+      min-height: 42px;
+      padding: 0 13px;
+      border: 1px solid var(--line);
+      color: var(--muted);
+      font: 800 0.71rem var(--mono);
+      letter-spacing: .06em;
+      text-decoration: none;
+      text-transform: uppercase;
+    }
+
+    .crumb:hover, .crumb:focus-visible { outline: 2px solid var(--yellow); outline-offset: 3px; color: white; }
+    .progress-label { color: var(--muted); font: 800 .7rem var(--mono); letter-spacing: .08em; text-transform: uppercase; }
+
+    .hero {
+      position: relative;
+      display: grid;
+      grid-template-columns: minmax(0, 1.15fr) minmax(280px, .55fr);
+      gap: clamp(34px, 7vw, 90px);
+      align-items: end;
+      padding: clamp(62px, 11vw, 128px) 0 clamp(44px, 7vw, 78px);
+      overflow: hidden;
+    }
+
+    .hero::after {
+      position: absolute;
+      right: 2%;
+      bottom: 12%;
+      z-index: -1;
+      width: min(38vw, 420px);
+      aspect-ratio: 1;
+      border: 1px solid rgba(226,179,79,.22);
+      content: "";
+      transform: rotate(8deg);
+      box-shadow: inset 0 0 0 30px rgba(226,179,79,.03), inset 0 0 0 31px rgba(226,179,79,.12);
+    }
+
+    .eyebrow { margin: 0 0 14px; color: var(--red); font: 900 .71rem var(--mono); letter-spacing: .14em; text-transform: uppercase; }
+    h1 { max-width: 10ch; margin: 0; font: 500 clamp(3.6rem, 9vw, 8rem)/.8 var(--serif); letter-spacing: -.06em; }
+    .hero-copy { padding-left: 20px; border-left: 4px solid var(--red); }
+    .hero-copy p { margin: 0; color: var(--muted); font: clamp(1.02rem,1.8vw,1.22rem)/1.58 var(--sans); }
+    .hero-copy strong { color: white; }
+
+    .audio-bar {
+      position: sticky;
+      top: 9px;
+      z-index: 20;
+      display: grid;
+      grid-template-columns: auto auto auto minmax(190px,1fr);
+      gap: 8px;
+      align-items: center;
+      padding: 10px;
+      border: 1px solid rgba(226,179,79,.48);
+      background: rgba(23,24,21,.96);
+      box-shadow: 0 12px 30px rgba(0,0,0,.35);
+      backdrop-filter: blur(12px);
+    }
+
+    .audio-bar button { min-width: 44px; min-height: 44px; border: 1px solid var(--line); background: transparent; cursor: pointer; }
+    .audio-bar button:hover, .audio-bar button:focus-visible { outline: 2px solid var(--yellow); outline-offset: 2px; background: rgba(255,255,255,.08); }
+    .audio-bar .primary { min-width: 140px; padding: 0 14px; background: var(--yellow); color: var(--ink); font: 900 .74rem var(--mono); }
+    .audio-status { min-width: 0; padding: 0 8px; color: var(--muted); font: .76rem/1.35 var(--sans); }
+    audio { display: none; }
+
+    .crime-map {
+      display: grid;
+      grid-template-columns: repeat(3,1fr);
+      gap: 1px;
+      margin: 32px 0 66px;
+      background: var(--line);
+      border: 1px solid var(--line);
+    }
+
+    .crime-layer { position: relative; min-height: 170px; padding: 20px; background: var(--surface); }
+    .crime-layer:first-child { background: var(--paper); color: var(--ink); }
+    .crime-layer span { color: var(--red); font: 900 .66rem var(--mono); letter-spacing: .1em; text-transform: uppercase; }
+    .crime-layer strong { display: block; max-width: 12ch; margin-top: 28px; font: 500 clamp(1.55rem,3vw,2.4rem)/1 var(--serif); }
+    .crime-layer small { position: absolute; right: 16px; bottom: 14px; color: var(--muted); font: .67rem var(--mono); }
+    .crime-layer:first-child small { color: var(--muted-dark); }
+
+    .section-label { display: flex; gap: 16px; align-items: center; margin: 0 0 18px; color: var(--red); font: 900 .7rem var(--mono); letter-spacing: .13em; text-transform: uppercase; }
+    .section-label::after { height: 1px; flex: 1; content: ""; background: var(--line); }
+
+    .study-shell { display: grid; grid-template-columns: minmax(235px,.36fr) minmax(0,1fr); gap: clamp(22px,4vw,48px); align-items: start; }
+    .chapter-list { display: grid; border-top: 1px solid rgba(247,240,229,.5); }
+
+    .chapter-button {
+      position: relative;
+      display: grid;
+      grid-template-columns: 39px 1fr;
+      gap: 11px;
+      width: 100%;
+      min-height: 70px;
+      padding: 13px 10px;
+      border: 0;
+      border-bottom: 1px solid var(--line);
+      background: transparent;
+      text-align: left;
+      cursor: pointer;
+      transition: background 170ms ease, padding-left 170ms ease;
+    }
+
+    .chapter-button::before { position: absolute; inset: 0 auto 0 0; width: 4px; content: ""; background: transparent; }
+    .chapter-button:hover, .chapter-button:focus-visible { outline: 2px solid rgba(226,179,79,.58); outline-offset: -2px; background: rgba(255,255,255,.05); }
+    .chapter-button.active { padding-left: 16px; background: rgba(238,228,208,.09); }
+    .chapter-button.active::before { background: var(--red); }
+    .chapter-number { padding-top: 2px; color: var(--red); font: 900 .7rem var(--mono); }
+    .chapter-name { font: 750 .9rem/1.22 var(--sans); }
+    .chapter-article { display: block; margin-top: 5px; color: #8e887f; font: .66rem var(--mono); }
+
+    .detail-panel {
+      position: relative;
+      min-height: 560px;
+      padding: clamp(26px,5vw,54px);
+      border: 1px solid rgba(24,26,22,.3);
+      background: var(--paper);
+      color: var(--ink);
+      box-shadow: 14px 14px 0 rgba(223,87,66,.25);
+      overflow: hidden;
+    }
+
+    .detail-panel::before { position: absolute; inset: 0 auto 0 0; width: 8px; content: ""; background: var(--detail-accent,var(--red)); }
+    .detail-kicker { margin: 0 0 13px; color: var(--detail-accent,var(--red)); font: 900 .69rem var(--mono); letter-spacing: .1em; text-transform: uppercase; }
+    .detail-panel h2 { max-width: 15ch; margin: 0; font: 500 clamp(2.35rem,5.5vw,5rem)/.88 var(--serif); letter-spacing: -.045em; }
+    .detail-summary { max-width: 66ch; margin: 20px 0 0; color: var(--muted-dark); font: clamp(1.02rem,1.8vw,1.18rem)/1.58 var(--sans); }
+    .detail-actions { display: flex; flex-wrap: wrap; gap: 9px; margin: 22px 0 6px; }
+    .inline-action { min-height: 44px; padding: 0 15px; border: 0; background: var(--ink); color: var(--paper); font: 900 .72rem var(--mono); cursor: pointer; }
+    .inline-action:hover, .inline-action:focus-visible { outline: 3px solid rgba(169,54,37,.35); outline-offset: 3px; }
+    .detail-section { margin-top: 26px; padding-top: 20px; border-top: 1px solid var(--line-dark); }
+    .detail-section h3 { margin: 0 0 12px; font: 900 .7rem var(--mono); letter-spacing: .1em; text-transform: uppercase; }
+    .detail-section ul { display: grid; gap: 10px; margin: 0; padding: 0; list-style: none; }
+    .detail-section li { position: relative; padding-left: 22px; color: var(--muted-dark); font: .96rem/1.56 var(--sans); }
+    .detail-section li::before { position: absolute; top: .66em; left: 0; width: 9px; height: 2px; content: ""; background: var(--detail-accent,var(--red)); }
+
+    .comparison { margin-top: 78px; }
+    .comparison-grid { display: grid; grid-template-columns: repeat(4,1fr); border: 1px solid var(--line); background: var(--line); gap: 1px; }
+    .compare-card { min-height: 220px; padding: 20px; background: var(--surface); }
+    .compare-card span { color: var(--yellow); font: 900 .65rem var(--mono); letter-spacing: .1em; text-transform: uppercase; }
+    .compare-card h3 { margin: 26px 0 10px; font: 500 1.65rem/1 var(--serif); }
+    .compare-card p { margin: 0; color: var(--muted); font: .87rem/1.5 var(--sans); }
+    .compare-card strong { display: block; margin-top: 16px; color: white; font: 800 .74rem/1.45 var(--mono); }
+
+    .test-case {
+      display: grid;
+      grid-template-columns: .48fr 1fr;
+      gap: clamp(24px,5vw,64px);
+      margin-top: 78px;
+      padding: clamp(28px,5vw,54px);
+      background: var(--paper);
+      color: var(--ink);
+    }
+    .test-case span { color: var(--red-dark); font: 900 .69rem var(--mono); letter-spacing: .12em; text-transform: uppercase; }
+    .test-case h2 { margin: 12px 0 0; font: 500 clamp(2.4rem,5vw,4.7rem)/.88 var(--serif); letter-spacing: -.04em; }
+    .case-content { display: grid; gap: 10px; }
+    .case-row { display: grid; grid-template-columns: 120px 1fr; gap: 16px; padding: 0 0 14px; border-bottom: 1px solid var(--line-dark); }
+    .case-row:last-child { border: 0; }
+    .case-row strong { font: 900 .69rem var(--mono); text-transform: uppercase; }
+    .case-row p { margin: 0; color: var(--muted-dark); font: .93rem/1.5 var(--sans); }
+
+    .quiz { display: grid; grid-template-columns: minmax(210px,.36fr) minmax(0,1fr); gap: clamp(24px,5vw,60px); margin-top: 78px; padding-top: 28px; border-top: 1px solid rgba(247,240,229,.5); }
+    .quiz header { display: block; padding: 0; border: 0; }
+    .quiz h2 { margin: 8px 0 12px; font: 500 clamp(2.1rem,4vw,3.7rem)/.9 var(--serif); }
+    .quiz header p { color: var(--muted); font: .92rem/1.5 var(--sans); }
+    .quiz-card { padding: clamp(22px,4vw,34px); border: 1px solid var(--line); background: var(--surface); }
+    .quiz-question { margin: 0 0 18px; font: 500 clamp(1.3rem,2.4vw,1.75rem)/1.25 var(--serif); }
+    .quiz-options { display: grid; gap: 9px; }
+    .quiz-option { min-height: 48px; padding: 11px 14px; border: 1px solid var(--line); background: var(--surface-2); text-align: left; cursor: pointer; }
+    .quiz-option:hover, .quiz-option:focus-visible { outline: 2px solid var(--yellow); outline-offset: 2px; }
+    .quiz-option.correct { border-color: var(--green); background: rgba(110,164,134,.16); }
+    .quiz-option.wrong { border-color: var(--red); background: rgba(223,87,66,.15); }
+    .quiz-feedback { min-height: 52px; margin: 16px 0 0; color: var(--muted); font: .86rem/1.5 var(--sans); }
+    .quiz-nav { display: flex; gap: 8px; justify-content: flex-end; margin-top: 14px; }
+    .quiz-nav button { min-width: 44px; min-height: 44px; border: 1px solid var(--line); background: transparent; cursor: pointer; }
+
+    .source-note { margin-top: 36px; color: #89837a; font: .76rem/1.5 var(--sans); }
+    .source-note a { color: var(--yellow); font-weight: 800; }
+    .source-note a:hover, .source-note a:focus-visible { outline: 2px solid var(--yellow); outline-offset: 3px; }
+    .reveal { opacity: 0; transform: translateY(18px); transition: opacity 560ms ease, transform 560ms cubic-bezier(.2,.8,.2,1); }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    @media (max-width: 900px) {
+      .hero, .study-shell, .test-case, .quiz { grid-template-columns: 1fr; }
+      .hero { gap: 28px; }
+      .hero-copy { max-width: 58ch; }
+      .chapter-list { grid-template-columns: repeat(2,minmax(0,1fr)); border-left: 1px solid var(--line); }
+      .comparison-grid { grid-template-columns: repeat(2,1fr); }
+      .detail-panel { min-height: 0; box-shadow: 8px 8px 0 rgba(223,87,66,.22); }
+    }
+
+    @media (max-width: 600px) {
+      .page { width: min(100vw - 24px,680px); padding-top: 12px; }
+      .topbar { align-items: start; flex-direction: column; }
+      h1 { font-size: clamp(3.45rem,18vw,5.6rem); }
+      .crime-map, .comparison-grid { grid-template-columns: 1fr; }
+      .crime-layer { min-height: 130px; }
+      .audio-bar { top: 6px; grid-template-columns: 44px minmax(0,1fr) 44px; }
+      .audio-bar .primary { min-width: 0; }
+      .audio-status { grid-column: 1/-1; padding: 3px 4px 0; }
+      .chapter-list { grid-template-columns: 1fr; }
+      .detail-panel { padding: 28px 22px 32px 29px; }
+      .detail-panel h2 { font-size: clamp(2.45rem,13vw,3.7rem); }
+      .case-row { grid-template-columns: 1fr; gap: 5px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+      .reveal { opacity: 1; transform: none; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+  <main class="page" id="conteudo">
+    <nav class="topbar" aria-label="Navegação estrutural">
+      <a class="crumb" href="../">← Direito Penal</a>
+      <span class="progress-label" id="progressLabel">Trilha · 1 de 9</span>
+    </nav>
+
+    <header class="hero reveal">
+      <div>
+        <p class="eyebrow">Caderno 01 · Teoria do crime</p>
+        <h1>Do fato à imputação</h1>
+      </div>
+      <div class="hero-copy">
+        <p>Antes de perguntar pela pena, organize o raciocínio: há <strong>conduta típica</strong>? Ela é ilícita? O agente é culpável?</p>
+      </div>
+    </header>
+
+    <section class="audio-bar" aria-label="Áudio guiado">
+      <button type="button" id="prevAudio" aria-label="Ouvir item anterior">←</button>
+      <button type="button" class="primary" id="toggleGuide">▶ Iniciar guia</button>
+      <button type="button" id="nextAudio" aria-label="Ouvir próximo item">→</button>
+      <div class="audio-status" id="audioStatus" aria-live="polite">Leitura pronta: visão geral.</div>
+      <audio id="studyAudio" preload="metadata"></audio>
+    </section>
+
+    <section class="crime-map reveal" aria-label="Conceito analítico tripartido de crime">
+      <article class="crime-layer"><span>Primeiro filtro</span><strong>Fato típico</strong><small>Este estudo aprofunda aqui</small></article>
+      <article class="crime-layer"><span>Segundo filtro</span><strong>Ilicitude</strong><small>Contrariedade ao Direito</small></article>
+      <article class="crime-layer"><span>Terceiro filtro</span><strong>Culpabilidade</strong><small>Juízo de reprovação</small></article>
+    </section>
+
+    <section aria-labelledby="trilha-title">
+      <p class="section-label" id="trilha-title">Percurso de aprendizagem</p>
+      <div class="study-shell">
+        <nav class="chapter-list" id="chapterList" aria-label="Capítulos do estudo"></nav>
+        <article class="detail-panel" id="detailPanel" aria-live="polite"></article>
+      </div>
+    </section>
+
+    <section class="comparison reveal" aria-labelledby="compare-title">
+      <p class="section-label" id="compare-title">Compare o elemento subjetivo</p>
+      <div class="comparison-grid">
+        <article class="compare-card"><span>Quer</span><h3>Dolo direto</h3><p>O resultado é buscado pelo agente.</p><strong>Vontade dirigida ao resultado</strong></article>
+        <article class="compare-card"><span>Aceita</span><h3>Dolo eventual</h3><p>O agente prevê o resultado e assume o risco de produzi-lo.</p><strong>Não é mera previsão</strong></article>
+        <article class="compare-card"><span>Confia</span><h3>Culpa consciente</h3><p>O agente prevê o resultado, mas confia sinceramente que ele não ocorrerá.</p><strong>Previsão sem aceitação</strong></article>
+        <article class="compare-card"><span>Não prevê</span><h3>Culpa inconsciente</h3><p>O agente não prevê um resultado objetivamente previsível.</p><strong>Violação do dever de cuidado</strong></article>
+      </div>
+    </section>
+
+    <section class="test-case reveal" aria-labelledby="case-title">
+      <div><span>Aplicação orientada</span><h2 id="case-title">Art. 121 em camadas</h2></div>
+      <div class="case-content">
+        <div class="case-row"><strong>Tipo básico</strong><p>“Matar alguém” descreve o homicídio simples no caput. É preciso conectar a morte à conduta do agente.</p></div>
+        <div class="case-row"><strong>Nexo</strong><p>O art. 13 exige que o resultado seja imputado a quem lhe deu causa, entendida como a ação ou omissão sem a qual ele não ocorreria.</p></div>
+        <div class="case-row"><strong>Dolo</strong><p>Se o agente quer a morte ou assume o risco de produzi-la, o enquadramento subjetivo parte do art. 18, I.</p></div>
+        <div class="case-row"><strong>Culpa</strong><p>Se não quer nem assume o risco, mas causa a morte por imprudência, negligência ou imperícia, examina-se o homicídio culposo do § 3º.</p></div>
+        <div class="case-row"><strong>Atenção</strong><p>O art. 121 é um ponto de aplicação, não um atalho: antes da conclusão, todos os elementos e circunstâncias do caso precisam ser examinados.</p></div>
+      </div>
+    </section>
+
+    <section class="quiz reveal" aria-labelledby="quiz-title">
+      <header><p class="eyebrow">Fixação</p><h2 id="quiz-title">Decida o próximo passo</h2><p>Uma pergunta por vez, com justificativa imediata.</p></header>
+      <div class="quiz-card">
+        <p class="quiz-question" id="quizQuestion"></p>
+        <div class="quiz-options" id="quizOptions"></div>
+        <p class="quiz-feedback" id="quizFeedback" aria-live="polite"></p>
+        <div class="quiz-nav"><button type="button" id="prevQuestion" aria-label="Pergunta anterior">←</button><button type="button" id="nextQuestion" aria-label="Próxima pergunta">→</button></div>
+      </div>
+    </section>
+
+    <footer class="source-note">
+      Base legal conferida no <a href="https://www.planalto.gov.br/ccivil_03/decreto-lei/del2848compilado.htm" target="_blank" rel="noreferrer">Código Penal compilado — Presidência da República</a>. A organização analítica adota a concepção tripartida majoritária para fins didáticos. Material de estudo; não constitui parecer jurídico.
+    </footer>
+  </main>
+
+  <script>
+    const studyData = {
+      overview: {
+        id: "visao-geral", number: "00", title: "Visão geral", article: "Mapa do raciocínio", accent: "#a93625",
+        short: "Na concepção analítica tripartida, crime é fato típico, ilícito e culpável. Este caderno abre o primeiro filtro: a estrutura do fato típico e sua imputação subjetiva.",
+        sections: [
+          { title: "Ordem correta", items: [
+            "Primeiro: identifique conduta, resultado quando exigido, nexo causal e tipicidade.",
+            "Depois: examine se a conduta é dolosa ou culposa, conforme o tipo penal admitir.",
+            "Só então avance para ilicitude e culpabilidade; um fato típico ainda não encerra sozinho o conceito analítico de crime."
+          ]},
+          { title: "Frase para guardar", items: [
+            "Fato típico é a conduta humana que se ajusta a uma descrição penal, com os elementos objetivos e subjetivos exigidos.",
+            "Dolo, culpa e preterdolo não descrevem a mesma relação psíquica entre agente, conduta e resultado."
+          ]}
+        ],
+        narration: "Visão geral. Na concepção analítica tripartida, crime é fato típico, ilícito e culpável. Este caderno aprofunda o primeiro filtro. Para reconhecer o fato típico, organize conduta, resultado quando exigido, nexo causal e tipicidade. Depois, examine a imputação subjetiva: dolo ou culpa, conforme a lei. Só então avance para ilicitude e culpabilidade. Guarde: um fato típico, sozinho, ainda não encerra todo o conceito analítico de crime."
+      },
+      chapters: [
+        { id: "fato-tipico", number: "01", title: "Fato típico", article: "Primeiro filtro", accent: "#df5742",
+          short: "É o fato humano que corresponde ao modelo de conduta proibida ou ordenada pela lei penal, reunindo os elementos exigidos pelo tipo.",
+          sections: [
+            { title: "Estrutura didática", items: [
+              "Conduta: comportamento humano voluntário, por ação ou omissão.",
+              "Resultado: modificação relevante; nos crimes materiais, a consumação depende do resultado naturalístico.",
+              "Nexo causal: ligação entre conduta e resultado, quando este integra o tipo.",
+              "Tipicidade: correspondência entre o fato concreto e a descrição legal, considerada também a relevância material da ofensa."
+            ]},
+            { title: "Cuidado", items: [
+              "Nem todo tipo exige resultado naturalístico: há crimes formais e de mera conduta.",
+              "A lista é um roteiro de análise, não uma fórmula que dispensa a leitura do tipo penal concreto."
+            ]}
+          ],
+          narration: "Capítulo um. Fato típico. É o fato humano que corresponde ao modelo de conduta previsto na lei penal. A estrutura didática reúne conduta, resultado quando exigido, nexo causal e tipicidade. A conduta é comportamento humano voluntário, por ação ou omissão. Nos crimes materiais, a consumação depende de resultado naturalístico. O nexo liga a conduta ao resultado. A tipicidade compara o fato concreto com a descrição legal e considera a relevância da ofensa. Atenção: nem todo crime exige resultado naturalístico."
+        },
+        { id: "teoria-finalista", number: "02", title: "Teoria finalista da ação", article: "Conduta dirigida a um fim", accent: "#e2b34f",
+          short: "Para o finalismo, a ação humana é orientada a uma finalidade. Dolo e culpa passam a integrar a análise do fato típico, e não a culpabilidade.",
+          sections: [
+            { title: "Mudança central", items: [
+              "A conduta não é vista como movimento causal vazio: agir é dirigir conscientemente um comportamento a um fim.",
+              "O dolo e a culpa são examinados no tipo, como componentes da conduta típica.",
+              "A culpabilidade permanece como juízo de reprovação, com imputabilidade, potencial consciência da ilicitude e exigibilidade de conduta diversa."
+            ]},
+            { title: "Aplicação", items: [
+              "Pergunte o que o agente fez ou deixou de fazer e qual direção subjetiva acompanhou a conduta.",
+              "Não confunda finalidade da ação com motivo: o motivo explica por que; a finalidade indica para que a conduta foi dirigida."
+            ]}
+          ],
+          narration: "Capítulo dois. Teoria finalista da ação. Para o finalismo, a ação humana é orientada a uma finalidade. A conduta não é um movimento causal vazio. O agente dirige conscientemente seu comportamento a um fim. Com essa teoria, dolo e culpa passam a integrar a análise do fato típico, e não a culpabilidade. A culpabilidade permanece como juízo de reprovação. Na aplicação, pergunte o que o agente fez ou deixou de fazer e qual direção subjetiva acompanhou a conduta. Não confunda finalidade com motivo: o motivo explica por que; a finalidade indica para que a ação foi dirigida."
+        },
+        { id: "conduta", number: "03", title: "Conduta: ação ou omissão", article: "Art. 13, caput e § 2º", accent: "#6ea486",
+          short: "A conduta pode ser positiva, quando o agente faz, ou negativa, quando deixa de agir apesar de um dever juridicamente relevante.",
+          sections: [
+            { title: "Ação", items: [
+              "É o comportamento comissivo: o agente realiza uma atividade corporal dirigida a um fim.",
+              "Para integrar o fato típico, a ação deve corresponder aos elementos descritos no tipo penal."
+            ]},
+            { title: "Omissão", items: [
+              "Nos crimes omissivos próprios, o tipo pune diretamente o não fazer exigido.",
+              "Na omissão imprópria, o resultado pode ser imputado a quem devia e podia agir para evitá-lo, nas hipóteses do art. 13, § 2º.",
+              "A simples presença no local não cria automaticamente o dever jurídico de impedir o resultado."
+            ]}
+          ],
+          narration: "Capítulo três. Conduta: ação ou omissão. A ação é o comportamento comissivo, quando o agente faz algo dirigido a um fim. A omissão é o não fazer juridicamente relevante. Nos crimes omissivos próprios, a lei pune diretamente a abstenção. Na omissão imprópria, o resultado pode ser imputado a quem devia e podia agir para evitá-lo, nas hipóteses do parágrafo segundo do artigo treze. A simples presença no local não cria automaticamente o dever de impedir o resultado."
+        },
+        { id: "resultado-nexo", number: "04", title: "Resultado e nexo causal", article: "Art. 13", accent: "#df5742",
+          short: "Nos crimes materiais, é preciso ligar juridicamente o resultado à conduta. O Código parte da ação ou omissão sem a qual o resultado não teria ocorrido.",
+          sections: [
+            { title: "Teste inicial", items: [
+              "Faça a eliminação hipotética: se a conduta for mentalmente retirada, o resultado ainda ocorreria do mesmo modo?",
+              "Se a resposta for não, há um ponto de partida causal; a imputação ainda pode exigir outros filtros normativos.",
+              "O art. 13, § 1º, disciplina a causa relativamente independente superveniente que, por si só, produz o resultado."
+            ]},
+            { title: "Resultado", items: [
+              "Resultado naturalístico é a modificação perceptível no mundo exterior, como a morte no homicídio.",
+              "Resultado jurídico é a lesão ou perigo de lesão ao bem protegido; não se confunde automaticamente com o resultado naturalístico."
+            ]}
+          ],
+          narration: "Capítulo quatro. Resultado e nexo causal. Nos crimes materiais, é preciso ligar o resultado à conduta. O artigo treze considera causa a ação ou omissão sem a qual o resultado não teria ocorrido. Como teste inicial, faça a eliminação hipotética: se a conduta for mentalmente retirada, o resultado ainda ocorreria do mesmo modo? Se não, há um ponto de partida causal, embora a imputação possa exigir outros filtros. O resultado naturalístico é uma modificação no mundo exterior, como a morte no homicídio. Já o resultado jurídico é a lesão ou perigo de lesão ao bem protegido."
+        },
+        { id: "tipicidade", number: "05", title: "Tipicidade", article: "Fato concreto × tipo penal", accent: "#e2b34f",
+          short: "Tipicidade é o juízo de correspondência entre o fato ocorrido e a descrição abstrata da lei penal, sem perder de vista a ofensa relevante ao bem jurídico.",
+          sections: [
+            { title: "Duas verificações", items: [
+              "Tipicidade formal: o fato reúne os elementos descritos pela lei penal.",
+              "Tipicidade material: a conduta produz lesão ou perigo de lesão penalmente relevante ao bem jurídico.",
+              "O princípio da legalidade impede criar crime por analogia contra o acusado."
+            ]},
+            { title: "Exemplo do art. 121", items: [
+              "O núcleo matar exige a produção da morte de outra pessoa e a ligação causal com a conduta.",
+              "Além dos elementos objetivos, o enquadramento muda conforme haja dolo ou culpa."
+            ]}
+          ],
+          narration: "Capítulo cinco. Tipicidade. É o juízo de correspondência entre o fato concreto e a descrição abstrata da lei penal. Na tipicidade formal, verifica-se se o fato reúne os elementos escritos no tipo. Na tipicidade material, observa-se se há lesão ou perigo de lesão penalmente relevante ao bem jurídico. O princípio da legalidade impede criar crime por analogia contra o acusado. No artigo cento e vinte e um, o núcleo matar exige a morte de outra pessoa e sua ligação com a conduta. O enquadramento ainda muda conforme haja dolo ou culpa."
+        },
+        { id: "dolo", number: "06", title: "Dolo direto e eventual", article: "Art. 18, I", accent: "#df5742",
+          short: "O crime é doloso quando o agente quer o resultado ou assume o risco de produzi-lo. São duas relações subjetivas diferentes cobertas pelo art. 18, I.",
+          sections: [
+            { title: "Dolo direto", items: [
+              "O agente conhece os elementos do fato e dirige sua vontade à realização do resultado típico.",
+              "Fórmula de memória: prevê e quer."
+            ]},
+            { title: "Dolo eventual", items: [
+              "O agente prevê a possibilidade do resultado e, diante dela, assume o risco de produzi-lo.",
+              "Fórmula de memória: prevê e aceita o risco; mera previsibilidade não basta.",
+              "A conclusão depende das circunstâncias provadas, não de uma frase automática sobre risco."
+            ]}
+          ],
+          narration: "Capítulo seis. Dolo direto e dolo eventual. Pelo artigo dezoito, inciso primeiro, o crime é doloso quando o agente quis o resultado ou assumiu o risco de produzi-lo. No dolo direto, o agente conhece os elementos do fato e dirige sua vontade ao resultado. Fórmula: prevê e quer. No dolo eventual, ele prevê a possibilidade do resultado e assume o risco de produzi-lo. Fórmula: prevê e aceita o risco. A mera previsibilidade não basta. A conclusão depende das circunstâncias provadas no caso."
+        },
+        { id: "culpa", number: "07", title: "Culpa em sentido estrito", article: "Art. 18, II", accent: "#6ea486",
+          short: "Na culpa, a conduta é voluntária, mas o resultado não é querido nem assumido; ele decorre da violação do dever objetivo de cuidado.",
+          sections: [
+            { title: "Elementos essenciais", items: [
+              "Conduta voluntária e resultado involuntário.",
+              "Inobservância do cuidado objetivo necessário, resultado previsível e nexo entre a falha de cuidado e o resultado.",
+              "A punição culposa exige previsão expressa em lei, conforme o parágrafo único do art. 18."
+            ]},
+            { title: "Três formas", items: [
+              "Imprudência: agir de modo precipitado, arriscado ou excessivo.",
+              "Negligência: deixar de tomar o cuidado exigido; descuido ou omissão cautelar.",
+              "Imperícia: falta de aptidão técnica no exercício de arte, profissão ou ofício."
+            ]},
+            { title: "Consciente × inconsciente", items: [
+              "Na culpa consciente, o agente prevê o resultado, mas confia que ele não ocorrerá.",
+              "Na culpa inconsciente, não prevê o resultado que era objetivamente previsível."
+            ]}
+          ],
+          narration: "Capítulo sete. Culpa em sentido estrito. Na culpa, a conduta é voluntária, mas o resultado não é querido nem assumido. Ele decorre da violação do dever objetivo de cuidado. O artigo dezoito, inciso segundo, aponta imprudência, negligência e imperícia. Imprudência é agir de modo arriscado ou precipitado. Negligência é deixar de tomar o cuidado exigido. Imperícia é falta de aptidão técnica. Na culpa consciente, o agente prevê o resultado, mas confia que ele não ocorrerá. Na culpa inconsciente, não prevê o resultado objetivamente previsível. A punição culposa exige previsão expressa em lei."
+        },
+        { id: "preterdolo", number: "08", title: "Preterdolo", article: "Art. 19", accent: "#a93625",
+          short: "No crime preterdoloso, há dolo na conduta antecedente e culpa no resultado mais grave: dolo no início, culpa no excesso de resultado.",
+          sections: [
+            { title: "Estrutura", items: [
+              "O agente quer praticar um crime inicial, mas produz resultado mais grave que não queria nem assumiu.",
+              "O resultado agravador só pode ser atribuído ao agente quando causado ao menos culposamente, conforme o art. 19.",
+              "Não é uma terceira categoria independente: é combinação de dolo antecedente com culpa consequente."
+            ]},
+            { title: "Exemplo clássico", items: [
+              "Na lesão corporal seguida de morte, o agente quer lesionar, não matar, mas causa culposamente a morte.",
+              "Se quis a morte ou assumiu o risco, a análise migra para homicídio doloso; se não houve dolo antecedente de lesão, o enquadramento também muda."
+            ]}
+          ],
+          narration: "Capítulo oito. Preterdolo. No crime preterdoloso, há dolo na conduta antecedente e culpa no resultado mais grave. Fórmula: dolo no início, culpa no excesso de resultado. Pelo artigo dezenove, o resultado que agrava especialmente a pena só pode ser atribuído ao agente quando causado ao menos culposamente. O exemplo clássico é a lesão corporal seguida de morte: o agente quer lesionar, não matar, mas causa culposamente a morte. Se quis a morte ou assumiu o risco, a análise muda para homicídio doloso. Preterdolo não é terceira categoria autônoma; é combinação de dolo e culpa."
+        }
+      ],
+      quiz: [
+        { question: "Na teoria finalista, onde são examinados dolo e culpa?", options: ["No fato típico, ligados à conduta", "Somente na culpabilidade", "Somente na ilicitude"], answer: 0, explanation: "O finalismo desloca dolo e culpa para o tipo penal; a culpabilidade permanece como juízo de reprovação." },
+        { question: "O que diferencia dolo eventual de culpa consciente?", options: ["No dolo eventual há assunção do risco; na culpa consciente há confiança de que o resultado não ocorrerá.", "No dolo eventual não há previsão; na culpa consciente há intenção.", "Não existe diferença entre eles."], answer: 0, explanation: "Ambos podem envolver previsão. A distinção está na postura diante do resultado: aceitação do risco ou confiança em evitá-lo." },
+        { question: "Qual enunciado descreve imperícia?", options: ["Falta de aptidão técnica no exercício de atividade especializada.", "Ação precipitada e arriscada.", "Aceitação do risco de produzir o resultado."], answer: 0, explanation: "Imperícia se liga à deficiência técnica; imprudência é ação arriscada, e aceitação do risco caracteriza dolo eventual." },
+        { question: "Como se estrutura o preterdolo?", options: ["Dolo no antecedente e culpa no resultado agravador.", "Culpa no antecedente e dolo no resultado.", "Dois resultados dolosos sucessivos."], answer: 0, explanation: "O agente quer o resultado inicial, mas causa culposamente consequência mais grave." },
+        { question: "Todo fato típico exige resultado naturalístico?", options: ["Não. Há crimes formais e de mera conduta.", "Sim. Sem alteração física não existe crime.", "Sim, mas apenas nos crimes culposos."], answer: 0, explanation: "O resultado naturalístico é indispensável à consumação dos crimes materiais, não de todos os tipos penais." }
+      ]
+    };
+
+    const sequence = [studyData.overview, ...studyData.chapters];
+    const chapterList = document.querySelector("#chapterList");
+    const detailPanel = document.querySelector("#detailPanel");
+    const progressLabel = document.querySelector("#progressLabel");
+    const audio = document.querySelector("#studyAudio");
+    const audioStatus = document.querySelector("#audioStatus");
+    const toggleGuide = document.querySelector("#toggleGuide");
+    const quizQuestion = document.querySelector("#quizQuestion");
+    const quizOptions = document.querySelector("#quizOptions");
+    const quizFeedback = document.querySelector("#quizFeedback");
+    let currentItem = studyData.overview;
+    let isGuidePlaying = false;
+    let quizIndex = 0;
+    let syntheticUtterance = null;
+
+    renderChapters(); renderDetail(currentItem); renderQuiz(); loadAudio(currentItem); setupReveals();
+    document.querySelector("#prevAudio").addEventListener("click", () => moveAudio(-1, true));
+    document.querySelector("#nextAudio").addEventListener("click", () => moveAudio(1, true));
+    document.querySelector("#prevQuestion").addEventListener("click", () => { quizIndex = (quizIndex - 1 + studyData.quiz.length) % studyData.quiz.length; renderQuiz(); });
+    document.querySelector("#nextQuestion").addEventListener("click", () => { quizIndex = (quizIndex + 1) % studyData.quiz.length; renderQuiz(); });
+    toggleGuide.addEventListener("click", () => isAudioActive() ? pauseCurrentAudio() : (isGuidePlaying = true, playCurrentAudio()));
+    audio.addEventListener("error", () => { updateAudioStatus("MP3 indisponível. Fallback de voz pronto."); toggleGuide.textContent = "▶ Narrar"; });
+    audio.addEventListener("ended", () => {
+      const currentIndex = sequence.findIndex((item) => item.id === currentItem.id);
+      if (isGuidePlaying && currentIndex < sequence.length - 1) selectItem(sequence[currentIndex + 1], true);
+      else { isGuidePlaying = false; toggleGuide.textContent = currentIndex === sequence.length - 1 ? "↻ Ouvir novamente" : "▶ Ouvir item"; updateAudioStatus(currentIndex === sequence.length - 1 ? "Guia concluído." : `Leitura concluída: ${currentItem.title}.`); }
+    });
+
+    function renderChapters() {
+      chapterList.replaceChildren(...sequence.map((item) => {
+        const button = document.createElement("button"); button.type = "button"; button.className = "chapter-button"; button.dataset.itemId = item.id;
+        const number = document.createElement("span"); number.className = "chapter-number"; number.textContent = item.number;
+        const text = document.createElement("span"); text.className = "chapter-name"; text.textContent = item.title;
+        const article = document.createElement("small"); article.className = "chapter-article"; article.textContent = item.article; text.append(article);
+        button.append(number, text); button.addEventListener("click", () => { isGuidePlaying = false; selectItem(item, false); }); return button;
+      }));
+    }
+
+    function renderDetail(item) {
+      currentItem = item; detailPanel.style.setProperty("--detail-accent", item.accent);
+      const kicker = document.createElement("p"); kicker.className = "detail-kicker"; kicker.textContent = `${item.number} · ${item.article}`;
+      const title = document.createElement("h2"); title.textContent = item.title;
+      const summary = document.createElement("p"); summary.className = "detail-summary"; summary.textContent = item.short;
+      const actions = document.createElement("div"); actions.className = "detail-actions";
+      const hear = document.createElement("button"); hear.type = "button"; hear.className = "inline-action"; hear.textContent = "▶ Ouvir este capítulo"; hear.addEventListener("click", () => { isGuidePlaying = false; playCurrentAudio(); }); actions.append(hear);
+      const sections = item.sections.map((section) => {
+        const wrapper = document.createElement("section"); wrapper.className = "detail-section";
+        const heading = document.createElement("h3"); heading.textContent = section.title;
+        const list = document.createElement("ul"); section.items.forEach((entry) => { const li = document.createElement("li"); li.textContent = entry; list.append(li); });
+        wrapper.append(heading, list); return wrapper;
+      });
+      detailPanel.replaceChildren(kicker, title, summary, actions, ...sections);
+      const index = sequence.findIndex((entry) => entry.id === item.id); progressLabel.textContent = `Trilha · ${index + 1} de ${sequence.length}`;
+      [...chapterList.children].forEach((button) => { const selected = button.dataset.itemId === item.id; button.classList.toggle("active", selected); button.setAttribute("aria-current", selected ? "step" : "false"); });
+      loadAudio(item);
+    }
+
+    function selectItem(item, shouldPlay) { renderDetail(item); if (shouldPlay) playCurrentAudio(); }
+    function loadAudio(item) { if (audio.dataset.itemId !== item.id) { audio.src = `./audio/${item.id}.mp3`; audio.dataset.itemId = item.id; audio.load(); } updateAudioStatus(`Leitura pronta: ${item.title}.`); toggleGuide.textContent = "▶ Iniciar guia"; }
+    async function playCurrentAudio() { stopSyntheticSpeech(); try { await audio.play(); toggleGuide.textContent = "Ⅱ Pausar"; updateAudioStatus(`Reproduzindo: ${currentItem.title}.`); } catch (error) { speakFallback(currentItem); } }
+    function pauseCurrentAudio() { isGuidePlaying = false; audio.pause(); if (isSyntheticActive()) speechSynthesis.pause(); toggleGuide.textContent = "▶ Retomar"; updateAudioStatus(`Leitura pausada: ${currentItem.title}.`); }
+    function moveAudio(direction, shouldPlay) { const currentIndex = Math.max(0, sequence.findIndex((item) => item.id === currentItem.id)); selectItem(sequence[(currentIndex + direction + sequence.length) % sequence.length], shouldPlay); }
+    function isAudioActive() { return !audio.paused || isSyntheticActive(); }
+    function speakFallback(item) {
+      if (!("speechSynthesis" in window)) { updateAudioStatus("Narração indisponível neste navegador."); return; }
+      stopSyntheticSpeech(); syntheticUtterance = new SpeechSynthesisUtterance(buildNarrationText(item)); syntheticUtterance.lang = "pt-BR"; syntheticUtterance.rate = .94; syntheticUtterance.pitch = .82;
+      syntheticUtterance.onend = () => { toggleGuide.textContent = "▶ Ouvir item"; updateAudioStatus(`Leitura concluída: ${item.title}.`); };
+      speechSynthesis.speak(syntheticUtterance); toggleGuide.textContent = "Ⅱ Pausar"; updateAudioStatus(`Fallback de voz: ${item.title}.`);
+    }
+    function stopSyntheticSpeech() { if ("speechSynthesis" in window && (speechSynthesis.speaking || speechSynthesis.pending)) speechSynthesis.cancel(); syntheticUtterance = null; }
+    function isSyntheticActive() { return "speechSynthesis" in window && speechSynthesis.speaking && !speechSynthesis.paused; }
+    function buildNarrationText(item) { if (item.narration) return toSpokenText(item.narration); return toSpokenText(`${item.title}. ${item.short}. ${item.sections.map((section) => [section.title, ...section.items].join(". ")).join(". ")}`); }
+    function toSpokenText(text) {
+      return text.replaceAll("CP", "Código Penal").replaceAll("art. 13, § 2º", "artigo treze, parágrafo segundo").replaceAll("Art. 13, § 2º", "artigo treze, parágrafo segundo").replaceAll("art. 18, I", "artigo dezoito, inciso primeiro").replaceAll("Art. 18, I", "artigo dezoito, inciso primeiro").replaceAll("art. 18, II", "artigo dezoito, inciso segundo").replaceAll("Art. 18, II", "artigo dezoito, inciso segundo").replaceAll("art. 13", "artigo treze").replaceAll("Art. 13", "artigo treze").replaceAll("art. 18", "artigo dezoito").replaceAll("Art. 18", "artigo dezoito").replaceAll("art. 19", "artigo dezenove").replaceAll("Art. 19", "artigo dezenove").replaceAll("art. 121", "artigo cento e vinte e um").replaceAll("Art. 121", "artigo cento e vinte e um").replaceAll("§ 1º", "parágrafo primeiro").replaceAll("§ 2º", "parágrafo segundo").replaceAll("§ 3º", "parágrafo terceiro");
+    }
+
+    function renderQuiz() {
+      const current = studyData.quiz[quizIndex]; quizQuestion.textContent = `${quizIndex + 1}. ${current.question}`; quizFeedback.textContent = "Selecione uma alternativa para conferir.";
+      quizOptions.replaceChildren(...current.options.map((option, index) => {
+        const button = document.createElement("button"); button.type = "button"; button.className = "quiz-option"; button.textContent = option;
+        button.addEventListener("click", () => { [...quizOptions.children].forEach((child, childIndex) => { child.classList.toggle("correct", childIndex === current.answer); child.classList.toggle("wrong", childIndex === index && index !== current.answer); }); quizFeedback.textContent = current.explanation; }); return button;
+      }));
+    }
+
+    function setupReveals() {
+      if (!("IntersectionObserver" in window) || window.matchMedia("(prefers-reduced-motion: reduce)").matches) { document.querySelectorAll(".reveal").forEach((element) => element.classList.add("visible")); return; }
+      const observer = new IntersectionObserver((entries) => entries.forEach((entry) => { if (entry.isIntersecting) { entry.target.classList.add("visible"); observer.unobserve(entry.target); } }), { threshold: .12 });
+      document.querySelectorAll(".reveal").forEach((element) => observer.observe(element));
+    }
+    function updateAudioStatus(message) { audioStatus.textContent = message; }
+  </script>
+</body>
+</html>
