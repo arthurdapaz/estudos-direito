@@ -9,10 +9,10 @@ const studyDir = resolve(__dirname, '..');
 const htmlPath = join(studyDir, 'index.html');
 const audioDir = join(studyDir, 'audio');
 const tmpDir = join(audioDir, '.tmp');
-const voice = process.env.PENAL_TTS_VOICE ?? 'pt-BR-AntonioNeural';
-const rate = process.env.PENAL_TTS_RATE ?? '-4%';
-const pitch = process.env.PENAL_TTS_PITCH ?? '-12Hz';
-const python = process.env.PENAL_TTS_PYTHON ?? 'python3';
+const voice = process.env.HONRA_TTS_VOICE ?? 'pt-BR-AntonioNeural';
+const rate = process.env.HONRA_TTS_RATE ?? '-4%';
+const pitch = process.env.HONRA_TTS_PITCH ?? '-12Hz';
+const python = process.env.HONRA_TTS_PYTHON ?? 'python3';
 
 main();
 
@@ -20,7 +20,6 @@ function main() {
   const source = readFileSync(htmlPath, 'utf8');
   const studyData = evaluateConstObject(source, 'studyData');
   const sequence = [studyData.overview, ...studyData.chapters];
-
   mkdirSync(audioDir, { recursive: true });
   mkdirSync(tmpDir, { recursive: true });
 
@@ -28,49 +27,27 @@ function main() {
     const textPath = join(tmpDir, `${item.id}.txt`);
     const mp3Path = join(audioDir, `${item.id}.mp3`);
     writeFileSync(textPath, buildNarrationText(item));
-    run(python, [
-      '-m', 'edge_tts', '--voice', voice, `--rate=${rate}`, `--pitch=${pitch}`,
-      '--file', textPath, '--write-media', mp3Path
-    ]);
+    run(python, ['-m', 'edge_tts', '--voice', voice, `--rate=${rate}`, `--pitch=${pitch}`, '--file', textPath, '--write-media', mp3Path]);
     console.log(`generated ${mp3Path}`);
   }
-
   rmSync(tmpDir, { recursive: true, force: true });
 }
 
 function buildNarrationText(item) {
   if (item.narration) return toSpokenText(item.narration);
-  const sections = item.sections
-    .map((section) => [section.title, ...section.items].join('. '))
-    .join('. ');
-  return toSpokenText(`${item.title}. ${item.short}. ${sections}`);
+  return toSpokenText(`${item.title}. ${item.short}. ${item.sections.map((section) => `${section.title}. ${section.items.join('. ')}`).join('. ')}`);
 }
 
 function toSpokenText(text) {
   return text
-    .replaceAll('CF', 'Constituição Federal')
+    .replaceAll('CDI', 'cê dê i')
     .replaceAll('CP', 'Código Penal')
-    .replaceAll('art. 5º, XXXIX', 'artigo quinto, inciso trinta e nove')
-    .replaceAll('Art. 5º, XXXIX', 'artigo quinto, inciso trinta e nove')
-    .replaceAll('art. 13, § 2º', 'artigo treze, parágrafo segundo')
-    .replaceAll('Art. 13, § 2º', 'artigo treze, parágrafo segundo')
-    .replaceAll('art. 18, I', 'artigo dezoito, inciso primeiro')
-    .replaceAll('Art. 18, I', 'artigo dezoito, inciso primeiro')
-    .replaceAll('art. 18, II', 'artigo dezoito, inciso segundo')
-    .replaceAll('Art. 18, II', 'artigo dezoito, inciso segundo')
-    .replaceAll('art. 1º', 'artigo primeiro')
-    .replaceAll('Art. 1º', 'artigo primeiro')
-    .replaceAll('art. 2º', 'artigo segundo')
-    .replaceAll('Art. 2º', 'artigo segundo')
-    .replaceAll('art. 13', 'artigo treze')
-    .replaceAll('Art. 13', 'artigo treze')
-    .replaceAll('art. 18', 'artigo dezoito')
-    .replaceAll('Art. 18', 'artigo dezoito')
-    .replaceAll('art. 19', 'artigo dezenove')
-    .replaceAll('Art. 19', 'artigo dezenove')
-    .replaceAll('art. 121', 'artigo cento e vinte e um')
-    .replaceAll('Art. 121', 'artigo cento e vinte e um')
-    .replaceAll('§ 1º', 'parágrafo primeiro')
+    .replaceAll('arts. 138 a 140', 'artigos cento e trinta e oito a cento e quarenta')
+    .replaceAll('art. 138', 'artigo cento e trinta e oito')
+    .replaceAll('art. 139', 'artigo cento e trinta e nove')
+    .replaceAll('art. 140', 'artigo cento e quarenta')
+    .replaceAll('art. 145', 'artigo cento e quarenta e cinco')
+    .replaceAll('art. 163', 'artigo cento e sessenta e três')
     .replaceAll('§ 2º', 'parágrafo segundo')
     .replaceAll('§ 3º', 'parágrafo terceiro');
 }
@@ -83,12 +60,10 @@ function extractConstLiteral(source, name) {
   const declaration = `const ${name} =`;
   const start = source.indexOf(declaration);
   if (start === -1) throw new Error(`Could not find ${declaration}`);
-
   const literalStart = source.indexOf('{', start);
   let depth = 0;
   let quote = null;
   let escaped = false;
-
   for (let index = literalStart; index < source.length; index += 1) {
     const char = source[index];
     if (quote) {

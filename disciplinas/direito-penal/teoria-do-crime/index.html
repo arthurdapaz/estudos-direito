@@ -149,6 +149,22 @@
     .audio-status { min-width: 0; padding: 0 8px; color: var(--muted); font: .76rem/1.35 var(--sans); }
     audio { display: none; }
 
+    .principle-map {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1px;
+      margin: 32px 0 0;
+      border: 1px solid rgba(226,179,79,.52);
+      background: rgba(226,179,79,.52);
+    }
+
+    .principle-card { min-height: 164px; padding: 22px; background: var(--surface); }
+    .principle-card:first-child { background: var(--paper); color: var(--ink); }
+    .principle-card span { color: var(--red); font: 900 .67rem var(--mono); letter-spacing: .1em; text-transform: uppercase; }
+    .principle-card h2 { max-width: 15ch; margin: 22px 0 8px; font: 500 clamp(1.65rem,3.3vw,2.65rem)/.95 var(--serif); }
+    .principle-card p { max-width: 48ch; margin: 0; color: var(--muted); font: .86rem/1.48 var(--sans); }
+    .principle-card:first-child p { color: var(--muted-dark); }
+
     .crime-map {
       display: grid;
       grid-template-columns: repeat(3,1fr);
@@ -278,7 +294,7 @@
       .page { width: min(100vw - 24px,680px); padding-top: 12px; }
       .topbar { align-items: start; flex-direction: column; }
       h1 { font-size: clamp(3.45rem,18vw,5.6rem); }
-      .crime-map, .comparison-grid { grid-template-columns: 1fr; }
+      .principle-map, .crime-map, .comparison-grid { grid-template-columns: 1fr; }
       .crime-layer { min-height: 130px; }
       .audio-bar { top: 6px; grid-template-columns: 44px minmax(0,1fr) 44px; }
       .audio-bar .primary { min-width: 0; }
@@ -301,7 +317,7 @@
   <main class="page" id="conteudo">
     <nav class="topbar" aria-label="Navegação estrutural">
       <a class="crumb" href="../">← Direito Penal</a>
-      <span class="progress-label" id="progressLabel">Trilha · 1 de 9</span>
+      <span class="progress-label" id="progressLabel">Trilha · 1 de 11</span>
     </nav>
 
     <header class="hero reveal">
@@ -320,6 +336,19 @@
       <button type="button" id="nextAudio" aria-label="Ouvir próximo item">→</button>
       <div class="audio-status" id="audioStatus" aria-live="polite">Leitura pronta: visão geral.</div>
       <audio id="studyAudio" preload="metadata"></audio>
+    </section>
+
+    <section class="principle-map reveal" aria-label="Princípios de abertura da lei penal">
+      <article class="principle-card">
+        <span>Primeiro princípio</span>
+        <h2>Legalidade</h2>
+        <p>Não há crime sem lei que o defina; a conduta punível precisa estar prevista em lei.</p>
+      </article>
+      <article class="principle-card">
+        <span>Segundo princípio</span>
+        <h2>Anterioridade</h2>
+        <p>Não há crime sem lei anterior: a lei deve existir antes do fato para desfavorecer o agente.</p>
+      </article>
     </section>
 
     <section class="crime-map reveal" aria-label="Conceito analítico tripartido de crime">
@@ -368,7 +397,7 @@
     </section>
 
     <footer class="source-note">
-      Base legal conferida no <a href="https://www.planalto.gov.br/ccivil_03/decreto-lei/del2848compilado.htm" target="_blank" rel="noreferrer">Código Penal compilado — Presidência da República</a>. A organização analítica adota a concepção tripartida majoritária para fins didáticos. Material de estudo; não constitui parecer jurídico.
+      Base legal conferida no <a href="https://www.planalto.gov.br/ccivil_03/decreto-lei/del2848compilado.htm" target="_blank" rel="noreferrer">Código Penal compilado — Presidência da República</a> e na <a href="https://www.planalto.gov.br/ccivil_03/constituicao/constituicaocompilado.htm" target="_blank" rel="noreferrer">Constituição Federal, art. 5º, XXXIX</a>. A organização analítica adota a concepção tripartida majoritária para fins didáticos. Material de estudo; não constitui parecer jurídico.
     </footer>
   </main>
 
@@ -379,8 +408,8 @@
         short: "Na concepção analítica tripartida, crime é fato típico, ilícito e culpável. Este caderno abre o primeiro filtro: a estrutura do fato típico e sua imputação subjetiva.",
         sections: [
           { title: "Ordem correta", items: [
-            "Primeiro: identifique conduta, resultado quando exigido, nexo causal e tipicidade.",
-            "Depois: examine se a conduta é dolosa ou culposa, conforme o tipo penal admitir.",
+            "Primeiro: confira legalidade e anterioridade — tipo penal existente antes do fato.",
+            "Depois: identifique conduta, resultado quando exigido, nexo causal, tipicidade e o elemento subjetivo.",
             "Só então avance para ilicitude e culpabilidade; um fato típico ainda não encerra sozinho o conceito analítico de crime."
           ]},
           { title: "Frase para guardar", items: [
@@ -388,10 +417,40 @@
             "Dolo, culpa e preterdolo não descrevem a mesma relação psíquica entre agente, conduta e resultado."
           ]}
         ],
-        narration: "Visão geral. Na concepção analítica tripartida, crime é fato típico, ilícito e culpável. Este caderno aprofunda o primeiro filtro. Para reconhecer o fato típico, organize conduta, resultado quando exigido, nexo causal e tipicidade. Depois, examine a imputação subjetiva: dolo ou culpa, conforme a lei. Só então avance para ilicitude e culpabilidade. Guarde: um fato típico, sozinho, ainda não encerra todo o conceito analítico de crime."
+        narration: "Visão geral. Na concepção analítica tripartida, crime é fato típico, ilícito e culpável. Antes de abrir o fato típico, confira legalidade e anterioridade: deve haver tipo penal previsto em lei e anterior ao fato. Depois, organize conduta, resultado quando exigido, nexo causal, tipicidade e imputação subjetiva, dolo ou culpa conforme a lei. Só então avance para ilicitude e culpabilidade. Guarde: um fato típico, sozinho, ainda não encerra todo o conceito analítico de crime."
       },
       chapters: [
-        { id: "fato-tipico", number: "01", title: "Fato típico", article: "Primeiro filtro", accent: "#df5742",
+        { id: "legalidade", number: "01", title: "Princípio da legalidade", article: "Art. 1º do CP · art. 5º, XXXIX, da CF", accent: "#e2b34f",
+          short: "Não há crime nem pena sem previsão legal: só a lei pode definir a conduta criminosa e estabelecer a sanção correspondente.",
+          sections: [
+            { title: "Núcleo", items: [
+              "A legalidade impede punir uma conduta que não esteja prevista em lei como crime.",
+              "A fórmula legal é: não há crime sem lei anterior que o defina, nem pena sem prévia cominação legal.",
+              "O princípio protege o cidadão contra a criação arbitrária de crimes e penas."
+            ]},
+            { title: "Efeito de estudo", items: [
+              "Antes de discutir dolo, culpa ou pena, localize o tipo penal e seus elementos na lei.",
+              "Não se cria crime ou se agrava pena por analogia contra o acusado; a descrição legal é o ponto de partida."
+            ]}
+          ],
+          narration: "Primeiro princípio: legalidade. Não há crime nem pena sem previsão legal. O artigo primeiro do Código Penal e o inciso trinta e nove do artigo quinto da Constituição dizem que não há crime sem lei anterior que o defina, nem pena sem prévia cominação legal. A legalidade impede punir conduta não prevista em lei e protege contra a criação arbitrária de crimes e penas. Para estudar qualquer caso, comece localizando o tipo penal e seus elementos. Não se cria crime ou se agrava pena por analogia contra o acusado."
+        },
+        { id: "anterioridade", number: "02", title: "Princípio da anterioridade", article: "Art. 1º do CP · art. 5º, XXXIX, da CF", accent: "#df5742",
+          short: "A lei que define crime ou agrava a resposta penal precisa ser anterior ao fato; não se pune alguém com base em incriminação posterior mais severa.",
+          sections: [
+            { title: "Núcleo", items: [
+              "A anterioridade é a dimensão temporal da legalidade: a lei penal deve existir antes da prática do fato.",
+              "A regra veda a retroatividade da lei penal mais grave para alcançar fato anterior.",
+              "O art. 2º preserva a exceção favorável: a lei posterior que beneficia o agente pode alcançar fatos anteriores."
+            ]},
+            { title: "Pergunta-chave", items: [
+              "Quando o fato ocorreu? Compare essa data com a vigência da lei aplicada.",
+              "A cronologia não é detalhe: ela pode definir se a incriminação ou o agravamento pode ser usado no caso."
+            ]}
+          ],
+          narration: "Segundo princípio: anterioridade. Não há crime sem lei anterior que o defina. A anterioridade é a dimensão temporal da legalidade: uma lei que cria crime ou agrava a resposta penal precisa existir antes da prática do fato. Por isso, a lei penal mais grave não retroage para alcançar fato anterior. Há uma exceção favorável no artigo segundo do Código Penal: a lei posterior que beneficia o agente pode alcançar fatos anteriores. Em qualquer caso, compare a data do fato com a vigência da lei aplicada."
+        },
+        { id: "fato-tipico", number: "03", title: "Fato típico", article: "Primeiro filtro", accent: "#df5742",
           short: "É o fato humano que corresponde ao modelo de conduta proibida ou ordenada pela lei penal, reunindo os elementos exigidos pelo tipo.",
           sections: [
             { title: "Estrutura didática", items: [
@@ -405,9 +464,9 @@
               "A lista é um roteiro de análise, não uma fórmula que dispensa a leitura do tipo penal concreto."
             ]}
           ],
-          narration: "Capítulo um. Fato típico. É o fato humano que corresponde ao modelo de conduta previsto na lei penal. A estrutura didática reúne conduta, resultado quando exigido, nexo causal e tipicidade. A conduta é comportamento humano voluntário, por ação ou omissão. Nos crimes materiais, a consumação depende de resultado naturalístico. O nexo liga a conduta ao resultado. A tipicidade compara o fato concreto com a descrição legal e considera a relevância da ofensa. Atenção: nem todo crime exige resultado naturalístico."
+          narration: "Fato típico. É o fato humano que corresponde ao modelo de conduta previsto na lei penal. A estrutura didática reúne conduta, resultado quando exigido, nexo causal e tipicidade. A conduta é comportamento humano voluntário, por ação ou omissão. Nos crimes materiais, a consumação depende de resultado naturalístico. O nexo liga a conduta ao resultado. A tipicidade compara o fato concreto com a descrição legal e considera a relevância da ofensa. Atenção: nem todo crime exige resultado naturalístico."
         },
-        { id: "teoria-finalista", number: "02", title: "Teoria finalista da ação", article: "Conduta dirigida a um fim", accent: "#e2b34f",
+        { id: "teoria-finalista", number: "04", title: "Teoria finalista da ação", article: "Conduta dirigida a um fim", accent: "#e2b34f",
           short: "Para o finalismo, a ação humana é orientada a uma finalidade. Dolo e culpa passam a integrar a análise do fato típico, e não a culpabilidade.",
           sections: [
             { title: "Mudança central", items: [
@@ -420,9 +479,9 @@
               "Não confunda finalidade da ação com motivo: o motivo explica por que; a finalidade indica para que a conduta foi dirigida."
             ]}
           ],
-          narration: "Capítulo dois. Teoria finalista da ação. Para o finalismo, a ação humana é orientada a uma finalidade. A conduta não é um movimento causal vazio. O agente dirige conscientemente seu comportamento a um fim. Com essa teoria, dolo e culpa passam a integrar a análise do fato típico, e não a culpabilidade. A culpabilidade permanece como juízo de reprovação. Na aplicação, pergunte o que o agente fez ou deixou de fazer e qual direção subjetiva acompanhou a conduta. Não confunda finalidade com motivo: o motivo explica por que; a finalidade indica para que a ação foi dirigida."
+          narration: "Teoria finalista da ação. Para o finalismo, a ação humana é orientada a uma finalidade. A conduta não é um movimento causal vazio. O agente dirige conscientemente seu comportamento a um fim. Com essa teoria, dolo e culpa passam a integrar a análise do fato típico, e não a culpabilidade. A culpabilidade permanece como juízo de reprovação. Na aplicação, pergunte o que o agente fez ou deixou de fazer e qual direção subjetiva acompanhou a conduta. Não confunda finalidade com motivo: o motivo explica por que; a finalidade indica para que a ação foi dirigida."
         },
-        { id: "conduta", number: "03", title: "Conduta: ação ou omissão", article: "Art. 13, caput e § 2º", accent: "#6ea486",
+        { id: "conduta", number: "05", title: "Conduta: ação ou omissão", article: "Art. 13, caput e § 2º", accent: "#6ea486",
           short: "A conduta pode ser positiva, quando o agente faz, ou negativa, quando deixa de agir apesar de um dever juridicamente relevante.",
           sections: [
             { title: "Ação", items: [
@@ -435,9 +494,9 @@
               "A simples presença no local não cria automaticamente o dever jurídico de impedir o resultado."
             ]}
           ],
-          narration: "Capítulo três. Conduta: ação ou omissão. A ação é o comportamento comissivo, quando o agente faz algo dirigido a um fim. A omissão é o não fazer juridicamente relevante. Nos crimes omissivos próprios, a lei pune diretamente a abstenção. Na omissão imprópria, o resultado pode ser imputado a quem devia e podia agir para evitá-lo, nas hipóteses do parágrafo segundo do artigo treze. A simples presença no local não cria automaticamente o dever de impedir o resultado."
+          narration: "Conduta: ação ou omissão. A ação é o comportamento comissivo, quando o agente faz algo dirigido a um fim. A omissão é o não fazer juridicamente relevante. Nos crimes omissivos próprios, a lei pune diretamente a abstenção. Na omissão imprópria, o resultado pode ser imputado a quem devia e podia agir para evitá-lo, nas hipóteses do parágrafo segundo do artigo treze. A simples presença no local não cria automaticamente o dever de impedir o resultado."
         },
-        { id: "resultado-nexo", number: "04", title: "Resultado e nexo causal", article: "Art. 13", accent: "#df5742",
+        { id: "resultado-nexo", number: "06", title: "Resultado e nexo causal", article: "Art. 13", accent: "#df5742",
           short: "Nos crimes materiais, é preciso ligar juridicamente o resultado à conduta. O Código parte da ação ou omissão sem a qual o resultado não teria ocorrido.",
           sections: [
             { title: "Teste inicial", items: [
@@ -450,9 +509,9 @@
               "Resultado jurídico é a lesão ou perigo de lesão ao bem protegido; não se confunde automaticamente com o resultado naturalístico."
             ]}
           ],
-          narration: "Capítulo quatro. Resultado e nexo causal. Nos crimes materiais, é preciso ligar o resultado à conduta. O artigo treze considera causa a ação ou omissão sem a qual o resultado não teria ocorrido. Como teste inicial, faça a eliminação hipotética: se a conduta for mentalmente retirada, o resultado ainda ocorreria do mesmo modo? Se não, há um ponto de partida causal, embora a imputação possa exigir outros filtros. O resultado naturalístico é uma modificação no mundo exterior, como a morte no homicídio. Já o resultado jurídico é a lesão ou perigo de lesão ao bem protegido."
+          narration: "Resultado e nexo causal. Nos crimes materiais, é preciso ligar o resultado à conduta. O artigo treze considera causa a ação ou omissão sem a qual o resultado não teria ocorrido. Como teste inicial, faça a eliminação hipotética: se a conduta for mentalmente retirada, o resultado ainda ocorreria do mesmo modo? Se não, há um ponto de partida causal, embora a imputação possa exigir outros filtros. O resultado naturalístico é uma modificação no mundo exterior, como a morte no homicídio. Já o resultado jurídico é a lesão ou perigo de lesão ao bem protegido."
         },
-        { id: "tipicidade", number: "05", title: "Tipicidade", article: "Fato concreto × tipo penal", accent: "#e2b34f",
+        { id: "tipicidade", number: "07", title: "Tipicidade", article: "Fato concreto × tipo penal", accent: "#e2b34f",
           short: "Tipicidade é o juízo de correspondência entre o fato ocorrido e a descrição abstrata da lei penal, sem perder de vista a ofensa relevante ao bem jurídico.",
           sections: [
             { title: "Duas verificações", items: [
@@ -465,9 +524,9 @@
               "Além dos elementos objetivos, o enquadramento muda conforme haja dolo ou culpa."
             ]}
           ],
-          narration: "Capítulo cinco. Tipicidade. É o juízo de correspondência entre o fato concreto e a descrição abstrata da lei penal. Na tipicidade formal, verifica-se se o fato reúne os elementos escritos no tipo. Na tipicidade material, observa-se se há lesão ou perigo de lesão penalmente relevante ao bem jurídico. O princípio da legalidade impede criar crime por analogia contra o acusado. No artigo cento e vinte e um, o núcleo matar exige a morte de outra pessoa e sua ligação com a conduta. O enquadramento ainda muda conforme haja dolo ou culpa."
+          narration: "Tipicidade. É o juízo de correspondência entre o fato concreto e a descrição abstrata da lei penal. Na tipicidade formal, verifica-se se o fato reúne os elementos escritos no tipo. Na tipicidade material, observa-se se há lesão ou perigo de lesão penalmente relevante ao bem jurídico. O princípio da legalidade impede criar crime por analogia contra o acusado. No artigo cento e vinte e um, o núcleo matar exige a morte de outra pessoa e sua ligação com a conduta. O enquadramento ainda muda conforme haja dolo ou culpa."
         },
-        { id: "dolo", number: "06", title: "Dolo direto e eventual", article: "Art. 18, I", accent: "#df5742",
+        { id: "dolo", number: "08", title: "Dolo direto e eventual", article: "Art. 18, I", accent: "#df5742",
           short: "O crime é doloso quando o agente quer o resultado ou assume o risco de produzi-lo. São duas relações subjetivas diferentes cobertas pelo art. 18, I.",
           sections: [
             { title: "Dolo direto", items: [
@@ -480,9 +539,9 @@
               "A conclusão depende das circunstâncias provadas, não de uma frase automática sobre risco."
             ]}
           ],
-          narration: "Capítulo seis. Dolo direto e dolo eventual. Pelo artigo dezoito, inciso primeiro, o crime é doloso quando o agente quis o resultado ou assumiu o risco de produzi-lo. No dolo direto, o agente conhece os elementos do fato e dirige sua vontade ao resultado. Fórmula: prevê e quer. No dolo eventual, ele prevê a possibilidade do resultado e assume o risco de produzi-lo. Fórmula: prevê e aceita o risco. A mera previsibilidade não basta. A conclusão depende das circunstâncias provadas no caso."
+          narration: "Dolo direto e dolo eventual. Pelo artigo dezoito, inciso primeiro, o crime é doloso quando o agente quis o resultado ou assumiu o risco de produzi-lo. No dolo direto, o agente conhece os elementos do fato e dirige sua vontade ao resultado. Fórmula: prevê e quer. No dolo eventual, ele prevê a possibilidade do resultado e assume o risco de produzi-lo. Fórmula: prevê e aceita o risco. A mera previsibilidade não basta. A conclusão depende das circunstâncias provadas no caso."
         },
-        { id: "culpa", number: "07", title: "Culpa em sentido estrito", article: "Art. 18, II", accent: "#6ea486",
+        { id: "culpa", number: "09", title: "Culpa em sentido estrito", article: "Art. 18, II", accent: "#6ea486",
           short: "Na culpa, a conduta é voluntária, mas o resultado não é querido nem assumido; ele decorre da violação do dever objetivo de cuidado.",
           sections: [
             { title: "Elementos essenciais", items: [
@@ -500,9 +559,9 @@
               "Na culpa inconsciente, não prevê o resultado que era objetivamente previsível."
             ]}
           ],
-          narration: "Capítulo sete. Culpa em sentido estrito. Na culpa, a conduta é voluntária, mas o resultado não é querido nem assumido. Ele decorre da violação do dever objetivo de cuidado. O artigo dezoito, inciso segundo, aponta imprudência, negligência e imperícia. Imprudência é agir de modo arriscado ou precipitado. Negligência é deixar de tomar o cuidado exigido. Imperícia é falta de aptidão técnica. Na culpa consciente, o agente prevê o resultado, mas confia que ele não ocorrerá. Na culpa inconsciente, não prevê o resultado objetivamente previsível. A punição culposa exige previsão expressa em lei."
+          narration: "Culpa em sentido estrito. Na culpa, a conduta é voluntária, mas o resultado não é querido nem assumido. Ele decorre da violação do dever objetivo de cuidado. O artigo dezoito, inciso segundo, aponta imprudência, negligência e imperícia. Imprudência é agir de modo arriscado ou precipitado. Negligência é deixar de tomar o cuidado exigido. Imperícia é falta de aptidão técnica. Na culpa consciente, o agente prevê o resultado, mas confia que ele não ocorrerá. Na culpa inconsciente, não prevê o resultado objetivamente previsível. A punição culposa exige previsão expressa em lei."
         },
-        { id: "preterdolo", number: "08", title: "Preterdolo", article: "Art. 19", accent: "#a93625",
+        { id: "preterdolo", number: "10", title: "Preterdolo", article: "Art. 19", accent: "#a93625",
           short: "No crime preterdoloso, há dolo na conduta antecedente e culpa no resultado mais grave: dolo no início, culpa no excesso de resultado.",
           sections: [
             { title: "Estrutura", items: [
@@ -515,10 +574,12 @@
               "Se quis a morte ou assumiu o risco, a análise migra para homicídio doloso; se não houve dolo antecedente de lesão, o enquadramento também muda."
             ]}
           ],
-          narration: "Capítulo oito. Preterdolo. No crime preterdoloso, há dolo na conduta antecedente e culpa no resultado mais grave. Fórmula: dolo no início, culpa no excesso de resultado. Pelo artigo dezenove, o resultado que agrava especialmente a pena só pode ser atribuído ao agente quando causado ao menos culposamente. O exemplo clássico é a lesão corporal seguida de morte: o agente quer lesionar, não matar, mas causa culposamente a morte. Se quis a morte ou assumiu o risco, a análise muda para homicídio doloso. Preterdolo não é terceira categoria autônoma; é combinação de dolo e culpa."
+          narration: "Preterdolo. No crime preterdoloso, há dolo na conduta antecedente e culpa no resultado mais grave. Fórmula: dolo no início, culpa no excesso de resultado. Pelo artigo dezenove, o resultado que agrava especialmente a pena só pode ser atribuído ao agente quando causado ao menos culposamente. O exemplo clássico é a lesão corporal seguida de morte: o agente quer lesionar, não matar, mas causa culposamente a morte. Se quis a morte ou assumiu o risco, a análise muda para homicídio doloso. Preterdolo não é terceira categoria autônoma; é combinação de dolo e culpa."
         }
       ],
       quiz: [
+        { question: "Qual é a ideia central do princípio da legalidade?", options: ["Só a lei pode definir crime e estabelecer pena.", "O julgador pode criar crime diante de uma conduta reprovável.", "Toda conduta imoral é automaticamente crime."], answer: 0, explanation: "A legalidade exige previsão legal para o crime e para a pena; ela impede a criação arbitrária de incriminações." },
+        { question: "O que a anterioridade impede?", options: ["Aplicar lei penal mais grave a fato ocorrido antes de sua vigência.", "Aplicar lei posterior mais benéfica a fato anterior.", "Consultar a data em que o fato ocorreu."], answer: 0, explanation: "A lei penal mais severa não retroage. A exceção favorável está no art. 2º: a lei posterior benéfica pode alcançar fatos anteriores." },
         { question: "Na teoria finalista, onde são examinados dolo e culpa?", options: ["No fato típico, ligados à conduta", "Somente na culpabilidade", "Somente na ilicitude"], answer: 0, explanation: "O finalismo desloca dolo e culpa para o tipo penal; a culpabilidade permanece como juízo de reprovação." },
         { question: "O que diferencia dolo eventual de culpa consciente?", options: ["No dolo eventual há assunção do risco; na culpa consciente há confiança de que o resultado não ocorrerá.", "No dolo eventual não há previsão; na culpa consciente há intenção.", "Não existe diferença entre eles."], answer: 0, explanation: "Ambos podem envolver previsão. A distinção está na postura diante do resultado: aceitação do risco ou confiança em evitá-lo." },
         { question: "Qual enunciado descreve imperícia?", options: ["Falta de aptidão técnica no exercício de atividade especializada.", "Ação precipitada e arriscada.", "Aceitação do risco de produzir o resultado."], answer: 0, explanation: "Imperícia se liga à deficiência técnica; imprudência é ação arriscada, e aceitação do risco caracteriza dolo eventual." },
@@ -600,7 +661,7 @@
     function isSyntheticActive() { return "speechSynthesis" in window && speechSynthesis.speaking && !speechSynthesis.paused; }
     function buildNarrationText(item) { if (item.narration) return toSpokenText(item.narration); return toSpokenText(`${item.title}. ${item.short}. ${item.sections.map((section) => [section.title, ...section.items].join(". ")).join(". ")}`); }
     function toSpokenText(text) {
-      return text.replaceAll("CP", "Código Penal").replaceAll("art. 13, § 2º", "artigo treze, parágrafo segundo").replaceAll("Art. 13, § 2º", "artigo treze, parágrafo segundo").replaceAll("art. 18, I", "artigo dezoito, inciso primeiro").replaceAll("Art. 18, I", "artigo dezoito, inciso primeiro").replaceAll("art. 18, II", "artigo dezoito, inciso segundo").replaceAll("Art. 18, II", "artigo dezoito, inciso segundo").replaceAll("art. 13", "artigo treze").replaceAll("Art. 13", "artigo treze").replaceAll("art. 18", "artigo dezoito").replaceAll("Art. 18", "artigo dezoito").replaceAll("art. 19", "artigo dezenove").replaceAll("Art. 19", "artigo dezenove").replaceAll("art. 121", "artigo cento e vinte e um").replaceAll("Art. 121", "artigo cento e vinte e um").replaceAll("§ 1º", "parágrafo primeiro").replaceAll("§ 2º", "parágrafo segundo").replaceAll("§ 3º", "parágrafo terceiro");
+      return text.replaceAll("CF", "Constituição Federal").replaceAll("CP", "Código Penal").replaceAll("art. 5º, XXXIX", "artigo quinto, inciso trinta e nove").replaceAll("Art. 5º, XXXIX", "artigo quinto, inciso trinta e nove").replaceAll("art. 13, § 2º", "artigo treze, parágrafo segundo").replaceAll("Art. 13, § 2º", "artigo treze, parágrafo segundo").replaceAll("art. 18, I", "artigo dezoito, inciso primeiro").replaceAll("Art. 18, I", "artigo dezoito, inciso primeiro").replaceAll("art. 18, II", "artigo dezoito, inciso segundo").replaceAll("Art. 18, II", "artigo dezoito, inciso segundo").replaceAll("art. 1º", "artigo primeiro").replaceAll("Art. 1º", "artigo primeiro").replaceAll("art. 2º", "artigo segundo").replaceAll("Art. 2º", "artigo segundo").replaceAll("art. 13", "artigo treze").replaceAll("Art. 13", "artigo treze").replaceAll("art. 18", "artigo dezoito").replaceAll("Art. 18", "artigo dezoito").replaceAll("art. 19", "artigo dezenove").replaceAll("Art. 19", "artigo dezenove").replaceAll("art. 121", "artigo cento e vinte e um").replaceAll("Art. 121", "artigo cento e vinte e um").replaceAll("§ 1º", "parágrafo primeiro").replaceAll("§ 2º", "parágrafo segundo").replaceAll("§ 3º", "parágrafo terceiro");
     }
 
     function renderQuiz() {
