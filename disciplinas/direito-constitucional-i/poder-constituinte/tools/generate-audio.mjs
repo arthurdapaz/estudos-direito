@@ -9,6 +9,7 @@ const html = readFileSync(join(studyDir, "index.html"), "utf8");
 const audioDir = join(studyDir, "audio");
 const tempDir = join(audioDir, ".tmp");
 const python = process.env.PODER_CONSTITUINTE_TTS_PYTHON ?? "python3";
+const requestedItem = process.env.PODER_CONSTITUINTE_TTS_ITEM;
 const start = html.indexOf("{", html.indexOf("const studyData ="));
 let depth = 0, quote = null, escaped = false, end;
 for (let index = start; index < html.length; index += 1) {
@@ -19,8 +20,10 @@ for (let index = start; index < html.length; index += 1) {
   if (character === "}" && !--depth) { end = index + 1; break; }
 }
 const data = vm.runInNewContext(`(${html.slice(start, end)})`);
+const items = [data.overview, ...data.chapters].filter((item) => !requestedItem || item.id === requestedItem);
+if (requestedItem && items.length === 0) throw new Error(`Item de áudio não encontrado: ${requestedItem}`);
 mkdirSync(tempDir, { recursive: true });
-for (const item of [data.overview, ...data.chapters]) {
+for (const item of items) {
   const textPath = join(tempDir, `${item.id}.txt`);
   const outputPath = join(audioDir, `${item.id}.mp3`);
   writeFileSync(textPath, item.narration);
