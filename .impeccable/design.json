@@ -1,0 +1,166 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-08-27T23:43:40Z",
+  "title": "Design System: Estudos de Direito",
+  "extensions": {
+    "colorMeta": {
+      "concrete": {
+        "role": "neutral",
+        "displayName": "Concreto Claro",
+        "canonical": "#e6e3df",
+        "tonalRamp": ["oklch(15% 0.003 75.4)", "oklch(25% 0.006 75.4)", "oklch(38% 0.006 75.4)", "oklch(50% 0.006 75.4)", "oklch(62% 0.006 75.4)", "oklch(74% 0.006 75.4)", "oklch(86% 0.004 75.4)", "oklch(95% 0.002 75.4)"]
+      },
+      "void": {
+        "role": "neutral",
+        "displayName": "Vazio Frio",
+        "canonical": "#f7f7f8",
+        "tonalRamp": ["oklch(15% 0.001 286.4)", "oklch(25% 0.001 286.4)", "oklch(38% 0.001 286.4)", "oklch(50% 0.001 286.4)", "oklch(62% 0.001 286.4)", "oklch(74% 0.001 286.4)", "oklch(86% 0.001 286.4)", "oklch(95% 0.000 286.4)"]
+      },
+      "paper": {
+        "role": "neutral",
+        "displayName": "Papel Mineral",
+        "canonical": "#efedeb",
+        "tonalRamp": ["oklch(15% 0.002 67.8)", "oklch(25% 0.003 67.8)", "oklch(38% 0.003 67.8)", "oklch(50% 0.003 67.8)", "oklch(62% 0.003 67.8)", "oklch(74% 0.003 67.8)", "oklch(86% 0.002 67.8)", "oklch(95% 0.001 67.8)"]
+      },
+      "carbon": {
+        "role": "neutral",
+        "displayName": "Carbono",
+        "canonical": "#0d0d0f",
+        "tonalRamp": ["oklch(15% 0.002 285.9)", "oklch(25% 0.004 285.9)", "oklch(38% 0.004 285.9)", "oklch(50% 0.004 285.9)", "oklch(62% 0.004 285.9)", "oklch(74% 0.004 285.9)", "oklch(86% 0.003 285.9)", "oklch(95% 0.001 285.9)"]
+      },
+      "graphite": {
+        "role": "neutral",
+        "displayName": "Grafite",
+        "canonical": "#2b2b2e",
+        "tonalRamp": ["oklch(15% 0.003 286.1)", "oklch(25% 0.005 286.1)", "oklch(38% 0.005 286.1)", "oklch(50% 0.005 286.1)", "oklch(62% 0.005 286.1)", "oklch(74% 0.005 286.1)", "oklch(86% 0.004 286.1)", "oklch(95% 0.001 286.1)"]
+      },
+      "ash": {
+        "role": "neutral",
+        "displayName": "Cinza-Cinória",
+        "canonical": "#6b6a6d",
+        "tonalRamp": ["oklch(15% 0.003 301.3)", "oklch(25% 0.005 301.3)", "oklch(38% 0.005 301.3)", "oklch(50% 0.005 301.3)", "oklch(62% 0.005 301.3)", "oklch(74% 0.005 301.3)", "oklch(86% 0.003 301.3)", "oklch(95% 0.001 301.3)"]
+      },
+      "line": {
+        "role": "neutral",
+        "displayName": "Regra Suave",
+        "canonical": "rgba(13, 13, 15, 0.18)",
+        "tonalRamp": ["oklch(15% 0.004 285.9 / 0.18)", "oklch(25% 0.004 285.9 / 0.18)", "oklch(38% 0.004 285.9 / 0.18)", "oklch(50% 0.004 285.9 / 0.18)", "oklch(62% 0.004 285.9 / 0.18)", "oklch(74% 0.004 285.9 / 0.18)", "oklch(86% 0.003 285.9 / 0.18)", "oklch(95% 0.001 285.9 / 0.18)"]
+      },
+      "line-strong": {
+        "role": "neutral",
+        "displayName": "Regra Estrutural",
+        "canonical": "rgba(13, 13, 15, 0.42)",
+        "tonalRamp": ["oklch(15% 0.004 285.9 / 0.42)", "oklch(25% 0.004 285.9 / 0.42)", "oklch(38% 0.004 285.9 / 0.42)", "oklch(50% 0.004 285.9 / 0.42)", "oklch(62% 0.004 285.9 / 0.42)", "oklch(74% 0.004 285.9 / 0.42)", "oklch(86% 0.003 285.9 / 0.42)", "oklch(95% 0.001 285.9 / 0.42)"]
+      },
+      "tension-red": {
+        "role": "primary",
+        "displayName": "Vermelho de Tensão",
+        "canonical": "#c71f2d",
+        "tonalRamp": ["oklch(15% 0.094 24.0)", "oklch(25% 0.170 24.0)", "oklch(38% 0.170 24.0)", "oklch(50% 0.170 24.0)", "oklch(62% 0.170 24.0)", "oklch(74% 0.170 24.0)", "oklch(86% 0.111 24.0)", "oklch(95% 0.043 24.0)"]
+      },
+      "tension-red-dark": {
+        "role": "primary",
+        "displayName": "Vermelho de Tensão Profundo",
+        "canonical": "#97131e",
+        "tonalRamp": ["oklch(15% 0.090 24.3)", "oklch(25% 0.164 24.3)", "oklch(38% 0.164 24.3)", "oklch(50% 0.164 24.3)", "oklch(62% 0.164 24.3)", "oklch(74% 0.164 24.3)", "oklch(86% 0.107 24.3)", "oklch(95% 0.041 24.3)"]
+      }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display Condensado", "purpose": "Títulos monumentais da home e das disciplinas." },
+      "headline": { "displayName": "Headline Condensado", "purpose": "Títulos dos estudos e cabeçalhos secundários." },
+      "body": { "displayName": "Leitura Nativa", "purpose": "Resumos, introduções e descrições jurídicas." },
+      "label": { "displayName": "Etiqueta Técnica", "purpose": "Códigos, modos, contagens, metadados e anotações." },
+      "navigation": { "displayName": "Navegação Condensada", "purpose": "Marca e deslocamento estrutural." }
+    },
+    "shadows": [
+      { "name": "node-svg", "value": "feDropShadow(dx=5, dy=9, stdDeviation=7, rgba(13,13,15,0.24))", "purpose": "Separar somente as esferas do Atomium do plano concreto." },
+      { "name": "rod-svg", "value": "18px rgba(13,13,15,0.20), translate(3px, 5px)", "purpose": "Dar espessura material às hastes sob o traço de 14px." }
+    ],
+    "motion": [
+      { "name": "state-standard", "value": "180ms ease", "purpose": "Cor, fundo, stroke e opacidade em estados." },
+      { "name": "spatial-snappy", "value": "180ms cubic-bezier(0.16, 1, 0.3, 1)", "purpose": "Deslocamento das setas e respostas espaciais curtas." },
+      { "name": "orbit-emphasis", "value": "420ms cubic-bezier(0.16, 1, 0.3, 1)", "purpose": "Expansão da órbita do nó ativo." },
+      { "name": "reduced-motion", "value": "0.01ms; 1 iteration", "purpose": "Neutralizar movimento quando o usuário solicita redução." }
+    ],
+    "breakpoints": [
+      { "name": "balanced-columns", "value": "980px" },
+      { "name": "single-column", "value": "760px" },
+      { "name": "compact-study-chrome", "value": "680px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Brand Lockup",
+      "kind": "nav",
+      "description": "Símbolo de rede e marca textual para cabeçalhos do catálogo.",
+      "html": "<a class=\"ds-brand\" href=\"#\" aria-label=\"Estudos de Direito — página inicial\"><svg viewBox=\"0 0 32 32\" aria-hidden=\"true\"><path d=\"M7 8.5 16 4l9 6.5-3 12.5-13 2Z\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\"/><path d=\"m7 8.5 15 14.5M25 10.5 9 25M16 4l6 19\" fill=\"none\" stroke=\"#c71f2d\" stroke-width=\"1.25\"/><circle cx=\"7\" cy=\"8.5\" r=\"2.2\"/><circle cx=\"16\" cy=\"4\" r=\"2.2\" fill=\"#c71f2d\"/><circle cx=\"25\" cy=\"10.5\" r=\"2.2\"/><circle cx=\"22\" cy=\"23\" r=\"2.2\"/><circle cx=\"9\" cy=\"25\" r=\"2.2\"/></svg><span>Estudos de Direito</span></a>",
+      "css": ".ds-brand{display:inline-flex;align-items:center;gap:14px;min-height:48px;color:var(--carbon,#0d0d0f);font:600 clamp(1.05rem,2vw,1.3rem)/1 \"Barlow Condensed\",sans-serif;letter-spacing:.1em;text-decoration:none;text-transform:uppercase}.ds-brand svg{width:29px;height:29px;overflow:visible}.ds-brand:focus-visible{outline:2px solid var(--red,#c71f2d);outline-offset:4px}"
+    },
+    {
+      "name": "Discipline Register Row",
+      "kind": "card",
+      "refersTo": "discipline-row",
+      "description": "Linha numerada que é fonte semântica da rede curricular.",
+      "html": "<a class=\"ds-discipline-row\" href=\"#\"><span class=\"ds-discipline-number\">01</span><span class=\"ds-discipline-copy\"><strong>Introdução ao Estudo do Direito</strong><small>1 estudo publicado</small></span><svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M5 12h13m-5-5 5 5-5 5\" fill=\"none\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg></a>",
+      "css": ".ds-discipline-row{display:grid;grid-template-columns:44px minmax(0,1fr) 24px;gap:14px;align-items:center;min-height:76px;padding:13px 4px;border-block:1px solid rgba(13,13,15,.18);color:var(--carbon,#0d0d0f);text-decoration:none;transition:color 180ms cubic-bezier(.16,1,.3,1),background 180ms ease}.ds-discipline-number{color:var(--red,#c71f2d);font:600 1.48rem/1 \"Barlow Condensed\",sans-serif;font-variant-numeric:tabular-nums}.ds-discipline-copy strong{display:block;font:600 .98rem/1.24 ui-sans-serif,system-ui,sans-serif}.ds-discipline-copy small{display:block;margin-top:5px;color:var(--ash,#6b6a6d);font:.73rem/1.25 ui-sans-serif,system-ui,sans-serif}.ds-discipline-row svg{width:20px;height:20px;stroke:currentColor;transition:transform 180ms cubic-bezier(.16,1,.3,1)}.ds-discipline-row:hover,.ds-discipline-row:focus-visible{color:var(--red-dark,#97131e);background:rgba(199,31,45,.055)}.ds-discipline-row:hover svg,.ds-discipline-row:focus-visible svg{transform:translateX(3px)}.ds-discipline-row:focus-visible{outline:2px solid var(--red,#c71f2d);outline-offset:-2px}"
+    },
+    {
+      "name": "Study Index Row",
+      "kind": "card",
+      "refersTo": "study-row",
+      "description": "Linha editorial que identifica, descreve e abre um estudo dentro da disciplina.",
+      "html": "<a class=\"ds-study-row\" href=\"#\"><span class=\"ds-study-number\">01</span><span class=\"ds-study-title\"><small>3D interativo · áudio guiado</small><strong>Pirâmide de Kelsen brasileira</strong></span><p>Ordenamento jurídico brasileiro em camadas, com normas clicáveis e explicações.</p><svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M5 12h13m-5-5 5 5-5 5\" fill=\"none\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg></a>",
+      "css": ".ds-study-row{display:grid;grid-template-columns:56px minmax(230px,.72fr) minmax(280px,1fr) 30px;gap:clamp(16px,3vw,40px);align-items:center;min-height:138px;padding:24px 8px;border-block:1px solid rgba(13,13,15,.18);color:var(--carbon,#0d0d0f);text-decoration:none;transition:background 180ms ease}.ds-study-number{align-self:start;color:var(--red,#c71f2d);font:600 1.5rem/1 \"Barlow Condensed\",sans-serif}.ds-study-title small{display:block;margin-bottom:8px;color:var(--ash,#6b6a6d);font:600 .68rem/1 \"Barlow Condensed\",sans-serif;letter-spacing:.1em;text-transform:uppercase}.ds-study-title strong{display:block;font:600 clamp(1.55rem,3vw,2.3rem)/.98 \"Barlow Condensed\",sans-serif}.ds-study-row p{max-width:64ch;margin:0;color:var(--graphite,#2b2b2e);font:.9rem/1.55 ui-sans-serif,system-ui,sans-serif}.ds-study-row svg{width:24px;height:24px;stroke:var(--carbon,#0d0d0f);transition:transform 180ms cubic-bezier(.16,1,.3,1),stroke 180ms ease}.ds-study-row:hover,.ds-study-row:focus-visible{background:rgba(199,31,45,.055);outline:2px solid var(--red,#c71f2d);outline-offset:-2px}.ds-study-row:hover svg,.ds-study-row:focus-visible svg{stroke:var(--red,#c71f2d);transform:translateX(4px)}@media(max-width:760px){.ds-study-row{grid-template-columns:42px minmax(0,1fr) 24px;gap:12px;min-height:0;padding:22px 4px}.ds-study-row p{grid-column:2/-1}.ds-study-row>svg{grid-column:3;grid-row:1}}"
+    },
+    {
+      "name": "Study Chrome",
+      "kind": "nav",
+      "refersTo": "study-chrome",
+      "description": "Navegação persistente que ancora estudos com identidades internas diferentes.",
+      "html": "<nav class=\"ds-study-chrome\" aria-label=\"Navegação dos estudos\"><a class=\"ds-study-brand\" href=\"#\" aria-label=\"Voltar ao diretório de disciplinas\"><svg viewBox=\"0 0 32 32\" aria-hidden=\"true\"><path d=\"M7 8.5 16 4l9 6.5-3 12.5-13 2Z\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\"/><path d=\"m7 8.5 15 14.5M25 10.5 9 25M16 4l6 19\" fill=\"none\" stroke=\"#c71f2d\" stroke-width=\"1.25\"/><circle cx=\"7\" cy=\"8.5\" r=\"2.2\"/><circle cx=\"16\" cy=\"4\" r=\"2.2\" fill=\"#c71f2d\"/><circle cx=\"25\" cy=\"10.5\" r=\"2.2\"/><circle cx=\"22\" cy=\"23\" r=\"2.2\"/><circle cx=\"9\" cy=\"25\" r=\"2.2\"/></svg><span>Estudos de Direito</span></a><span class=\"ds-study-path\"><a href=\"#\">Disciplinas</a><span>/</span><a href=\"#\">Direito Penal</a><span>/</span><span aria-current=\"page\">Teoria do crime</span></span></nav>",
+      "css": ".ds-study-chrome{min-height:60px;display:flex;align-items:center;justify-content:space-between;gap:24px;padding:10px 24px;border-bottom:1px solid rgba(13,13,15,.42);color:var(--carbon,#0d0d0f);background:var(--concrete,#e6e3df);font-family:ui-sans-serif,system-ui,sans-serif}.ds-study-brand{display:inline-flex;align-items:center;gap:10px;min-width:44px;min-height:44px;color:inherit;font:600 .92rem/1 \"Barlow Condensed\",sans-serif;letter-spacing:.1em;text-decoration:none;text-transform:uppercase;white-space:nowrap}.ds-study-brand svg{width:24px;height:24px}.ds-study-path{display:flex;align-items:center;justify-content:flex-end;gap:8px;min-width:0;color:#4f4e51;font-size:.72rem;line-height:1.25}.ds-study-path a{min-height:44px;display:inline-flex;align-items:center;color:inherit;text-underline-offset:4px}.ds-study-path a:hover{color:var(--red-dark,#97131e)}.ds-study-path [aria-current=page]{max-width:34ch;overflow:hidden;color:var(--carbon,#0d0d0f);font-weight:700;text-overflow:ellipsis;white-space:nowrap}.ds-study-chrome a:focus-visible{outline:2px solid var(--red,#c71f2d);outline-offset:3px}@media(max-width:680px){.ds-study-chrome{min-height:56px;gap:12px;padding-inline:12px}.ds-study-brand span{display:none}.ds-study-path{gap:6px;font-size:.68rem}.ds-study-path>a:first-child,.ds-study-path>span:first-of-type{display:none}.ds-study-path [aria-current=page]{max-width:24ch}}"
+    },
+    {
+      "name": "Atomium Node",
+      "kind": "custom",
+      "description": "Nó esférico navegável com órbita, código e índice sincronizados à lista.",
+      "html": "<svg class=\"ds-atomium\" viewBox=\"0 0 160 160\" role=\"navigation\" aria-label=\"Navegação visual pelas disciplinas\"><defs><radialGradient id=\"ds-node-gradient\" cx=\"34%\" cy=\"26%\" r=\"72%\"><stop offset=\"0\" stop-color=\"#626368\"/><stop offset=\".28\" stop-color=\"#27282c\"/><stop offset=\".72\" stop-color=\"#0d0d0f\"/><stop offset=\"1\" stop-color=\"#030304\"/></radialGradient><filter id=\"ds-node-shadow\" x=\"-40%\" y=\"-40%\" width=\"180%\" height=\"190%\"><feDropShadow dx=\"5\" dy=\"9\" stdDeviation=\"7\" flood-color=\"#0d0d0f\" flood-opacity=\".24\"/></filter></defs><a class=\"ds-network-node\" href=\"#\" aria-label=\"Abrir Direito Penal\"><circle class=\"ds-node-focus\" cx=\"80\" cy=\"80\" r=\"66\" fill=\"none\" stroke=\"transparent\"/><circle class=\"ds-node-orbit\" cx=\"80\" cy=\"80\" r=\"63\"/><circle class=\"ds-node-sphere\" cx=\"80\" cy=\"80\" r=\"54\"/><text class=\"ds-node-code\" x=\"80\" y=\"84\">PEN</text><text class=\"ds-node-index\" x=\"80\" y=\"111\">03</text></a></svg>",
+      "css": ".ds-atomium{width:160px;height:160px;overflow:visible}.ds-network-node{cursor:pointer;outline:none}.ds-node-orbit{fill:none;stroke:rgba(13,13,15,.2);stroke-width:1;stroke-dasharray:3 5;transform-origin:80px 80px;transition:stroke 180ms ease,transform 420ms cubic-bezier(.16,1,.3,1)}.ds-node-sphere{fill:url(#ds-node-gradient);stroke:rgba(255,255,255,.3);stroke-width:1;filter:url(#ds-node-shadow);transition:stroke 180ms ease}.ds-node-code{fill:#f7f7f8;font:600 1.22rem/1 \"Barlow Condensed\",sans-serif;letter-spacing:.08em;text-anchor:middle;pointer-events:none}.ds-node-index{fill:rgba(255,255,255,.66);font:600 .58rem/1 \"Barlow Condensed\",sans-serif;letter-spacing:.08em;text-anchor:middle;pointer-events:none}.ds-network-node:hover .ds-node-orbit,.ds-network-node:focus .ds-node-orbit{stroke:#c71f2d;transform:scale(1.08)}.ds-network-node:hover .ds-node-sphere,.ds-network-node:focus .ds-node-sphere{stroke:#c71f2d;stroke-width:3}.ds-network-node:focus .ds-node-focus{stroke:#c71f2d;stroke-width:2}"
+    }
+  ],
+  "narrative": {
+    "northStar": "Atomium Curricular",
+    "overview": "O sistema apresenta o curso como uma estrutura acadêmica construída: concreto claro e regras suíças formam o plano de trabalho; hastes de carbono, colares metálicos e cabos vermelhos transformam a lista de disciplinas em uma escultura navegável. A sensação é técnica, objetiva e concentrada, sem perder a fisicalidade que torna o diretório memorável.\n\nA identidade compartilhada cobre a home, os índices de disciplina e a navegação de retorno dos estudos. O interior de cada estudo permanece livre para adotar a linguagem mais útil ao conteúdo — mapa, trilha, quiz, áudio, Canvas ou 3D — sem ser recolorido ou reformatado pelo shell. Essa fronteira permite variedade pedagógica sem perder localização acadêmica.",
+    "keyCharacteristics": [
+      "Concreto quase branco, carbono profundo e vermelho usado como tensão, não como preenchimento.",
+      "Tipografia condensada e auto-hospedada para estrutura; sans de sistema para leitura longa.",
+      "Cantos retos, regras de um pixel e profundidade concentrada na escultura SVG.",
+      "Hierarquia de três níveis: disciplinas, índice da disciplina e estudo específico.",
+      "Lista semântica como verdade; visualização como extensão progressiva e sincronizada."
+    ],
+    "rules": [
+      { "name": "The Red Tension Rule", "body": "O vermelho aparece em uma fração pequena da tela e sempre sinaliza conexão, posição ou resposta; nunca deve virar uma grande superfície decorativa.", "section": "colors" },
+      { "name": "The Carbon Legibility Rule", "body": "Texto de leitura usa Carbono ou Grafite sobre os fundos claros; Cinza-Cinória fica restrito a metadados e notas curtas.", "section": "colors" },
+      { "name": "The Two-Voice Rule", "body": "Barlow Condensed organiza e nomeia; a sans de sistema explica e sustenta leitura. Não usar a condensada em parágrafos longos.", "section": "typography" },
+      { "name": "The Tight Display Rule", "body": "Títulos grandes usam entrelinha abaixo de 1 e tracking levemente negativo; labels fazem o oposto, com caixa alta e tracking positivo.", "section": "typography" },
+      { "name": "The Three-Level Rule", "body": "Home, disciplina e estudo são níveis diferentes; nunca promover estudos ou subtemas para o diretório principal.", "section": "layout" },
+      { "name": "The Directory-First Rule", "body": "Em qualquer largura, o caminho textual completo aparece antes da visualização e continua útil sem JavaScript.", "section": "layout" },
+      { "name": "The Flat Frame, Sculpted Node Rule", "body": "Superfícies de navegação ficam planas; relevo, brilho e volume pertencem apenas aos materiais do Atomium.", "section": "elevation" },
+      { "name": "The Reserved Circle Rule", "body": "O círculo indica nó, junta, terminal ou estado; não arredondar arbitrariamente listas, painéis ou blocos de leitura.", "section": "shapes" }
+    ],
+    "dos": [
+      "Do manter links relativos para que shell, disciplinas, estudos, fontes e scripts funcionem em localhost e no subpath do GitHub Pages.",
+      "Do tratar a lista semântica como fonte de verdade e a rede SVG como uma visualização derivada.",
+      "Do usar HTML semântico, foco vermelho de alto contraste, áreas interativas de pelo menos 44px e suporte a movimento reduzido.",
+      "Do preservar o chrome concreto como elo entre estudos visualmente diferentes.",
+      "Do verificar home, índice da disciplina e estudo em desktop e mobile ao estender a arquitetura."
+    ],
+    "donts": [
+      "Don't colocar estudos, subtemas, atalhos ou cards promocionais na home.",
+      "Don't interpretar arestas do Atomium como pré-requisitos, hierarquia ou dependência entre disciplinas.",
+      "Don't transformar o vermelho em grande preenchimento, nem espalhar sombras e gradientes materiais para fora da rede.",
+      "Don't substituir o símbolo abstrato por balanças, martelos, colunas, livros ou outros clichês jurídicos.",
+      "Don't impor a paleta global ao interior de um estudo; compartilhe navegação e arquitetura, não uniformidade pedagógica."
+    ]
+  }
+}

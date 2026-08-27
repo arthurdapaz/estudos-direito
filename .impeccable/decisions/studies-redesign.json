@@ -1,0 +1,75 @@
+{
+  "title": "Escolha o novo sistema visual",
+  "question": "Qual linguagem deve organizar o diretório de disciplinas e todas as páginas de estudo?",
+  "options": [
+    {
+      "id": "assigned",
+      "label": "Margem de Estudo",
+      "kicker": "DIREÇÃO SORTEADA",
+      "lineage": "cadernos universitários anotados + sinalização modernista de campus",
+      "thesis": "Uma margem vertical contínua organiza o curso; disciplinas são faixas curriculares e estudos são anotações abertas dentro delas.",
+      "palette": ["#f6f7f2", "#16253a", "#1e5bff", "#d8ff3e"],
+      "materials": ["papel branco frio", "tinta cobalto", "grafite", "marca-texto ácido"],
+      "viewport": "A home abre com quatro faixas acadêmicas numeradas, uma por disciplina, atravessadas por uma margem azul; nenhum subtema aparece.",
+      "risk": "Pode ficar utilitário demais se a margem, a tipografia e o marca-texto não tiverem ritmo preciso.",
+      "sketch": ".impeccable/sketches/assigned.webp"
+    },
+    {
+      "id": "challenger-coptic",
+      "label": "Costura Exposta",
+      "kicker": "ALTERNATIVA",
+      "lineage": "encadernação copta + caderno acadêmico",
+      "thesis": "A estrutura curricular aparece como uma lombada costurada; cada disciplina é um caderno que se abre completamente plano.",
+      "palette": ["#eee7d8", "#20221e", "#6c4b2e", "#b7503e"],
+      "materials": ["papel de fibra", "fio de linho", "madeira clara", "relevo seco"],
+      "viewport": "Quatro cadernos de disciplina se alinham a uma costura vertical gerada pela quantidade real de seções.",
+      "risk": "A metáfora física pode competir com a rapidez de consulta no celular.",
+      "case": "Identifica-se fortemente com o ritual de estudar, mas perde para Margem de Estudo em clareza imediata.",
+      "sketch": ".impeccable/sketches/challenger-coptic.webp",
+      "hero": "https://impeccable.style/worlds/cards/craft-making-coptic-exposed-binding-hero.webp",
+      "board": "https://impeccable.style/worlds/cards/craft-making-coptic-exposed-binding.webp"
+    },
+    {
+      "id": "challenger-film",
+      "label": "Trilho de Revisão",
+      "kicker": "ALTERNATIVA",
+      "lineage": "bancada de montagem cinematográfica + sequência de revisão",
+      "thesis": "Disciplinas passam por um trilho perfurado; o ponto de estudo atual recebe uma bandeira e cada conteúdo concluído fica marcado no próprio quadro.",
+      "palette": ["#0a0a09", "#f36b32", "#f5f2ea", "#2b2b28"],
+      "materials": ["grão de filme", "fita laranja", "janela perfurada", "marca de lápis branco"],
+      "viewport": "Um trilho horizontal contém as quatro disciplinas como fotogramas largos, com navegação por gesto e encaixe preciso.",
+      "risk": "A energia cinematográfica é memorável, porém mais intensa do que uma longa sessão de leitura pede.",
+      "case": "Tem excelente estado e continuidade, mas o trilho é menos direto para um diretório acadêmico.",
+      "sketch": ".impeccable/sketches/challenger-film.webp",
+      "hero": "https://impeccable.style/worlds/cards/operate-a-cutting-bench-select-rail-hero.webp",
+      "board": "https://impeccable.style/worlds/cards/operate-a-cutting-bench-select-rail.webp"
+    },
+    {
+      "id": "challenger-tensegrity",
+      "label": "Rede de Fundamentos",
+      "kicker": "ALTERNATIVA",
+      "lineage": "escultura de tensegridade + diagramas de relações jurídicas",
+      "thesis": "Uma rede de forças mostra como disciplinas e conceitos se sustentam; cada seleção revela o caminho de dependências.",
+      "palette": ["#e8e9e5", "#151715", "#c8362f", "#8f9590"],
+      "materials": ["concreto claro", "hastes de carbono", "cordão vermelho", "linha técnica"],
+      "viewport": "As quatro disciplinas se distribuem como nós de uma estrutura tensionada, acompanhadas por uma lista semântica equivalente.",
+      "risk": "A relação visual sugere dependências que nem sempre existem entre as matérias.",
+      "case": "Expressa sistema e hierarquia, mas perde em verdade do produto porque a home precisa ser diretório, não grafo.",
+      "sketch": ".impeccable/sketches/challenger-tensegrity.webp",
+      "hero": "https://impeccable.style/worlds/cards/kinetic-sculpture-automata-tensegrity-breathing-column-hero.webp",
+      "board": "https://impeccable.style/worlds/cards/kinetic-sculpture-automata-tensegrity-breathing-column.webp"
+    }
+  ],
+  "reroll": true,
+  "canon": true,
+  "canonCard": {
+    "label": "Diretório acadêmico convencional",
+    "thesis": "Um catálogo branco e azul de disciplinas em cards, executado com rigor e sem metáfora visual.",
+    "palette": ["#ffffff", "#172033", "#2457c5", "#edf1f7"],
+    "materials": ["superfície digital", "grade modular", "ícones lineares"],
+    "viewport": "Cabeçalho compacto, título do curso e uma grade responsiva de quatro cards de disciplina.",
+    "risk": "Muito claro, porém menos memorável e pouco específico ao seu ritual de estudo.",
+    "sketch": ".impeccable/sketches/canon.webp"
+  },
+  "steer": true
+}

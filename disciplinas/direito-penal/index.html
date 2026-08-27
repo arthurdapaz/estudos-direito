@@ -3,252 +3,41 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Estudos de Direito Penal sobre teoria do crime, crimes contra a honra, tipicidade, dolo, culpa e aplicação da lei penal.">
+  <meta name="description" content="Estudos de Direito Penal sobre teoria do crime, crimes contra a honra, legítima defesa e consunção.">
   <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="../../assets/site.css">
   <title>Direito Penal | Estudos de Direito</title>
-  <style>
-    :root {
-      color-scheme: dark;
-      --bg: #0d0d0c;
-      --paper: #eae0cc;
-      --ink: #161814;
-      --text: #f5efe4;
-      --muted: #c4bbaa;
-      --red: #dd543f;
-      --yellow: #e2b34f;
-      --line: rgba(245, 239, 228, 0.18);
-      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-      --sans: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      --serif: Georgia, "Times New Roman", serif;
-    }
-
-    * { box-sizing: border-box; }
-
-    body {
-      min-height: 100vh;
-      margin: 0;
-      color: var(--text);
-      background:
-        linear-gradient(90deg, transparent 0 9%, rgba(221, 84, 63, 0.25) 9% calc(9% + 1px), transparent calc(9% + 1px)),
-        radial-gradient(circle at 82% 3%, rgba(221, 84, 63, 0.16), transparent 26rem),
-        var(--bg);
-      font-family: var(--sans);
-    }
-
-    body::before {
-      position: fixed;
-      inset: 0;
-      z-index: -1;
-      content: "";
-      opacity: 0.17;
-      background: repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.06) 0 1px, transparent 1px 4px);
-      pointer-events: none;
-    }
-
-    a { color: inherit; text-decoration: none; }
-
-    .page {
-      width: min(1080px, calc(100vw - 32px));
-      margin: 0 auto;
-      padding: 24px 0 50px;
-    }
-
-    .crumb {
-      display: inline-flex;
-      align-items: center;
-      min-height: 42px;
-      padding: 0 14px;
-      border: 1px solid var(--line);
-      color: var(--muted);
-      font: 800 0.72rem var(--mono);
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-    }
-
-    .crumb:hover, .crumb:focus-visible { outline: 2px solid var(--yellow); outline-offset: 3px; color: white; }
-
-    header {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) minmax(260px, 0.48fr);
-      gap: clamp(34px, 7vw, 82px);
-      align-items: end;
-      padding: clamp(58px, 10vw, 116px) 0 38px;
-      border-bottom: 1px solid var(--line);
-    }
-
-    .eyebrow {
-      margin: 0 0 14px;
-      color: var(--red);
-      font: 900 0.72rem var(--mono);
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-    }
-
-    h1 {
-      max-width: 8ch;
-      margin: 0;
-      font: 500 clamp(3.6rem, 10vw, 8rem)/0.8 var(--serif);
-      letter-spacing: -0.06em;
-    }
-
-    header p {
-      margin: 0;
-      color: var(--muted);
-      font: 1rem/1.62 var(--sans);
-    }
-
-    .section-head {
-      display: flex;
-      gap: 18px;
-      align-items: end;
-      justify-content: space-between;
-      margin: 32px 0 16px;
-    }
-
-    .section-head h2 { margin: 0; font: 500 clamp(1.4rem, 3vw, 2rem) var(--serif); }
-    .section-head span { color: var(--muted); font: 0.72rem var(--mono); }
-
-    .study {
-      position: relative;
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) auto;
-      gap: 28px;
-      align-items: center;
-      padding: clamp(24px, 4vw, 38px);
-      border: 1px solid rgba(22, 24, 20, 0.24);
-      background: var(--paper);
-      color: var(--ink);
-      box-shadow: 12px 12px 0 rgba(221, 84, 63, 0.28);
-      transition: transform 180ms ease, box-shadow 180ms ease;
-    }
-
-    .study::before {
-      position: absolute;
-      inset: 0 0 auto;
-      height: 7px;
-      content: "";
-      background: linear-gradient(90deg, var(--red) 0 68%, var(--yellow) 68%);
-    }
-
-    .study:hover, .study:focus-visible {
-      outline: 3px solid rgba(226, 179, 79, 0.72);
-      outline-offset: 4px;
-      transform: translate(-2px, -2px);
-      box-shadow: 16px 16px 0 rgba(221, 84, 63, 0.32);
-    }
-
-    .study small {
-      color: #a33525;
-      font: 900 0.68rem var(--mono);
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-    }
-
-    .study h3 {
-      max-width: 15ch;
-      margin: 9px 0 13px;
-      font: 500 clamp(2rem, 4.5vw, 3.8rem)/0.92 var(--serif);
-      letter-spacing: -0.04em;
-    }
-
-    .study p { max-width: 67ch; margin: 0; color: #50564e; line-height: 1.58; }
-
-    .open {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 48px;
-      padding: 0 16px;
-      background: var(--ink);
-      color: var(--paper);
-      font: 900 0.74rem var(--mono);
-      letter-spacing: 0.04em;
-      white-space: nowrap;
-    }
-
-    .trail {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      margin-top: 30px;
-      border-top: 1px solid var(--line);
-      border-left: 1px solid var(--line);
-    }
-
-    .trail span {
-      min-height: 88px;
-      padding: 15px;
-      border-right: 1px solid var(--line);
-      border-bottom: 1px solid var(--line);
-      color: var(--muted);
-      font: 0.78rem/1.4 var(--mono);
-    }
-
-    .trail strong { display: block; margin-bottom: 7px; color: var(--yellow); }
-
-    @media (max-width: 720px) {
-      .page { width: min(100vw - 24px, 620px); padding-top: 14px; }
-      header, .study { grid-template-columns: 1fr; }
-      header { gap: 24px; padding-top: 52px; }
-      h1 { font-size: clamp(3.8rem, 20vw, 6rem); }
-      .section-head { align-items: start; flex-direction: column; }
-      .open { justify-self: start; }
-      .trail { grid-template-columns: repeat(2, 1fr); }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after { transition: none !important; }
-    }
-  </style>
 </head>
 <body>
-  <main class="page">
-    <a class="crumb" href="../../">← Catálogo geral</a>
-
-    <header>
-      <div>
-        <p class="eyebrow">Disciplina</p>
-        <h1>Direito Penal</h1>
-      </div>
-      <p>Estudo dos pressupostos do crime, das formas de imputação e das consequências jurídicas, com leitura sistemática da Parte Geral e aplicação aos tipos penais.</p>
+  <div class="site-shell">
+    <header class="site-header">
+      <a class="brand" href="../../" aria-label="Estudos de Direito — página inicial">
+        <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M7 8.5 16 4l9 6.5-3 12.5-13 2Z" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="m7 8.5 15 14.5M25 10.5 9 25M16 4l6 19" fill="none" stroke="#c71f2d" stroke-width="1.25"/><circle cx="7" cy="8.5" r="2.2"/><circle cx="16" cy="4" r="2.2" fill="#c71f2d"/><circle cx="25" cy="10.5" r="2.2"/><circle cx="22" cy="23" r="2.2"/><circle cx="9" cy="25" r="2.2"/></svg>
+        <span>Estudos de Direito</span>
+      </a>
+      <span class="site-mode">Disciplina PEN</span>
     </header>
-
-    <section aria-labelledby="publicados">
-      <div class="section-head">
-        <h2 id="publicados">Estudos publicados</h2>
-        <span>04 materiais · áudio guiado</span>
-      </div>
-
-      <a class="study" href="./teoria-do-crime/">
+    <main class="discipline-main">
+      <nav class="breadcrumbs" aria-label="Navegação estrutural"><a href="../../">Disciplinas</a><span>/</span><span aria-current="page">Direito Penal</span></nav>
+      <section class="discipline-hero" aria-labelledby="titulo">
+        <h1 class="discipline-title" id="titulo">Direito Penal</h1>
         <div>
-          <small>Trilha linear interativa</small>
-          <h3>Do fato típico à imputação subjetiva</h3>
-          <p>Teoria finalista da ação, conduta, resultado, nexo causal, tipicidade, dolo direto e eventual, culpa e preterdolo, com o art. 121 como caso de aplicação.</p>
+          <p class="discipline-summary">Pressupostos do crime, formas de imputação e consequências jurídicas, com leitura sistemática da Parte Geral e aplicação aos tipos penais.</p>
+          <div class="discipline-meta"><span>PEN · Disciplina</span><span>4 estudos</span></div>
         </div>
-        <strong class="open">Começar estudo →</strong>
-      </a>
-
-      <a class="study" href="./crimes-contra-a-honra/">
-        <div>
-          <small>Mapa CDI · revisão ativa</small>
-          <h3>Calúnia, Difamação e Injúria</h3>
-          <p>Um mapa visual para distinguir imputação de fato, honra objetiva e honra subjetiva, com ação penal, exceções essenciais e a separação entre crimes contra a honra e dano.</p>
-        </div>
-        <strong class="open">Abrir mapa CDI →</strong>
-      </a>
-
-      <a class="study" href="./legitima-defesa/">
-        <div><small>Ilicitude · art. 25 do CP</small><h3>Legítima defesa: os cinco requisitos</h3><p>Um roteiro visual de agressão injusta, atual ou iminente, direito protegido, meios necessários e moderação, com revisão ativa do excesso.</p></div>
-        <strong class="open">Abrir estudo →</strong>
-      </a>
-      <a class="study" href="./principio-da-consuncao/"><div><small>Conflito aparente de normas</small><h3>Princípio da consunção</h3><p>Crime-meio, crime-fim, exaurimento da lesividade e os limites da absorção, com comparação a especialidade e subsidiariedade.</p></div><strong class="open">Abrir estudo →</strong></a>
-
-      <div class="trail" aria-label="Resumo do percurso">
-        <span><strong>01</strong>Conduta</span>
-        <span><strong>02</strong>Resultado + nexo</span>
-        <span><strong>03</strong>Tipicidade</span>
-        <span><strong>04</strong>Dolo ou culpa</span>
-      </div>
-    </section>
-  </main>
+      </section>
+      <section class="studies-section" aria-labelledby="estudos">
+        <div class="studies-heading"><h2 id="estudos">Estudos publicados</h2><p>Conteúdos separados por problema jurídico e finalidade de revisão.</p></div>
+        <ol class="study-index">
+          <li><a class="study-row" href="./teoria-do-crime/"><span class="study-number">01</span><span class="study-title-wrap"><small>Trilha linear · áudio guiado</small><strong>Do fato típico à imputação subjetiva</strong></span><p class="study-description">Teoria finalista da ação, conduta, resultado, nexo causal, tipicidade, dolo direto e eventual, culpa e preterdolo, com o art. 121 como aplicação.</p><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13m-5-5 5 5-5 5" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
+          <li><a class="study-row" href="./crimes-contra-a-honra/"><span class="study-number">02</span><span class="study-title-wrap"><small>Mapa CDI · revisão ativa</small><strong>Calúnia, Difamação e Injúria</strong></span><p class="study-description">Mapa visual para distinguir imputação de fato, honra objetiva e honra subjetiva, com ação penal, exceções essenciais e comparação com dano.</p><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13m-5-5 5 5-5 5" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
+          <li><a class="study-row" href="./legitima-defesa/"><span class="study-number">03</span><span class="study-title-wrap"><small>Ilicitude · art. 25 do CP</small><strong>Legítima defesa: os cinco requisitos</strong></span><p class="study-description">Roteiro visual de agressão injusta, atual ou iminente, direito protegido, meios necessários e moderação, com revisão do excesso punível.</p><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13m-5-5 5 5-5 5" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
+          <li><a class="study-row" href="./principio-da-consuncao/"><span class="study-number">04</span><span class="study-title-wrap"><small>Conflito aparente de normas</small><strong>Princípio da consunção</strong></span><p class="study-description">Crime-meio, crime-fim, exaurimento da lesividade e limites da absorção, com comparação a especialidade e subsidiariedade.</p><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13m-5-5 5 5-5 5" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
+        </ol>
+        <div class="discipline-note"><strong>Leitura da disciplina</strong><span>Os estudos permanecem independentes e podem ser abertos em qualquer ordem; a página organiza, mas não impõe uma sequência curricular.</span></div>
+      </section>
+    </main>
+    <footer class="site-footer"><span>Curso de Direito · Estudos pessoais</span><span>Disciplina PEN</span></footer>
+  </div>
 </body>
 </html>

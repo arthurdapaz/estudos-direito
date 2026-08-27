@@ -1,0 +1,122 @@
+@font-face {
+  font-family: "Barlow Condensed";
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("./fonts/barlow-condensed-600.woff2") format("woff2");
+}
+
+html,
+body {
+  min-width: 0 !important;
+}
+
+.study-site-chrome {
+  position: relative;
+  z-index: 1000;
+  min-height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  width: 100%;
+  padding: 10px max(16px, calc((100vw - 1440px) / 2 + 24px));
+  border-bottom: 1px solid rgba(13, 13, 15, 0.42);
+  color: #0d0d0f;
+  background: #e6e3df;
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  isolation: isolate;
+}
+
+.study-site-chrome *,
+.study-site-chrome *::before,
+.study-site-chrome *::after {
+  box-sizing: border-box;
+}
+
+.study-site-chrome a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.study-chrome-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 44px;
+  min-height: 44px;
+  font: 600 0.92rem/1 "Barlow Condensed", sans-serif;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.study-chrome-brand svg {
+  width: 24px;
+  height: 24px;
+  overflow: visible;
+}
+
+.study-chrome-path {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  min-width: 0;
+  color: #4f4e51;
+  font-size: 0.72rem;
+  line-height: 1.25;
+}
+
+.study-chrome-path a {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 4px;
+}
+
+.study-chrome-path a:hover {
+  color: #97131e;
+}
+
+.study-chrome-path span[aria-current="page"] {
+  max-width: 34ch;
+  overflow: hidden;
+  color: #0d0d0f;
+  font-weight: 700;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.study-site-chrome a:focus-visible {
+  outline: 2px solid #c71f2d;
+  outline-offset: 3px;
+}
+
+@media (max-width: 680px) {
+  .study-site-chrome {
+    min-height: 56px;
+    gap: 12px;
+    padding-inline: 12px;
+  }
+
+  .study-chrome-brand span {
+    display: none;
+  }
+
+  .study-chrome-path {
+    gap: 6px;
+    font-size: 0.68rem;
+  }
+
+  .study-chrome-path > a:first-child,
+  .study-chrome-path > .study-chrome-separator:first-of-type {
+    display: none;
+  }
+
+  .study-chrome-path span[aria-current="page"] {
+    max-width: 24ch;
+  }
+}
