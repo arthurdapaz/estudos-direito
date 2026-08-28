@@ -76,6 +76,12 @@ components:
     rounded: "{rounded.none}"
     padding: "10px 24px"
     height: "60px"
+  study-surface:
+    backgroundColor: "{colors.void}"
+    textColor: "{colors.carbon}"
+    rounded: "{rounded.none}"
+    padding: "clamp(28px, 5vw, 56px)"
+    height: "auto"
 ---
 
 # Design System: Estudos de Direito
@@ -86,15 +92,16 @@ components:
 
 O sistema apresenta o curso como uma estrutura acadêmica construída: concreto claro e regras suíças formam o plano de trabalho; hastes de carbono, colares metálicos e cabos vermelhos transformam a lista de disciplinas em uma escultura navegável. A sensação é técnica, objetiva e concentrada, sem perder a fisicalidade que torna o diretório memorável.
 
-A identidade compartilhada cobre a home, os índices de disciplina e a navegação de retorno dos estudos. O interior de cada estudo permanece livre para adotar a linguagem mais útil ao conteúdo — mapa, trilha, quiz, áudio, Canvas ou 3D — sem ser recolorido ou reformatado pelo shell. Essa fronteira permite variedade pedagógica sem perder localização acadêmica.
+A identidade compartilhada cobre a home, os índices de disciplina e todo o interior dos estudos convencionais. Mapa, trilha, quiz e áudio podem variar como ferramentas pedagógicas, mas usam a mesma paleta clara, tipografia, ritmo, botões e superfícies. A Pirâmide de Kelsen é a única exceção estrutural: preserva a composição 3D em tela cheia, também convertida para um ambiente claro e integrada pelo mesmo chrome.
 
 **Key Characteristics:**
 
 - Concreto quase branco, carbono profundo e vermelho usado como tensão, não como preenchimento.
 - Tipografia condensada e auto-hospedada para estrutura; sans de sistema para leitura longa.
-- Cantos retos, regras de um pixel e profundidade concentrada na escultura SVG.
+- Cantos retos, regras raras de um pixel e profundidade concentrada na escultura SVG.
 - Hierarquia de três níveis: disciplinas, índice da disciplina e estudo específico.
 - Lista semântica como verdade; visualização como extensão progressiva e sincronizada.
+- Espaço vazio como principal instrumento de separação, ritmo e hierarquia.
 
 ## Colors
 
@@ -212,6 +219,22 @@ As hastes têm terminações arredondadas porque representam tubos físicos, nã
 - **Material:** faixa concreta clara, divisor estrutural e tipografia do sistema, independente da paleta do estudo abaixo.
 - **Accessibility:** links de 44px, foco vermelho visível, `aria-current` no estudo e truncamento apenas visual do título longo.
 
+### Shared Study Surface
+
+- **Scope:** obrigatório em todo estudo convencional por meio de `assets/study-system.css` e da classe `study-standard` no `<body>`.
+- **Palette:** fundo Vazio Frio, superfícies brancas ocasionais, texto Carbono/Grafite e Vermelho de Tensão restrito a foco, posição, erro e seleção.
+- **Hierarchy:** títulos em Barlow Condensed; leitura em sans nativa; largura de texto confortável e intervalos generosos entre grupos.
+- **Separation:** espaço vazio é a primeira escolha. Fundos sutis são permitidos para áreas interativas; bordas aparecem somente quando comunicam estado, limite funcional ou estrutura indispensável.
+- **Controls:** ações primárias são blocos Carbono sem arredondamento; escolhas usam um banho neutro e estados corretos/incorretos de baixa saturação.
+- **Prohibited local overrides:** estudos não podem reintroduzir modo escuro, gradientes decorativos de fundo, grades cosméticas, cartões com borda e sombra, ou paletas próprias concorrentes.
+
+### Kelsen Light Exception
+
+- **Scope:** apenas `disciplinas/introducao-ao-estudo-do-direito/piramide-de-kelsen/`, por meio de `assets/kelsen-light.css` e da classe `study-kelsen-light`.
+- **Preserved:** cena Three.js, câmera, pirâmide, Grundnorm, rótulos, normas clicáveis, conectores, áudio e painéis flutuantes.
+- **Changed:** fundo, névoa, piso, iluminação, dunas, painéis, chips e textos usam tons claros com contraste escuro.
+- **Boundary:** a exceção autoriza a composição espacial; não autoriza retornar ao fundo escuro.
+
 ### Atomium Curricular
 
 - **Data model:** a lista ordenada semântica é a fonte única. Código, nome, destino, quantidade e ordem são relidos do DOM; `MutationObserver` reage a alterações e `ResizeObserver` recalcula geometria.
@@ -223,7 +246,7 @@ As hastes têm terminações arredondadas porque representam tubos físicos, nã
 
 ### Extension Boundary
 
-Para adicionar uma disciplina, criar primeiro sua página e inserir um único item completo na lista da home, preservando os atributos de código, nome e destino; a rede não deve receber dados duplicados. Para adicionar um estudo, alterar apenas o índice da disciplina correspondente e instalar o chrome compartilhado no estudo. Novos mundos pedagógicos podem criar tokens locais, mas não devem redefinir o shell, copiar a rede ou misturar seus componentes no DESIGN.md global.
+Para adicionar uma disciplina, criar primeiro sua página e inserir um único item completo na lista da home, preservando os atributos de código, nome e destino; a rede não deve receber dados duplicados. Para adicionar um estudo, alterar o índice da disciplina correspondente, instalar o chrome compartilhado e aplicar `study-system.css` com `study-standard`. Interações pedagógicas podem criar geometria e comportamento próprios, mas não paletas, tipografia estrutural ou sistemas locais de cartões. Exceções visuais exigem registro explícito neste documento; atualmente, só a Pirâmide de Kelsen possui essa condição.
 
 Movimento compartilhado usa transições de 180ms para cor, fundo e deslocamento, curva rápida `cubic-bezier(0.16, 1, 0.3, 1)` para gestos espaciais e 420ms para a expansão da órbita. `prefers-reduced-motion` reduz toda animação e transição a um estado praticamente imediato.
 
@@ -234,7 +257,9 @@ Movimento compartilhado usa transições de 180ms para cor, fundo e deslocamento
 - **Do** manter links relativos para que shell, disciplinas, estudos, fontes e scripts funcionem em localhost e no subpath do GitHub Pages.
 - **Do** tratar a lista semântica como fonte de verdade e a rede SVG como uma visualização derivada.
 - **Do** usar HTML semântico, foco vermelho de alto contraste, áreas interativas de pelo menos 44px e suporte a movimento reduzido.
-- **Do** preservar o chrome concreto como elo entre estudos visualmente diferentes.
+- **Do** aplicar a superfície clara compartilhada a todo estudo convencional.
+- **Do** usar espaço vazio antes de bordas, sombras, caixas ou fundos para separar conteúdos.
+- **Do** preservar o chrome concreto como elo entre todos os níveis do repositório.
 - **Do** verificar home, índice da disciplina e estudo em desktop e mobile ao estender a arquitetura.
 
 ### Don't:
@@ -243,4 +268,6 @@ Movimento compartilhado usa transições de 180ms para cor, fundo e deslocamento
 - **Don't** interpretar arestas do Atomium como pré-requisitos, hierarquia ou dependência entre disciplinas.
 - **Don't** transformar o vermelho em grande preenchimento, nem espalhar sombras e gradientes materiais para fora da rede.
 - **Don't** substituir o símbolo abstrato por balanças, martelos, colunas, livros ou outros clichês jurídicos.
-- **Don't** impor a paleta global ao interior de um estudo; compartilhe navegação e arquitetura, não uniformidade pedagógica.
+- **Don't** criar paleta, modo escuro, tipografia estrutural ou linguagem de cartões exclusiva para um estudo convencional.
+- **Don't** usar bordas e caixas como separadores automáticos; primeiro resolva a hierarquia com espaço, alinhamento e escala tipográfica.
+- **Don't** tratar a Pirâmide de Kelsen como autorização genérica para outras exceções; sua composição 3D clara é uma regra nomeada e isolada.

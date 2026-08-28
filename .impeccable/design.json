@@ -130,13 +130,14 @@
   ],
   "narrative": {
     "northStar": "Atomium Curricular",
-    "overview": "O sistema apresenta o curso como uma estrutura acadêmica construída: concreto claro e regras suíças formam o plano de trabalho; hastes de carbono, colares metálicos e cabos vermelhos transformam a lista de disciplinas em uma escultura navegável. A sensação é técnica, objetiva e concentrada, sem perder a fisicalidade que torna o diretório memorável.\n\nA identidade compartilhada cobre a home, os índices de disciplina e a navegação de retorno dos estudos. O interior de cada estudo permanece livre para adotar a linguagem mais útil ao conteúdo — mapa, trilha, quiz, áudio, Canvas ou 3D — sem ser recolorido ou reformatado pelo shell. Essa fronteira permite variedade pedagógica sem perder localização acadêmica.",
+    "overview": "O sistema apresenta o curso como uma estrutura acadêmica construída: concreto claro e regras suíças formam o plano de trabalho; hastes de carbono, colares metálicos e cabos vermelhos transformam a lista de disciplinas em uma escultura navegável. A sensação é técnica, objetiva e concentrada, sem perder a fisicalidade que torna o diretório memorável.\n\nA identidade compartilhada cobre a home, os índices de disciplina e o interior de todos os estudos convencionais. Mapa, trilha, quiz e áudio variam como ferramentas pedagógicas, mas compartilham paleta clara, tipografia, ritmo, botões e superfícies. A Pirâmide de Kelsen é a única exceção estrutural: preserva a experiência 3D em tela cheia, também em ambiente claro.",
     "keyCharacteristics": [
       "Concreto quase branco, carbono profundo e vermelho usado como tensão, não como preenchimento.",
       "Tipografia condensada e auto-hospedada para estrutura; sans de sistema para leitura longa.",
-      "Cantos retos, regras de um pixel e profundidade concentrada na escultura SVG.",
+      "Cantos retos, regras raras de um pixel e profundidade concentrada na escultura SVG.",
       "Hierarquia de três níveis: disciplinas, índice da disciplina e estudo específico.",
-      "Lista semântica como verdade; visualização como extensão progressiva e sincronizada."
+      "Lista semântica como verdade; visualização como extensão progressiva e sincronizada.",
+      "Espaço vazio como principal instrumento de separação, ritmo e hierarquia."
     ],
     "rules": [
       { "name": "The Red Tension Rule", "body": "O vermelho aparece em uma fração pequena da tela e sempre sinaliza conexão, posição ou resposta; nunca deve virar uma grande superfície decorativa.", "section": "colors" },
@@ -146,13 +147,17 @@
       { "name": "The Three-Level Rule", "body": "Home, disciplina e estudo são níveis diferentes; nunca promover estudos ou subtemas para o diretório principal.", "section": "layout" },
       { "name": "The Directory-First Rule", "body": "Em qualquer largura, o caminho textual completo aparece antes da visualização e continua útil sem JavaScript.", "section": "layout" },
       { "name": "The Flat Frame, Sculpted Node Rule", "body": "Superfícies de navegação ficam planas; relevo, brilho e volume pertencem apenas aos materiais do Atomium.", "section": "elevation" },
-      { "name": "The Reserved Circle Rule", "body": "O círculo indica nó, junta, terminal ou estado; não arredondar arbitrariamente listas, painéis ou blocos de leitura.", "section": "shapes" }
+      { "name": "The Reserved Circle Rule", "body": "O círculo indica nó, junta, terminal ou estado; não arredondar arbitrariamente listas, painéis ou blocos de leitura.", "section": "shapes" },
+      { "name": "The Whitespace First Rule", "body": "Separar conteúdos primeiro com espaço, alinhamento e escala tipográfica; bordas e superfícies só aparecem quando comunicam uma estrutura funcional.", "section": "layout" },
+      { "name": "The Shared Study Surface Rule", "body": "Todo estudo convencional usa a superfície clara comum; apenas a Pirâmide de Kelsen preserva composição própria, igualmente clara.", "section": "components" }
     ],
     "dos": [
       "Do manter links relativos para que shell, disciplinas, estudos, fontes e scripts funcionem em localhost e no subpath do GitHub Pages.",
       "Do tratar a lista semântica como fonte de verdade e a rede SVG como uma visualização derivada.",
       "Do usar HTML semântico, foco vermelho de alto contraste, áreas interativas de pelo menos 44px e suporte a movimento reduzido.",
-      "Do preservar o chrome concreto como elo entre estudos visualmente diferentes.",
+      "Do aplicar a superfície clara compartilhada a todo estudo convencional.",
+      "Do usar espaço vazio antes de bordas, sombras, caixas ou fundos para separar conteúdos.",
+      "Do preservar o chrome concreto como elo entre todos os níveis do repositório.",
       "Do verificar home, índice da disciplina e estudo em desktop e mobile ao estender a arquitetura."
     ],
     "donts": [
@@ -160,7 +165,9 @@
       "Don't interpretar arestas do Atomium como pré-requisitos, hierarquia ou dependência entre disciplinas.",
       "Don't transformar o vermelho em grande preenchimento, nem espalhar sombras e gradientes materiais para fora da rede.",
       "Don't substituir o símbolo abstrato por balanças, martelos, colunas, livros ou outros clichês jurídicos.",
-      "Don't impor a paleta global ao interior de um estudo; compartilhe navegação e arquitetura, não uniformidade pedagógica."
+      "Don't criar paleta, modo escuro, tipografia estrutural ou linguagem de cartões exclusiva para um estudo convencional.",
+      "Don't usar bordas e caixas como separadores automáticos; primeiro resolva a hierarquia com espaço, alinhamento e escala tipográfica.",
+      "Don't tratar a Pirâmide de Kelsen como autorização genérica para outras exceções; sua composição 3D clara é uma regra nomeada e isolada."
     ]
   }
 }

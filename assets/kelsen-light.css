@@ -1,0 +1,152 @@
+/* The Kelsen study keeps its immersive 3D composition, but belongs to the
+   same light, low-noise reading environment as the rest of the repository. */
+
+body.study-kelsen-light {
+  color-scheme: light;
+  --panel-bg: rgba(255, 255, 255, 0.82);
+  --panel-strong: rgba(255, 255, 255, 0.96);
+  --line: rgba(13, 13, 15, 0.14);
+  --text: #0d0d0f;
+  --muted: #57565b;
+  --blue: #176b92;
+  --teal: #087b82;
+  --gold: #9a6a08;
+  --ruby: #a52d45;
+  --green: #2f7354;
+  background: #ecebe8 !important;
+  color: var(--text) !important;
+}
+
+.study-kelsen-light .loading {
+  background: #ecebe8;
+  color: #333337;
+}
+
+.study-kelsen-light .hud {
+  top: clamp(78px, calc(60px + 2vw), 90px);
+  text-shadow: none;
+}
+
+.study-kelsen-light .hud::before {
+  width: 1px;
+  background: #c71f2d;
+  box-shadow: none;
+}
+
+.study-kelsen-light .hud h1,
+.study-kelsen-light .hud p {
+  color: var(--text);
+}
+
+.study-kelsen-light :is(.label, .norm-chip, .study-player, .scheme-panel, .detail-panel) {
+  border-color: rgba(13, 13, 15, 0.14);
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 18px 42px rgba(13, 13, 15, 0.1);
+  color: var(--text);
+  backdrop-filter: none;
+}
+
+.study-kelsen-light .label {
+  color: var(--text);
+}
+
+.study-kelsen-light .norm-chip {
+  color: #242327;
+  box-shadow: 0 7px 18px rgba(13, 13, 15, 0.08);
+}
+
+.study-kelsen-light .norm-chip:is(:hover, :focus-visible, .active) {
+  border-color: #c71f2d;
+  background: #fff;
+  color: #97131e;
+  box-shadow: 0 9px 24px rgba(13, 13, 15, 0.12);
+}
+
+.study-kelsen-light :is(.scheme-kicker, .study-kicker, .detail-level, .detail-section h3) {
+  color: #646368;
+}
+
+.study-kelsen-light :is(.scheme-panel h2, .study-title, .detail-title, .detail-section p, .detail-section li) {
+  color: var(--text);
+}
+
+.study-kelsen-light .scheme-note {
+  color: var(--muted);
+}
+
+.study-kelsen-light .study-player {
+  top: 78px;
+}
+
+.study-kelsen-light .scheme-panel {
+  top: 78px;
+}
+
+.study-kelsen-light .scheme-panel::after {
+  display: none;
+}
+
+.study-kelsen-light .study-player button,
+.study-kelsen-light .detail-close {
+  border-color: rgba(13, 13, 15, 0.14);
+  background: #f0efed;
+  color: var(--text);
+  box-shadow: none;
+}
+
+.study-kelsen-light .study-player button:is(:hover, :focus-visible),
+.study-kelsen-light .detail-close:is(:hover, :focus-visible) {
+  border-color: #c71f2d;
+  background: #fff;
+}
+
+.study-kelsen-light .study-player[data-state="playing"] {
+  border-color: rgba(199, 31, 45, 0.34);
+  box-shadow: 0 18px 42px rgba(13, 13, 15, 0.12);
+}
+
+.study-kelsen-light .detail-panel {
+  top: 206px;
+  color: var(--text);
+}
+
+.study-kelsen-light .detail-status {
+  border-color: rgba(8, 123, 130, 0.24);
+  background: rgba(8, 123, 130, 0.1);
+  color: #075c61;
+}
+
+.study-kelsen-light .detail-status[data-state="warning"] {
+  border-color: rgba(154, 106, 8, 0.25);
+  background: rgba(154, 106, 8, 0.09);
+  color: #694806;
+}
+
+.study-kelsen-light .detail-status[data-state="inactive"] {
+  border-color: rgba(165, 45, 69, 0.22);
+  background: rgba(165, 45, 69, 0.08);
+  color: #812036;
+}
+
+.study-kelsen-light .connector-line {
+  stroke: rgba(151, 19, 30, 0.72);
+  filter: none;
+}
+
+@media (max-width: 640px) {
+  .study-kelsen-light .hud {
+    top: 68px;
+  }
+
+  .study-kelsen-light .study-player {
+    top: 184px;
+  }
+
+  .study-kelsen-light .scheme-panel {
+    top: 68px;
+  }
+
+  .study-kelsen-light .detail-panel {
+    top: auto;
+  }
+}

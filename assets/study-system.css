@@ -1,0 +1,583 @@
+/* Shared reading surface for every conventional study.
+   The 3D Kelsen experiment uses kelsen-light.css instead. */
+
+body.study-standard {
+  color-scheme: light;
+  --study-bg: #f7f7f8;
+  --study-paper: #ffffff;
+  --study-carbon: #0d0d0f;
+  --study-graphite: #333337;
+  --study-muted: #66656a;
+  --study-faint: #8a898e;
+  --study-red: #c71f2d;
+  --study-red-dark: #97131e;
+  --study-green: #2f6f53;
+  --study-line: rgba(13, 13, 15, 0.14);
+
+  /* Compatibility aliases for the existing interactive studies. */
+  --bg: var(--study-bg);
+  --b: var(--study-bg);
+  --night: var(--study-bg);
+  --deep: var(--study-paper);
+  --surface: var(--study-paper);
+  --surface-2: #f0efed;
+  --p: var(--study-paper);
+  --panel: var(--study-paper);
+  --paper: var(--study-paper);
+  --paper-2: var(--study-paper);
+  --paper-muted: #efedeb;
+  --ink: var(--study-carbon);
+  --text: var(--study-carbon);
+  --t: var(--study-carbon);
+  --muted: var(--study-muted);
+  --m: var(--study-muted);
+  --soft: var(--study-faint);
+  --muted-dark: var(--study-muted);
+  --line: var(--study-line);
+  --l: var(--study-line);
+  --line-dark: var(--study-line);
+  --red: var(--study-red);
+  --red-dark: var(--study-red-dark);
+  --clay: var(--study-red);
+  --sun: var(--study-red-dark);
+  --a: var(--study-red);
+  --x: var(--study-red-dark);
+  --lime: var(--study-red);
+  --mint: var(--study-green);
+  --green: var(--study-green);
+  --moss: var(--study-green);
+  --blue: var(--study-red-dark);
+  --teal: var(--study-green);
+  --orange: #9a5a2d;
+  --purple: #66556f;
+  --pink: var(--study-red);
+  --amber: #836419;
+  --shadow: none;
+  --radius: 0;
+  --sans: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --serif: "Barlow Condensed", sans-serif;
+  --mono: "Barlow Condensed", sans-serif;
+
+  min-width: 0;
+  color: var(--study-carbon) !important;
+  background: var(--study-bg) !important;
+  font-family: var(--sans) !important;
+}
+
+body.study-standard::before {
+  display: none !important;
+}
+
+.study-standard :is(a, button, input) {
+  font-family: inherit;
+}
+
+.study-standard :focus-visible {
+  outline: 2px solid var(--study-red) !important;
+  outline-offset: 3px !important;
+}
+
+.study-standard .page {
+  width: min(1120px, calc(100vw - 40px)) !important;
+  margin-inline: auto !important;
+  padding: 0 0 96px !important;
+}
+
+.study-standard .page > :is(.crumb, .back) {
+  display: none !important;
+}
+
+.study-standard .topbar {
+  min-height: 54px;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+}
+
+.study-standard .topbar > .crumb,
+.study-standard .crumbs > .crumb {
+  display: none !important;
+}
+
+.study-standard :is(.progress, .progress-label, .source-link) {
+  color: var(--study-muted) !important;
+  font: 600 0.72rem/1.2 "Barlow Condensed", sans-serif !important;
+  letter-spacing: 0.1em !important;
+  text-transform: uppercase;
+}
+
+.study-standard .source-link {
+  min-height: 44px;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  color: var(--study-red-dark) !important;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 4px;
+}
+
+.study-standard :is(.hero, .study-head) {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) minmax(280px, 0.72fr) !important;
+  gap: clamp(36px, 7vw, 88px) !important;
+  align-items: end !important;
+  padding: clamp(64px, 9vw, 112px) 0 clamp(56px, 7vw, 86px) !important;
+  border: 0 !important;
+}
+
+.study-standard :is(.hero, .study-head) > div:first-child {
+  display: flex;
+  flex-direction: column;
+}
+
+.study-standard :is(.hero, .study-head) h1 {
+  order: 1;
+}
+
+.study-standard :is(.hero, .study-head) .eyebrow {
+  order: 2;
+}
+
+.study-standard .study-head .lead {
+  order: 3;
+  margin-top: 18px !important;
+}
+
+.study-standard .hero::after {
+  display: none !important;
+}
+
+.study-standard h1,
+.study-standard h2,
+.study-standard h3 {
+  color: var(--study-carbon) !important;
+  font-family: "Barlow Condensed", sans-serif !important;
+  font-weight: 600 !important;
+}
+
+.study-standard h1 {
+  max-width: 11ch !important;
+  margin: 0 !important;
+  font-size: clamp(4rem, 8.2vw, 6rem) !important;
+  line-height: 0.86 !important;
+  letter-spacing: -0.025em !important;
+  text-wrap: balance;
+}
+
+.study-standard h2 {
+  letter-spacing: -0.015em !important;
+}
+
+.study-standard :is(.eyebrow, .section-label, .section-title, .detail-kicker, .study-kicker) {
+  color: var(--study-muted) !important;
+  font: 600 0.74rem/1.2 "Barlow Condensed", sans-serif !important;
+  letter-spacing: 0.1em !important;
+  text-transform: uppercase;
+}
+
+.study-standard .section-label::after {
+  display: none !important;
+}
+
+.study-standard :is(.hero, .study-head) .eyebrow {
+  margin: 18px 0 0 !important;
+}
+
+.study-standard :is(.detail, .quiz, .quiz-card) > .eyebrow {
+  display: none;
+}
+
+.study-standard :is(p, li) {
+  color: var(--study-graphite);
+}
+
+.study-standard :is(.hero p, .hero-copy p, .study-head .lead) {
+  max-width: 66ch;
+  margin: 0 !important;
+  color: var(--study-graphite) !important;
+  font: clamp(1rem, 1.5vw, 1.12rem)/1.65 var(--sans) !important;
+}
+
+.study-standard :is(.hero p, .hero-copy p, .study-head .lead) strong {
+  color: var(--study-carbon) !important;
+}
+
+.study-standard :is(.hero-copy, .formula) {
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.study-standard .formula {
+  color: var(--study-graphite) !important;
+  font: 500 clamp(1.2rem, 2vw, 1.48rem)/1.25 "Barlow Condensed", sans-serif !important;
+}
+
+.study-standard .formula :is(b, strong) {
+  color: var(--study-red-dark) !important;
+}
+
+.study-standard .audio-bar {
+  top: 8px !important;
+  margin: 0 0 clamp(64px, 8vw, 96px) !important;
+  padding: 8px 0 !important;
+  border: 0 !important;
+  border-bottom: 1px solid var(--study-line) !important;
+  border-radius: 0 !important;
+  background: rgba(247, 247, 248, 0.96) !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+}
+
+.study-standard .audio-bar button,
+.study-standard .quiz-nav button {
+  min-width: 44px;
+  min-height: 44px;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  color: var(--study-carbon) !important;
+}
+
+.study-standard :is(.audio-bar .primary, .primary, .inline-action, .button) {
+  min-height: 44px;
+  padding: 0 16px !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: var(--study-carbon) !important;
+  box-shadow: none !important;
+  color: white !important;
+  font: 600 0.78rem/1 "Barlow Condensed", sans-serif !important;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.study-standard :is(.audio-status, .quiz-feedback, .feedback) {
+  color: var(--study-muted) !important;
+}
+
+/* Structure is separated by rhythm, not containers. */
+.study-standard :is(
+  .detail,
+  .detail-panel,
+  .side-panel,
+  .study-card,
+  .quiz,
+  .quiz-card,
+  .quiz-panel,
+  .quiz-body,
+  .map-board,
+  .map-panel,
+  .map-frame,
+  .flow-board,
+  .articles-panel,
+  .deadline-panel,
+  .five,
+  .cdi-key,
+  .quick-facts .fact
+) {
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
+.study-standard :is(.detail, .detail-panel, .side-panel, .study-card, .quiz-card, .quiz-panel, .articles-panel, .deadline-panel) {
+  background: var(--study-paper) !important;
+  color: var(--study-carbon) !important;
+}
+
+.study-standard :is(.study-shell, .board, .map, .workspace, .study-flow) {
+  gap: clamp(28px, 5vw, 64px) !important;
+}
+
+.study-standard :is(.detail, .detail-panel, .study-card, .quiz-card, .quiz-panel, .articles-panel, .deadline-panel) {
+  padding: clamp(28px, 5vw, 56px) !important;
+}
+
+.study-standard :is(.detail, .detail-panel)::before {
+  display: none !important;
+}
+
+.study-standard .detail h2,
+.study-standard .study-card h2 {
+  max-width: 16ch !important;
+  margin-top: 0 !important;
+  font-size: clamp(2.2rem, 4.8vw, 4rem) !important;
+  line-height: 0.94 !important;
+}
+
+.study-standard :is(.detail-summary, .detail .lede, .detail p, .detail li, .detail-section p, .detail-section li, .study-card > p) {
+  color: var(--study-graphite) !important;
+  line-height: 1.62 !important;
+}
+
+.study-standard .detail-section {
+  margin-top: 32px !important;
+  padding-top: 0 !important;
+  border: 0 !important;
+}
+
+.study-standard .detail-section + .detail-section {
+  margin-top: 42px !important;
+}
+
+.study-standard .detail-section h3 {
+  margin-bottom: 12px !important;
+  color: var(--study-carbon) !important;
+  font-size: 1rem !important;
+  letter-spacing: 0 !important;
+  text-transform: none !important;
+}
+
+.study-standard .detail-section li::before {
+  background: var(--study-red) !important;
+}
+
+/* Lists and choices use only a quiet state wash. */
+.study-standard :is(.concept-list, .chapter-list, .chapter-nav, .article-list, .flow) {
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.study-standard :is(.concept-button, .chapter-button, .chapter, .step, .card, .study-row, .answer, .quiz-option) {
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  color: var(--study-carbon) !important;
+}
+
+.study-standard :is(.concept-button, .chapter-button, .chapter, .step, .card, .study-row) {
+  min-height: 68px;
+  padding: 14px 12px !important;
+}
+
+.study-standard :is(.concept-button, .chapter-button, .chapter, .step, .card, .study-row):is(:hover, :focus-visible, .active) {
+  background: rgba(199, 31, 45, 0.055) !important;
+  color: var(--study-red-dark) !important;
+  transform: none !important;
+}
+
+.study-standard :is(.concept-number, .chapter-number, .chapter span, .step span, .card span, .study-row small) {
+  color: var(--study-red) !important;
+  font-family: "Barlow Condensed", sans-serif !important;
+}
+
+.study-standard :is(.concept-note, .chapter small) {
+  color: var(--study-muted) !important;
+}
+
+.study-standard .chapter-button::before {
+  display: none !important;
+}
+
+.study-standard :is(.answer, .quiz-option) {
+  min-height: 50px;
+  margin-top: 8px;
+  padding: 13px 15px !important;
+  background: #f0efed !important;
+  color: var(--study-carbon) !important;
+  text-align: left;
+}
+
+.study-standard :is(.answer, .quiz-option):hover {
+  background: #e8e6e3 !important;
+}
+
+.study-standard :is(.answer.ok, .answer.correct, .quiz-option.correct) {
+  background: rgba(47, 111, 83, 0.13) !important;
+  color: #184a36 !important;
+}
+
+.study-standard :is(.answer.no, .answer.wrong, .quiz-option.wrong) {
+  background: rgba(199, 31, 45, 0.1) !important;
+  color: var(--study-red-dark) !important;
+}
+
+/* Diagrams may retain geometry, but not visual clutter. */
+.study-standard :is(.rupture-map, .effect-grid, .principle-map, .crime-map, .principle-strip, .comparison-grid, .compare, .deadline-grid, .quick-facts) {
+  gap: clamp(20px, 4vw, 42px) !important;
+  border: 0 !important;
+  background: transparent !important;
+}
+
+.study-standard :is(.order, .effect, .principle-card, .crime-layer, .compare-card, .case-row, .fact, .deadline-grid > *, .principle-strip > div, .compare > div) {
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  color: var(--study-carbon) !important;
+}
+
+.study-standard .order {
+  min-height: 0 !important;
+  padding: clamp(24px, 4vw, 42px) 0 !important;
+}
+
+.study-standard .break {
+  min-width: 1px !important;
+  padding: 0 !important;
+  background: var(--study-red) !important;
+  color: transparent !important;
+  font-size: 0 !important;
+}
+
+.study-standard .break::before {
+  display: none !important;
+}
+
+.study-standard :is(.effect p, .order p, .principle-card p, .compare-card p, .case-row p, .fact span, .principle-strip strong) {
+  color: var(--study-graphite) !important;
+}
+
+.study-standard .effect-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+}
+
+.study-standard .effect {
+  min-height: 0 !important;
+  padding: 28px 0 !important;
+}
+
+.study-standard :is(.principle-map, .crime-map) {
+  margin-block: clamp(42px, 6vw, 72px) !important;
+}
+
+.study-standard :is(.principle-card, .crime-layer) {
+  min-height: 0 !important;
+  padding: 24px 0 !important;
+}
+
+.study-standard :is(.cdi-key, .map-board, .five, .flow-board, .map-panel, .map-frame) {
+  background: var(--study-paper) !important;
+  color: var(--study-carbon) !important;
+}
+
+.study-standard .cdi-key {
+  min-height: 220px;
+  margin-bottom: clamp(56px, 8vw, 96px);
+}
+
+.study-standard .principle-strip {
+  margin-bottom: clamp(56px, 8vw, 96px);
+}
+
+.study-standard .principle-strip > div {
+  padding: 0 !important;
+}
+
+.study-standard .map-board::before,
+.study-standard .five {
+  background-image: none !important;
+}
+
+.study-standard .node {
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
+.study-standard .node:hover {
+  transform: none !important;
+  filter: brightness(0.98);
+}
+
+.study-standard .side-panel .progress {
+  padding: 20px clamp(28px, 5vw, 56px) 0 !important;
+  border: 0 !important;
+}
+
+.study-standard :is(.note, .alert) {
+  margin-top: 28px !important;
+  padding: 18px 20px !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: rgba(199, 31, 45, 0.065) !important;
+  color: var(--study-graphite) !important;
+}
+
+.study-standard :is(.quiz, .comparison, .test-case, .four-effects, .source, .source-note) {
+  margin-top: clamp(72px, 10vw, 120px) !important;
+}
+
+.study-standard :is(.source, .source-note) {
+  max-width: 76ch;
+  color: var(--study-muted) !important;
+  font-size: 0.78rem !important;
+  line-height: 1.6 !important;
+}
+
+.study-standard :is(.source, .source-note) a {
+  color: var(--study-red-dark) !important;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
+.study-standard .reveal {
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+@media (max-width: 900px) {
+  .study-standard :is(.hero, .study-head, .study-shell, .board, .map, .workspace, .study-flow, .quiz) {
+    grid-template-columns: 1fr !important;
+  }
+
+  .study-standard :is(.hero, .study-head) {
+    gap: 28px !important;
+    padding-block: 64px !important;
+  }
+
+  .study-standard :is(.concept-list, .chapter-list, .chapter-nav) {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+}
+
+@media (max-width: 620px) {
+  .study-standard .page {
+    width: min(100vw - 28px, 680px) !important;
+    padding-bottom: 72px !important;
+  }
+
+  .study-standard h1 {
+    font-size: clamp(3.5rem, 18vw, 5rem) !important;
+  }
+
+  .study-standard :is(.hero, .study-head) {
+    padding-block: 48px 56px !important;
+  }
+
+  .study-standard .audio-bar {
+    grid-template-columns: 44px minmax(0, 1fr) 44px !important;
+  }
+
+  .study-standard .audio-status {
+    grid-column: 1 / -1;
+  }
+
+  .study-standard :is(.concept-list, .chapter-list, .chapter-nav, .effect-grid, .quick-facts, .deadline-grid) {
+    grid-template-columns: 1fr !important;
+  }
+
+  .study-standard :is(.detail, .detail-panel, .study-card, .quiz-card, .quiz-panel, .articles-panel, .deadline-panel) {
+    padding: 28px 22px !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .study-standard *,
+  .study-standard *::before,
+  .study-standard *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}

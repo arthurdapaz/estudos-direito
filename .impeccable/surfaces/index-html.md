@@ -40,7 +40,8 @@ related_targets: ["disciplinas/introducao-ao-estudo-do-direito/index.html","disc
 | Rótulos e linhas-guia | SVG/HTML | Evitar colisões; reduzir no mobile |
 | Textura mineral | CSS | Sem raster; ruído tão discreto que não prejudique leitura |
 | Páginas de disciplina | HTML/CSS compartilhado | Cabeçalho contextual + lista de estudos da disciplina |
-| Estudos existentes | CSS compartilhado + chrome HTML | Preservar interações, conteúdo e áudio; unificar navegação e tokens |
+| Estudos existentes | `study-system.css` + chrome HTML | Preservar interações, conteúdo e áudio; unificar paleta clara, tipografia, ritmo, controles e superfícies |
+| Pirâmide de Kelsen | `kelsen-light.css` + Three.js | Preservar a composição 3D; converter toda a experiência para fundo, painéis e iluminação claros |
 
 ## Composição responsiva
 
@@ -55,3 +56,10 @@ related_targets: ["disciplinas/introducao-ao-estudo-do-direito/index.html","disc
 - Teclado percorre links sem armadilha; foco tem anel vermelho/preto de alto contraste.
 - Sem JavaScript, a lista continua completa e navegável; apenas a escultura deixa de aparecer.
 - O clique sempre abre a página da disciplina correspondente.
+
+## Regra dos estudos
+
+- Todo estudo convencional usa a classe `study-standard` e a folha `assets/study-system.css`.
+- Espaço vazio, alinhamento e tipografia devem separar conteúdo antes de bordas, sombras ou caixas.
+- Modo escuro, gradientes decorativos e paletas locais não são permitidos nos estudos convencionais.
+- A Pirâmide de Kelsen é a única exceção estrutural registrada. Ela mantém o 3D, mas obrigatoriamente em tema claro com `study-kelsen-light` e `assets/kelsen-light.css`.
