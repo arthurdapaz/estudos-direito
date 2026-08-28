@@ -1,0 +1,37 @@
+---
+layout: base
+---
+<div class="site-shell">
+  {% include site-header.html mode="Diretório de disciplinas" %}
+
+  <main class="home-layout">
+    <section class="home-directory" aria-labelledby="titulo">
+      <p class="home-context">Curso de Direito</p>
+      <h1 class="home-title" id="titulo">Disciplinas</h1>
+      <p class="home-intro">Esta é a entrada para os estudos do curso. Escolha uma disciplina; dentro dela, os conteúdos são organizados para leitura, revisão e prática.</p>
+
+      <div class="directory-heading">
+        <h2 id="disciplinas">Diretório acadêmico</h2>
+        <span data-discipline-count>{{ site.data.disciplines | size }} no catálogo</span>
+      </div>
+
+      <ol class="discipline-list" aria-labelledby="disciplinas">
+        {% for discipline in site.data.disciplines %}
+          {% include discipline-link.html discipline=discipline index=forloop.index %}
+        {% endfor %}
+      </ol>
+
+      <p class="home-directory-note">O arquivo <code>_data/disciplines.yml</code> é a fonte única do catálogo. Ao adicionar, remover ou reordenar uma disciplina, a lista e a rede recalculam automaticamente sua estrutura.</p>
+    </section>
+
+    <section class="network-panel" data-course-network aria-labelledby="rede-titulo">
+      <div class="network-label"><strong id="rede-titulo">Rede adaptativa</strong><span>Nós = disciplinas</span></div>
+      <svg class="course-network" role="navigation" aria-label="Navegação visual pelas disciplinas"></svg>
+      <p class="network-annotation"><strong>Visão do curso.</strong><br>As ligações agrupam as disciplinas no catálogo; não indicam pré-requisitos ou dependência entre matérias.</p>
+      <noscript><p class="network-annotation">A lista de disciplinas permanece disponível. Ative o JavaScript apenas para visualizar a rede adaptativa.</p></noscript>
+    </section>
+  </main>
+
+  {% include site-footer.html %}
+</div>
+<script src="{{ '/assets/course-network.js' | relative_url }}"></script>

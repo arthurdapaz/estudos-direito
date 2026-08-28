@@ -29,8 +29,9 @@ Uma biblioteca acadêmica pessoal em que cada disciplina é uma porta de entrada
 
 ## Capabilities and Constraints
 
-- Site estático em HTML, CSS e JavaScript, sem build step, framework ou backend.
-- Links relativos para funcionar em localhost e no subpath `/estudos-direito/` do GitHub Pages.
+- Site gerado pelo Jekyll e entregue como HTML, CSS e JavaScript estáticos, sem backend.
+- Layouts, includes e dados compartilhados seguem DRY/KISS e são compilados pelo GitHub Pages.
+- URLs de componentes usam o filtro `relative_url` para funcionar no subpath `/estudos-direito/`.
 - Estudos podem usar APIs nativas do navegador, Canvas e Three.js por CDN quando necessário.
 - Áudios narrados são arquivos MP3 pré-gerados; não há TTS pago em tempo de execução.
 - A home não deve exibir estudos, subtemas ou atalhos que confundam o nível de disciplina.

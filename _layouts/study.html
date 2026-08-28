@@ -1,0 +1,7 @@
+---
+layout: base
+---
+{% assign discipline = site.data.disciplines | where: "id", page.discipline_id | first %}
+{% assign study = discipline.studies | where: "id", page.study_id | first %}
+{% include study-chrome.html discipline=discipline study=study %}
+{{ content }}

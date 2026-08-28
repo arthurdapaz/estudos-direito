@@ -1,0 +1,92 @@
+- id: introducao-ao-estudo-do-direito
+  code: IED
+  name: Introdução ao Estudo do Direito
+  url: /disciplinas/introducao-ao-estudo-do-direito/
+  description: Estudos de Introdução ao Estudo do Direito.
+  summary: "Fundamentos do Direito: norma jurídica, validade, vigência, hierarquia, fontes, ordenamento e os conceitos que sustentam as demais disciplinas."
+  studies_intro: Conteúdo da disciplina organizado como material navegável e interativo.
+  note_label: Estrutura expansível
+  note: Novos mapas, fichamentos visuais e simuladores entram nesta página da disciplina, mantendo a home restrita ao diretório acadêmico.
+  studies:
+    - id: piramide-de-kelsen
+      url: /disciplinas/introducao-ao-estudo-do-direito/piramide-de-kelsen/
+      eyebrow: 3D interativo · áudio guiado
+      title: Pirâmide de Kelsen brasileira
+      chrome_title: Pirâmide de Kelsen brasileira
+      browser_title: Pirâmide de Kelsen - Ordenamento Jurídico Brasileiro
+      description: Ordenamento jurídico brasileiro em camadas, com Grundnorm no topo, normas clicáveis e explicações sobre criação, atores, prazos, hierarquia e situação atual.
+
+- id: etica
+  code: ETI
+  name: Ética
+  url: /disciplinas/etica/
+  description: Estudos de Ética Profissional, Estatuto da Advocacia e Código de Ética e Disciplina da OAB.
+  summary: Código de Ética e Disciplina da OAB, Estatuto da Advocacia, prerrogativas, infrações, sanções e funcionamento dos órgãos disciplinares.
+  studies_intro: Fluxos e revisões da disciplina, preservando as fontes normativas.
+  note_label: Próximos conteúdos
+  note: Estatuto da Advocacia, infrações disciplinares, honorários, publicidade e prerrogativas poderão ser organizados aqui sem alterar o diretório principal.
+  studies:
+    - id: procedimento-disciplinar-oab
+      url: /disciplinas/etica/procedimento-disciplinar-oab/
+      eyebrow: Mapa mental · áudio guiado
+      title: Procedimento disciplinar na OAB
+      chrome_title: Procedimento Disciplinar da OAB
+      browser_title: Procedimento Disciplinar da OAB | Ética
+      description: Fluxo dos arts. 55 a 69 do Código de Ética e Disciplina, com representação, admissibilidade, TAC, defesa, instrução, julgamento, acórdão, revisão e reabilitação.
+
+- id: direito-penal
+  code: PEN
+  name: Direito Penal
+  url: /disciplinas/direito-penal/
+  description: Estudos de Direito Penal sobre teoria do crime, crimes contra a honra, legítima defesa e consunção.
+  summary: Pressupostos do crime, formas de imputação e consequências jurídicas, com leitura sistemática da Parte Geral e aplicação aos tipos penais.
+  studies_intro: Conteúdos separados por problema jurídico e finalidade de revisão.
+  note_label: Leitura da disciplina
+  note: Os estudos permanecem independentes e podem ser abertos em qualquer ordem; a página organiza, mas não impõe uma sequência curricular.
+  studies:
+    - id: teoria-do-crime
+      url: /disciplinas/direito-penal/teoria-do-crime/
+      eyebrow: Trilha linear · áudio guiado
+      title: Do fato típico à imputação subjetiva
+      chrome_title: Do fato típico à imputação subjetiva
+      browser_title: Do fato típico à imputação subjetiva | Direito Penal
+      description: Teoria finalista da ação, conduta, resultado, nexo causal, tipicidade, dolo direto e eventual, culpa e preterdolo, com o art. 121 como aplicação.
+    - id: crimes-contra-a-honra
+      url: /disciplinas/direito-penal/crimes-contra-a-honra/
+      eyebrow: Mapa CDI · revisão ativa
+      title: Calúnia, Difamação e Injúria
+      chrome_title: CDI — crimes contra a honra
+      browser_title: "CDI: crimes contra a honra | Direito Penal"
+      description: Mapa visual para distinguir imputação de fato, honra objetiva e honra subjetiva, com ação penal, exceções essenciais e comparação com dano.
+    - id: legitima-defesa
+      url: /disciplinas/direito-penal/legitima-defesa/
+      eyebrow: Ilicitude · art. 25 do CP
+      title: "Legítima defesa: os cinco requisitos"
+      chrome_title: Legítima defesa
+      browser_title: Legítima defesa | Direito Penal
+      description: Roteiro visual de agressão injusta, atual ou iminente, direito protegido, meios necessários e moderação, com revisão do excesso punível.
+    - id: principio-da-consuncao
+      url: /disciplinas/direito-penal/principio-da-consuncao/
+      eyebrow: Conflito aparente de normas
+      title: Princípio da consunção
+      chrome_title: Princípio da consunção
+      browser_title: Princípio da consunção | Direito Penal
+      description: Crime-meio, crime-fim, exaurimento da lesividade e limites da absorção, com comparação a especialidade e subsidiariedade.
+
+- id: direito-constitucional-i
+  code: CON
+  name: Direito Constitucional I
+  url: /disciplinas/direito-constitucional-i/
+  description: Estudos de Direito Constitucional I sobre poder constituinte, Constituição, direitos fundamentais e organização do Estado.
+  summary: "A Constituição como fundamento da ordem jurídica: poder constituinte, princípios fundamentais, direitos e garantias, organização do Estado e distribuição de competências."
+  studies_intro: Fundamentos constitucionais organizados para leitura e revisão ativa.
+  note_label: Organização correta
+  note: Este conteúdo pertence exclusivamente a Direito Constitucional I e permanece separado dos materiais de Direito Penal.
+  studies:
+    - id: poder-constituinte
+      url: /disciplinas/direito-constitucional-i/poder-constituinte/
+      eyebrow: Fundamentos · áudio guiado
+      title: "Poder Constituinte: ruptura e nova ordem"
+      chrome_title: Poder Constituinte
+      browser_title: Poder Constituinte | Direito Constitucional I
+      description: Mapa interativo sobre ruptura constitucional, poder originário, dimensões material e formal, poderes derivados, artigo 60 e mecanismos de preservação do Estado.

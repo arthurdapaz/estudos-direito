@@ -12,22 +12,26 @@ O site público fica em:
 
 ## Arquitetura
 
-- `index.html`: catálogo geral dos estudos e porta de entrada do GitHub Pages.
-- `disciplinas/<slug-da-disciplina>/index.html`: página de uma disciplina.
-- `disciplinas/<slug-da-disciplina>/<slug-do-estudo>/index.html`: estudo, experimento, documento ou simulador específico.
-- `.nojekyll`: mantém o GitHub Pages servindo arquivos estáticos sem processamento Jekyll.
+- `_config.yml`: configuração do Jekyll e do subpath `/estudos-direito`.
+- `_data/disciplines.yml`: fonte única das disciplinas, estudos, descrições, ordem e rotas do catálogo.
+- `_layouts/`: estruturas compartilhadas de base, home, disciplina e estudo.
+- `_includes/`: componentes reutilizáveis de marca, navegação, rodapé, links e linhas do catálogo.
+- `index.html`: front matter mínimo que aciona o layout da home.
+- `disciplinas/<slug-da-disciplina>/index.html`: front matter mínimo que seleciona uma disciplina dos dados.
+- `disciplinas/<slug-da-disciplina>/<slug-do-estudo>/index.html`: conteúdo e comportamento específico de um estudo, envolvido pelo layout compartilhado.
+- `assets/studies/<slug-do-estudo>.css`: estilos específicos do conteúdo, carregados antes do design system comum.
 - `README.md`: descrição curta do repositório para humanos.
 
-O projeto é intencionalmente estático. Não há build step, bundler, package manager ou framework. Cada estudo deve abrir diretamente via servidor estático.
+O projeto usa Jekyll apenas como gerador estático. O resultado continua sem backend e é publicado pelo build nativo do GitHub Pages. Não introduza frameworks JavaScript ou plugins Jekyll fora da lista suportada pelo GitHub Pages sem necessidade e validação explícitas.
 
 ## Convenções de organização
 
 - Use slugs em minúsculas, sem acentos e separados por hífen.
-- Crie uma página de disciplina antes de adicionar estudos dentro dela.
-- Sempre atualize o catálogo raiz quando publicar uma nova disciplina ou estudo relevante.
-- Sempre atualize a página da disciplina quando adicionar, renomear ou remover um estudo.
-- Use links relativos, como `./disciplina/` ou `../`, para funcionar em localhost e no subpath do GitHub Pages.
-- Não use URLs absolutas começando com `/`, porque o site roda sob `/estudos-direito/` no GitHub Pages.
+- Cadastre disciplinas e estudos em `_data/disciplines.yml`; não duplique o catálogo em layouts ou páginas.
+- Crie a página mínima da disciplina antes de adicionar estudos dentro dela.
+- Use o filtro Liquid `relative_url` nos componentes e layouts para respeitar localhost e o subpath do GitHub Pages.
+- Dentro do conteúdo específico de um estudo, links documentais relativos como `../` e `audio/<id>.mp3` permanecem válidos.
+- Toda página HTML publicada deve ter front matter e usar um layout existente.
 - Evite salvar screenshots, previews temporários ou arquivos grandes no repositório, salvo quando forem parte real do estudo.
 
 ## Padrões de estudo
@@ -60,14 +64,18 @@ O conteúdo é material de estudo, não parecer jurídico. Ao incluir informaç�
 ## Padrões técnicos
 
 - Mantenha HTML, CSS e JS coesos quando o estudo for pequeno ou experimental.
-- Extraia arquivos separados apenas quando isso melhorar manutenção real.
+- Extraia componentes para `_includes` quando forem usados em mais de um nível ou página; não crie includes para fragmentos exclusivos.
+- Cabeçalho, marca, breadcrumb, rodapé, metadados e linhas de catálogo não devem ser duplicados nas páginas.
+- Metadados acadêmicos do catálogo pertencem a `_data/disciplines.yml`; conteúdo jurídico e interação exclusivos permanecem na página do estudo.
 - Use APIs nativas do navegador quando bastarem.
 - Para 3D, use Three.js por import map/CDN, como no estudo da Pirâmide de Kelsen.
-- Não introduza dependências, build tools ou frameworks sem necessidade clara.
-- Garanta que o estudo funcione com um servidor estático simples, por exemplo:
+- Use o `github-pages` definido no `Gemfile` para reproduzir localmente as versões do ambiente de publicação.
+- Faça o build local com Ruby 3.2 configurado no `rbenv`:
 
 ```bash
-python3 -m http.server 8001
+RBENV_VERSION=3.2.0 rbenv exec bundle exec jekyll build
+RBENV_VERSION=3.2.0 rbenv exec bundle exec jekyll serve
+RBENV_VERSION=3.2.0 rbenv exec ruby tools/validate-jekyll.rb
 ```
 
 ## Áudio narrado neural
@@ -125,7 +133,7 @@ Depois valide:
 
 - Confirme que existe um MP3 por item narrável.
 - Confira duração e codec com `ffprobe`.
-- Rode servidor estático local e teste o player em desktop e mobile.
+- Rode o Jekyll localmente e teste o player em desktop e mobile.
 - Clique em itens com siglas difíceis e confira se carregam o arquivo correto.
 - Quando possível, ouça trechos críticos. Ajuste `toSpokenText` e regenere se a voz pronunciar errado.
 - Faça commit dos MP3s gerados junto com o script e o HTML que os consome.
@@ -134,7 +142,9 @@ Depois valide:
 
 Antes de finalizar uma mudança:
 
-- Rode um servidor estático local quando houver HTML/JS navegável.
+- Rode `bundle exec jekyll build` e corrija qualquer erro ou warning relevante.
+- Rode `RBENV_VERSION=3.2.0 rbenv exec ruby tools/validate-jekyll.rb` para conferir a correspondência entre dados, páginas, layouts e estilos.
+- Sirva o resultado com Jekyll quando houver HTML/JS navegável.
 - Teste a home, a página da disciplina e o estudo alterado.
 - Verifique o console do navegador.
 - Valide pelo menos um viewport desktop e um mobile quando a UI mudar.

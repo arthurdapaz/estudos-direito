@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="{{ site.lang | default: 'pt-BR' }}">
+<head>
+  {% assign resolved_title = page.title | default: site.title %}
+  {% assign resolved_description = page.description | default: site.description %}
+  {% if page.discipline_id %}
+    {% assign resolved_discipline = site.data.disciplines | where: "id", page.discipline_id | first %}
+    {% if page.study_id %}
+      {% assign resolved_study = resolved_discipline.studies | where: "id", page.study_id | first %}
+      {% assign resolved_title = resolved_study.browser_title | default: resolved_study.title %}
+      {% assign resolved_description = resolved_study.description %}
+    {% else %}
+      {% capture resolved_title %}{{ resolved_discipline.name }} | {{ site.title }}{% endcapture %}
+      {% assign resolved_description = resolved_discipline.description %}
+    {% endif %}
+  {% endif %}
+  {% include head.html title=resolved_title description=resolved_description %}
+</head>
+<body{% if page.body_class %} class="{{ page.body_class }}"{% endif %}>
+  {{ content }}
+</body>
+</html>

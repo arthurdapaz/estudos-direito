@@ -1,0 +1,9 @@
+{% assign study = include.study %}
+<li>
+  <a class="study-row" href="{{ study.url | relative_url }}">
+    <span class="study-number">{% if include.index < 10 %}0{% endif %}{{ include.index }}</span>
+    <span class="study-title-wrap"><small>{{ study.eyebrow }}</small><strong>{{ study.title }}</strong></span>
+    <p class="study-description">{{ study.description }}</p>
+    {% include arrow-icon.html %}
+  </a>
+</li>

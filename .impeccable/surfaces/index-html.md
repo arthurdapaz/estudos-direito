@@ -11,7 +11,7 @@ related_targets: ["disciplinas/introducao-ao-estudo-do-direito/index.html","disc
 
 - Comp aprovado: `.impeccable/mocks/home-a.webp` — Diretório lateral.
 - A home é exclusivamente um diretório de disciplinas; subtemas e estudos só aparecem dentro da disciplina.
-- A lista semântica à esquerda é a fonte de verdade. O Atomium à direita é gerado a partir dessa mesma lista, logo inclusão, remoção e reordenação de disciplinas recalculam nós, arestas, rótulos e estados.
+- `_data/disciplines.yml` é a fonte de verdade. O Jekyll gera a lista semântica à esquerda, e o Atomium à direita deriva dessa lista; inclusão, remoção e reordenação de disciplinas recalculam nós, arestas, rótulos e estados.
 - As ligações representam apenas a visão do conjunto do curso, nunca pré-requisito ou dependência acadêmica.
 
 ## Gramática do sistema
@@ -31,16 +31,16 @@ related_targets: ["disciplinas/introducao-ao-estudo-do-direito/index.html","disc
 
 | Compromisso visível | Meio | Observação |
 | --- | --- | --- |
-| Cabeçalho compacto e marca textual | HTML/CSS | Sem navegação fictícia |
+| Cabeçalho compacto e marca textual | Include Jekyll + CSS | Componente único, sem navegação fictícia |
 | Título, explicação e contagem | HTML/CSS | Hierarquia editorial técnica |
-| Diretório numerado de disciplinas | HTML semântico | Fonte única de dados da rede |
+| Diretório numerado de disciplinas | Jekyll + HTML semântico | Gerado por `_data/disciplines.yml`; fonte da rede no DOM |
 | Atomium curricular | SVG + JavaScript nativo | Layout determinístico por quantidade e tamanho do container |
 | Hastes e cabos | SVG | Animação e foco sincronizados com a lista |
 | Esferas/nós | SVG | Links reais, teclado, `aria-label`, área de toque mínima |
 | Rótulos e linhas-guia | SVG/HTML | Evitar colisões; reduzir no mobile |
 | Textura mineral | CSS | Sem raster; ruído tão discreto que não prejudique leitura |
-| Páginas de disciplina | HTML/CSS compartilhado | Cabeçalho contextual + lista de estudos da disciplina |
-| Estudos existentes | `study-system.css` + chrome HTML | Preservar interações, conteúdo e áudio; unificar paleta clara, tipografia, ritmo, controles e superfícies |
+| Páginas de disciplina | Layout Jekyll + CSS compartilhado | Cabeçalho contextual + lista gerada de estudos da disciplina |
+| Estudos existentes | Layout `study` + `study-system.css` | Chrome renderizado por include; preservar interações, conteúdo e áudio |
 | Pirâmide de Kelsen | `kelsen-light.css` + Three.js | Preservar a composição 3D; converter toda a experiência para fundo, painéis e iluminação claros |
 
 ## Composição responsiva
@@ -60,6 +60,7 @@ related_targets: ["disciplinas/introducao-ao-estudo-do-direito/index.html","disc
 ## Regra dos estudos
 
 - Todo estudo convencional usa a classe `study-standard` e a folha `assets/study-system.css`.
+- Home, disciplinas e metadados de estudos são compostos por layouts/includes e nunca duplicados manualmente.
 - Espaço vazio, alinhamento e tipografia devem separar conteúdo antes de bordas, sombras ou caixas.
 - Modo escuro, gradientes decorativos e paletas locais não são permitidos nos estudos convencionais.
 - A Pirâmide de Kelsen é a única exceção estrutural registrada. Ela mantém o 3D, mas obrigatoriamente em tema claro com `study-kelsen-light` e `assets/kelsen-light.css`.

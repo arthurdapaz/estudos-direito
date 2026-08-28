@@ -1,147 +1,13 @@
-<!doctype html>
-<html lang="pt-BR">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Estudo interativo e narrado sobre o poder constituinte, a ruptura com a ordem anterior e a fundação de uma nova ordem constitucional.">
-  <link rel="icon" href="data:,">
-  <title>Poder Constituinte | Direito Constitucional I</title>
-  <style>
-    :root {
-      color-scheme: dark;
-      --night: #10120f;
-      --deep: #161b15;
-      --ink: #1e241d;
-      --paper: #f1ead9;
-      --paper-muted: #ddd3bd;
-      --text: #f8f3e8;
-      --muted: #c5bdad;
-      --clay: #d5533d;
-      --sun: #dfb74d;
-      --moss: #91a55c;
-      --line: rgba(248, 243, 232, .18);
-      --serif: Georgia, "Times New Roman", serif;
-      --sans: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-    }
+---
+layout: study
+discipline_id: direito-constitucional-i
+study_id: poder-constituinte
+study_style: /assets/studies/poder-constituinte.css
+body_class: study-standard
+permalink: /disciplinas/direito-constitucional-i/poder-constituinte/
+---
 
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    body {
-      min-width: 320px;
-      min-height: 100vh;
-      margin: 0;
-      color: var(--text);
-      background:
-        radial-gradient(circle at 87% 7%, rgba(223,183,77,.17), transparent 31rem),
-        linear-gradient(90deg, transparent 0 8%, rgba(213,83,61,.25) 8% calc(8% + 1px), transparent calc(8% + 1px)),
-        var(--night);
-      font-family: var(--sans);
-    }
-    body::before { position: fixed; inset: 0; z-index: -1; content: ""; opacity: .14; pointer-events: none; background: repeating-linear-gradient(0deg, rgba(255,255,255,.07) 0 1px, transparent 1px 4px); }
-    a, button { font: inherit; }
-    a { color: inherit; }
-    button { color: inherit; }
-    .skip-link { position: fixed; z-index: 30; top: 10px; left: 10px; padding: 10px 14px; color: var(--ink); background: var(--sun); transform: translateY(-160%); }
-    .skip-link:focus { transform: translateY(0); }
-    .page { width: min(1160px, calc(100vw - 40px)); margin: 0 auto; padding: 22px 0 72px; }
-
-    .topbar { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-bottom: 18px; border-bottom: 1px solid var(--line); }
-    .crumb { display: inline-flex; align-items: center; min-height: 42px; padding: 0 13px; border: 1px solid var(--line); color: var(--muted); font: 800 .71rem var(--mono); letter-spacing: .07em; text-decoration: none; text-transform: uppercase; }
-    .crumb:hover, .crumb:focus-visible { outline: 2px solid var(--sun); outline-offset: 3px; color: white; }
-    .progress { color: var(--muted); font: 800 .69rem var(--mono); letter-spacing: .1em; text-transform: uppercase; }
-
-    .hero { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(260px, .55fr); gap: clamp(34px, 7vw, 90px); align-items: end; padding: clamp(64px, 12vw, 136px) 0 clamp(44px, 8vw, 86px); }
-    .eyebrow { margin: 0 0 14px; color: var(--clay); font: 900 .7rem var(--mono); letter-spacing: .15em; text-transform: uppercase; }
-    h1 { max-width: 8ch; margin: 0; font: 500 clamp(3.75rem, 10vw, 8.6rem)/.8 var(--serif); letter-spacing: -.065em; }
-    .hero-copy { padding-left: 21px; border-left: 4px solid var(--clay); }
-    .hero-copy p { margin: 0; color: var(--muted); font: clamp(1.02rem, 1.9vw, 1.24rem)/1.6 var(--sans); }
-    .hero-copy strong { color: white; }
-
-    .audio-bar { position: sticky; z-index: 20; top: 9px; display: grid; grid-template-columns: 44px auto 44px minmax(180px, 1fr); gap: 8px; align-items: center; padding: 10px; border: 1px solid rgba(223,183,77,.54); background: rgba(22,27,21,.96); box-shadow: 0 14px 34px rgba(0,0,0,.32); backdrop-filter: blur(14px); }
-    .audio-bar button { min-width: 44px; min-height: 44px; border: 1px solid var(--line); background: transparent; cursor: pointer; }
-    .audio-bar button:hover, .audio-bar button:focus-visible { outline: 2px solid var(--sun); outline-offset: 2px; background: rgba(255,255,255,.08); }
-    .audio-bar .primary { min-width: 148px; padding: 0 14px; border-color: var(--sun); background: var(--sun); color: var(--ink); font: 900 .72rem var(--mono); letter-spacing: .03em; }
-    .audio-status { min-width: 0; padding: 0 7px; color: var(--muted); font: .76rem/1.35 var(--sans); }
-    audio { display: none; }
-
-    .rupture-map { display: grid; grid-template-columns: 1fr auto 1fr; align-items: stretch; margin: 34px 0 72px; border: 1px solid rgba(223,183,77,.44); background: var(--line); }
-    .order { min-height: 244px; padding: clamp(22px, 4vw, 42px); background: var(--deep); }
-    .order.next { background: var(--paper); color: var(--ink); }
-    .order span { color: var(--clay); font: 900 .67rem var(--mono); letter-spacing: .12em; text-transform: uppercase; }
-    .order h2 { max-width: 11ch; margin: 26px 0 11px; font: 500 clamp(2rem,4vw,4rem)/.9 var(--serif); letter-spacing: -.04em; }
-    .order p { max-width: 44ch; margin: 0; color: var(--muted); font: .94rem/1.55 var(--sans); }
-    .order.next p { color: #555b4d; }
-    .break { display: grid; place-items: center; min-width: clamp(68px, 11vw, 136px); padding: 10px; background: var(--clay); color: var(--paper); font: 900 .72rem/1.3 var(--mono); letter-spacing: .07em; text-align: center; text-transform: uppercase; }
-    .break::before { content: "↯"; display: block; margin-bottom: 8px; font: 2.35rem/1 var(--serif); }
-
-    .section-label { display: flex; gap: 16px; align-items: center; margin: 0 0 18px; color: var(--clay); font: 900 .7rem var(--mono); letter-spacing: .14em; text-transform: uppercase; }
-    .section-label::after { height: 1px; flex: 1; content: ""; background: var(--line); }
-    .study-shell { display: grid; grid-template-columns: minmax(242px,.36fr) minmax(0,1fr); gap: clamp(22px,4.4vw,54px); align-items: start; }
-    .concept-list { display: grid; border-top: 1px solid rgba(248,243,232,.52); }
-    .concept-button { position: relative; display: grid; grid-template-columns: 42px 1fr; gap: 11px; width: 100%; min-height: 76px; padding: 14px 10px; border: 0; border-bottom: 1px solid var(--line); background: transparent; text-align: left; cursor: pointer; transition: background 180ms ease, padding-left 180ms ease; }
-    .concept-button::before { position: absolute; inset: 0 auto 0 0; width: 4px; content: ""; background: transparent; }
-    .concept-button:hover, .concept-button:focus-visible { outline: 2px solid rgba(223,183,77,.7); outline-offset: -2px; background: rgba(255,255,255,.05); }
-    .concept-button.active { padding-left: 16px; background: rgba(241,234,217,.09); }
-    .concept-button.active::before { background: var(--clay); }
-    .concept-number { padding-top: 2px; color: var(--clay); font: 900 .71rem var(--mono); }
-    .concept-name { font: 800 .91rem/1.22 var(--sans); }
-    .concept-note { display: block; margin-top: 5px; color: #979083; font: .67rem/1.32 var(--mono); }
-
-    .detail { position: relative; min-height: 544px; padding: clamp(28px,5vw,58px); overflow: hidden; border: 1px solid rgba(30,36,29,.28); background: var(--paper); color: var(--ink); box-shadow: 14px 14px 0 rgba(213,83,61,.27); }
-    .detail::before { position: absolute; inset: 0 auto 0 0; width: 8px; content: ""; background: var(--accent, var(--clay)); }
-    .detail-kicker { margin: 0 0 13px; color: var(--accent, var(--clay)); font: 900 .69rem var(--mono); letter-spacing: .1em; text-transform: uppercase; }
-    .detail h2 { max-width: 14ch; margin: 0; font: 500 clamp(2.4rem,5.7vw,5.1rem)/.88 var(--serif); letter-spacing: -.05em; }
-    .detail-summary { max-width: 65ch; margin: 20px 0 0; color: #555b4d; font: clamp(1.01rem,1.8vw,1.17rem)/1.58 var(--sans); }
-    .detail-actions { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 23px; }
-    .inline-action { min-height: 44px; padding: 0 15px; border: 0; background: var(--ink); color: var(--paper); font: 900 .72rem var(--mono); cursor: pointer; }
-    .inline-action:hover, .inline-action:focus-visible { outline: 3px solid rgba(213,83,61,.32); outline-offset: 3px; }
-    .detail-section { margin-top: 28px; padding-top: 20px; border-top: 1px solid rgba(30,36,29,.2); }
-    .detail-section h3 { margin: 0 0 12px; font: 900 .7rem var(--mono); letter-spacing: .1em; text-transform: uppercase; }
-    .detail-section ul { display: grid; gap: 10px; margin: 0; padding: 0; list-style: none; }
-    .detail-section li { position: relative; padding-left: 22px; color: #555b4d; font: .96rem/1.56 var(--sans); }
-    .detail-section li::before { position: absolute; top: .67em; left: 0; width: 9px; height: 2px; content: ""; background: var(--accent, var(--clay)); }
-
-    .four-effects { margin-top: 80px; }
-    .effect-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 1px; border: 1px solid var(--line); background: var(--line); }
-    .effect { min-height: 218px; padding: 22px; background: var(--deep); }
-    .effect:nth-child(1) { background: var(--paper); color: var(--ink); }
-    .effect span { color: var(--sun); font: 900 .66rem var(--mono); letter-spacing: .1em; text-transform: uppercase; }
-    .effect:first-child span { color: var(--clay); }
-    .effect h3 { margin: 26px 0 11px; font: 500 clamp(1.5rem,2.7vw,2.1rem)/.98 var(--serif); }
-    .effect p { margin: 0; color: var(--muted); font: .86rem/1.52 var(--sans); }
-    .effect:first-child p { color: #555b4d; }
-
-    .quiz { display: grid; grid-template-columns: minmax(220px,.37fr) minmax(0,1fr); gap: clamp(24px,5vw,64px); margin-top: 80px; padding-top: 30px; border-top: 1px solid rgba(248,243,232,.5); }
-    .quiz header { display: block; }
-    .quiz h2 { margin: 8px 0 12px; font: 500 clamp(2.2rem,4vw,3.8rem)/.9 var(--serif); }
-    .quiz header p { color: var(--muted); font: .92rem/1.5 var(--sans); }
-    .quiz-card { padding: clamp(22px,4vw,35px); border: 1px solid var(--line); background: var(--deep); }
-    .quiz-question { margin: 0 0 19px; font: 500 clamp(1.3rem,2.4vw,1.78rem)/1.28 var(--serif); }
-    .quiz-options { display: grid; gap: 9px; }
-    .quiz-option { min-height: 49px; padding: 11px 14px; border: 1px solid var(--line); background: rgba(255,255,255,.03); text-align: left; cursor: pointer; }
-    .quiz-option:hover, .quiz-option:focus-visible { outline: 2px solid var(--sun); outline-offset: 2px; }
-    .quiz-option.correct { border-color: var(--moss); background: rgba(145,165,92,.17); }
-    .quiz-option.wrong { border-color: var(--clay); background: rgba(213,83,61,.16); }
-    .quiz-feedback { min-height: 52px; margin: 16px 0 0; color: var(--muted); font: .86rem/1.5 var(--sans); }
-    .quiz-nav { display: flex; justify-content: flex-end; gap: 8px; margin-top: 14px; }
-    .quiz-nav button { min-width: 44px; min-height: 44px; border: 1px solid var(--line); background: transparent; cursor: pointer; }
-    .source-note { margin-top: 38px; color: #999184; font: .76rem/1.55 var(--sans); }
-    .source-note a { color: var(--sun); font-weight: 800; }
-    .source-note a:hover, .source-note a:focus-visible { outline: 2px solid var(--sun); outline-offset: 3px; }
-    .reveal { opacity: 0; transform: translateY(18px); transition: opacity 560ms ease, transform 560ms cubic-bezier(.2,.8,.2,1); }
-    .reveal.visible { opacity: 1; transform: none; }
-
-    @media (max-width: 900px) { .hero, .study-shell, .quiz { grid-template-columns: 1fr; } .hero { gap: 28px; } .hero-copy { max-width: 58ch; } .concept-list { grid-template-columns: repeat(2,minmax(0,1fr)); border-left: 1px solid var(--line); } .effect-grid { grid-template-columns: repeat(2,1fr); } .detail { min-height: 0; box-shadow: 8px 8px 0 rgba(213,83,61,.24); } }
-    @media (max-width: 620px) { .page { width: min(100vw - 24px,680px); padding-top: 12px; } .topbar { align-items: start; flex-direction: column; } h1 { font-size: clamp(3.5rem,18vw,5.7rem); } .audio-bar { top: 6px; grid-template-columns: 44px minmax(0,1fr) 44px; } .audio-bar .primary { min-width: 0; } .audio-status { grid-column: 1/-1; padding: 3px 4px 0; } .rupture-map { grid-template-columns: 1fr; } .break { min-height: 70px; } .break::before { display: inline; margin-right: 8px; } .concept-list, .effect-grid { grid-template-columns: 1fr; } .detail { padding: 29px 22px 33px 29px; } .detail h2 { font-size: clamp(2.45rem,13vw,3.8rem); } }
-    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *,*::before,*::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; } .reveal { opacity: 1; transform: none; } }
-  </style>
-  <link rel="stylesheet" href="../../../assets/study-chrome.css">
-  <link rel="stylesheet" href="../../../assets/study-system.css">
-  <script src="../../../assets/study-chrome.js" data-root="../../../" data-discipline="Direito Constitucional I" data-discipline-href="../" defer></script>
-</head>
-<body class="study-standard">
-  <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+<a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
   <main class="page" id="conteudo">
     <nav class="topbar" aria-label="Navegação estrutural">
       <a class="crumb" href="../">← Direito Constitucional I</a>
@@ -244,5 +110,3 @@
     function setupReveals() { if (!("IntersectionObserver" in window) || window.matchMedia("(prefers-reduced-motion: reduce)").matches) { document.querySelectorAll(".reveal").forEach((element) => element.classList.add("visible")); return; } const observer = new IntersectionObserver((entries) => entries.forEach((entry) => { if (entry.isIntersecting) { entry.target.classList.add("visible"); observer.unobserve(entry.target); } }), { threshold: .12 }); document.querySelectorAll(".reveal").forEach((element) => observer.observe(element)); }
     function updateAudioStatus(message) { audioStatus.textContent = message; }
   </script>
-</body>
-</html>

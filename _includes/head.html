@@ -1,0 +1,18 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="{{ include.description | default: site.description | escape }}">
+<link rel="icon" href="data:,">
+<link rel="preload" href="{{ '/assets/fonts/barlow-condensed-600.woff2' | relative_url }}" as="font" type="font/woff2" crossorigin>
+<title>{{ include.title | default: site.title | escape }}</title>
+{% if page.layout == "study" %}
+  <link rel="stylesheet" href="{{ page.study_style | relative_url }}">
+  <link rel="stylesheet" href="{{ '/assets/study-chrome.css' | relative_url }}">
+  {% if page.study_variant == "kelsen" %}
+    <link rel="stylesheet" href="{{ '/assets/kelsen-light.css' | relative_url }}">
+  {% else %}
+    <link rel="stylesheet" href="{{ '/assets/study-system.css' | relative_url }}">
+  {% endif %}
+{% else %}
+  <link rel="stylesheet" href="{{ '/assets/site.css' | relative_url }}">
+{% endif %}
+{% if page.three_js %}{% include three-importmap.html %}{% endif %}

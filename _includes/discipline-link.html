@@ -1,0 +1,12 @@
+{% assign discipline = include.discipline %}
+{% assign study_count = discipline.studies | size %}
+<li>
+  <a class="discipline-link" data-discipline data-code="{{ discipline.code }}" data-name="{{ discipline.name | escape }}" href="{{ discipline.url | relative_url }}">
+    <span class="discipline-number">{% if include.index < 10 %}0{% endif %}{{ include.index }}</span>
+    <span class="discipline-copy">
+      <strong>{{ discipline.name }}</strong>
+      <small>{{ study_count }} {% if study_count == 1 %}estudo publicado{% else %}estudos publicados{% endif %}</small>
+    </span>
+    {% include arrow-icon.html class="discipline-arrow" %}
+  </a>
+</li>

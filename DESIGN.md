@@ -102,6 +102,7 @@ A identidade compartilhada cobre a home, os índices de disciplina e todo o inte
 - Hierarquia de três níveis: disciplinas, índice da disciplina e estudo específico.
 - Lista semântica como verdade; visualização como extensão progressiva e sincronizada.
 - Espaço vazio como principal instrumento de separação, ritmo e hierarquia.
+- Jekyll como camada de composição estática: dados, layouts e includes evitam divergência visual sem adicionar runtime ao navegador.
 
 ## Colors
 
@@ -214,8 +215,8 @@ As hastes têm terminações arredondadas porque representam tubos físicos, nã
 
 ### Study Chrome
 
-- **Structure:** navegação injetada no topo de cada estudo com marca, link para Disciplinas, link para a disciplina atual e título corrente.
-- **Configuration:** cada página informa caminhos relativos e nome da disciplina por atributos do script; o título é derivado do `<title>` e o componente evita duplicação.
+- **Structure:** navegação renderizada no topo de cada estudo pelo include `_includes/study-chrome.html`, com marca, link para Disciplinas, link para a disciplina atual e título corrente.
+- **Configuration:** o layout resolve disciplina e estudo a partir de `_data/disciplines.yml`; URLs passam por `relative_url` e não dependem de injeção JavaScript.
 - **Material:** faixa concreta clara, divisor estrutural e tipografia do sistema, independente da paleta do estudo abaixo.
 - **Accessibility:** links de 44px, foco vermelho visível, `aria-current` no estudo e truncamento apenas visual do título longo.
 
@@ -237,7 +238,7 @@ As hastes têm terminações arredondadas porque representam tubos físicos, nã
 
 ### Atomium Curricular
 
-- **Data model:** a lista ordenada semântica é a fonte única. Código, nome, destino, quantidade e ordem são relidos do DOM; `MutationObserver` reage a alterações e `ResizeObserver` recalcula geometria.
+- **Data model:** `_data/disciplines.yml` é a fonte única. O Jekyll gera a lista ordenada semântica; código, nome, destino, quantidade e ordem são relidos do DOM pela rede, enquanto `MutationObserver` e `ResizeObserver` mantêm a geometria sincronizada.
 - **Scale:** um, dois, três e quatro nós têm composições determinísticas próprias. A partir de cinco, os nós ocupam um anel externo; acima de dez, até cinco migram para um anel interno.
 - **Connections:** até quatro nós formam um conjunto completo. Em coleções maiores, cada nó liga-se aos dois vizinhos seguintes, limitando densidade. Cabos vermelhos aparecem em todas as arestas até quatro e de modo alternado acima disso.
 - **Material grammar:** haste de Carbono de 14px, sombra estrutural de 18px, colares radiais junto às esferas, cabo vermelho de 1.6px, órbita tracejada e esfera radial com código central.
@@ -246,7 +247,15 @@ As hastes têm terminações arredondadas porque representam tubos físicos, nã
 
 ### Extension Boundary
 
-Para adicionar uma disciplina, criar primeiro sua página e inserir um único item completo na lista da home, preservando os atributos de código, nome e destino; a rede não deve receber dados duplicados. Para adicionar um estudo, alterar o índice da disciplina correspondente, instalar o chrome compartilhado e aplicar `study-system.css` com `study-standard`. Interações pedagógicas podem criar geometria e comportamento próprios, mas não paletas, tipografia estrutural ou sistemas locais de cartões. Exceções visuais exigem registro explícito neste documento; atualmente, só a Pirâmide de Kelsen possui essa condição.
+Para adicionar uma disciplina, cadastrar um único registro em `_data/disciplines.yml` e criar sua página declarativa com `layout: discipline`. Para adicionar um estudo, cadastrar o item no mesmo arquivo e criar a página com `layout: study`, `discipline_id`, `study_id`, `study-standard` e seu CSS específico. Home, índices, marca, chrome, metadados e setas nunca devem ser copiados manualmente. Interações pedagógicas podem criar geometria e comportamento próprios, mas não paletas, tipografia estrutural ou sistemas locais de cartões. Exceções visuais exigem registro explícito neste documento; atualmente, só a Pirâmide de Kelsen possui essa condição.
+
+### Jekyll Composition Rule
+
+- **Data:** nomes, códigos, rotas, ordem, resumos e registros de estudos vivem somente em `_data/disciplines.yml`.
+- **Layouts:** `base`, `home`, `discipline` e `study` definem a estrutura dos quatro tipos de página; páginas publicadas declaram intenção por front matter.
+- **Includes:** fragmentos realmente compartilhados — marca, cabeçalho, rodapé, chrome, setas e linhas de índice — vivem em `_includes`.
+- **KISS boundary:** conteúdo jurídico, dados interativos e scripts exclusivos não viram includes artificiais; permanecem no estudo que os utiliza.
+- **Runtime:** Jekyll atua apenas no build. O site entregue continua estático e não exige JavaScript para navegação textual.
 
 Movimento compartilhado usa transições de 180ms para cor, fundo e deslocamento, curva rápida `cubic-bezier(0.16, 1, 0.3, 1)` para gestos espaciais e 420ms para a expansão da órbita. `prefers-reduced-motion` reduz toda animação e transição a um estado praticamente imediato.
 
@@ -254,7 +263,8 @@ Movimento compartilhado usa transições de 180ms para cor, fundo e deslocamento
 
 ### Do:
 
-- **Do** manter links relativos para que shell, disciplinas, estudos, fontes e scripts funcionem em localhost e no subpath do GitHub Pages.
+- **Do** usar `relative_url` em layouts e includes para que shell, disciplinas, estudos, fontes e scripts funcionem no subpath do GitHub Pages.
+- **Do** editar o catálogo somente em `_data/disciplines.yml` e executar o build Jekyll antes de publicar.
 - **Do** tratar a lista semântica como fonte de verdade e a rede SVG como uma visualização derivada.
 - **Do** usar HTML semântico, foco vermelho de alto contraste, áreas interativas de pelo menos 44px e suporte a movimento reduzido.
 - **Do** aplicar a superfície clara compartilhada a todo estudo convencional.
@@ -271,3 +281,4 @@ Movimento compartilhado usa transições de 180ms para cor, fundo e deslocamento
 - **Don't** criar paleta, modo escuro, tipografia estrutural ou linguagem de cartões exclusiva para um estudo convencional.
 - **Don't** usar bordas e caixas como separadores automáticos; primeiro resolva a hierarquia com espaço, alinhamento e escala tipográfica.
 - **Don't** tratar a Pirâmide de Kelsen como autorização genérica para outras exceções; sua composição 3D clara é uma regra nomeada e isolada.
+- **Don't** duplicar marca, cabeçalhos, breadcrumbs, rodapés, metadados ou registros acadêmicos diretamente em páginas.

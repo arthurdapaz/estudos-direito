@@ -1,0 +1,20 @@
+title: Estudos de Direito
+description: Biblioteca de estudos interativos do Curso de Direito.
+lang: pt-BR
+url: https://arthurdapaz.github.io
+baseurl: /estudos-direito
+timezone: America/Sao_Paulo
+encoding: utf-8
+permalink: pretty
+strict_front_matter: true
+
+exclude:
+  - AGENTS.md
+  - DESIGN.md
+  - PRODUCT.md
+  - README.md
+  - Gemfile
+  - Gemfile.lock
+  - tools
+  - vendor
+  - .impeccable
