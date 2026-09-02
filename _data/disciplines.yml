@@ -38,7 +38,7 @@
   code: PEN
   name: Direito Penal
   url: /disciplinas/direito-penal/
-  description: Estudos de Direito Penal sobre teoria do crime, iter criminis, crimes contra a honra, legítima defesa e consunção.
+  description: Estudos de Direito Penal sobre teoria do crime, iter criminis, tentativa, crimes contra a honra, legítima defesa e consunção.
   summary: Pressupostos do crime, formas de imputação e consequências jurídicas, com leitura sistemática da Parte Geral e aplicação aos tipos penais.
   studies_intro: Conteúdos separados por problema jurídico e finalidade de revisão.
   note_label: Leitura da disciplina
@@ -58,6 +58,13 @@
       chrome_title: Iter criminis
       browser_title: Iter criminis | Direito Penal
       description: Régua interativa do percurso do crime — cogitação, atos preparatórios, atos executórios e consumação — com o art. 14 do CP e exemplo orientado ao homicídio.
+    - id: tentativa
+      url: /disciplinas/direito-penal/tentativa/
+      eyebrow: Arts. 14 e 15 do CP · áudio guiado
+      title: "Tentativa, desistência e arrependimento eficaz"
+      chrome_title: Tentativa e desistência
+      browser_title: Tentativa e desistência | Direito Penal
+      description: Organização pelos arts. 14 e 15 do CP — tentativa imperfeita, tentativa perfeita, desistência voluntária e arrependimento eficaz — com tabela de distinção e guia em áudio.
     - id: crimes-contra-a-honra
       url: /disciplinas/direito-penal/crimes-contra-a-honra/
       eyebrow: Mapa CDI · revisão ativa

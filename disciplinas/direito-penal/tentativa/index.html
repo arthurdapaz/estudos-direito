@@ -1,0 +1,467 @@
+---
+layout: study
+discipline_id: direito-penal
+study_id: tentativa
+study_style: /assets/studies/tentativa.css
+body_class: study-standard
+permalink: /disciplinas/direito-penal/tentativa/
+---
+
+<main class="page">
+  <a class="crumb" href="../">← Direito Penal</a>
+
+  <header class="hero">
+    <div>
+      <p class="eyebrow">Teoria do crime · arts. 14 e 15 do CP</p>
+      <h1>Tentativa e desistência</h1>
+    </div>
+    <div class="formula">
+      <strong>Quando a execução começa e o resultado não vem</strong>
+      <p>O art. 14 pune a tentativa. O art. 15 abre a “ponte de ouro”: se o agente para por vontade própria, responde só pelo que já fez.</p>
+    </div>
+  </header>
+
+  <section class="audio-bar" aria-label="Áudio guiado">
+    <button type="button" id="prevAudio" aria-label="Ouvir item anterior">←</button>
+    <button type="button" class="primary" id="toggleGuide">▶ Iniciar guia</button>
+    <button type="button" id="nextAudio" aria-label="Ouvir próximo item">→</button>
+    <div class="audio-status" id="audioStatus" aria-live="polite">Leitura pronta: visão geral.</div>
+    <audio id="studyAudio" preload="metadata"></audio>
+  </section>
+
+  <section class="article-map" aria-label="Organização pelos artigos do Código Penal">
+    <article class="article-block">
+      <span>Art. 14, II e parágrafo único</span>
+      <h2>Tentativa</h2>
+      <p>Iniciada a execução, o crime não se consuma por circunstâncias <strong>alheias</strong> à vontade do agente. Pena do consumado, diminuída de um a dois terços.</p>
+    </article>
+    <article class="article-block bridge">
+      <span>Art. 15</span>
+      <h2>Ponte de ouro</h2>
+      <p>Se o agente, <strong>voluntariamente</strong>, desiste de prosseguir ou impede o resultado, só responde pelos atos já praticados.</p>
+    </article>
+  </section>
+
+  <section aria-labelledby="map-title">
+    <p class="section-label" id="map-title">Quatro figuras para estudar</p>
+    <div class="study-shell">
+      <nav class="chapter-list" id="chapterList" aria-label="Figuras do estudo"></nav>
+      <article class="detail" id="detail" aria-live="polite"></article>
+    </div>
+  </section>
+
+  <section class="comparison" aria-labelledby="compare-title">
+    <p class="section-label" id="compare-title">Tabela de distinção</p>
+    <h2>O que decide o enquadramento?</h2>
+    <div class="compare-table" role="table" aria-label="Comparação entre tentativa e art. 15">
+      <div class="compare-head" role="row">
+        <span role="columnheader">Figura</span>
+        <span role="columnheader">Execução</span>
+        <span role="columnheader">Por que não consumou</span>
+        <span role="columnheader">Base</span>
+        <span role="columnheader">Responde por</span>
+      </div>
+      <div class="compare-row" role="row">
+        <strong role="cell">Tentativa imperfeita</strong>
+        <span role="cell">Incompleta</span>
+        <span role="cell">Alheia à vontade</span>
+        <span role="cell">Art. 14, II</span>
+        <span role="cell">Tentativa</span>
+      </div>
+      <div class="compare-row" role="row">
+        <strong role="cell">Tentativa perfeita</strong>
+        <span role="cell">Completa</span>
+        <span role="cell">Alheia à vontade</span>
+        <span role="cell">Art. 14, II</span>
+        <span role="cell">Tentativa</span>
+      </div>
+      <div class="compare-row bridge" role="row">
+        <strong role="cell">Desistência voluntária</strong>
+        <span role="cell">Incompleta</span>
+        <span role="cell">Vontade do agente</span>
+        <span role="cell">Art. 15</span>
+        <span role="cell">Atos já praticados</span>
+      </div>
+      <div class="compare-row bridge" role="row">
+        <strong role="cell">Arrependimento eficaz</strong>
+        <span role="cell">Completa</span>
+        <span role="cell">Vontade do agente</span>
+        <span role="cell">Art. 15</span>
+        <span role="cell">Atos já praticados</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="quiz" aria-labelledby="quiz-title">
+    <p class="section-label">Fixação</p>
+    <h2 id="quiz-title">Qual figura cabe?</h2>
+    <p id="quizQuestion"></p>
+    <div id="quizOptions"></div>
+    <p id="quizFeedback" class="feedback" aria-live="polite"></p>
+    <div class="quiz-nav">
+      <button type="button" id="prevQuestion" aria-label="Pergunta anterior">←</button>
+      <button type="button" id="nextQuestion" aria-label="Próxima pergunta">→</button>
+    </div>
+  </section>
+
+  <p class="source">Base: <a href="https://www.planalto.gov.br/ccivil_03/decreto-lei/del2848compilado.htm">Código Penal, arts. 14 e 15 (Planalto)</a>. Material de estudo; a tipificação no caso concreto depende das provas e do tipo penal envolvido. Não confundir o art. 15 com o art. 16 (arrependimento posterior), que é causa de diminuição de pena.</p>
+</main>
+
+<script>
+const studyData = {
+  overview: {
+    id: 'visao-geral',
+    number: '00',
+    title: 'O mapa dos arts. 14 e 15',
+    article: 'CP · Parte Geral',
+    accent: '#a93625',
+    short: 'Depois do início da execução, o resultado pode faltar. Se faltou por causa alheia à vontade, há tentativa (art. 14, II). Se o próprio agente parou ou impediu o resultado, aplica-se o art. 15.',
+    sections: [
+      {
+        title: 'Ordem de estudo',
+        items: [
+          'Primeiro: confirme que a execução já começou — sem atos executórios, não há tentativa nem art. 15.',
+          'Depois: pergunte se a execução foi completa ou incompleta.',
+          'Por fim: o resultado deixou de ocorrer por circunstância alheia ou por vontade do agente?'
+        ]
+      },
+      {
+        title: 'Frase para guardar',
+        items: [
+          'Art. 14: queria continuar, mas não pôde.',
+          'Art. 15: podia continuar, mas não quis — ou impediu o resultado depois de esgotar a execução.'
+        ]
+      }
+    ],
+    narration: 'Visão geral. Depois do início da execução, o resultado pode faltar. Se faltou por circunstância alheia à vontade do agente, há tentativa, artigo quatorze, inciso dois, do Código Penal. Se o próprio agente voluntariamente desiste de prosseguir ou impede que o resultado se produza, aplica-se o artigo quinze. Estude nesta ordem: confirme o início da execução; veja se a execução ficou completa ou incompleta; depois pergunte se a falha do resultado veio de fora ou da vontade do agente. Guarde: no artigo quatorze, o agente queria continuar, mas não pôde. No artigo quinze, podia continuar, mas não quis, ou impediu o resultado depois de esgotar a execução.'
+  },
+  chapters: [
+    {
+      id: 'tentativa-imperfeita',
+      number: '01',
+      title: 'Tentativa imperfeita',
+      article: 'Art. 14, II, do CP',
+      accent: '#df5742',
+      short: 'O agente inicia a execução e ainda não esgota os atos executórios; a interrupção ocorre por circunstância alheia à sua vontade.',
+      sections: [
+        {
+          title: 'Núcleo',
+          items: [
+            'Também chamada de tentativa inacabada.',
+            'A execução foi interrompida antes de o agente empregar todos os meios de que dispunha.',
+            'O resultado não ocorre porque algo externo impede a continuidade.'
+          ]
+        },
+        {
+          title: 'Exemplo',
+          items: [
+            'Dispara parte dos tiros e é imobilizado antes de continuar.',
+            'Começa a esfaquear a vítima e terceiros o impedem de prosseguir.',
+            'A pena segue o parágrafo único do art. 14: pena do consumado, diminuída de um a dois terços.'
+          ]
+        }
+      ],
+      narration: 'Primeira figura: tentativa imperfeita, ou inacabada. Base: artigo quatorze, inciso dois, do Código Penal. O agente inicia a execução, mas ainda não esgota os atos executórios. A interrupção ocorre por circunstância alheia à sua vontade. Exemplo: dispara parte dos tiros e é imobilizado antes de continuar. A pena é a do crime consumado, diminuída de um a dois terços, conforme o parágrafo único do artigo quatorze.'
+    },
+    {
+      id: 'tentativa-perfeita',
+      number: '02',
+      title: 'Tentativa perfeita',
+      article: 'Art. 14, II, do CP',
+      accent: '#c71f2d',
+      short: 'O agente esgota todos os atos executórios de que dispunha, mas o resultado não ocorre por circunstância alheia à sua vontade. Também chamada de crime falho.',
+      sections: [
+        {
+          title: 'Núcleo',
+          items: [
+            'A execução está completa do ponto de vista do agente.',
+            'Ainda assim, o resultado típico não se produz por fator externo.',
+            'Continua sendo tentativa: a falha não veio da vontade do agente.'
+          ]
+        },
+        {
+          title: 'Exemplo',
+          items: [
+            'Dispara todos os tiros para matar; a vítima sobrevive por socorro médico.',
+            'Administra a dose completa do veneno; o antídoto aplicado por terceiros impede a morte.',
+            'Em regra, a diminuição da pena tende a ser menor do que na tentativa imperfeita, porque o agente chegou mais perto da consumação.'
+          ]
+        }
+      ],
+      narration: 'Segunda figura: tentativa perfeita, também chamada de crime falho. Base: artigo quatorze, inciso dois, do Código Penal. O agente esgota todos os atos executórios de que dispunha, mas o resultado não ocorre por circunstância alheia à sua vontade. Exemplo: dispara todos os tiros para matar, e a vítima sobrevive por socorro médico. Continua sendo tentativa. Em regra, a diminuição da pena tende a ser menor do que na tentativa imperfeita, porque o agente chegou mais perto da consumação.'
+    },
+    {
+      id: 'desistencia-voluntaria',
+      number: '03',
+      title: 'Desistência voluntária',
+      article: 'Art. 15, primeira parte, do CP',
+      accent: '#2f6f53',
+      short: 'Durante a execução ainda incompleta, o agente voluntariamente desiste de prosseguir, embora pudesse continuar. Só responde pelos atos já praticados.',
+      sections: [
+        {
+          title: 'Núcleo',
+          items: [
+            'Exige execução iniciada e ainda não esgotada.',
+            'A interrupção vem da vontade do agente, não de obstáculo externo decisivo.',
+            'Fórmula de Frank: “posso prosseguir, mas não quero” — desistência; “quero prosseguir, mas não posso” — tentativa.'
+          ]
+        },
+        {
+          title: 'Efeito',
+          items: [
+            'Não se pune a tentativa do crime-fim.',
+            'O agente responde apenas pelos atos já praticados, se forem típicos por si — por exemplo, lesão corporal.',
+            'A voluntariedade basta; não se exige espontaneidade absoluta.'
+          ]
+        }
+      ],
+      narration: 'Terceira figura: desistência voluntária. Base: artigo quinze, primeira parte, do Código Penal. Durante a execução ainda incompleta, o agente voluntariamente desiste de prosseguir, embora pudesse continuar. Use a fórmula de Frank: posso prosseguir, mas não quero — desistência; quero prosseguir, mas não posso — tentativa. Efeito: não se pune a tentativa do crime-fim; o agente só responde pelos atos já praticados, se forem típicos por si, como lesão corporal.'
+    },
+    {
+      id: 'arrependimento-eficaz',
+      number: '04',
+      title: 'Arrependimento eficaz',
+      article: 'Art. 15, segunda parte, do CP',
+      accent: '#2f6f53',
+      short: 'Depois de esgotar a execução, o agente voluntariamente impede que o resultado se produza. Também só responde pelos atos já praticados.',
+      sections: [
+        {
+          title: 'Núcleo',
+          items: [
+            'Pressupõe execução completa — daí a proximidade com a tentativa perfeita.',
+            'Exige conduta positiva e eficaz: o agente age para evitar o resultado.',
+            'Se o resultado mesmo assim ocorre, não há arrependimento eficaz.'
+          ]
+        },
+        {
+          title: 'Exemplo e limite',
+          items: [
+            'Envenenou a vítima e, em seguida, administra o antídoto e salva a vida.',
+            'Após disparar, presta socorro imediato e impede a morte.',
+            'Não confundir com o art. 16: arrependimento posterior é reparação ou restituição até o recebimento da denúncia ou queixa, e só diminui a pena.'
+          ]
+        }
+      ],
+      narration: 'Quarta figura: arrependimento eficaz. Base: artigo quinze, segunda parte, do Código Penal. Depois de esgotar a execução, o agente voluntariamente impede que o resultado se produza. Exige conduta positiva e eficaz. Exemplo: envenenou a vítima e depois administra o antídoto, salvando a vida. Se o resultado mesmo assim ocorre, não há arrependimento eficaz. Não confunda com o artigo dezesseis: o arrependimento posterior é reparação ou restituição até o recebimento da denúncia ou queixa, e apenas diminui a pena.'
+    }
+  ],
+  quiz: [
+    {
+      question: 'O agente inicia os disparos para matar e é imobilizado antes de esgotar a munição. A vítima sobrevive. Qual figura?',
+      options: ['Tentativa imperfeita', 'Tentativa perfeita', 'Desistência voluntária'],
+      answer: 0,
+      explanation: 'A execução ficou incompleta e a interrupção foi alheia à vontade: art. 14, II — tentativa imperfeita.'
+    },
+    {
+      question: 'O agente usa todos os meios de que dispunha para matar; a vítima só sobrevive por UTI. Qual figura?',
+      options: ['Desistência voluntária', 'Tentativa perfeita', 'Arrependimento eficaz'],
+      answer: 1,
+      explanation: 'Execução completa e resultado impedido por fator externo: tentativa perfeita ou crime falho, art. 14, II.'
+    },
+    {
+      question: 'Podendo continuar a agressão mortal, o agente para por vontade própria. A vítima tem só lesões. Qual figura?',
+      options: ['Tentativa imperfeita', 'Desistência voluntária', 'Arrependimento eficaz'],
+      answer: 1,
+      explanation: 'Execução incompleta interrompida pela vontade do agente: art. 15 — desistência voluntária. Responde pelas lesões, não pela tentativa de homicídio.'
+    },
+    {
+      question: 'Depois de administrar o veneno, o agente voluntariamente leva a vítima ao hospital e impede a morte. Qual figura?',
+      options: ['Tentativa perfeita', 'Arrependimento eficaz', 'Arrependimento posterior'],
+      answer: 1,
+      explanation: 'Execução completa e impedimento voluntário do resultado: art. 15 — arrependimento eficaz. O art. 16 é outra figura.'
+    }
+  ]
+};
+
+const sequence = [studyData.overview, ...studyData.chapters];
+const chapterList = document.querySelector('#chapterList');
+const detail = document.querySelector('#detail');
+const audio = document.querySelector('#studyAudio');
+const audioStatus = document.querySelector('#audioStatus');
+const toggleGuide = document.querySelector('#toggleGuide');
+const quizQuestion = document.querySelector('#quizQuestion');
+const quizOptions = document.querySelector('#quizOptions');
+const quizFeedback = document.querySelector('#quizFeedback');
+
+let currentItem = studyData.overview;
+let guidePlaying = false;
+let quizIndex = 0;
+let synthetic = null;
+
+function updateStatus(text) {
+  audioStatus.textContent = text;
+}
+
+function stopSpeech() {
+  if ('speechSynthesis' in window) speechSynthesis.cancel();
+  synthetic = null;
+}
+
+function speechActive() {
+  return 'speechSynthesis' in window && speechSynthesis.speaking && !speechSynthesis.paused;
+}
+
+function audioActive() {
+  return !audio.paused || speechActive();
+}
+
+function loadAudio(item) {
+  if (audio.dataset.itemId !== item.id) {
+    audio.src = `audio/${item.id}.mp3`;
+    audio.dataset.itemId = item.id;
+    audio.load();
+  }
+  updateStatus(`Leitura pronta: ${item.title}.`);
+  toggleGuide.textContent = '▶ Iniciar guia';
+}
+
+function speakFallback(item) {
+  if (!('speechSynthesis' in window)) {
+    updateStatus('Narração indisponível neste navegador.');
+    return;
+  }
+  stopSpeech();
+  synthetic = new SpeechSynthesisUtterance(item.narration);
+  synthetic.lang = 'pt-BR';
+  synthetic.rate = 0.94;
+  synthetic.pitch = 0.82;
+  synthetic.onend = () => {
+    toggleGuide.textContent = '▶ Ouvir item';
+    updateStatus(`Leitura concluída: ${item.title}.`);
+  };
+  speechSynthesis.speak(synthetic);
+  toggleGuide.textContent = 'Ⅱ Pausar';
+  updateStatus(`Fallback de voz: ${item.title}.`);
+}
+
+async function playCurrent() {
+  stopSpeech();
+  try {
+    await audio.play();
+    toggleGuide.textContent = 'Ⅱ Pausar';
+    updateStatus(`Reproduzindo: ${currentItem.title}.`);
+  } catch (error) {
+    speakFallback(currentItem);
+  }
+}
+
+function pauseCurrent() {
+  guidePlaying = false;
+  audio.pause();
+  if (speechActive()) speechSynthesis.pause();
+  toggleGuide.textContent = '▶ Retomar';
+  updateStatus(`Leitura pausada: ${currentItem.title}.`);
+}
+
+function renderList() {
+  chapterList.innerHTML = sequence.map((item) => `
+    <button class="chapter-button ${item.id === currentItem.id ? 'active' : ''}" type="button" data-id="${item.id}">
+      <span class="chapter-number">${item.number}</span>
+      <span>
+        <strong class="chapter-name">${item.title}</strong>
+        <small class="chapter-note">${item.article}</small>
+      </span>
+    </button>
+  `).join('');
+}
+
+function renderDetail(item) {
+  currentItem = item;
+  renderList();
+  detail.style.setProperty('--accent', item.accent);
+  const sections = item.sections.map((section) => `
+    <section class="detail-section">
+      <h3>${section.title}</h3>
+      <ul>${section.items.map((entry) => `<li>${entry}</li>`).join('')}</ul>
+    </section>
+  `).join('');
+  detail.innerHTML = `
+    <p class="detail-kicker">${item.number} · ${item.article}</p>
+    <h2>${item.title}</h2>
+    <p class="detail-summary">${item.short}</p>
+    <div class="detail-actions">
+      <button class="inline-action" type="button" id="hearItem">▶ Ouvir este tópico</button>
+    </div>
+    ${sections}
+  `;
+  document.querySelector('#hearItem').onclick = () => {
+    guidePlaying = false;
+    loadAudio(item);
+    playCurrent();
+  };
+  loadAudio(item);
+}
+
+function selectItem(item, shouldPlay) {
+  renderDetail(item);
+  if (shouldPlay) playCurrent();
+}
+
+function moveAudio(delta, shouldPlay) {
+  const index = Math.max(0, sequence.findIndex((item) => item.id === currentItem.id));
+  selectItem(sequence[(index + delta + sequence.length) % sequence.length], shouldPlay);
+}
+
+function renderQuiz() {
+  const current = studyData.quiz[quizIndex];
+  quizQuestion.textContent = `${quizIndex + 1}. ${current.question}`;
+  quizFeedback.textContent = 'Escolha uma alternativa.';
+  quizOptions.innerHTML = current.options.map((option, index) => `
+    <button class="quiz-option" type="button" data-index="${index}">${option}</button>
+  `).join('');
+  quizOptions.querySelectorAll('.quiz-option').forEach((button) => {
+    button.onclick = () => {
+      const index = Number(button.dataset.index);
+      quizOptions.querySelectorAll('.quiz-option').forEach((optionButton, optionIndex) => {
+        optionButton.classList.toggle('correct', optionIndex === current.answer);
+        optionButton.classList.toggle('wrong', optionIndex === index && index !== current.answer);
+      });
+      quizFeedback.textContent = current.explanation;
+    };
+  });
+}
+
+chapterList.addEventListener('click', (event) => {
+  const button = event.target.closest('[data-id]');
+  if (!button) return;
+  guidePlaying = false;
+  selectItem(sequence.find((item) => item.id === button.dataset.id), false);
+});
+
+document.querySelector('#prevAudio').onclick = () => moveAudio(-1, true);
+document.querySelector('#nextAudio').onclick = () => moveAudio(1, true);
+toggleGuide.onclick = () => {
+  if (audioActive()) pauseCurrent();
+  else {
+    guidePlaying = true;
+    playCurrent();
+  }
+};
+
+audio.addEventListener('error', () => {
+  updateStatus('MP3 indisponível. Fallback de voz pronto.');
+  toggleGuide.textContent = '▶ Narrar';
+});
+
+audio.addEventListener('ended', () => {
+  const index = sequence.findIndex((item) => item.id === currentItem.id);
+  if (guidePlaying && index < sequence.length - 1) selectItem(sequence[index + 1], true);
+  else {
+    guidePlaying = false;
+    toggleGuide.textContent = index === sequence.length - 1 ? '↻ Ouvir novamente' : '▶ Ouvir item';
+    updateStatus(index === sequence.length - 1 ? 'Guia concluído.' : `Leitura concluída: ${currentItem.title}.`);
+  }
+});
+
+document.querySelector('#prevQuestion').onclick = () => {
+  quizIndex = (quizIndex - 1 + studyData.quiz.length) % studyData.quiz.length;
+  renderQuiz();
+};
+document.querySelector('#nextQuestion').onclick = () => {
+  quizIndex = (quizIndex + 1) % studyData.quiz.length;
+  renderQuiz();
+};
+
+renderDetail(studyData.overview);
+renderQuiz();
+</script>
