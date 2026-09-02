@@ -1,6 +1,12 @@
 /* Shared reading surface for every conventional study.
    The 3D Kelsen experiment uses kelsen-light.css instead. */
 
+/* 100vw inclui a largura da scrollbar e provoca overflow horizontal.
+   Nos estudos, a largura útil deve partir de 100% do containing block. */
+html:has(body.study-standard) {
+  overflow-x: clip;
+}
+
 body.study-standard {
   color-scheme: light;
   --study-bg: #f7f7f8;
@@ -13,6 +19,7 @@ body.study-standard {
   --study-red-dark: #97131e;
   --study-green: #2f6f53;
   --study-line: rgba(13, 13, 15, 0.14);
+  overflow-x: clip;
 
   /* Compatibility aliases for the existing interactive studies. */
   --bg: var(--study-bg);
@@ -78,7 +85,8 @@ body.study-standard::before {
 }
 
 .study-standard .page {
-  width: min(1120px, calc(100vw - 40px)) !important;
+  width: min(1120px, calc(100% - 40px)) !important;
+  max-width: 100% !important;
   margin-inline: auto !important;
   padding: 0 0 96px !important;
 }
@@ -542,7 +550,7 @@ body.study-standard::before {
 
 @media (max-width: 620px) {
   .study-standard .page {
-    width: min(100vw - 28px, 680px) !important;
+    width: min(calc(100% - 28px), 680px) !important;
     padding-bottom: 72px !important;
   }
 

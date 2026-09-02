@@ -14,13 +14,15 @@ body {
 .study-site-chrome {
   position: relative;
   z-index: 1000;
+  box-sizing: border-box;
   min-height: 60px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 24px;
   width: 100%;
-  padding: 10px max(16px, calc((100vw - 1440px) / 2 + 24px));
+  max-width: 100%;
+  padding: 10px max(16px, calc((100% - 1440px) / 2 + 24px));
   border-bottom: 1px solid rgba(13, 13, 15, 0.42);
   color: #0d0d0f;
   background: #e6e3df;

@@ -1,25 +1,65 @@
-/* Iter criminis — camada de geometria sobre assets/study-system.css.
-   O design system cuida de cor, tipografia e achatamento; aqui fica só o desenho da régua. */
+/* Iter criminis — geometria da régua + barra de áudio padrão.
+   Cor, tipografia e achatamento vêm de assets/study-system.css. */
 
 *,
 *::before,
 *::after { box-sizing: border-box; }
 
-html { scroll-behavior: smooth; }
 html, body { min-width: 0; }
-body { margin: 0; font-family: system-ui, sans-serif; }
+body { margin: 0; }
 
 a { color: inherit; text-decoration: none; }
 button { font: inherit; color: inherit; }
 audio { display: none; }
 
-/* ---------- Régua do iter ---------- */
+/* ---------- Áudio guiado (mesmo padrão da teoria do crime) ---------- */
 
-.ruler-section { margin-bottom: clamp(30px, 5vw, 52px); }
+.audio-bar {
+  position: sticky;
+  top: 8px;
+  z-index: 20;
+  display: grid;
+  grid-template-columns: 44px auto 44px minmax(0, 1fr);
+  gap: 8px;
+  align-items: center;
+  margin: 0 0 clamp(48px, 7vw, 80px);
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(13, 13, 15, 0.14);
+  background: rgba(247, 247, 248, 0.96);
+}
+
+.audio-bar button {
+  min-width: 44px;
+  min-height: 44px;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+.audio-bar .primary {
+  min-width: 148px;
+  padding: 0 14px;
+  background: #0d0d0f;
+  color: #fff;
+  font: 600 0.78rem/1 "Barlow Condensed", sans-serif;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.audio-status {
+  min-width: 0;
+  padding: 0 8px;
+  color: #66656a;
+  font: 0.76rem/1.35 ui-sans-serif, system-ui, sans-serif;
+}
+
+/* ---------- Régua ---------- */
+
+.ruler-section { margin-bottom: clamp(28px, 5vw, 48px); }
 
 .ruler-intro {
   max-width: 64ch;
-  margin: 0 0 clamp(24px, 4vw, 38px);
+  margin: 0 0 clamp(22px, 4vw, 34px);
   font-size: clamp(1rem, 1.5vw, 1.08rem);
   line-height: 1.62;
 }
@@ -31,10 +71,10 @@ audio { display: none; }
   grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
   gap: 12px;
   align-items: end;
-  margin: 0 0 13px;
+  margin: 0 0 12px;
   color: #8a898e;
-  font: 600 .68rem/1.2 "Barlow Condensed", sans-serif;
-  letter-spacing: .12em;
+  font: 600 0.68rem/1.2 "Barlow Condensed", sans-serif;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
 }
 
@@ -45,22 +85,23 @@ audio { display: none; }
   position: relative;
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: clamp(8px, 1.6vw, 22px);
+  gap: clamp(8px, 1.5vw, 20px);
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
   padding-top: 22px;
 }
 
-/* Linha de base: neutra até o limiar da execução, vermelha depois dele. */
 .flow::before {
   position: absolute;
   top: 0;
   right: 0;
   left: 0;
   height: 2px;
-  background: linear-gradient(90deg, rgba(13, 13, 15, .22) 0 50%, #c71f2d 50% 100%);
+  background: linear-gradient(90deg, rgba(13, 13, 15, 0.22) 0 50%, #c71f2d 50% 100%);
   content: "";
 }
 
-/* Marca de fim de escala. */
 .flow::after {
   position: absolute;
   top: 0;
@@ -74,10 +115,11 @@ audio { display: none; }
 .ruler-threshold {
   position: absolute;
   top: 0;
-  bottom: 16px;
+  bottom: 12px;
   left: 50%;
   width: 1px;
-  background: repeating-linear-gradient(180deg, rgba(199, 31, 45, .5) 0 4px, transparent 4px 9px);
+  background: repeating-linear-gradient(180deg, rgba(199, 31, 45, 0.5) 0 4px, transparent 4px 9px);
+  pointer-events: none;
 }
 
 .step {
@@ -85,18 +127,22 @@ audio { display: none; }
   display: grid;
   gap: 7px;
   align-content: start;
+  width: 100%;
+  min-width: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
   cursor: pointer;
   text-align: left;
 }
 
-/* Traço da régua no início de cada marco. */
 .step::before {
   position: absolute;
   top: -22px;
   left: 0;
   width: 2px;
   height: 22px;
-  background: rgba(13, 13, 15, .3);
+  background: rgba(13, 13, 15, 0.3);
   content: "";
 }
 
@@ -109,33 +155,34 @@ audio { display: none; }
 .step[data-punish="punivel"].active::before { background: #c71f2d; }
 
 .step span {
-  font: 600 .7rem/1 "Barlow Condensed", sans-serif;
-  letter-spacing: .1em;
+  font: 600 0.7rem/1 "Barlow Condensed", sans-serif;
+  letter-spacing: 0.1em;
 }
 
 .step strong {
-  font: 600 clamp(1.08rem, 1.7vw, 1.38rem)/1.06 "Barlow Condensed", sans-serif;
+  font: 600 clamp(1.05rem, 1.6vw, 1.32rem)/1.08 "Barlow Condensed", sans-serif;
+  overflow-wrap: anywhere;
   text-wrap: balance;
 }
 
 .step em {
   color: #8a898e;
-  font: 600 .66rem/1 "Barlow Condensed", sans-serif;
+  font: 600 0.66rem/1 "Barlow Condensed", sans-serif;
   font-style: normal;
-  letter-spacing: .12em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
 }
 
 .step[data-punish="punivel"] em { color: #c71f2d; }
 
-/* ---------- Painel de detalhe ---------- */
+/* ---------- Detalhe ---------- */
 
 .detail small {
   display: block;
   margin-bottom: 12px;
   color: #c71f2d;
-  font: 600 .7rem/1 "Barlow Condensed", sans-serif;
-  letter-spacing: .12em;
+  font: 600 0.7rem/1 "Barlow Condensed", sans-serif;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
 }
 
@@ -157,12 +204,12 @@ audio { display: none; }
 .detail li {
   position: relative;
   padding-left: 20px;
-  font-size: .95rem;
+  font-size: 0.95rem;
 }
 
 .detail li::before {
   position: absolute;
-  top: .68em;
+  top: 0.68em;
   left: 0;
   width: 9px;
   height: 2px;
@@ -174,20 +221,34 @@ audio { display: none; }
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
-  margin-top: 30px;
+  margin-top: 28px;
 }
 
-/* ---------- Exemplo orientado ---------- */
+.detail .note {
+  margin-top: 18px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(13, 13, 15, 0.14);
+  color: #66656a;
+  font-size: 0.88rem;
+  line-height: 1.55;
+}
+
+/* ---------- Exemplo ---------- */
 
 .comparison-grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  margin-top: 26px;
+  gap: clamp(14px, 2vw, 22px);
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  margin-top: 24px;
 }
 
 body.study-standard .comparison-grid .compare-card {
-  padding-top: 15px !important;
-  border-top: 2px solid rgba(13, 13, 15, .18) !important;
+  min-width: 0;
+  padding-top: 14px !important;
+  border-top: 2px solid rgba(13, 13, 15, 0.18) !important;
 }
 
 body.study-standard .comparison-grid .compare-card[data-punish="punivel"] {
@@ -196,36 +257,38 @@ body.study-standard .comparison-grid .compare-card[data-punish="punivel"] {
 
 .compare-card span {
   display: block;
-  margin-bottom: 9px;
+  margin-bottom: 8px;
   color: #c71f2d;
-  font: 600 .68rem/1 "Barlow Condensed", sans-serif;
-  letter-spacing: .1em;
+  font: 600 0.68rem/1 "Barlow Condensed", sans-serif;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
 }
 
 .compare-card p {
   margin: 0;
-  font-size: .92rem;
-  line-height: 1.58;
+  font-size: 0.92rem;
+  line-height: 1.55;
+  overflow-wrap: anywhere;
 }
 
-/* ---------- Fixação ---------- */
+/* ---------- Quiz ---------- */
 
 .quiz > p {
   max-width: 72ch;
-  margin: 0 0 20px;
+  margin: 0 0 18px;
 }
 
 .answer {
   display: block;
   width: 100%;
+  max-width: 100%;
   cursor: pointer;
 }
 
 .feedback {
   min-height: 1.5em;
   margin: 16px 0 0;
-  font-size: .92rem;
+  font-size: 0.92rem;
   line-height: 1.55;
 }
 
@@ -240,7 +303,6 @@ body.study-standard .comparison-grid .compare-card[data-punish="punivel"] {
     padding: 0 0 0 22px;
   }
 
-  /* A régua vira trilho vertical. */
   .flow::before {
     top: 0;
     right: auto;
@@ -248,7 +310,7 @@ body.study-standard .comparison-grid .compare-card[data-punish="punivel"] {
     left: 0;
     width: 2px;
     height: auto;
-    background: linear-gradient(180deg, rgba(13, 13, 15, .22) 0 50%, #c71f2d 50% 100%);
+    background: linear-gradient(180deg, rgba(13, 13, 15, 0.22) 0 50%, #c71f2d 50% 100%);
   }
 
   .flow::after {
@@ -266,10 +328,11 @@ body.study-standard .comparison-grid .compare-card[data-punish="punivel"] {
     grid-template-columns: auto minmax(0, 1fr);
     gap: 4px 12px;
     align-items: baseline;
+    padding: 12px 0;
   }
 
   .step::before {
-    top: 24px;
+    top: 1.35em;
     left: -22px;
     width: 14px;
     height: 2px;
@@ -284,5 +347,13 @@ body.study-standard .comparison-grid .compare-card[data-punish="punivel"] {
 }
 
 @media (max-width: 620px) {
+  .audio-bar {
+    top: 6px;
+    grid-template-columns: 44px minmax(0, 1fr) 44px;
+  }
+
+  .audio-bar .primary { min-width: 0; width: 100%; }
+  .audio-status { grid-column: 1 / -1; padding: 3px 4px 0; }
+
   .comparison-grid { grid-template-columns: minmax(0, 1fr); }
 }

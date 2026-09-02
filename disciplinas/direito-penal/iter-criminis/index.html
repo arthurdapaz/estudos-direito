@@ -21,6 +21,14 @@ permalink: /disciplinas/direito-penal/iter-criminis/
     </div>
   </header>
 
+  <section class="audio-bar" aria-label="Áudio guiado">
+    <button type="button" id="prevAudio" aria-label="Ouvir item anterior">←</button>
+    <button type="button" class="primary" id="toggleGuide">▶ Iniciar guia</button>
+    <button type="button" id="nextAudio" aria-label="Ouvir próximo item">→</button>
+    <div class="audio-status" id="audioStatus" aria-live="polite">Leitura pronta: visão geral.</div>
+    <audio id="studyAudio" preload="metadata"></audio>
+  </section>
+
   <section class="ruler-section" aria-labelledby="ruler-title">
     <p class="section-label" id="ruler-title">A régua do iter</p>
     <p class="ruler-intro">O <strong>iter criminis</strong> é o percurso do crime. A régua marca quatro marcos e um limiar: antes do início da execução, em regra, não há punição. Clique em cada marco.</p>
@@ -29,10 +37,7 @@ permalink: /disciplinas/direito-penal/iter-criminis/
       <span>limiar · início da execução</span>
       <span>punibilidade</span>
     </div>
-    <div class="flow" id="ruler"></div>
-    <div class="controls">
-      <button class="button" type="button" id="playOverview">Ouvir visão geral</button>
-    </div>
+    <div class="flow" id="ruler" role="tablist" aria-label="Etapas do iter criminis"></div>
   </section>
 
   <article class="detail" id="detail" aria-live="polite"></article>
@@ -56,8 +61,6 @@ permalink: /disciplinas/direito-penal/iter-criminis/
 
   <p class="source">Base: <a href="https://www.planalto.gov.br/ccivil_03/decreto-lei/del2848compilado.htm">Código Penal, arts. 14, 15 e 121 (Planalto)</a>. Material de estudo; a delimitação entre preparação e execução depende do tipo penal e das circunstâncias do caso.</p>
 </main>
-
-<audio id="audio" preload="metadata"></audio>
 
 <script>
 const studyData = {
@@ -138,25 +141,132 @@ const studyData = {
   ]
 };
 
+const sequence = [studyData.overview, ...studyData.stages];
 const ruler = document.querySelector('#ruler');
 const detail = document.querySelector('#detail');
 const exampleSteps = document.querySelector('#exampleSteps');
-const audio = document.querySelector('#audio');
+const audio = document.querySelector('#studyAudio');
+const audioStatus = document.querySelector('#audioStatus');
+const toggleGuide = document.querySelector('#toggleGuide');
+
+let currentItem = studyData.overview;
+let guidePlaying = false;
+let synthetic = null;
 
 function flag(stage) {
   return stage.punishable ? 'punivel' : 'impune';
 }
 
-function listen(item) {
-  audio.src = `audio/${item.id}.mp3`;
-  audio.play().catch(() => speechSynthesis.speak(new SpeechSynthesisUtterance(item.narration)));
+function updateStatus(text) {
+  audioStatus.textContent = text;
+}
+
+function stopSpeech() {
+  if ('speechSynthesis' in window) speechSynthesis.cancel();
+  synthetic = null;
+}
+
+function speechActive() {
+  return 'speechSynthesis' in window && speechSynthesis.speaking && !speechSynthesis.paused;
+}
+
+function audioActive() {
+  return !audio.paused || speechActive();
+}
+
+function loadAudio(item) {
+  if (audio.dataset.itemId !== item.id) {
+    audio.src = `audio/${item.id}.mp3`;
+    audio.dataset.itemId = item.id;
+    audio.load();
+  }
+  updateStatus(`Leitura pronta: ${item.title}.`);
+  toggleGuide.textContent = '▶ Iniciar guia';
+}
+
+function speakFallback(item) {
+  if (!('speechSynthesis' in window)) {
+    updateStatus('Narração indisponível neste navegador.');
+    return;
+  }
+  stopSpeech();
+  synthetic = new SpeechSynthesisUtterance(item.narration);
+  synthetic.lang = 'pt-BR';
+  synthetic.rate = 0.94;
+  synthetic.pitch = 0.82;
+  synthetic.onend = () => {
+    toggleGuide.textContent = '▶ Ouvir item';
+    updateStatus(`Leitura concluída: ${item.title}.`);
+  };
+  speechSynthesis.speak(synthetic);
+  toggleGuide.textContent = 'Ⅱ Pausar';
+  updateStatus(`Fallback de voz: ${item.title}.`);
+}
+
+async function playCurrent() {
+  stopSpeech();
+  try {
+    await audio.play();
+    toggleGuide.textContent = 'Ⅱ Pausar';
+    updateStatus(`Reproduzindo: ${currentItem.title}.`);
+  } catch (error) {
+    speakFallback(currentItem);
+  }
+}
+
+function pauseCurrent() {
+  guidePlaying = false;
+  audio.pause();
+  if (speechActive()) speechSynthesis.pause();
+  toggleGuide.textContent = '▶ Retomar';
+  updateStatus(`Leitura pausada: ${currentItem.title}.`);
+}
+
+function selectItem(item, shouldPlay) {
+  currentItem = item;
+  if (item.id !== 'visao-geral') renderDetail(item);
+  else renderOverview();
+  loadAudio(item);
+  if (shouldPlay) playCurrent();
+}
+
+function moveAudio(delta, shouldPlay) {
+  const index = Math.max(0, sequence.findIndex((item) => item.id === currentItem.id));
+  selectItem(sequence[(index + delta + sequence.length) % sequence.length], shouldPlay);
+}
+
+function renderOverview() {
+  ruler.querySelectorAll('.step').forEach((button) => {
+    button.classList.remove('active');
+    button.setAttribute('aria-selected', 'false');
+  });
+  detail.innerHTML = `
+    <small>${studyData.overview.label}</small>
+    <h2>${studyData.overview.title}</h2>
+    <p class="lede">${studyData.overview.short}</p>
+    <ul>${studyData.overview.items.map((entry) => `<li>${entry}</li>`).join('')}</ul>
+    <div class="controls">
+      <button class="button" type="button" id="hearItem">▶ Ouvir este tópico</button>
+      <button class="button" type="button" id="nextItem">Começar pela cogitação →</button>
+    </div>
+    <p class="note">A régua não substitui a análise do tipo penal concreto, mas ajuda a localizar quando a lei passa a reagir.</p>
+  `;
+  document.querySelector('#hearItem').onclick = () => {
+    guidePlaying = false;
+    selectItem(studyData.overview, true);
+  };
+  document.querySelector('#nextItem').onclick = () => {
+    guidePlaying = false;
+    selectItem(studyData.stages[0], false);
+  };
 }
 
 function renderDetail(stage) {
+  currentItem = stage;
   ruler.querySelectorAll('.step').forEach((button) => {
     const on = button.dataset.id === stage.id;
     button.classList.toggle('active', on);
-    button.setAttribute('aria-pressed', on ? 'true' : 'false');
+    button.setAttribute('aria-selected', on ? 'true' : 'false');
   });
 
   detail.innerHTML = `
@@ -165,21 +275,27 @@ function renderDetail(stage) {
     <p class="lede">${stage.short}</p>
     <ul>${stage.items.map((entry) => `<li>${entry}</li>`).join('')}</ul>
     <div class="controls">
-      <button class="button" type="button" id="listen">Ouvir explicação</button>
-      <button class="button" type="button" id="next">Próximo marco →</button>
+      <button class="button" type="button" id="hearItem">▶ Ouvir este tópico</button>
+      <button class="button" type="button" id="nextItem">Próximo marco →</button>
     </div>
     <p class="note">A fronteira entre preparação e execução é definida pelo núcleo do tipo penal e pelo entendimento majoritário sobre o início da execução.</p>
   `;
 
-  document.querySelector('#listen').onclick = () => listen(stage);
-  document.querySelector('#next').onclick = () => {
-    const index = studyData.stages.indexOf(stage);
-    renderDetail(studyData.stages[(index + 1) % studyData.stages.length]);
+  document.querySelector('#hearItem').onclick = () => {
+    guidePlaying = false;
+    selectItem(stage, true);
   };
+  document.querySelector('#nextItem').onclick = () => {
+    const index = studyData.stages.indexOf(stage);
+    guidePlaying = false;
+    selectItem(studyData.stages[(index + 1) % studyData.stages.length], false);
+  };
+
+  loadAudio(stage);
 }
 
 ruler.innerHTML = studyData.stages.map((stage) => `
-  <button class="step" type="button" data-id="${stage.id}" data-punish="${flag(stage)}" aria-pressed="false">
+  <button class="step" type="button" role="tab" data-id="${stage.id}" data-punish="${flag(stage)}" aria-selected="false">
     <span>${stage.label}</span>
     <strong>${stage.title}</strong>
     <em>${stage.punish}</em>
@@ -196,10 +312,34 @@ exampleSteps.innerHTML = studyData.stages.map((stage) => `
 ruler.addEventListener('click', (event) => {
   const button = event.target.closest('[data-id]');
   if (!button) return;
-  renderDetail(studyData.stages.find((stage) => stage.id === button.dataset.id));
+  guidePlaying = false;
+  selectItem(studyData.stages.find((stage) => stage.id === button.dataset.id), false);
 });
 
-document.querySelector('#playOverview').onclick = () => listen(studyData.overview);
+document.querySelector('#prevAudio').onclick = () => moveAudio(-1, true);
+document.querySelector('#nextAudio').onclick = () => moveAudio(1, true);
+toggleGuide.onclick = () => {
+  if (audioActive()) pauseCurrent();
+  else {
+    guidePlaying = true;
+    playCurrent();
+  }
+};
+
+audio.addEventListener('error', () => {
+  updateStatus('MP3 indisponível. Fallback de voz pronto.');
+  toggleGuide.textContent = '▶ Narrar';
+});
+
+audio.addEventListener('ended', () => {
+  const index = sequence.findIndex((item) => item.id === currentItem.id);
+  if (guidePlaying && index < sequence.length - 1) selectItem(sequence[index + 1], true);
+  else {
+    guidePlaying = false;
+    toggleGuide.textContent = index === sequence.length - 1 ? '↻ Ouvir novamente' : '▶ Ouvir item';
+    updateStatus(index === sequence.length - 1 ? 'Guia concluído.' : `Leitura concluída: ${currentItem.title}.`);
+  }
+});
 
 document.querySelectorAll('.answer').forEach((button) => {
   button.addEventListener('click', () => {
@@ -211,5 +351,6 @@ document.querySelectorAll('.answer').forEach((button) => {
   });
 });
 
-renderDetail(studyData.stages[0]);
+renderOverview();
+loadAudio(studyData.overview);
 </script>
