@@ -38,7 +38,7 @@
   code: PEN
   name: Direito Penal
   url: /disciplinas/direito-penal/
-  description: Estudos de Direito Penal sobre teoria do crime, crimes contra a honra, legítima defesa e consunção.
+  description: Estudos de Direito Penal sobre teoria do crime, iter criminis, crimes contra a honra, legítima defesa e consunção.
   summary: Pressupostos do crime, formas de imputação e consequências jurídicas, com leitura sistemática da Parte Geral e aplicação aos tipos penais.
   studies_intro: Conteúdos separados por problema jurídico e finalidade de revisão.
   note_label: Leitura da disciplina
@@ -51,6 +51,13 @@
       chrome_title: Do fato típico à imputação subjetiva
       browser_title: Do fato típico à imputação subjetiva | Direito Penal
       description: Teoria finalista da ação, conduta, resultado, nexo causal, tipicidade, dolo direto e eventual, culpa e preterdolo, com o art. 121 como aplicação.
+    - id: iter-criminis
+      url: /disciplinas/direito-penal/iter-criminis/
+      eyebrow: Régua visual · teoria do crime
+      title: "Iter criminis: da cogitação à consumação"
+      chrome_title: Iter criminis
+      browser_title: Iter criminis | Direito Penal
+      description: Régua interativa do percurso do crime — cogitação, atos preparatórios, atos executórios e consumação — com o art. 14 do CP e exemplo orientado ao homicídio.
     - id: crimes-contra-a-honra
       url: /disciplinas/direito-penal/crimes-contra-a-honra/
       eyebrow: Mapa CDI · revisão ativa

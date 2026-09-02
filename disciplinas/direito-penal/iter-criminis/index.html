@@ -1,0 +1,210 @@
+---
+layout: study
+discipline_id: direito-penal
+study_id: iter-criminis
+study_style: /assets/studies/iter-criminis.css
+body_class: study-standard
+permalink: /disciplinas/direito-penal/iter-criminis/
+---
+
+<main class="page">
+  <a class="crumb" href="../">← Direito Penal</a>
+
+  <header class="hero">
+    <div>
+      <p class="eyebrow">Teoria do crime · art. 14 do CP</p>
+      <h1>Iter criminis</h1>
+    </div>
+    <div class="formula">
+      <strong>Da cogitação ao resultado</strong>
+      <p>Até a hora em que se pensa em matar o marido, até a hora em que ele morre: em que ponto o Direito Penal passa a reagir?</p>
+    </div>
+  </header>
+
+  <section class="iter-board" aria-labelledby="ruler-title">
+    <div class="ruler-wrap">
+      <h2 id="ruler-title" class="section-label">A régua do iter</h2>
+      <p class="iter-intro">O <strong>iter criminis</strong> é o percurso do crime. A régua abaixo marca quatro marcos: <strong>cogitação</strong>, <strong>atos preparatórios</strong>, <strong>atos executórios</strong> e <strong>consumação</strong>. Clique em cada etapa.</p>
+      <div class="ruler-scale" aria-hidden="true"><span>impunidade</span><span>punibilidade</span></div>
+      <div class="ruler-track" id="ruler" role="tablist" aria-label="Etapas do iter criminis"></div>
+    </div>
+    <aside class="detail iter-detail" id="detail" aria-live="polite"></aside>
+  </section>
+
+  <section class="example-lane" aria-labelledby="example-title">
+    <p class="eyebrow">Exemplo orientado</p>
+    <h2 id="example-title">Homicídio do marido, etapa por etapa</h2>
+    <p>Use o art. 121 como referência e percorra a régua com um caso concreto.</p>
+    <div class="example-steps" id="exampleSteps"></div>
+  </section>
+
+  <section class="quiz">
+    <p class="eyebrow">Fixação</p>
+    <h2>Onde começa a punição?</h2>
+    <p>Uma mulher compra veneno, coloca na bebida do marido, mas ele desiste de beber e joga o copo fora. Em que marco da régua o Direito Penal, em regra, já pode reagir?</p>
+    <button class="answer" data-correct="false">Cogitação</button>
+    <button class="answer" data-correct="false">Atos preparatórios</button>
+    <button class="answer" data-correct="true">Atos executórios</button>
+    <button class="answer" data-correct="false">Consumação</button>
+    <p id="feedback" class="feedback"></p>
+  </section>
+
+  <p class="source">Base: <a href="https://www.planalto.gov.br/ccivil_03/decreto-lei/del2848compilado.htm">Código Penal, arts. 14 e 121 (Planalto)</a>. Material de estudo; a delimitação entre preparação e execução depende do tipo penal e das circunstâncias do caso.</p>
+</main>
+
+<audio id="audio" preload="metadata"></audio>
+
+<script>
+const studyData = {
+  overview: {
+    id: 'visao-geral',
+    title: 'O percurso do crime',
+    label: 'visão geral',
+    punish: 'mapa',
+    short: 'O iter criminis organiza o caminho do agente desde a ideia até o resultado. Nem todo movimento interno ou externo é crime: a punibilidade costuma surgir com o início da execução.',
+    items: [
+      'Cogitação e atos preparatórios, em regra, ficam fora do alcance da lei penal.',
+      'A partir dos atos executórios, abre-se a possibilidade de tentativa punível.',
+      'Na consumação, o tipo se realiza por completo.'
+    ],
+    narration: 'Iter criminis. É o percurso do crime, da cogitação à consumação. A régua didática tem quatro marcos: cogitação, atos preparatórios, atos executórios e consumação. Em regra, o Direito Penal não pune o pensamento nem a mera preparação. A punibilidade costuma surgir quando começa a execução do crime, abrindo caminho para a tentativa. Na consumação, todos os elementos do tipo se realizam.'
+  },
+  stages: [
+    {
+      id: 'cogitacao',
+      title: 'Cogitação',
+      label: '01',
+      punish: 'impune',
+      short: 'É o pensamento, o desejo ou a resolução interna de praticar o crime. Ainda não há externalização suficiente para o Direito Penal.',
+      items: [
+        'Exemplo: “Penso em matar meu marido.”',
+        'O pensamento, por si, é livre: não configura crime.',
+        'A cogitação pode anteceder qualquer ato externo, mas não basta para responsabilização penal.'
+      ],
+      example: 'Ela apenas imagina envenenar o marido, sem comprar veneno nem dizer nada a ninguém.',
+      narration: 'Primeira etapa: cogitação. É o pensamento, o desejo ou a resolução interna de praticar o crime. Exemplo: penso em matar meu marido. O pensamento, por si, é livre e não configura crime. A cogitação pode existir sozinha, sem qualquer ato externo, e ainda assim permanece impune.'
+    },
+    {
+      id: 'atos-preparatorios',
+      title: 'Atos preparatórios',
+      label: '02',
+      punish: 'impune',
+      short: 'São atos que preparam o crime, mas ainda não iniciam sua execução. O art. 14, inciso II, do Código Penal, em regra, não os pune.',
+      items: [
+        'Exemplo: comprar veneno, observar a rotina da vítima, alugar carro para fuga.',
+        'Preparar não é, por si, executar: falta o início da realização do núcleo do tipo.',
+        'Exceção: quando a lei expressamente criminaliza um ato preparatório autônomo.'
+      ],
+      example: 'Ela compra o veneno e guarda em casa, mas ainda não o coloca na bebida.',
+      narration: 'Segunda etapa: atos preparatórios. São atos que preparam o crime, mas ainda não iniciam sua execução. O artigo quatorze, inciso dois, do Código Penal, em regra, não pune atos preparatórios. Exemplo: comprar veneno ou observar a rotina da vítima. Preparar não é executar. Só quando a lei expressamente criminaliza um ato preparatório é que ele pode ser punido de modo autônomo.'
+    },
+    {
+      id: 'atos-executorios',
+      title: 'Atos executórios',
+      label: '03',
+      punish: 'punível',
+      short: 'É o início da execução do crime. Daqui em diante, em regra, nasce a tentativa punível, salvo desistência voluntária ou arrependimento eficaz.',
+      items: [
+        'Exemplo: colocar veneno na bebida, apontar arma, iniciar estrangulamento.',
+        'Art. 14, I: há crime tentado quando, iniciada a execução, não se consuma por circunstâncias alheias à vontade do agente.',
+        'Se o agente desiste voluntariamente ou impede o resultado, o art. 15 pode afastar a punição da tentativa.'
+      ],
+      example: 'Ela coloca o veneno no café. O marido ainda não morreu, mas a execução do homicídio já começou.',
+      narration: 'Terceira etapa: atos executórios. É o início da execução do crime. Daqui em diante, em regra, nasce a tentativa punível. Exemplo: colocar veneno na bebida ou apontar a arma. O artigo quatorze, inciso um, fala em tentativa quando, iniciada a execução, o crime não se consuma por circunstâncias alheias à vontade do agente. Se houver desistência voluntária ou arrependimento eficaz, o artigo quinze pode afastar a punição da tentativa.'
+    },
+    {
+      id: 'consumacao',
+      title: 'Consumação',
+      label: '04',
+      punish: 'punível',
+      short: 'O crime se realiza por completo: todos os elementos do tipo penal estão presentes. No homicídio, a morte da vítima consuma o delito.',
+      items: [
+        'Exemplo: o marido morre em razão do veneno administrado.',
+        'Aqui não se fala mais em tentativa, mas em crime consumado.',
+        'A pena é a cominada ao tipo, sem a redução própria da tentativa.'
+      ],
+      example: 'O marido bebe o café envenenado e morre. O homicídio está consumado.',
+      narration: 'Quarta etapa: consumação. O crime se realiza por completo, com todos os elementos do tipo penal. No homicídio, a morte da vítima consuma o delito. Exemplo: o marido morre em razão do veneno. Não se fala mais em tentativa, mas em crime consumado, sujeito à pena cominada ao tipo.'
+    }
+  ]
+};
+
+const all = [studyData.overview, ...studyData.stages];
+const ruler = document.querySelector('#ruler');
+const detail = document.querySelector('#detail');
+const exampleSteps = document.querySelector('#exampleSteps');
+const audio = document.querySelector('#audio');
+let active = studyData.stages[0];
+
+function renderDetail(item) {
+  active = item;
+  ruler.querySelectorAll('.ruler-segment').forEach((button) => {
+    const on = button.dataset.id === item.id;
+    button.classList.toggle('active', on);
+    button.setAttribute('aria-selected', on ? 'true' : 'false');
+  });
+  const isOverview = item.id === 'visao-geral';
+  detail.innerHTML = `
+    <small>${isOverview ? item.label : `${item.label} · ${item.punish}`}</small>
+    <h2>${item.title}</h2>
+    <p class="lede">${item.short}</p>
+    <ul>${item.items.map((entry) => `<li>${entry}</li>`).join('')}</ul>
+    <div class="controls">
+      <button class="button" type="button" id="listen">Ouvir explicação</button>
+      <button class="button" type="button" id="next">${isOverview ? 'Começar pela cogitação →' : 'Próxima etapa →'}</button>
+    </div>
+    <p class="note">${isOverview ? 'A régua não substitui a análise do tipo penal concreto, mas ajuda a localizar quando a lei passa a reagir.' : 'Lembrete: a fronteira entre preparação e execução é definida pelo núcleo do tipo e pela doutrina majoritária sobre o início da execução.'}</p>
+  `;
+  document.querySelector('#listen').onclick = () => {
+    audio.src = `audio/${item.id}.mp3`;
+    audio.play().catch(() => speechSynthesis.speak(new SpeechSynthesisUtterance(item.narration)));
+  };
+  document.querySelector('#next').onclick = () => {
+    const index = all.indexOf(item);
+    renderDetail(all[(index + 1) % all.length]);
+  };
+}
+
+ruler.innerHTML = studyData.stages.map((stage, index) => `
+  <button
+    class="ruler-segment"
+    type="button"
+    role="tab"
+    data-id="${stage.id}"
+    aria-selected="false"
+    aria-controls="detail"
+    id="tab-${stage.id}"
+  >
+    <span class="ruler-tick">
+      <span class="ruler-dot">${String(index + 1).padStart(2, '0')}</span>
+    </span>
+    <span class="ruler-label">${stage.title}</span>
+    <span class="ruler-punish">${stage.punish}</span>
+  </button>
+`).join('');
+
+exampleSteps.innerHTML = studyData.stages.map((stage) => `
+  <article class="example-step">
+    <span>${stage.title}</span>
+    <p>${stage.example}</p>
+  </article>
+`).join('');
+
+ruler.addEventListener('click', (event) => {
+  const button = event.target.closest('[data-id]');
+  if (!button) return;
+  renderDetail(studyData.stages.find((stage) => stage.id === button.dataset.id));
+});
+
+document.querySelectorAll('.answer').forEach((button) => {
+  button.addEventListener('click', () => {
+    const ok = button.dataset.correct === 'true';
+    button.classList.add(ok ? 'ok' : 'no');
+    document.querySelector('#feedback').textContent = ok
+      ? 'Correto: ao colocar o veneno na bebida, em regra, já há início da execução — tentativa punível, ainda que o resultado não ocorra.'
+      : 'Revise a régua: comprar veneno é preparação; colocá-lo na bebida costuma marcar o início da execução.';
+  });
+});
+
+renderDetail(studyData.stages[0]);
+</script>
