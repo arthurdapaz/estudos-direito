@@ -1,0 +1,425 @@
+---
+layout: study
+discipline_id: direito-constitucional-i
+study_id: teoria-geral-dos-direitos-fundamentais
+study_style: /assets/studies/teoria-geral-dos-direitos-fundamentais.css
+body_class: study-standard
+permalink: /disciplinas/direito-constitucional-i/teoria-geral-dos-direitos-fundamentais/
+---
+
+<a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+<main class="page" id="conteudo">
+  <nav class="topbar" aria-label="Navegação estrutural">
+    <a class="crumb" href="../">← Direito Constitucional I</a>
+    <span class="progress" id="progressLabel">Trilha · 1 de 6</span>
+  </nav>
+
+  <header class="hero reveal">
+    <div>
+      <p class="eyebrow">Direitos fundamentais · Caderno 02</p>
+      <h1>Teoria geral</h1>
+    </div>
+    <div class="hero-copy">
+      <p>Não basta ter vida. A vida precisa de <strong>saúde</strong>, de <strong>segurança</strong> e de outros petrechos que lhe dêem sentido. O esteio máximo é <strong>Vida e Dignidade</strong> — e a palavra-chave é <strong>eficácia</strong>.</p>
+    </div>
+  </header>
+
+  <section class="audio-bar" aria-label="Áudio guiado">
+    <button type="button" id="prevAudio" aria-label="Ouvir item anterior">←</button>
+    <button type="button" class="primary" id="toggleGuide">▶ Iniciar guia</button>
+    <button type="button" id="nextAudio" aria-label="Ouvir próximo item">→</button>
+    <div class="audio-status" id="audioStatus" aria-live="polite">Leitura pronta: visão geral.</div>
+    <audio id="studyAudio" preload="metadata"></audio>
+  </section>
+
+  <section class="reveal" aria-labelledby="mapa-title">
+    <p class="section-label" id="mapa-title">O mapa da aula</p>
+    <p class="axis-intro">A teoria geral pergunta para que servem os direitos fundamentais e como eles operam. Clique no esteio, nos petrechos ou no eixo Estado–indivíduo.</p>
+    <div class="stage">
+      <div class="vertical-axis" aria-label="Eixo da eficácia vertical">
+        <button type="button" class="axis-node" data-item-id="eficacia-vertical">
+          <small>Topo do eixo</small>
+          <strong>Estado</strong>
+          <span>Na relação com o indivíduo, os direitos fundamentais devem ser respeitados.</span>
+        </button>
+        <div class="axis-line" aria-hidden="true"></div>
+        <button type="button" class="axis-node" data-item-id="eficacia">
+          <small>Por isso a palavra</small>
+          <strong>Eficácia</strong>
+          <span>O direito precisa alcançar a realidade de cada pessoa.</span>
+        </button>
+        <div class="axis-line" aria-hidden="true"></div>
+        <button type="button" class="axis-node" data-item-id="eficacia-vertical">
+          <small>Base do eixo</small>
+          <strong>Indivíduo</strong>
+          <span>A vida concreta, com suas necessidades distintas.</span>
+        </button>
+      </div>
+      <div class="pillar">
+        <button type="button" class="core" data-item-id="esteio-maximo">
+          <small>Esteio máximo</small>
+          <h2>Vida e Dignidade</h2>
+          <p>A vida é direito fundamental, mas só se sustenta se vier acompanhada da dignidade — e a dignidade se mede na saúde, na segurança e no tratamento de cada um.</p>
+        </button>
+        <div class="petrechos" aria-label="Petrechos da vida">
+          <button type="button" class="petrecho" data-item-id="petrechos">
+            <b>Saúde</b>
+            <em>Sem saúde, a vida não se realiza.</em>
+          </button>
+          <button type="button" class="petrecho" data-item-id="petrechos">
+            <b>Segurança</b>
+            <em>A vida precisa de proteção contínua.</em>
+          </button>
+          <button type="button" class="petrecho" data-item-id="particularidade">
+            <b>Particularidade</b>
+            <em>Cada indivíduo tem necessidades distintas.</em>
+          </button>
+          <button type="button" class="petrecho" data-item-id="particularidade">
+            <b>Tratamento</b>
+            <em>Terapia e medicamento podem ser dignidade.</em>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="reveal" aria-labelledby="eixos">
+    <p class="section-label" id="eixos">Trilha de leitura</p>
+    <div class="study-shell">
+      <div class="concept-list" id="conceptList" aria-label="Tópicos do estudo"></div>
+      <article class="detail" id="detailPanel" aria-live="polite"></article>
+    </div>
+  </section>
+
+  <section class="quiz reveal" aria-labelledby="quiz-title">
+    <header>
+      <p class="eyebrow">Fixação</p>
+      <h2 id="quiz-title">Retome a ideia central</h2>
+      <p>Escolha uma resposta e confira a justificativa.</p>
+    </header>
+    <div class="quiz-card">
+      <p class="quiz-question" id="quizQuestion"></p>
+      <div class="quiz-options" id="quizOptions"></div>
+      <p class="quiz-feedback" id="quizFeedback" aria-live="polite"></p>
+      <div class="quiz-nav">
+        <button type="button" id="prevQuestion" aria-label="Pergunta anterior">←</button>
+        <button type="button" id="nextQuestion" aria-label="Próxima pergunta">→</button>
+      </div>
+    </div>
+  </section>
+
+  <footer class="source-note">Base de leitura: <a href="https://www.planalto.gov.br/ccivil_03/constituicao/constituicaocompilado.htm" target="_blank" rel="noreferrer">Constituição Federal</a>, arts. 1º, III (dignidade da pessoa humana) e 5º, caput (inviolabilidade do direito à vida). Material de estudo; não constitui parecer jurídico. A eficácia horizontal e as demais classificações entram em aulas seguintes.</footer>
+</main>
+
+<script>
+  const studyData = {
+    overview: {
+      id: "visao-geral",
+      number: "00",
+      title: "Visão geral",
+      note: "Para que servem",
+      accent: "#c71f2d",
+      short: "A teoria geral dos direitos fundamentais pergunta duas coisas ao mesmo tempo: para que esses direitos existem e como eles alcançam a vida real. A vida é o ponto de partida, mas a vida nua não basta.",
+      sections: [
+        { title: "O recorte desta aula", items: ["Estamos dentro dos direitos fundamentais, no capítulo da teoria geral.", "O eixo não é listar cada direito do art. 5º: é entender eficácia — o direito precisa operar na realidade."] },
+        { title: "Fórmula para guardar", items: ["Vida + dignidade = esteio máximo.", "A dignidade se completa com petrechos: saúde, segurança, tratamento, atenção à particularidade de cada pessoa."] }
+      ],
+      narration: "Visão geral. Na teoria geral dos direitos fundamentais, estudamos para que esses direitos servem e como eles alcançam a vida real. A vida é um direito fundamental, mas não basta ter vida. É preciso vida com saúde e vida com segurança. O esteio máximo é vida e dignidade. A vida precisa de outros petrechos que a acompanhem e lhe dêem sentido. Por isso a palavra eficácia. A primeira eficácia desta aula é a eficácia vertical."
+    },
+    chapters: [
+      {
+        id: "esteio-maximo",
+        number: "01",
+        title: "Esteio máximo",
+        note: "Vida e Dignidade",
+        accent: "#97131e",
+        short: "A vida é direito fundamental. Mas não basta ter vida: é preciso vida com saúde e vida com segurança. O esteio máximo é Vida e Dignidade.",
+        sections: [
+          { title: "Leitura da aula", items: ["A vida não se esgota no fato biológico de existir.", "A dignidade é o que dá sentido a essa vida e impede que o direito fundamental vire enunciado vazio."] },
+          { title: "Base constitucional", items: ["O art. 5º, caput, declara inviolável o direito à vida.", "O art. 1º, III, coloca a dignidade da pessoa humana como fundamento da República."] }
+        ],
+        narration: "Esteio máximo. A vida é um direito fundamental. Mas não basta ter vida. Tem que ter vida com saúde, vida com segurança. Ou seja, há um esteio máximo: vida e dignidade. Essa vida precisa de outros petrechos que a acompanhem e lhe dêem sentido. Eu não tenho vida se eu não tenho saúde. Na Constituição, o artigo quinto, caput, protege a vida, e o artigo primeiro, inciso três, afirma a dignidade da pessoa humana como fundamento da República."
+      },
+      {
+        id: "petrechos",
+        number: "02",
+        title: "Petrechos da vida",
+        note: "O que dá sentido",
+        accent: "#9a5a2d",
+        short: "A vida precisa de petrechos que a acompanhem. Saúde e segurança não são enfeites: sem eles, o direito à vida não se realiza.",
+        sections: [
+          { title: "Ideia", items: ["Petrecho, nesta aula, é o instrumento que sustenta a vida digna.", "Saúde e segurança são os primeiros exemplos: a vida isolada não se basta."] },
+          { title: "Consequência", items: ["Se falta o petrecho, falta a dignidade concreta.", "Por isso o estudo dos direitos fundamentais não para no nome do direito: pergunta o que a pessoa precisa para viver com sentido."] }
+        ],
+        narration: "Petrechos da vida. A vida precisa de outros petrechos que a acompanhem. Ela precisa de outros petrechos que dêem sentido a ela. Eu não tenho vida se eu não tenho saúde. Saúde e segurança não são detalhes: são o que permite que o direito à vida deixe de ser só um enunciado e passe a ser existência digna."
+      },
+      {
+        id: "particularidade",
+        number: "03",
+        title: "Particularidade",
+        note: "Dignidade concreta",
+        accent: "#2f6f53",
+        short: "Cada indivíduo, dentro da sua particularidade, terá necessidades distintas. Para uns, dignidade é terapia, medicamento específico, tratamento direcionado.",
+        sections: [
+          { title: "Exemplo da aula", items: ["Hoje há grande procura por diagnósticos de autismo.", "Essas pessoas buscam plano de saúde para atendimento. Para esse indivíduo, a terapia é dignidade; o medicamento específico e o tratamento direcionado também são dignidade."] },
+          { title: "O que o Estado deve fazer", items: ["O Estado deve se preocupar e se voltar para essas realidades.", "A dignidade não é um padrão único: mede-se na necessidade concreta de cada pessoa."] }
+        ],
+        narration: "Particularidade. Cada indivíduo, dentro da sua particularidade, terá necessidades distintas. Por exemplo, hoje teremos um nível de procura grande quanto a diagnósticos de autismo. Essas pessoas buscam um plano de saúde para o atendimento. Para esse indivíduo, a terapia é dignidade; o medicamento específico e o tratamento direcionado são dignidade. Logo, o Estado deve se preocupar e se voltar para essas realidades."
+      },
+      {
+        id: "eficacia",
+        number: "04",
+        title: "A palavra eficácia",
+        note: "Direito que opera",
+        accent: "#66556f",
+        short: "Por isso a palavra eficácia. Direito fundamental que não alcança a vida concreta — a saúde, a segurança, o tratamento de quem precisa — ainda não cumpriu a sua função.",
+        sections: [
+          { title: "Para que serve", items: ["Servir não é só declarar. Servir é produzir efeito na relação da pessoa com o poder e com as condições de viver.", "A eficácia é o nome técnico dessa operação: o direito deixa o papel e chega à realidade."] },
+          { title: "Ponte para o próximo passo", items: ["A primeira eficácia desta aula é a eficácia vertical.", "Ela organiza o vínculo entre o Estado e o indivíduo."] }
+        ],
+        narration: "A palavra eficácia. Por isso a palavra eficácia. Os direitos fundamentais existem para operar. Se a vida precisa de saúde, de segurança e de tratamento conforme a particularidade de cada um, o Estado não pode ficar indiferente. Eficácia é o nome dessa exigência: o direito tem de alcançar a realidade. A primeira eficácia que teremos é a eficácia vertical."
+      },
+      {
+        id: "eficacia-vertical",
+        number: "05",
+        title: "Eficácia vertical",
+        note: "Estado e indivíduo",
+        accent: "#c71f2d",
+        short: "A eficácia vertical dos direitos fundamentais está presente nas relações entre o indivíduo e o Estado. Nessas relações, os direitos fundamentais devem ser respeitados.",
+        sections: [
+          { title: "Onde opera", items: ["Está presente nas relações entre o indivíduo e o Estado.", "Nesse eixo, assegura-se que os direitos fundamentais sejam respeitados."] },
+          { title: "O que isso exige", items: ["O Poder Público não trata o particular como se o direito fundamental fosse facultativo.", "Vida, dignidade, saúde e segurança entram nessa relação como vínculos: o Estado deve respeitá-los."] },
+          { title: "Até aqui", items: ["Esta é a primeira eficácia da aula. As demais — a começar pela horizontal — ficam para o próximo passo da teoria geral."] }
+        ],
+        narration: "Eficácia vertical. A primeira eficácia que teremos é a eficácia vertical. A eficácia vertical dos direitos fundamentais está presente nas relações entre o indivíduo e o Estado, onde se assegura que nessas relações devem ser respeitados os direitos fundamentais. O Estado não trata esses direitos como facultativos: na relação com a pessoa, vida, dignidade, saúde e segurança devem ser respeitados. As demais eficácias ficam para a continuação da teoria geral."
+      }
+    ],
+    quiz: [
+      { question: "Qual é o esteio máximo desta aula?", options: ["Vida e Dignidade.", "Somente a existência biológica.", "Apenas a liberdade de expressão."], answer: 0, explanation: "A vida é direito fundamental, mas não basta existir: o esteio máximo é vida com dignidade." },
+      { question: "Por que a aula fala em petrechos da vida?", options: ["Porque a vida precisa de acompanhamentos — como saúde e segurança — que lhe dêem sentido.", "Porque petrecho é sinônimo de cláusula pétrea.", "Porque o direito à vida dispensa qualquer outro direito."], answer: 0, explanation: "Sem saúde, por exemplo, a vida não se realiza. Os petrechos sustentam a dignidade concreta." },
+      { question: "No exemplo do autismo, o que a aula chama de dignidade?", options: ["Terapia, medicamento específico e tratamento direcionado para aquele indivíduo.", "Apenas o diagnóstico formal, sem atendimento.", "Um padrão idêntico de necessidades para todas as pessoas."], answer: 0, explanation: "Cada pessoa tem particularidades. Para aquele indivíduo, o tratamento é dignidade — e o Estado deve se voltar a isso." },
+      { question: "Por que a palavra eficácia aparece neste capítulo?", options: ["Porque o direito fundamental precisa operar na realidade, e não ficar só no enunciado.", "Porque eficácia é o mesmo que validade formal da norma.", "Porque eficácia significa que o direito vale apenas entre particulares."], answer: 0, explanation: "A eficácia explica para que servem esses direitos: alcançar a vida concreta." },
+      { question: "O que caracteriza a eficácia vertical?", options: ["Está presente nas relações entre o indivíduo e o Estado, nas quais os direitos fundamentais devem ser respeitados.", "Os direitos fundamentais só valem entre particulares.", "Os direitos fundamentais não obrigam o Poder Público."], answer: 0, explanation: "A eficácia vertical opera no eixo indivíduo–Estado e assegura o respeito aos direitos fundamentais nessa relação." }
+    ]
+  };
+
+  const sequence = [studyData.overview, ...studyData.chapters];
+  const conceptList = document.querySelector("#conceptList");
+  const detailPanel = document.querySelector("#detailPanel");
+  const progressLabel = document.querySelector("#progressLabel");
+  const audio = document.querySelector("#studyAudio");
+  const audioStatus = document.querySelector("#audioStatus");
+  const toggleGuide = document.querySelector("#toggleGuide");
+  const quizQuestion = document.querySelector("#quizQuestion");
+  const quizOptions = document.querySelector("#quizOptions");
+  const quizFeedback = document.querySelector("#quizFeedback");
+  let currentItem = studyData.overview;
+  let isGuidePlaying = false;
+  let quizIndex = 0;
+  let syntheticUtterance = null;
+
+  renderConcepts();
+  renderDetail(currentItem);
+  renderQuiz();
+  loadAudio(currentItem);
+  setupReveals();
+  document.querySelector("#prevAudio").addEventListener("click", () => moveAudio(-1, true));
+  document.querySelector("#nextAudio").addEventListener("click", () => moveAudio(1, true));
+  toggleGuide.addEventListener("click", () => isAudioActive() ? pauseCurrentAudio() : (isGuidePlaying = true, playCurrentAudio()));
+  document.querySelector("#prevQuestion").addEventListener("click", () => { quizIndex = (quizIndex - 1 + studyData.quiz.length) % studyData.quiz.length; renderQuiz(); });
+  document.querySelector("#nextQuestion").addEventListener("click", () => { quizIndex = (quizIndex + 1) % studyData.quiz.length; renderQuiz(); });
+  audio.addEventListener("error", () => { updateAudioStatus("MP3 indisponível. Fallback de voz pronto."); toggleGuide.textContent = "▶ Narrar"; });
+  audio.addEventListener("ended", () => {
+    const index = sequence.findIndex((item) => item.id === currentItem.id);
+    if (isGuidePlaying && index < sequence.length - 1) selectItem(sequence[index + 1], true);
+    else {
+      isGuidePlaying = false;
+      toggleGuide.textContent = index === sequence.length - 1 ? "↻ Ouvir novamente" : "▶ Ouvir item";
+      updateAudioStatus(index === sequence.length - 1 ? "Guia concluído." : `Leitura concluída: ${currentItem.title}.`);
+    }
+  });
+  document.querySelectorAll("[data-item-id]").forEach((button) => {
+    button.addEventListener("click", () => {
+      const item = sequence.find((entry) => entry.id === button.dataset.itemId);
+      if (!item) return;
+      isGuidePlaying = false;
+      selectItem(item, false);
+    });
+  });
+
+  function renderConcepts() {
+    conceptList.replaceChildren(...sequence.map((item) => {
+      const button = document.createElement("button");
+      button.type = "button";
+      button.className = "concept-button";
+      button.dataset.itemId = item.id;
+      button.innerHTML = `<span class="concept-number">${item.number}</span><span class="concept-name">${item.title}<small class="concept-note">${item.note}</small></span>`;
+      button.addEventListener("click", () => { isGuidePlaying = false; selectItem(item, false); });
+      return button;
+    }));
+  }
+
+  function renderDetail(item) {
+    currentItem = item;
+    detailPanel.style.setProperty("--accent", item.accent);
+    const kicker = document.createElement("p");
+    kicker.className = "detail-kicker";
+    kicker.textContent = `${item.number} · ${item.note}`;
+    const title = document.createElement("h2");
+    title.textContent = item.title;
+    const summary = document.createElement("p");
+    summary.className = "detail-summary";
+    summary.textContent = item.short;
+    const actions = document.createElement("div");
+    actions.className = "detail-actions";
+    const hear = document.createElement("button");
+    hear.type = "button";
+    hear.className = "inline-action";
+    hear.textContent = "▶ Ouvir este tópico";
+    hear.addEventListener("click", () => { isGuidePlaying = false; playCurrentAudio(); });
+    actions.append(hear);
+    const sections = item.sections.map((section) => {
+      const wrapper = document.createElement("section");
+      wrapper.className = "detail-section";
+      const heading = document.createElement("h3");
+      heading.textContent = section.title;
+      const list = document.createElement("ul");
+      section.items.forEach((entry) => {
+        const line = document.createElement("li");
+        line.textContent = entry;
+        list.append(line);
+      });
+      wrapper.append(heading, list);
+      return wrapper;
+    });
+    detailPanel.replaceChildren(kicker, title, summary, actions, ...sections);
+    const index = sequence.findIndex((entry) => entry.id === item.id);
+    progressLabel.textContent = `Trilha · ${index + 1} de ${sequence.length}`;
+    [...conceptList.children].forEach((button) => {
+      const selected = button.dataset.itemId === item.id;
+      button.classList.toggle("active", selected);
+      button.setAttribute("aria-current", selected ? "step" : "false");
+    });
+    document.querySelectorAll(".stage [data-item-id]").forEach((button) => {
+      button.classList.toggle("active", button.dataset.itemId === item.id);
+    });
+    loadAudio(item);
+  }
+
+  function selectItem(item, shouldPlay) {
+    renderDetail(item);
+    if (shouldPlay) playCurrentAudio();
+  }
+
+  function loadAudio(item) {
+    if (audio.dataset.itemId !== item.id) {
+      audio.src = `./audio/${item.id}.mp3`;
+      audio.dataset.itemId = item.id;
+      audio.load();
+    }
+    updateAudioStatus(`Leitura pronta: ${item.title}.`);
+    toggleGuide.textContent = "▶ Iniciar guia";
+  }
+
+  async function playCurrentAudio() {
+    stopSyntheticSpeech();
+    try {
+      await audio.play();
+      toggleGuide.textContent = "Ⅱ Pausar";
+      updateAudioStatus(`Reproduzindo: ${currentItem.title}.`);
+    } catch (error) {
+      speakFallback(currentItem);
+    }
+  }
+
+  function pauseCurrentAudio() {
+    isGuidePlaying = false;
+    audio.pause();
+    if (isSyntheticActive()) speechSynthesis.pause();
+    toggleGuide.textContent = "▶ Retomar";
+    updateAudioStatus(`Leitura pausada: ${currentItem.title}.`);
+  }
+
+  function moveAudio(direction, shouldPlay) {
+    const index = Math.max(0, sequence.findIndex((item) => item.id === currentItem.id));
+    selectItem(sequence[(index + direction + sequence.length) % sequence.length], shouldPlay);
+  }
+
+  function isAudioActive() {
+    return !audio.paused || isSyntheticActive();
+  }
+
+  function speakFallback(item) {
+    if (!("speechSynthesis" in window)) {
+      updateAudioStatus("Narração indisponível neste navegador.");
+      return;
+    }
+    stopSyntheticSpeech();
+    syntheticUtterance = new SpeechSynthesisUtterance(toSpokenText(item.narration));
+    syntheticUtterance.lang = "pt-BR";
+    syntheticUtterance.rate = 0.94;
+    syntheticUtterance.pitch = 0.82;
+    syntheticUtterance.onend = () => {
+      toggleGuide.textContent = "▶ Ouvir item";
+      updateAudioStatus(`Leitura concluída: ${item.title}.`);
+    };
+    speechSynthesis.speak(syntheticUtterance);
+    toggleGuide.textContent = "Ⅱ Pausar";
+    updateAudioStatus(`Fallback de voz: ${item.title}.`);
+  }
+
+  function stopSyntheticSpeech() {
+    if ("speechSynthesis" in window && (speechSynthesis.speaking || speechSynthesis.pending)) speechSynthesis.cancel();
+    syntheticUtterance = null;
+  }
+
+  function isSyntheticActive() {
+    return "speechSynthesis" in window && speechSynthesis.speaking && !speechSynthesis.paused;
+  }
+
+  function toSpokenText(text) {
+    return text
+      .replaceAll("art. 5º, caput", "artigo quinto, caput")
+      .replaceAll("art. 5º", "artigo quinto")
+      .replaceAll("art. 1º, III", "artigo primeiro, inciso três")
+      .replaceAll("art. 1º", "artigo primeiro");
+  }
+
+  function renderQuiz() {
+    const current = studyData.quiz[quizIndex];
+    quizQuestion.textContent = `${quizIndex + 1}. ${current.question}`;
+    quizFeedback.textContent = "Selecione uma alternativa para conferir.";
+    quizOptions.replaceChildren(...current.options.map((option, index) => {
+      const button = document.createElement("button");
+      button.type = "button";
+      button.className = "quiz-option";
+      button.textContent = option;
+      button.addEventListener("click", () => {
+        [...quizOptions.children].forEach((child, childIndex) => {
+          child.classList.toggle("correct", childIndex === current.answer);
+          child.classList.toggle("wrong", childIndex === index && index !== current.answer);
+        });
+        quizFeedback.textContent = current.explanation;
+      });
+      return button;
+    }));
+  }
+
+  function setupReveals() {
+    if (!("IntersectionObserver" in window) || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      document.querySelectorAll(".reveal").forEach((element) => element.classList.add("visible"));
+      return;
+    }
+    const observer = new IntersectionObserver((entries) => entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("visible");
+        observer.unobserve(entry.target);
+      }
+    }), { threshold: 0.12 });
+    document.querySelectorAll(".reveal").forEach((element) => observer.observe(element));
+  }
+
+  function updateAudioStatus(message) {
+    audioStatus.textContent = message;
+  }
+</script>

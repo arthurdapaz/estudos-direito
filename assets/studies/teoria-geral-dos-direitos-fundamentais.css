@@ -1,0 +1,318 @@
+/* Teoria geral dos direitos fundamentais — esteio, petrechos e eixo vertical.
+   Cor, tipografia e achatamento vêm de assets/study-system.css. */
+
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+html, body { min-width: 0; }
+body { margin: 0; }
+
+a { color: inherit; text-decoration: none; }
+button { font: inherit; color: inherit; }
+audio { display: none; }
+
+.audio-bar {
+  position: sticky;
+  top: 8px;
+  z-index: 20;
+  display: grid;
+  grid-template-columns: 44px auto 44px minmax(0, 1fr);
+  gap: 8px;
+  align-items: center;
+  margin: 0 0 clamp(48px, 7vw, 80px);
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(13, 13, 15, 0.14);
+  background: rgba(247, 247, 248, 0.96);
+}
+
+.audio-bar button {
+  min-width: 44px;
+  min-height: 44px;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+.audio-bar .primary {
+  min-width: 148px;
+  padding: 0 14px;
+  background: #0d0d0f;
+  color: #fff;
+  font: 600 0.78rem/1 "Barlow Condensed", sans-serif;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.audio-status {
+  min-width: 0;
+  padding: 0 8px;
+  color: #66656a;
+  font: 0.76rem/1.35 ui-sans-serif, system-ui, sans-serif;
+}
+
+.axis-intro {
+  max-width: 64ch;
+  margin: 0 0 clamp(28px, 5vw, 42px);
+  font-size: clamp(1rem, 1.5vw, 1.08rem);
+  line-height: 1.62;
+}
+
+.axis-intro strong { color: #0d0d0f; }
+
+.stage {
+  display: grid;
+  grid-template-columns: minmax(220px, 0.42fr) minmax(0, 1fr);
+  gap: clamp(28px, 5vw, 72px);
+  align-items: start;
+  margin-bottom: clamp(48px, 7vw, 80px);
+}
+
+.vertical-axis {
+  display: grid;
+  gap: 0;
+}
+
+.axis-node {
+  display: grid;
+  justify-items: start;
+  width: 100%;
+  min-height: 72px;
+  padding: 16px 0;
+  border: 0;
+  background: transparent;
+  text-align: left;
+  cursor: pointer;
+}
+
+.axis-node small {
+  display: block;
+  margin-bottom: 4px;
+  color: #c71f2d;
+  font: 600 0.68rem/1.2 "Barlow Condensed", sans-serif;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.axis-node strong {
+  font: 600 clamp(1.35rem, 2.4vw, 1.85rem)/1.05 "Barlow Condensed", sans-serif;
+  letter-spacing: -0.02em;
+}
+
+.axis-node span {
+  display: block;
+  margin-top: 6px;
+  color: #66656a;
+  font-size: 0.86rem;
+  line-height: 1.45;
+}
+
+.axis-node.active,
+.axis-node:hover,
+.axis-node:focus-visible {
+  background: rgba(199, 31, 45, 0.055);
+}
+
+.axis-line {
+  width: 2px;
+  height: 28px;
+  margin-left: 11px;
+  background: #c71f2d;
+}
+
+.pillar {
+  display: grid;
+  gap: 18px;
+}
+
+.core {
+  display: grid;
+  place-items: start;
+  width: 100%;
+  min-height: 168px;
+  padding: 28px 0;
+  border: 0;
+  background: transparent;
+  text-align: left;
+  cursor: pointer;
+}
+
+.core small {
+  color: #c71f2d;
+  font: 600 0.68rem/1.2 "Barlow Condensed", sans-serif;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.core h2 {
+  max-width: 12ch;
+  margin: 10px 0 8px;
+  font-size: clamp(2.4rem, 5vw, 3.8rem);
+  line-height: 0.9;
+}
+
+.core p {
+  max-width: 46ch;
+  margin: 0;
+  color: #333337;
+  font-size: 0.95rem;
+  line-height: 1.55;
+}
+
+.core.active {
+  background: rgba(199, 31, 45, 0.055);
+}
+
+.petrechos {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px 28px;
+}
+
+.petrecho {
+  display: grid;
+  width: 100%;
+  min-height: 68px;
+  padding: 12px 0;
+  border: 0;
+  background: transparent;
+  text-align: left;
+  cursor: pointer;
+}
+
+.petrecho b {
+  font: 600 1.05rem/1.15 "Barlow Condensed", sans-serif;
+}
+
+.petrecho em {
+  margin-top: 4px;
+  color: #66656a;
+  font-style: normal;
+  font-size: 0.82rem;
+  line-height: 1.4;
+}
+
+.petrecho.active,
+.petrecho:hover,
+.petrecho:focus-visible {
+  background: rgba(199, 31, 45, 0.055);
+}
+
+.study-shell {
+  display: grid;
+  grid-template-columns: minmax(242px, 0.36fr) minmax(0, 1fr);
+  gap: clamp(22px, 4.4vw, 54px);
+  align-items: start;
+}
+
+.concept-list { display: grid; }
+
+.concept-button {
+  display: grid;
+  grid-template-columns: 42px 1fr;
+  gap: 11px;
+  width: 100%;
+  min-height: 76px;
+  padding: 14px 10px;
+  border: 0;
+  background: transparent;
+  text-align: left;
+  cursor: pointer;
+}
+
+.concept-name {
+  font: 800 0.91rem/1.22 ui-sans-serif, system-ui, sans-serif;
+}
+
+.concept-note {
+  display: block;
+  margin-top: 5px;
+  font: 0.67rem/1.32 "Barlow Condensed", sans-serif;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.detail { min-height: 420px; }
+
+.detail-summary {
+  max-width: 65ch;
+  margin: 20px 0 0;
+}
+
+.detail-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+  margin-top: 23px;
+}
+
+.inline-action { cursor: pointer; }
+
+.detail-section ul {
+  display: grid;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.detail-section li {
+  position: relative;
+  padding-left: 22px;
+}
+
+.detail-section li::before {
+  position: absolute;
+  top: 0.67em;
+  left: 0;
+  width: 9px;
+  height: 2px;
+  content: "";
+  background: #c71f2d;
+}
+
+.quiz {
+  display: grid;
+  grid-template-columns: minmax(220px, 0.37fr) minmax(0, 1fr);
+  gap: clamp(24px, 5vw, 64px);
+}
+
+.quiz h2 {
+  margin: 8px 0 12px;
+  font-size: clamp(2.2rem, 4vw, 3.4rem);
+  line-height: 0.92;
+}
+
+.quiz-question {
+  margin: 0 0 19px;
+  font: 500 clamp(1.3rem, 2.4vw, 1.78rem)/1.28 "Barlow Condensed", sans-serif;
+}
+
+.quiz-options { display: grid; gap: 9px; }
+
+.quiz-option { cursor: pointer; }
+
+.quiz-nav {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.quiz-nav button {
+  min-width: 44px;
+  min-height: 44px;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+@media (max-width: 900px) {
+  .stage,
+  .study-shell,
+  .quiz { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 620px) {
+  .petrechos { grid-template-columns: 1fr; }
+}
