@@ -198,6 +198,88 @@ audio { display: none; }
   background: rgba(199, 31, 45, 0.055);
 }
 
+.relations {
+  display: grid;
+  gap: 0;
+  margin: 0 0 clamp(72px, 9vw, 104px);
+}
+
+.horizontal-relation,
+.diagonal-relation {
+  display: grid;
+  grid-template-columns: minmax(90px, 0.28fr) minmax(220px, 1fr) minmax(90px, 0.28fr);
+  gap: 18px;
+  align-items: center;
+  width: 100%;
+  margin: 0;
+  padding: 22px 0;
+  border: 0;
+  border-block: 1px solid rgba(13, 13, 15, 0.14);
+  background: transparent;
+  color: #0d0d0f;
+  text-align: center;
+  cursor: pointer;
+}
+
+.diagonal-relation {
+  border-top: 0;
+}
+
+.horizontal-relation > span,
+.diagonal-relation > span {
+  font: 600 clamp(1.25rem, 2.5vw, 1.75rem)/1 "Barlow Condensed", sans-serif;
+}
+
+.horizontal-relation > strong,
+.diagonal-relation > strong {
+  position: relative;
+  font: 600 0.76rem/1.2 "Barlow Condensed", sans-serif;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.horizontal-relation > strong { color: #2f6f53; }
+.diagonal-relation > strong { color: #9a5a2d; }
+
+.horizontal-relation > strong::before,
+.horizontal-relation > strong::after,
+.diagonal-relation > strong::before,
+.diagonal-relation > strong::after {
+  display: inline-block;
+  width: 26px;
+  height: 1px;
+  margin: 0 9px 3px;
+  content: "";
+}
+
+.horizontal-relation > strong::before,
+.horizontal-relation > strong::after { background: #2f6f53; }
+
+.diagonal-relation > strong::before,
+.diagonal-relation > strong::after {
+  width: 32px;
+  background: #9a5a2d;
+  transform: rotate(-18deg);
+}
+
+.horizontal-relation > small,
+.diagonal-relation > small {
+  grid-column: 1 / -1;
+  max-width: 62ch;
+  margin-inline: auto;
+  color: #66656a;
+  font-size: 0.84rem;
+  line-height: 1.5;
+}
+
+.horizontal-relation:is(:hover, :focus-visible, .active) {
+  background: rgba(47, 111, 83, 0.06);
+}
+
+.diagonal-relation:is(:hover, :focus-visible, .active) {
+  background: rgba(154, 90, 45, 0.08);
+}
+
 .study-shell {
   display: grid;
   grid-template-columns: minmax(242px, 0.36fr) minmax(0, 1fr);
@@ -315,4 +397,17 @@ audio { display: none; }
 
 @media (max-width: 620px) {
   .petrechos { grid-template-columns: 1fr; }
+
+  .horizontal-relation,
+  .diagonal-relation {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .horizontal-relation > strong::before,
+  .horizontal-relation > strong::after,
+  .diagonal-relation > strong::before,
+  .diagonal-relation > strong::after {
+    width: 18px;
+  }
 }
