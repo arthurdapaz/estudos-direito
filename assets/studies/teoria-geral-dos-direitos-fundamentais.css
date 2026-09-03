@@ -280,6 +280,56 @@ audio { display: none; }
   background: rgba(154, 90, 45, 0.08);
 }
 
+.limit-pair {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  gap: 18px;
+  align-items: center;
+  width: 100%;
+  margin: 0 0 clamp(72px, 9vw, 104px);
+  padding: 8px 0 22px;
+  border: 0;
+  background: transparent;
+  color: #0d0d0f;
+  text-align: left;
+  cursor: pointer;
+}
+
+.limit-pair > span {
+  display: grid;
+  gap: 6px;
+}
+
+.limit-pair small {
+  color: #c71f2d;
+  font: 600 0.68rem/1.2 "Barlow Condensed", sans-serif;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.limit-pair strong {
+  font: 600 clamp(1.6rem, 3vw, 2.2rem)/0.95 "Barlow Condensed", sans-serif;
+}
+
+.limit-pair em {
+  max-width: 34ch;
+  color: #66656a;
+  font-style: normal;
+  font-size: 0.86rem;
+  line-height: 1.45;
+}
+
+.limit-pair > b {
+  color: #66556f;
+  font: 600 0.72rem/1.2 "Barlow Condensed", sans-serif;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.limit-pair:is(:hover, :focus-visible, .active) {
+  background: rgba(102, 85, 111, 0.07);
+}
+
 .study-shell {
   display: grid;
   grid-template-columns: minmax(242px, 0.36fr) minmax(0, 1fr);
@@ -409,5 +459,10 @@ audio { display: none; }
   .diagonal-relation > strong::before,
   .diagonal-relation > strong::after {
     width: 18px;
+  }
+
+  .limit-pair {
+    grid-template-columns: 1fr;
+    gap: 10px;
   }
 }
