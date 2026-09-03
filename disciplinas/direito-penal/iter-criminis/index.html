@@ -31,10 +31,10 @@ permalink: /disciplinas/direito-penal/iter-criminis/
 
   <section class="ruler-section" aria-labelledby="ruler-title">
     <p class="section-label" id="ruler-title">A régua do iter</p>
-    <p class="ruler-intro">O <strong>iter criminis</strong> é o percurso do crime. A régua marca quatro marcos e um limiar: antes do início da execução, em regra, não há punição. Clique em cada marco.</p>
+    <p class="ruler-intro">O <strong>iter criminis</strong> é o percurso do crime. A régua marca quatro marcos e um limiar: os atos executórios começam quando o <strong>bem jurídico tutelado efetivamente entra em perigo</strong>. Antes disso, em regra, não há punição. Clique em cada marco.</p>
     <div class="ruler-scale" aria-hidden="true">
       <span>impunidade</span>
-      <span>limiar · início da execução</span>
+      <span>limiar · bem jurídico em perigo</span>
       <span>punibilidade</span>
     </div>
     <div class="flow" id="ruler" role="tablist" aria-label="Etapas do iter criminis"></div>
@@ -72,10 +72,10 @@ const studyData = {
     short: 'O iter criminis organiza o caminho do agente desde a ideia até o resultado. Nem todo movimento interno ou externo é crime: a punibilidade costuma surgir com o início da execução.',
     items: [
       'Cogitação e atos preparatórios, em regra, ficam fora do alcance da lei penal.',
-      'A partir dos atos executórios, abre-se a possibilidade de tentativa punível.',
-      'Na consumação, o tipo se realiza por completo.'
+      'Atos executórios começam quando o bem jurídico tutelado efetivamente entra em perigo — aí nasce a tentativa do art. 14, II.',
+      'Art. 14, I: crime consumado quando nele se reúnem todos os elementos de sua definição legal.'
     ],
-    narration: 'Iter criminis. É o percurso do crime, da cogitação à consumação. A régua didática tem quatro marcos: cogitação, atos preparatórios, atos executórios e consumação. Em regra, o Direito Penal não pune o pensamento nem a mera preparação. A punibilidade costuma surgir quando começa a execução do crime, abrindo caminho para a tentativa. Na consumação, todos os elementos do tipo se realizam.'
+    narration: 'Iter criminis. É o percurso do crime, da cogitação à consumação. A régua didática tem quatro marcos: cogitação, atos preparatórios, atos executórios e consumação. Em regra, o Direito Penal não pune o pensamento nem a mera preparação. Os atos executórios começam quando o bem jurídico tutelado efetivamente entra em perigo. Aí nasce a tentativa do artigo quatorze, inciso dois. Na consumação, artigo quatorze, inciso um, reúnem-se todos os elementos da definição legal do crime.'
   },
   stages: [
     {
@@ -114,14 +114,15 @@ const studyData = {
       label: '03',
       punish: 'punível',
       punishable: true,
-      short: 'É o início da execução do crime. Daqui em diante, em regra, nasce a tentativa punível, salvo desistência voluntária ou arrependimento eficaz.',
+      short: 'Iniciam quando o bem jurídico tutelado efetivamente entra em perigo. Daqui em diante, em regra, nasce a tentativa punível do art. 14, II.',
       items: [
+        'Critério: o bem jurídico passa a estar em perigo concreto — não basta preparar; é preciso iniciar o ataque típico.',
         'Exemplo: colocar veneno na bebida, apontar arma, iniciar estrangulamento.',
-        'Art. 14, I: há crime tentado quando, iniciada a execução, não se consuma por circunstâncias alheias à vontade do agente.',
+        'Art. 14, II: crime tentado quando, iniciada a execução, não se consuma por circunstâncias alheias à vontade do agente.',
         'Se o agente desiste voluntariamente ou impede o resultado, o art. 15 pode afastar a punição da tentativa.'
       ],
-      example: 'Ela coloca o veneno no café. O marido ainda não morreu, mas a execução do homicídio já começou.',
-      narration: 'Terceira etapa: atos executórios. É o início da execução do crime. Daqui em diante, em regra, nasce a tentativa punível. Exemplo: colocar veneno na bebida ou apontar a arma. O artigo quatorze, inciso um, fala em tentativa quando, iniciada a execução, o crime não se consuma por circunstâncias alheias à vontade do agente. Se houver desistência voluntária ou arrependimento eficaz, o artigo quinze pode afastar a punição da tentativa.'
+      example: 'Ela coloca o veneno no café. A vida do marido entra em perigo: a execução do homicídio já começou.',
+      narration: 'Terceira etapa: atos executórios. Eles iniciam quando o bem jurídico tutelado efetivamente entra em perigo. Daqui em diante, em regra, nasce a tentativa punível. Exemplo: colocar veneno na bebida ou apontar a arma. O artigo quatorze, inciso dois, diz que o crime é tentado quando, iniciada a execução, não se consuma por circunstâncias alheias à vontade do agente. Se houver desistência voluntária ou arrependimento eficaz, o artigo quinze pode afastar a punição da tentativa.'
     },
     {
       id: 'consumacao',
@@ -129,14 +130,15 @@ const studyData = {
       label: '04',
       punish: 'punível',
       punishable: true,
-      short: 'O crime se realiza por completo: todos os elementos do tipo penal estão presentes. No homicídio, a morte da vítima consuma o delito.',
+      short: 'Art. 14, I: diz-se o crime consumado quando nele se reúnem todos os elementos de sua definição legal. No homicídio, a morte da vítima consuma o delito.',
       items: [
+        'Texto legal: “consumado, quando nele se reúnem todos os elementos de sua definição legal”.',
         'Exemplo: o marido morre em razão do veneno administrado.',
         'Aqui não se fala mais em tentativa, mas em crime consumado.',
         'A pena é a cominada ao tipo, sem a redução própria da tentativa.'
       ],
-      example: 'O marido bebe o café envenenado e morre. O homicídio está consumado.',
-      narration: 'Quarta etapa: consumação. O crime se realiza por completo, com todos os elementos do tipo penal. No homicídio, a morte da vítima consuma o delito. Exemplo: o marido morre em razão do veneno. Não se fala mais em tentativa, mas em crime consumado, sujeito à pena cominada ao tipo.'
+      example: 'O marido bebe o café envenenado e morre. O homicídio está consumado: todos os elementos do tipo estão reunidos.',
+      narration: 'Quarta etapa: consumação. O artigo quatorze, inciso um, do Código Penal diz que o crime é consumado quando nele se reúnem todos os elementos de sua definição legal. No homicídio, a morte da vítima consuma o delito. Exemplo: o marido morre em razão do veneno. Não se fala mais em tentativa, mas em crime consumado, sujeito à pena cominada ao tipo.'
     }
   ]
 };
