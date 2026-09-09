@@ -221,7 +221,7 @@ permalink: /disciplinas/direito-penal/teoria-do-crime/
           ],
           narration: "Tipicidade. É a adequação do fato concreto à norma penal. Na tipicidade formal, exige-se correspondência completa entre o fato e os elementos descritos na norma penal incriminadora: se falta elemento exigido, não há enquadramento formal completo. Na tipicidade material, observa-se se há lesão ou perigo de lesão penalmente relevante ao bem jurídico. O princípio da legalidade impede criar crime por analogia contra o acusado. No artigo cento e vinte e um, o núcleo matar exige a morte de outra pessoa e sua ligação com a conduta. O enquadramento ainda muda conforme haja dolo ou culpa."
         },
-        { id: "dolo", number: "08", title: "Dolo direto e eventual", article: "Art. 18, I", accent: "#df5742",
+        { id: "dolo", number: "08", title: "Dolo direto e eventual", article: "Art. 18, I", accent: "#df5742", emphasis: "Dolo é a vontade de praticar os elementos descritos no tipo penal.",
           short: "O crime é doloso quando o agente quer o resultado ou assume o risco de produzi-lo. São duas relações subjetivas diferentes cobertas pelo art. 18, I.",
           sections: [
             { title: "Dolo direto", items: [
@@ -234,7 +234,7 @@ permalink: /disciplinas/direito-penal/teoria-do-crime/
               "A conclusão depende das circunstâncias provadas, não de uma frase automática sobre risco."
             ]}
           ],
-          narration: "Dolo direto e dolo eventual. Pelo artigo dezoito, inciso primeiro, o crime é doloso quando o agente quis o resultado ou assumiu o risco de produzi-lo. No dolo direto, o agente conhece os elementos do fato e dirige sua vontade ao resultado. Fórmula: prevê e quer. No dolo eventual, ele prevê a possibilidade do resultado e assume o risco de produzi-lo. Fórmula: prevê e aceita o risco. A mera previsibilidade não basta. A conclusão depende das circunstâncias provadas no caso."
+          narration: "Dolo direto e dolo eventual. Frase para guardar: dolo é a vontade de praticar os elementos descritos no tipo penal. Pelo artigo dezoito, inciso primeiro, o crime é doloso quando o agente quis o resultado ou assumiu o risco de produzi-lo. No dolo direto, o agente conhece os elementos do fato e dirige sua vontade ao resultado. Fórmula: prevê e quer. No dolo eventual, ele prevê a possibilidade do resultado e assume o risco de produzi-lo. Fórmula: prevê e aceita o risco. A mera previsibilidade não basta. A conclusão depende das circunstâncias provadas no caso."
         },
         { id: "culpa", number: "09", title: "Culpa em sentido estrito", article: "Art. 18, II", accent: "#6ea486",
           short: "Na culpa, a conduta é voluntária, mas o resultado não é querido nem assumido; ele decorre da violação do dever objetivo de cuidado.",
@@ -326,6 +326,13 @@ permalink: /disciplinas/direito-penal/teoria-do-crime/
       const kicker = document.createElement("p"); kicker.className = "detail-kicker"; kicker.textContent = `${item.number} · ${item.article}`;
       const title = document.createElement("h2"); title.textContent = item.title;
       const summary = document.createElement("p"); summary.className = "detail-summary"; summary.textContent = item.short;
+      const keyPhrase = item.emphasis ? document.createElement("aside") : null;
+      if (keyPhrase) {
+        keyPhrase.className = "key-phrase";
+        const keyLabel = document.createElement("span"); keyLabel.textContent = "Frase importante";
+        const keyText = document.createElement("strong"); keyText.textContent = item.emphasis;
+        keyPhrase.append(keyLabel, keyText);
+      }
       const actions = document.createElement("div"); actions.className = "detail-actions";
       const hear = document.createElement("button"); hear.type = "button"; hear.className = "inline-action"; hear.textContent = "▶ Ouvir este capítulo"; hear.addEventListener("click", () => { isGuidePlaying = false; playCurrentAudio(); }); actions.append(hear);
       const sections = item.sections.map((section) => {
@@ -334,7 +341,7 @@ permalink: /disciplinas/direito-penal/teoria-do-crime/
         const list = document.createElement("ul"); section.items.forEach((entry) => { const li = document.createElement("li"); li.textContent = entry; list.append(li); });
         wrapper.append(heading, list); return wrapper;
       });
-      detailPanel.replaceChildren(kicker, title, summary, actions, ...sections);
+      detailPanel.replaceChildren(kicker, title, summary, ...(keyPhrase ? [keyPhrase] : []), actions, ...sections);
       const index = sequence.findIndex((entry) => entry.id === item.id); progressLabel.textContent = `Trilha · ${index + 1} de ${sequence.length}`;
       [...chapterList.children].forEach((button) => { const selected = button.dataset.itemId === item.id; button.classList.toggle("active", selected); button.setAttribute("aria-current", selected ? "step" : "false"); });
       loadAudio(item);
