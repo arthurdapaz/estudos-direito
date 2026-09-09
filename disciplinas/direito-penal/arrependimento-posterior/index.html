@@ -1,0 +1,270 @@
+---
+layout: study
+discipline_id: direito-penal
+study_id: arrependimento-posterior
+study_style: /assets/studies/arrependimento-posterior.css
+body_class: study-standard
+permalink: /disciplinas/direito-penal/arrependimento-posterior/
+---
+
+<main class="page">
+  <a class="crumb" href="../">← Direito Penal</a>
+
+  <header class="hero">
+    <div>
+      <p class="eyebrow">Parte Geral · art. 16 do CP</p>
+      <h1>Arrependimento posterior</h1>
+    </div>
+    <div class="formula">
+      <strong>O crime já se consumou. A reparação ainda pode reduzir a pena.</strong>
+      <p>Sem violência ou grave ameaça, com reparação voluntária e tempestiva: redução de <b>1 a 2 terços</b>.</p>
+    </div>
+  </header>
+
+  <section class="audio-bar" aria-label="Áudio guiado">
+    <button type="button" id="prevAudio" aria-label="Ouvir item anterior">←</button>
+    <button type="button" class="primary" id="toggleGuide">▶ Iniciar guia</button>
+    <button type="button" id="nextAudio" aria-label="Ouvir próximo item">→</button>
+    <div class="audio-status" id="audioStatus" aria-live="polite">Leitura pronta: visão geral.</div>
+    <audio id="studyAudio" preload="metadata"></audio>
+  </section>
+
+  <section class="statute" aria-labelledby="statute-title">
+    <p class="section-label">Texto do Código</p>
+    <h2 id="statute-title">Art. 16 — A fórmula legal</h2>
+    <p class="statute-text">Nos crimes cometidos <mark>sem violência ou grave ameaça à pessoa</mark>, reparado o dano ou restituída a coisa, até o recebimento da denúncia ou da queixa, por ato voluntário do agente, a pena será reduzida de <mark>um a dois terços</mark>.</p>
+    <p class="statute-note">É causa de diminuição de pena: o fato continua sendo crime e a reparação não apaga, por si só, a tipicidade ou a ilicitude.</p>
+  </section>
+
+  <section class="filters" aria-labelledby="filters-title">
+    <div class="section-heading">
+      <p class="section-label" id="filters-title">Quatro filtros cumulativos</p>
+      <p class="section-intro">Clique em cada cartão. Se um filtro essencial faltar, o redutor do art. 16 não incide.</p>
+    </div>
+    <div class="filter-grid" id="filterGrid" role="tablist" aria-label="Requisitos do arrependimento posterior"></div>
+  </section>
+
+  <article class="detail" id="detail" aria-live="polite"></article>
+
+  <section class="timeline" aria-labelledby="timeline-title">
+    <p class="section-label" id="timeline-title">O relógio decide</p>
+    <h2>Onde a reparação precisa caber?</h2>
+    <div class="timeline-track" aria-label="Linha do tempo do crime à reparação">
+      <div class="timeline-item"><span>01</span><strong>Consumação</strong><p>O crime se completa.</p></div>
+      <div class="timeline-item active"><span>02</span><strong>Reparação</strong><p>Dano reparado ou coisa restituída.</p></div>
+      <div class="timeline-item deadline"><span>03</span><strong>Recebimento</strong><p>Denúncia ou queixa.</p></div>
+      <div class="timeline-item"><span>04</span><strong>Dosimetria</strong><p>Redução de 1 a 2 terços.</p></div>
+    </div>
+    <p class="timeline-callout"><b>Antes do recebimento.</b> O início de uma negociação não substitui a reparação efetiva dentro do prazo legal.</p>
+  </section>
+
+  <section class="comparison" aria-labelledby="compare-title">
+    <p class="section-label" id="compare-title">Não confunda</p>
+    <h2>Três respostas para três momentos</h2>
+    <div class="compare-table" role="table" aria-label="Distinção entre arrependimento eficaz, arrependimento posterior e atenuante">
+      <div class="compare-head" role="row"><span role="columnheader">Figura</span><span role="columnheader">Quando ocorre</span><span role="columnheader">Efeito</span><span role="columnheader">Base</span></div>
+      <div class="compare-row" role="row"><strong role="cell">Arrependimento eficaz</strong><span role="cell">Antes da consumação</span><span role="cell">Só atos já praticados</span><span role="cell">Art. 15</span></div>
+      <div class="compare-row highlighted" role="row"><strong role="cell">Arrependimento posterior</strong><span role="cell">Depois da consumação, antes do recebimento</span><span role="cell">Redução de 1 a 2 terços</span><span role="cell">Art. 16</span></div>
+      <div class="compare-row" role="row"><strong role="cell">Atenuante de reparação</strong><span role="cell">Depois do marco do art. 16</span><span role="cell">Atenua, sem o redutor do art. 16</span><span role="cell">Art. 65, III, b</span></div>
+    </div>
+  </section>
+
+  <section class="quiz" aria-labelledby="quiz-title">
+    <p class="section-label">Fixação</p>
+    <h2 id="quiz-title">O art. 16 incide?</h2>
+    <p id="quizQuestion"></p>
+    <div id="quizOptions"></div>
+    <p id="quizFeedback" class="feedback" aria-live="polite"></p>
+    <div class="quiz-nav"><button type="button" id="prevQuestion" aria-label="Pergunta anterior">←</button><button type="button" id="nextQuestion" aria-label="Próxima pergunta">→</button></div>
+  </section>
+
+  <p class="source">Base: <a href="https://www.planalto.gov.br/ccivil_03/decreto-lei/del2848compilado.htm">Código Penal, arts. 16 e 65, III, b (Planalto)</a>. Referência jurisprudencial: <a href="https://scon.stj.jus.br/SCON/pesquisar.jsp?O=RR&amp;b=ACOR&amp;p=true&amp;preConsultaPP=000002381%2F0&amp;thesaurus=JURIDICO&amp;tp=T">STJ, jurisprudência sobre o art. 16</a>. Material de estudo; a incidência e a fração dependem das circunstâncias provadas no caso concreto.</p>
+</main>
+
+<script>
+const studyData = {
+  overview: {
+    id: 'visao-geral',
+    number: '00',
+    title: 'O mapa do art. 16',
+    article: 'CP · causa de diminuição',
+    short: 'O arrependimento posterior é uma ponte entre a consumação e a dosimetria: o agente repara o dano ou restitui a coisa, voluntariamente e dentro do prazo, e pode obter redução da pena.',
+    sections: [
+      {
+        title: 'Frase para guardar',
+        items: [
+          'Crime sem violência ou grave ameaça à pessoa.',
+          'Reparação do dano ou restituição da coisa, em regra integral.',
+          'Ato voluntário antes do recebimento da denúncia ou queixa.',
+          'Efeito: redução de um a dois terços; o crime permanece consumado.'
+        ]
+      },
+      {
+        title: 'A pergunta de prova',
+        items: [
+          'O fato já estava consumado quando houve reparação? Se não, estude o art. 15.',
+          'A reparação efetiva ocorreu antes do recebimento? Se depois, o art. 16 não cabe.',
+          'Houve violência ou grave ameaça à pessoa? O redutor não incide.'
+        ]
+      }
+    ],
+    narration: 'Visão geral. O arrependimento posterior está no artigo dezesseis do Código Penal. O crime já se consumou, mas o agente repara o dano ou restitui a coisa. Se o crime foi cometido sem violência ou grave ameaça à pessoa, o ato foi voluntário e ocorreu até o recebimento da denúncia ou da queixa, a pena pode ser reduzida de um a dois terços. É causa de diminuição de pena: o crime continua consumado. Guarde quatro filtros: ausência de violência ou grave ameaça, reparação ou restituição, voluntariedade e prazo anterior ao recebimento da denúncia ou queixa.'
+  },
+  chapters: [
+    {
+      id: 'sem-violencia',
+      number: '01',
+      title: 'Sem violência ou grave ameaça',
+      article: 'Art. 16, primeira condição',
+      short: 'O crime não pode ter sido cometido com violência ou grave ameaça à pessoa. A restrição é expressa no caput do art. 16.',
+      sections: [
+        { title: 'Filtro', items: ['Pergunte se a conduta empregou violência ou grave ameaça dirigida à pessoa.', 'A devolução do bem não transforma roubo em furto nem faz incidir o redutor do art. 16.', 'Em regra, o instituto aparece em crimes patrimoniais sem violência, mas o texto legal não o limita nominalmente a esse grupo.'] },
+        { title: 'Cuidado', items: ['Não confunda ausência de violência contra a coisa com ausência de violência contra a pessoa.', 'A reparação posterior pode ter outros efeitos jurídicos, mas não substitui esse requisito do art. 16.'] }
+      ],
+      narration: 'Primeiro filtro: ausência de violência ou grave ameaça à pessoa. O artigo dezesseis é expresso. A devolução do bem não transforma roubo em furto e não faz incidir o redutor. O instituto aparece com frequência em crimes patrimoniais sem violência, mas o texto legal não o limita nominalmente a esse grupo. Cuidado: ausência de violência contra a coisa não é o mesmo que ausência de violência contra a pessoa.'
+    },
+    {
+      id: 'reparacao-integral',
+      number: '02',
+      title: 'Reparação ou restituição',
+      article: 'Art. 16, núcleo objetivo',
+      short: 'O dano deve ser reparado ou a coisa restituída. A orientação do STJ exige, para a causa de diminuição, reparação integral ou restituição efetiva.',
+      sections: [
+        { title: 'Duas formas', items: ['Reparar o dano: ressarcir integralmente o prejuízo causado.', 'Restituir a coisa: devolver o bem à vítima, de modo efetivo.', 'Mero início de negociação ou devolução parcial, em regra, não satisfaz o requisito objetivo.'] },
+        { title: 'Efeito', items: ['A reparação não apaga o crime nem desfaz a consumação.', 'Ela abre espaço para a redução da pena, desde que os demais filtros também estejam presentes.'] }
+      ],
+      narration: 'Segundo filtro: reparação ou restituição. Reparar o dano significa ressarcir integralmente o prejuízo causado. Restituir a coisa significa devolver efetivamente o bem à vítima. Segundo a orientação do Superior Tribunal de Justiça, o redutor exige reparação integral ou restituição efetiva. O mero início de negociação ou a devolução parcial, em regra, não satisfaz o requisito objetivo. A reparação não apaga o crime nem desfaz a consumação; ela pode reduzir a pena quando os outros filtros também aparecem.'
+    },
+    {
+      id: 'prazo',
+      number: '03',
+      title: 'Antes do recebimento',
+      article: 'Art. 16, marco temporal',
+      short: 'A reparação efetiva precisa ocorrer até o recebimento da denúncia ou da queixa. O marco não é o oferecimento da peça nem a sentença.',
+      sections: [
+        { title: 'Linha do tempo', items: ['Consumação do crime → reparação ou restituição → recebimento da denúncia ou queixa.', 'O recebimento da denúncia ou queixa é o limite temporal do art. 16.', 'Se a reparação só se completa depois desse marco, o redutor do art. 16 não incide.'] },
+        { title: 'Não basta começar', items: ['Negociar antes do prazo não basta se a reparação efetiva só ocorre depois.', 'Após o marco, pode existir discussão sobre a atenuante do art. 65, III, b, mas ela não é o arrependimento posterior.'] }
+      ],
+      narration: 'Terceiro filtro: o prazo. A reparação efetiva precisa ocorrer até o recebimento da denúncia ou da queixa. A linha do tempo é: consumação, reparação ou restituição, e depois recebimento. O recebimento é o limite temporal do artigo dezesseis. Se a reparação só se completa depois, o redutor não incide. Também não basta começar uma negociação antes do prazo se a reparação efetiva ocorre posteriormente. Depois do marco, pode existir discussão sobre a atenuante do artigo sessenta e cinco, inciso três, letra b, mas ela não é o arrependimento posterior.'
+    },
+    {
+      id: 'voluntariedade',
+      number: '04',
+      title: 'Ato voluntário',
+      article: 'Art. 16, requisito subjetivo',
+      short: 'A reparação ou restituição precisa decorrer de ato voluntário do agente, sem coação. A voluntariedade se examina com os fatos provados.',
+      sections: [
+        { title: 'O que observar', items: ['A iniciativa deve ser atribuível ao agente, não apenas resultado de apreensão ou de ação de terceiros.', 'Voluntário não significa necessariamente espontâneo ou motivado por arrependimento moral.', 'O grau de voluntariedade e a rapidez da reparação podem influenciar a fração dentro da faixa de um a dois terços.'] },
+        { title: 'Resultado', items: ['Sem voluntariedade, o art. 16 não incide, ainda que o bem retorne à vítima.', 'Com os quatro filtros, a redução é aplicada na dosimetria conforme o caso concreto.'] }
+      ],
+      narration: 'Quarto filtro: ato voluntário. A reparação ou restituição precisa decorrer de ato voluntário do agente, sem coação. A iniciativa deve ser atribuível ao agente, e não apenas resultado de apreensão ou da ação de terceiros. Voluntário não significa necessariamente espontâneo ou motivado por arrependimento moral. O grau de voluntariedade e a rapidez da reparação podem influenciar a fração dentro da faixa de um a dois terços. Sem voluntariedade, o artigo dezesseis não incide, ainda que o bem retorne à vítima.'
+    }
+  ],
+  quiz: [
+    { question: 'O agente furta um notebook, devolve-o voluntariamente antes do recebimento da denúncia e não houve violência. Qual é a consequência possível?', options: ['O fato deixa de ser crime.', 'A pena pode ser reduzida de um a dois terços.', 'Aplica-se obrigatoriamente a pena mínima.'], answer: 1, explanation: 'Presentes os quatro filtros, o art. 16 permite reduzir a pena de um a dois terços; o crime continua consumado.' },
+    { question: 'No roubo, o agente devolve o celular depois de ser localizado pela polícia. Incide o art. 16?', options: ['Sim, porque todo roubo reparado gera o redutor.', 'Não, porque há grave ameaça e falta voluntariedade.', 'Sim, desde que a devolução seja integral.'], answer: 1, explanation: 'Não. A grave ameaça afasta o art. 16 e a devolução decorrente da localização policial não demonstra, por si, ato voluntário.' },
+    { question: 'A vítima recebe a reparação integral depois do recebimento da denúncia. Qual afirmação é correta?', options: ['O art. 16 incide com redução de um terço.', 'O art. 16 não incide por falta do requisito temporal.', 'O crime deixa de ser punível.'], answer: 1, explanation: 'Correto. A reparação efetiva posterior ao recebimento não atende ao marco do art. 16; pode haver análise de outro efeito, como a atenuante do art. 65, III, b.' },
+    { question: 'Qual diferença resume melhor o art. 15 e o art. 16?', options: ['Art. 15 atua antes da consumação; art. 16 depois da consumação e reduz a pena.', 'Art. 15 e art. 16 são sinônimos.', 'Art. 15 reduz a pena; art. 16 exclui o crime.'], answer: 0, explanation: 'Correto. No art. 15, a desistência ou o impedimento do resultado ocorre antes da consumação; no art. 16, o crime já se consumou e a reparação reduz a pena.' }
+  ]
+};
+
+const sequence = [studyData.overview, ...studyData.chapters];
+const filterGrid = document.querySelector('#filterGrid');
+const detail = document.querySelector('#detail');
+const audio = document.querySelector('#studyAudio');
+const audioStatus = document.querySelector('#audioStatus');
+const toggleGuide = document.querySelector('#toggleGuide');
+const quizQuestion = document.querySelector('#quizQuestion');
+const quizOptions = document.querySelector('#quizOptions');
+const quizFeedback = document.querySelector('#quizFeedback');
+let currentItem = studyData.overview;
+let guidePlaying = false;
+let quizIndex = 0;
+let synthetic = null;
+
+function updateStatus(text) { audioStatus.textContent = text; }
+function stopSpeech() { if ('speechSynthesis' in window) speechSynthesis.cancel(); synthetic = null; }
+function speechActive() { return 'speechSynthesis' in window && speechSynthesis.speaking && !speechSynthesis.paused; }
+function audioActive() { return !audio.paused || speechActive(); }
+
+function loadAudio(item) {
+  if (audio.dataset.itemId !== item.id) { audio.src = `audio/${item.id}.mp3`; audio.dataset.itemId = item.id; audio.load(); }
+  updateStatus(`Leitura pronta: ${item.title}.`);
+  toggleGuide.textContent = '▶ Iniciar guia';
+}
+
+function speakFallback(item) {
+  if (!('speechSynthesis' in window)) { updateStatus('Narração indisponível neste navegador.'); return; }
+  stopSpeech();
+  synthetic = new SpeechSynthesisUtterance(item.narration);
+  synthetic.lang = 'pt-BR'; synthetic.rate = 0.94; synthetic.pitch = 0.82;
+  synthetic.onend = () => { toggleGuide.textContent = '▶ Ouvir item'; updateStatus(`Leitura concluída: ${item.title}.`); };
+  speechSynthesis.speak(synthetic);
+  toggleGuide.textContent = 'Ⅱ Pausar'; updateStatus(`Fallback de voz: ${item.title}.`);
+}
+
+async function playCurrent() {
+  stopSpeech();
+  try { await audio.play(); toggleGuide.textContent = 'Ⅱ Pausar'; updateStatus(`Reproduzindo: ${currentItem.title}.`); }
+  catch (error) { speakFallback(currentItem); }
+}
+
+function pauseCurrent() {
+  guidePlaying = false; audio.pause(); if (speechActive()) speechSynthesis.pause();
+  toggleGuide.textContent = '▶ Retomar'; updateStatus(`Leitura pausada: ${currentItem.title}.`);
+}
+
+function selectItem(item, shouldPlay) {
+  currentItem = item;
+  renderDetail(item);
+  loadAudio(item);
+  if (shouldPlay) playCurrent();
+}
+
+function moveAudio(delta, shouldPlay) {
+  const index = Math.max(0, sequence.findIndex((item) => item.id === currentItem.id));
+  selectItem(sequence[(index + delta + sequence.length) % sequence.length], shouldPlay);
+}
+
+function renderDetail(item) {
+  filterGrid.querySelectorAll('.filter-card').forEach((button) => {
+    const active = button.dataset.id === item.id;
+    button.classList.toggle('active', active);
+    button.setAttribute('aria-selected', active ? 'true' : 'false');
+  });
+  detail.innerHTML = `<small>${item.id === 'visao-geral' ? 'visão geral' : `${item.number} · ${item.article}`}</small><h2>${item.title}</h2><p class="lede">${item.short}</p>${item.sections.map((section) => `<section class="detail-section"><h3>${section.title}</h3><ul>${section.items.map((entry) => `<li>${entry}</li>`).join('')}</ul></section>`).join('')}<div class="controls"><button class="button" type="button" id="hearItem">▶ Ouvir este tópico</button><button class="button" type="button" id="nextItem">${item.id === 'visao-geral' ? 'Começar pelos filtros →' : 'Próximo filtro →'}</button></div><p class="note">O art. 16 é uma causa de diminuição de pena. A reparação deve ser comprovada e os requisitos são analisados a partir das circunstâncias do caso.</p>`;
+  document.querySelector('#hearItem').onclick = () => { guidePlaying = false; selectItem(item, true); };
+  document.querySelector('#nextItem').onclick = () => { guidePlaying = false; const index = sequence.indexOf(item); selectItem(sequence[(index + 1) % sequence.length], false); };
+}
+
+filterGrid.innerHTML = `<button class="filter-card overview-card" type="button" role="tab" data-id="visao-geral" aria-selected="true"><span>00</span><strong>Visão geral</strong><em>mapa completo</em></button>` + studyData.chapters.map((chapter) => `<button class="filter-card" type="button" role="tab" data-id="${chapter.id}" aria-selected="false"><span>${chapter.number}</span><strong>${chapter.title}</strong><em>filtro</em></button>`).join('');
+filterGrid.addEventListener('click', (event) => { const button = event.target.closest('[data-id]'); if (button) { guidePlaying = false; selectItem(sequence.find((item) => item.id === button.dataset.id), false); } });
+
+function renderQuiz() {
+  const quiz = studyData.quiz[quizIndex];
+  quizQuestion.textContent = quiz.question;
+  quizOptions.innerHTML = quiz.options.map((option, index) => `<button class="answer" type="button" data-index="${index}">${option}</button>`).join('');
+  quizFeedback.textContent = '';
+  quizOptions.querySelectorAll('.answer').forEach((button) => button.addEventListener('click', () => {
+    const correct = Number(button.dataset.index) === quiz.answer;
+    quizOptions.querySelectorAll('.answer').forEach((option) => option.classList.toggle('correct-answer', Number(option.dataset.index) === quiz.answer));
+    button.classList.add(correct ? 'ok' : 'no');
+    quizFeedback.textContent = `${correct ? 'Correto. ' : 'Revise. '}${quiz.explanation}`;
+  }));
+}
+
+document.querySelector('#prevAudio').onclick = () => moveAudio(-1, true);
+document.querySelector('#nextAudio').onclick = () => moveAudio(1, true);
+toggleGuide.onclick = () => { if (audioActive()) pauseCurrent(); else { guidePlaying = true; playCurrent(); } };
+audio.addEventListener('error', () => { updateStatus('MP3 indisponível. Fallback de voz pronto.'); toggleGuide.textContent = '▶ Narrar'; });
+audio.addEventListener('ended', () => {
+  const index = sequence.findIndex((item) => item.id === currentItem.id);
+  if (guidePlaying && index < sequence.length - 1) selectItem(sequence[index + 1], true);
+  else { guidePlaying = false; toggleGuide.textContent = index === sequence.length - 1 ? '↻ Ouvir novamente' : '▶ Ouvir item'; updateStatus(index === sequence.length - 1 ? 'Guia concluído.' : `Leitura concluída: ${currentItem.title}.`); }
+});
+document.querySelector('#prevQuestion').onclick = () => { quizIndex = (quizIndex - 1 + studyData.quiz.length) % studyData.quiz.length; renderQuiz(); };
+document.querySelector('#nextQuestion').onclick = () => { quizIndex = (quizIndex + 1) % studyData.quiz.length; renderQuiz(); };
+renderDetail(studyData.overview);
+loadAudio(studyData.overview);
+renderQuiz();
+</script>
