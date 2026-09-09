@@ -38,7 +38,7 @@
   code: PEN
   name: Direito Penal
   url: /disciplinas/direito-penal/
-  description: Estudos de Direito Penal sobre teoria do crime, iter criminis, tentativa, arrependimento posterior, crimes contra a honra, legítima defesa e consunção.
+  description: Estudos de Direito Penal sobre teoria do crime, iter criminis, tentativa, arrependimento posterior, erro de tipo, crimes contra a honra, legítima defesa e consunção.
   summary: Pressupostos do crime, formas de imputação e consequências jurídicas, com leitura sistemática da Parte Geral e aplicação aos tipos penais.
   studies_intro: Conteúdos separados por problema jurídico e finalidade de revisão.
   note_label: Leitura da disciplina
@@ -72,6 +72,13 @@
       chrome_title: Arrependimento posterior
       browser_title: Instituto do arrependimento posterior | Direito Penal
       description: Os quatro filtros do art. 16 do CP, o momento da reparação, a redução de um a dois terços e a distinção para o arrependimento eficaz e a atenuante genérica.
+    - id: erro-de-tipo
+      url: /disciplinas/direito-penal/erro-de-tipo/
+      eyebrow: Art. 20 do CP · erro essencial e acidental · áudio guiado
+      title: Erro de tipo
+      chrome_title: Erro de tipo
+      browser_title: Erro de tipo | Direito Penal
+      description: "Mapa do erro de tipo essencial, perdoável e imperdoável, e das modalidades acidentais: pessoa, execução, terceiro provocador e resultado diverso."
     - id: crimes-contra-a-honra
       url: /disciplinas/direito-penal/crimes-contra-a-honra/
       eyebrow: Mapa CDI · revisão ativa

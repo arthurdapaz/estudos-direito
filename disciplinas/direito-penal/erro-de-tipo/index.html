@@ -1,0 +1,263 @@
+---
+layout: study
+discipline_id: direito-penal
+study_id: erro-de-tipo
+study_style: /assets/studies/erro-de-tipo.css
+body_class: study-standard
+permalink: /disciplinas/direito-penal/erro-de-tipo/
+---
+
+<main class="page">
+  <a class="crumb" href="../">← Direito Penal</a>
+
+  <header class="hero">
+    <div>
+      <p class="eyebrow">Teoria do crime · art. 20 do CP</p>
+      <h1>Erro de tipo</h1>
+    </div>
+    <div class="formula">
+      <strong>O agente erra sobre a realidade do fato.</strong>
+      <p>O erro essencial pode retirar o dolo; o acidental, em regra, não impede a responsabilização pelo resultado juridicamente relevante.</p>
+    </div>
+  </header>
+
+  <section class="audio-bar" aria-label="Áudio guiado">
+    <button type="button" id="prevAudio" aria-label="Ouvir item anterior">←</button>
+    <button type="button" class="primary" id="toggleGuide">▶ Iniciar guia</button>
+    <button type="button" id="nextAudio" aria-label="Ouvir próximo item">→</button>
+    <div class="audio-status" id="audioStatus" aria-live="polite">Leitura pronta: visão geral.</div>
+    <audio id="studyAudio" preload="metadata"></audio>
+  </section>
+
+  <section class="statute" aria-labelledby="statute-title">
+    <p class="section-label">Texto do Código</p>
+    <h2 id="statute-title">Art. 20 — O ponto de partida</h2>
+    <p class="statute-text">O erro sobre elemento constitutivo do tipo legal de crime <mark>exclui o dolo</mark>, mas permite a punição por crime culposo, se previsto em lei.</p>
+    <p class="statute-note">Não confunda erro de tipo com erro sobre a ilicitude do fato: este último é tratado no art. 21 do Código Penal.</p>
+  </section>
+
+  <section class="map" aria-labelledby="map-title">
+    <div class="section-heading">
+      <p class="section-label" id="map-title">Mapa do instituto</p>
+      <p class="section-intro">O erro pode ser essencial — atinge elemento do tipo — ou acidental — altera aspectos secundários da execução ou do resultado.</p>
+    </div>
+    <div class="error-tree" id="errorTree" role="tablist" aria-label="Classificações do erro de tipo">
+      <button class="tree-root active" type="button" role="tab" data-id="visao-geral" aria-selected="true"><span>00</span><strong>Erro de tipo</strong><em>art. 20, caput</em></button>
+      <div class="tree-branch essential">
+        <div class="branch-heading"><span>01</span><strong>Essencial</strong><em>elemento do tipo</em></div>
+        <button class="tree-card" type="button" role="tab" data-id="essencial-perdoavel" aria-selected="false"><span>01A</span><strong>Perdoável</strong><em>inevitável</em></button>
+        <button class="tree-card" type="button" role="tab" data-id="essencial-imperdoavel" aria-selected="false"><span>01B</span><strong>Imperdoável</strong><em>evitável</em></button>
+      </div>
+      <div class="tree-branch accidental">
+        <div class="branch-heading"><span>02</span><strong>Acidental</strong><em>aspecto secundário</em></div>
+        <button class="tree-card" type="button" role="tab" data-id="erro-pessoa" aria-selected="false"><span>02A</span><strong>Erro sobre a pessoa</strong><em>art. 20, § 3º</em></button>
+        <button class="tree-card" type="button" role="tab" data-id="erro-execucao" aria-selected="false"><span>02B</span><strong>Erro na execução</strong><em>art. 73</em></button>
+        <button class="tree-card" type="button" role="tab" data-id="erro-terceiro" aria-selected="false"><span>02C</span><strong>Erro provocado por terceiro</strong><em>art. 20, § 2º</em></button>
+        <button class="tree-card" type="button" role="tab" data-id="resultado-diverso" aria-selected="false"><span>02D</span><strong>Resultado diverso do pretendido</strong><em>art. 74</em></button>
+      </div>
+    </div>
+  </section>
+
+  <article class="detail" id="detail" aria-live="polite"></article>
+
+  <section class="comparison" aria-labelledby="compare-title">
+    <p class="section-label" id="compare-title">Teste de distinção</p>
+    <h2>Qual pergunta separa as figuras?</h2>
+    <div class="compare-grid">
+      <article><strong>Essencial</strong><p>O agente desconhece um elemento que integra o tipo penal?</p></article>
+      <article><strong>Sobre a pessoa</strong><p>Ele queria atingir uma pessoa, mas confundiu sua identidade?</p></article>
+      <article><strong>Na execução</strong><p>Ele identificou a vítima, mas errou o golpe ou o disparo?</p></article>
+      <article><strong>Resultado diverso</strong><p>A execução produziu resultado diferente daquele que ele pretendia?</p></article>
+    </div>
+  </section>
+
+  <section class="quiz" aria-labelledby="quiz-title">
+    <p class="section-label">Fixação</p>
+    <h2 id="quiz-title">Qual modalidade aparece?</h2>
+    <p id="quizQuestion"></p>
+    <div id="quizOptions"></div>
+    <p id="quizFeedback" class="feedback" aria-live="polite"></p>
+    <div class="quiz-nav"><button type="button" id="prevQuestion" aria-label="Pergunta anterior">←</button><button type="button" id="nextQuestion" aria-label="Próxima pergunta">→</button></div>
+  </section>
+
+  <p class="source">Base: <a href="https://www.planalto.gov.br/ccivil_03/decreto-lei/del2848compilado.htm">Código Penal, arts. 20, 73 e 74 (Planalto)</a>. Material de estudo; a classificação e a responsabilização dependem do tipo penal e das circunstâncias provadas no caso concreto.</p>
+</main>
+
+<script>
+const studyData = {
+  overview: {
+    id: 'visao-geral',
+    number: '00',
+    title: 'O mapa do erro de tipo',
+    article: 'CP · art. 20',
+    short: 'Erro de tipo é o erro sobre elemento constitutivo do tipo legal. O essencial atinge o núcleo do tipo; o acidental altera a pessoa, a execução, o agente provocador ou o resultado.',
+    sections: [
+      { title: 'Primeiro corte', items: ['Essencial: o agente não percebe corretamente um elemento do tipo penal.', 'Acidental: o agente sabe que atua contra um bem juridicamente protegido, mas erra um aspecto secundário da conduta ou do resultado.', 'Regra do art. 20, caput: o erro sobre elemento constitutivo exclui o dolo, mas pode permitir punição por culpa quando houver previsão legal.'] },
+      { title: 'Não confundir', items: ['Erro de tipo recai sobre os fatos ou sobre elemento do tipo.', 'Erro de proibição recai sobre a consciência da ilicitude e está no art. 21.', '“Perdoável” e “imperdoável” são rótulos didáticos; tecnicamente, fala-se em erro inevitável e evitável.'] }
+    ],
+    narration: 'Visão geral. Erro de tipo é o erro sobre elemento constitutivo do tipo legal de crime. A regra do artigo vinte, caput, é: esse erro exclui o dolo, mas permite a punição por crime culposo, se previsto em lei. O erro essencial atinge o núcleo do tipo. Ele pode ser perdoável, ou inevitável, e imperdoável, ou evitável. O erro acidental não recai sobre o núcleo do tipo; envolve, por exemplo, a pessoa atingida, a execução, o terceiro que provoca o erro ou o resultado diverso do pretendido. Não confunda erro de tipo, que recai sobre fatos ou elementos do tipo, com erro de proibição, que recai sobre a consciência da ilicitude e está no artigo vinte e um.'
+  },
+  chapters: [
+    {
+      id: 'essencial-perdoavel', number: '01A', title: 'Essencial perdoável', article: 'Inevitável ou escusável',
+      short: 'O agente erra sobre elemento do tipo e, nas circunstâncias, não era possível evitar o erro. O dolo e a culpa ficam excluídos.',
+      sections: [
+        { title: 'Efeito', items: ['Exclui o dolo porque falta conhecimento sobre elemento do tipo.', 'Também exclui a culpa quando o erro era inevitável, mesmo com o cuidado objetivamente exigível.', 'Se não houver modalidade culposa prevista para aquele crime, não há punição pelo tipo doloso.'] },
+        { title: 'Exemplo', items: ['A pessoa pega uma mochila idêntica à sua, sem qualquer sinal que permitisse reconhecer o bem alheio.', 'O erro recai sobre “coisa alheia”, elemento do furto.', 'Rótulo técnico: erro de tipo essencial inevitável ou escusável.'] }
+      ],
+      narration: 'Erro essencial perdoável, também chamado inevitável ou escusável. O agente erra sobre elemento do tipo e, nas circunstâncias, não era possível evitar o erro. O dolo é excluído porque falta conhecimento sobre elemento do tipo. A culpa também fica excluída quando o erro era inevitável, mesmo com o cuidado objetivamente exigível. Exemplo: a pessoa pega uma mochila idêntica à sua, sem qualquer sinal que permitisse reconhecer o bem alheio. O erro recai sobre o elemento coisa alheia, do furto. Este é o erro de tipo essencial inevitável.'
+    },
+    {
+      id: 'essencial-imperdoavel', number: '01B', title: 'Essencial imperdoável', article: 'Evitável ou inescusável',
+      short: 'O agente erra sobre elemento do tipo, mas poderia ter evitado o erro com o cuidado exigível. O dolo cai; a culpa pode permanecer.',
+      sections: [
+        { title: 'Efeito', items: ['Também exclui o dolo: o agente não conhece corretamente o elemento do tipo.', 'Como o erro era evitável, pode haver punição por crime culposo, se o tipo admitir essa modalidade.', 'Não existe conversão automática para culpa: é preciso haver previsão legal e comportamento culposo.'] },
+        { title: 'Exemplo', items: ['A pessoa pega a mochila alheia sem conferir a etiqueta, embora existam sinais claros de que não é sua.', 'O erro sobre a coisa alheia era evitável.', 'Rótulo técnico: erro de tipo essencial evitável ou inescusável.'] }
+      ],
+      narration: 'Erro essencial imperdoável, também chamado evitável ou inescusável. O agente erra sobre elemento do tipo, mas poderia ter evitado o erro com o cuidado exigível. O dolo cai porque ele não conhece corretamente o elemento do tipo. Como o erro era evitável, pode haver punição por crime culposo, se o tipo admitir essa modalidade. Não existe conversão automática para culpa: é preciso haver previsão legal e comportamento culposo. Exemplo: a pessoa pega a mochila alheia sem conferir a etiqueta, embora existam sinais claros de que não é sua.'
+    },
+    {
+      id: 'erro-pessoa', number: '02A', title: 'Erro sobre a pessoa', article: 'Art. 20, § 3º · error in persona',
+      short: 'O agente quer atingir determinada pessoa, mas a confunde com outra. O erro não isenta de pena: consideram-se as condições da vítima pretendida.',
+      sections: [
+        { title: 'Regra', items: ['A identidade da vítima é confundida, mas o agente mantém a intenção de praticar o crime contra uma pessoa.', 'O art. 20, § 3º, determina que o erro não isenta de pena.', 'Não se consideram as condições ou qualidades da vítima efetivamente atingida, mas as da pessoa contra quem o agente queria praticar o crime.'] },
+        { title: 'Exemplo', items: ['O agente quer matar A, confunde B com A e mata B.', 'Responde como se tivesse atingido A para a análise das condições pessoais da vítima pretendida.', 'Não confundir: aqui o erro é de identificação; no erro na execução, o alvo é identificado, mas o golpe ou disparo desvia.'] }
+      ],
+      narration: 'Erro sobre a pessoa, ou error in persona. O agente quer atingir determinada pessoa, mas a confunde com outra. O artigo vinte, parágrafo terceiro, determina que o erro não isenta de pena. As condições ou qualidades consideradas são as da pessoa contra quem o agente queria praticar o crime, e não as da vítima efetivamente atingida. Exemplo: o agente quer matar A, confunde B com A e mata B. Aqui o erro é de identificação. No erro na execução, o alvo é identificado, mas o golpe ou disparo desvia.'
+    },
+    {
+      id: 'erro-execucao', number: '02B', title: 'Erro na execução', article: 'Art. 73 · aberratio ictus',
+      short: 'O agente identifica corretamente a vítima, mas erra a execução e atinge pessoa diversa. Aplica-se a regra do erro sobre a pessoa.',
+      sections: [
+        { title: 'Regra', items: ['O alvo pretendido é conhecido; o desvio ocorre no disparo, golpe ou outro ato executório.', 'O art. 73 manda aplicar a regra do art. 20, § 3º, sobre o erro quanto à pessoa.', 'Se também atinge a vítima pretendida, aplica-se a regra do concurso formal do art. 70.'] },
+        { title: 'Exemplo', items: ['O agente mira em A, mas erra o disparo e atinge B.', 'Não houve confusão sobre quem era A: houve falha na execução.', 'Nome clássico: aberratio ictus, ou desvio do golpe.'] }
+      ],
+      narration: 'Erro na execução, ou aberratio ictus. O agente identifica corretamente a vítima, mas erra a execução e atinge pessoa diversa. O artigo setenta e três manda aplicar a regra do erro sobre a pessoa, do artigo vinte, parágrafo terceiro. Exemplo: o agente mira em A, mas erra o disparo e atinge B. Não houve confusão sobre quem era A; houve falha na execução. Se também atingir a vítima pretendida, aplica-se a regra do concurso formal do artigo setenta.'
+    },
+    {
+      id: 'erro-terceiro', number: '02C', title: 'Erro provocado por terceiro', article: 'Art. 20, § 2º',
+      short: 'Uma terceira pessoa induz o agente em erro. Pelo crime, responde quem determinou o erro; a situação de quem atuou enganado é analisada conforme sua conduta.',
+      sections: [
+        { title: 'Regra', items: ['O erro não nasce sozinho: alguém o provoca ou determina.', 'O art. 20, § 2º, estabelece que responde pelo crime o terceiro que determina o erro.', 'A responsabilidade de quem foi enganado depende do que ele sabia, do cuidado exigível e da existência de modalidade culposa.'] },
+        { title: 'Exemplo', items: ['C, querendo lesionar B, entrega a A uma informação falsa que faz A agir contra B.', 'C é o terceiro provocador e responde pelo crime que determinou.', 'Não confundir com erro essencial espontâneo: aqui existe uma pessoa por trás da falsa representação.'] }
+      ],
+      narration: 'Erro provocado por terceiro. Uma terceira pessoa induz o agente em erro. O artigo vinte, parágrafo segundo, estabelece que responde pelo crime o terceiro que determina o erro. A responsabilidade de quem foi enganado depende do que ele sabia, do cuidado exigível e da existência de modalidade culposa. Exemplo: C, querendo lesionar B, entrega a A uma informação falsa que faz A agir contra B. C é o terceiro provocador e responde pelo crime que determinou. Aqui existe uma pessoa por trás da falsa representação.'
+    },
+    {
+      id: 'resultado-diverso', number: '02D', title: 'Resultado diverso do pretendido', article: 'Art. 74 · aberratio criminis',
+      short: 'Fora do caso do art. 73, o acidente ou erro na execução produz resultado diferente do querido. O agente responde por culpa se houver previsão legal.',
+      sections: [
+        { title: 'Regra', items: ['O agente queria produzir um resultado, mas sobrevém outro, diferente do pretendido.', 'Aplica-se o resultado diverso quando não for caso de erro na pessoa do art. 73.', 'O agente responde por culpa pelo resultado diverso, se o fato for previsto como crime culposo.'] },
+        { title: 'Exemplo e limite', items: ['O agente atira para quebrar uma vitrine, mas atinge uma pessoa e causa lesão.', 'Se também ocorre o resultado pretendido, aplica-se a regra do concurso formal do art. 70.', 'Nome clássico: aberratio criminis, ou resultado diverso do pretendido.'] }
+      ],
+      narration: 'Resultado diverso do pretendido, ou aberratio criminis. Fora do caso do artigo setenta e três, o acidente ou erro na execução produz resultado diferente do querido. O agente responde por culpa pelo resultado diverso, se o fato for previsto como crime culposo. Exemplo: o agente atira para quebrar uma vitrine, mas atinge uma pessoa e causa lesão. Se também ocorrer o resultado pretendido, aplica-se a regra do concurso formal do artigo setenta. A pergunta-chave é: não foi apenas outra pessoa atingida; surgiu resultado de natureza diversa.'
+    }
+  ],
+  quiz: [
+    { question: 'A pessoa pega uma mochila alheia idêntica à sua, sem qualquer sinal que permitisse evitar o engano. Qual classificação?', options: ['Erro essencial perdoável.', 'Erro sobre a pessoa.', 'Erro na execução.'], answer: 0, explanation: 'O erro recai sobre elemento do tipo — coisa alheia — e era inevitável: essencial perdoável.' },
+    { question: 'O agente mira em A, que foi corretamente identificado, mas o disparo desvia e atinge B. Qual modalidade?', options: ['Erro sobre a pessoa.', 'Erro na execução.', 'Resultado diverso do pretendido.'], answer: 1, explanation: 'O alvo foi identificado; o que falhou foi a execução. É aberratio ictus, art. 73.' },
+    { question: 'O agente quer quebrar uma vitrine, mas atinge uma pessoa e causa lesão. Em regra, qual é a figura?', options: ['Resultado diverso do pretendido.', 'Erro essencial imperdoável.', 'Erro sobre a pessoa.'], answer: 0, explanation: 'Surge resultado de natureza diversa do pretendido: art. 74, aberratio criminis, com responsabilização culposa se prevista.' },
+    { question: 'O agente confunde B com A e pratica contra B o crime que queria praticar contra A. Qual regra?', options: ['Erro sobre a pessoa, art. 20, § 3º.', 'Erro na execução, art. 73.', 'Erro provocado por terceiro, art. 20, § 2º.'], answer: 0, explanation: 'Aqui há erro de identificação da vítima, sem desvio do golpe: erro sobre a pessoa.' },
+    { question: 'No erro essencial imperdoável, qual é a consequência correta?', options: ['O dolo é excluído e a culpa pode ser punida se prevista em lei.', 'O fato sempre deixa de ser crime.', 'A pena é automaticamente reduzida de um terço.'], answer: 0, explanation: 'O erro evitável exclui o dolo, mas pode permitir punição por culpa quando houver tipo culposo e conduta negligente.' }
+  ]
+};
+
+const sequence = [studyData.overview, ...studyData.chapters];
+const errorTree = document.querySelector('#errorTree');
+const detail = document.querySelector('#detail');
+const audio = document.querySelector('#studyAudio');
+const audioStatus = document.querySelector('#audioStatus');
+const toggleGuide = document.querySelector('#toggleGuide');
+const quizQuestion = document.querySelector('#quizQuestion');
+const quizOptions = document.querySelector('#quizOptions');
+const quizFeedback = document.querySelector('#quizFeedback');
+let currentItem = studyData.overview;
+let guidePlaying = false;
+let quizIndex = 0;
+let synthetic = null;
+
+function updateStatus(text) { audioStatus.textContent = text; }
+function stopSpeech() { if ('speechSynthesis' in window) speechSynthesis.cancel(); synthetic = null; }
+function speechActive() { return 'speechSynthesis' in window && speechSynthesis.speaking && !speechSynthesis.paused; }
+function audioActive() { return !audio.paused || speechActive(); }
+
+function loadAudio(item) {
+  if (audio.dataset.itemId !== item.id) { audio.src = `audio/${item.id}.mp3`; audio.dataset.itemId = item.id; audio.load(); }
+  updateStatus(`Leitura pronta: ${item.title}.`);
+  toggleGuide.textContent = '▶ Iniciar guia';
+}
+
+function speakFallback(item) {
+  if (!('speechSynthesis' in window)) { updateStatus('Narração indisponível neste navegador.'); return; }
+  stopSpeech();
+  synthetic = new SpeechSynthesisUtterance(item.narration);
+  synthetic.lang = 'pt-BR'; synthetic.rate = 0.94; synthetic.pitch = 0.82;
+  synthetic.onend = () => { toggleGuide.textContent = '▶ Ouvir item'; updateStatus(`Leitura concluída: ${item.title}.`); };
+  speechSynthesis.speak(synthetic);
+  toggleGuide.textContent = 'Ⅱ Pausar'; updateStatus(`Fallback de voz: ${item.title}.`);
+}
+
+async function playCurrent() {
+  stopSpeech();
+  try { await audio.play(); toggleGuide.textContent = 'Ⅱ Pausar'; updateStatus(`Reproduzindo: ${currentItem.title}.`); }
+  catch (error) { speakFallback(currentItem); }
+}
+
+function pauseCurrent() {
+  guidePlaying = false; audio.pause(); if (speechActive()) speechSynthesis.pause();
+  toggleGuide.textContent = '▶ Retomar'; updateStatus(`Leitura pausada: ${currentItem.title}.`);
+}
+
+function selectItem(item, shouldPlay) {
+  currentItem = item;
+  renderDetail(item);
+  loadAudio(item);
+  if (shouldPlay) playCurrent();
+}
+
+function moveAudio(delta, shouldPlay) {
+  const index = Math.max(0, sequence.findIndex((item) => item.id === currentItem.id));
+  selectItem(sequence[(index + delta + sequence.length) % sequence.length], shouldPlay);
+}
+
+function renderDetail(item) {
+  errorTree.querySelectorAll('[data-id]').forEach((button) => {
+    const active = button.dataset.id === item.id;
+    button.classList.toggle('active', active);
+    button.setAttribute('aria-selected', active ? 'true' : 'false');
+  });
+  detail.innerHTML = `<small>${item.id === 'visao-geral' ? 'visão geral' : `${item.number} · ${item.article}`}</small><h2>${item.title}</h2><p class="lede">${item.short}</p>${item.sections.map((section) => `<section class="detail-section"><h3>${section.title}</h3><ul>${section.items.map((entry) => `<li>${entry}</li>`).join('')}</ul></section>`).join('')}<div class="controls"><button class="button" type="button" id="hearItem">▶ Ouvir este tópico</button><button class="button" type="button" id="nextItem">${item.id === 'visao-geral' ? 'Começar pelo essencial →' : 'Próximo tópico →'}</button></div><p class="note">A classificação depende do elemento atingido pelo erro e das circunstâncias concretas. Não trate este mapa de estudo como parecer jurídico.</p>`;
+  document.querySelector('#hearItem').onclick = () => { guidePlaying = false; selectItem(item, true); };
+  document.querySelector('#nextItem').onclick = () => { guidePlaying = false; const index = sequence.indexOf(item); selectItem(sequence[(index + 1) % sequence.length], false); };
+}
+
+errorTree.addEventListener('click', (event) => { const button = event.target.closest('[data-id]'); if (button) { guidePlaying = false; selectItem(sequence.find((item) => item.id === button.dataset.id), false); } });
+document.querySelector('#prevAudio').onclick = () => moveAudio(-1, true);
+document.querySelector('#nextAudio').onclick = () => moveAudio(1, true);
+toggleGuide.onclick = () => { if (audioActive()) { guidePlaying = false; pauseCurrent(); } else { guidePlaying = true; playCurrent(); } };
+audio.addEventListener('error', () => { updateStatus('MP3 indisponível. Fallback de voz pronto.'); toggleGuide.textContent = '▶ Narrar'; });
+audio.addEventListener('ended', () => {
+  const index = sequence.findIndex((item) => item.id === currentItem.id);
+  if (guidePlaying && index < sequence.length - 1) selectItem(sequence[index + 1], true);
+  else { guidePlaying = false; toggleGuide.textContent = index === sequence.length - 1 ? '↻ Ouvir novamente' : '▶ Ouvir item'; updateStatus(index === sequence.length - 1 ? 'Guia concluído.' : `Leitura concluída: ${currentItem.title}.`); }
+});
+
+function renderQuiz() {
+  const quiz = studyData.quiz[quizIndex];
+  quizQuestion.textContent = quiz.question;
+  quizOptions.innerHTML = quiz.options.map((option, index) => `<button class="answer" type="button" data-index="${index}">${option}</button>`).join('');
+  quizFeedback.textContent = '';
+  quizOptions.querySelectorAll('.answer').forEach((button) => button.addEventListener('click', () => {
+    const correct = Number(button.dataset.index) === quiz.answer;
+    quizOptions.querySelectorAll('.answer').forEach((option) => option.classList.toggle('correct-answer', Number(option.dataset.index) === quiz.answer));
+    button.classList.add(correct ? 'ok' : 'no');
+    quizFeedback.textContent = `${correct ? 'Correto. ' : 'Revise. '}${quiz.explanation}`;
+  }));
+}
+
+document.querySelector('#prevQuestion').onclick = () => { quizIndex = (quizIndex - 1 + studyData.quiz.length) % studyData.quiz.length; renderQuiz(); };
+document.querySelector('#nextQuestion').onclick = () => { quizIndex = (quizIndex + 1) % studyData.quiz.length; renderQuiz(); };
+renderDetail(studyData.overview);
+loadAudio(studyData.overview);
+renderQuiz();
+</script>
