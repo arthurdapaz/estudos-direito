@@ -124,4 +124,11 @@
       title: "Teoria geral: vida, dignidade e eficácia"
       chrome_title: Teoria geral dos direitos fundamentais
       browser_title: Teoria geral dos direitos fundamentais | Direito Constitucional I
-      description: Para que servem os direitos fundamentais — o esteio Vida e Dignidade, as eficácias vertical, horizontal e diagonal, e o caráter declarado, mas não absoluto, desses direitos.
+      description: Para que servem os direitos fundamentais — eficácia, caráter declarado mas não absoluto, e a evolução em dimensões ligada à Revolução Francesa.
+    - id: isonomia-e-legalidade
+      url: /disciplinas/direito-constitucional-i/isonomia-e-legalidade/
+      eyebrow: Arts. 5º e 37 da CF · ponto de prova
+      title: "Isonomia e legalidade"
+      chrome_title: Isonomia e legalidade
+      browser_title: Isonomia e legalidade | Direito Constitucional I
+      description: Igualdade formal e material, princípio da isonomia, legalidade para particulares, mandados constitucionais de criminalização, Súmula Vinculante 44 e legalidade na Administração Pública.

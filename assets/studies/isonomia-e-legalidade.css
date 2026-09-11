@@ -1,0 +1,112 @@
+/* Isonomia e legalidade — trilha constitucional ordenada pelos dispositivos. */
+
+.constitutional-order {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1px;
+  margin: 0 0 clamp(72px, 9vw, 104px);
+  border-block: 1px solid rgba(13, 13, 15, 0.14);
+  background: rgba(13, 13, 15, 0.14);
+}
+
+.article-card {
+  display: grid;
+  align-content: start;
+  gap: 9px;
+  min-height: 190px;
+  padding: 22px 20px;
+  border: 0;
+  background: #f7f7f8;
+  color: #0d0d0f;
+  text-align: left;
+  cursor: pointer;
+}
+
+.article-card:hover,
+.article-card:focus-visible,
+.article-card.active {
+  background: rgba(199, 31, 45, 0.065);
+}
+
+.article-card small {
+  color: #c71f2d;
+  font: 600 0.68rem/1.2 "Barlow Condensed", sans-serif;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.article-card strong {
+  font: 600 clamp(1.5rem, 2.7vw, 2.2rem)/0.96 "Barlow Condensed", sans-serif;
+}
+
+.article-card span {
+  color: #66656a;
+  font-size: 0.86rem;
+  line-height: 1.45;
+}
+
+.proof-callout {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 20px;
+  align-items: center;
+  margin: 0 0 clamp(72px, 9vw, 104px);
+  padding: 22px 0;
+  border-block: 1px solid rgba(199, 31, 45, 0.34);
+}
+
+.proof-callout strong {
+  color: #c71f2d;
+  font: 600 0.76rem/1.2 "Barlow Condensed", sans-serif;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.proof-callout p {
+  max-width: 65ch;
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.55;
+}
+
+.article-tag {
+  display: inline-flex;
+  width: fit-content;
+  min-height: 27px;
+  align-items: center;
+  padding: 0 9px;
+  border: 1px solid currentColor;
+  color: var(--accent, #c71f2d);
+  font: 600 0.68rem/1.2 "Barlow Condensed", sans-serif;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.rule-box {
+  margin-top: 26px;
+  padding: 18px 20px;
+  border-left: 3px solid var(--accent, #c71f2d);
+  background: rgba(199, 31, 45, 0.06);
+}
+
+.rule-box strong {
+  display: block;
+  color: #c71f2d;
+  font: 600 0.7rem/1.2 "Barlow Condensed", sans-serif;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.rule-box p {
+  margin: 8px 0 0;
+  line-height: 1.55;
+}
+
+@media (max-width: 900px) {
+  .constitutional-order { grid-template-columns: 1fr; }
+  .article-card { min-height: 0; }
+}
+
+@media (max-width: 620px) {
+  .proof-callout { grid-template-columns: 1fr; gap: 8px; }
+}

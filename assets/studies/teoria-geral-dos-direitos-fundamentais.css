@@ -286,8 +286,7 @@ audio { display: none; }
   gap: 18px;
   align-items: center;
   width: 100%;
-  margin: 0 0 clamp(72px, 9vw, 104px);
-  padding: 8px 0 22px;
+  margin: 0 0 36px;
   border: 0;
   background: transparent;
   color: #0d0d0f;
@@ -328,6 +327,57 @@ audio { display: none; }
 
 .limit-pair:is(:hover, :focus-visible, .active) {
   background: rgba(102, 85, 111, 0.07);
+}
+
+.dimensions {
+  margin: 0 0 clamp(72px, 9vw, 104px);
+}
+
+.dimensions-kicker {
+  margin: 0 0 16px;
+  color: #2f6f53;
+  font: 600 0.7rem/1.2 "Barlow Condensed", sans-serif;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.dimensions-row {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 28px;
+}
+
+.dimension {
+  display: grid;
+  gap: 6px;
+  width: 100%;
+  min-height: 96px;
+  padding: 16px 0;
+  border: 0;
+  background: transparent;
+  color: #0d0d0f;
+  text-align: left;
+  cursor: pointer;
+}
+
+.dimension small {
+  color: #c71f2d;
+  font: 600 0.68rem/1.2 "Barlow Condensed", sans-serif;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.dimension strong {
+  font: 600 clamp(1.6rem, 3vw, 2.3rem)/0.95 "Barlow Condensed", sans-serif;
+}
+
+.dimension span {
+  color: #66656a;
+  font-size: 0.92rem;
+}
+
+.dimension:is(:hover, :focus-visible, .active) {
+  background: rgba(47, 111, 83, 0.07);
 }
 
 .study-shell {
@@ -464,5 +514,10 @@ audio { display: none; }
   .limit-pair {
     grid-template-columns: 1fr;
     gap: 10px;
+  }
+
+  .dimensions-row {
+    grid-template-columns: 1fr;
+    gap: 8px;
   }
 }
