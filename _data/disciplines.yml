@@ -38,7 +38,7 @@
   code: PEN
   name: Direito Penal
   url: /disciplinas/direito-penal/
-  description: Estudos de Direito Penal sobre teoria do crime, iter criminis, tentativa, arrependimento posterior, erro de tipo, concurso de pessoas, crimes contra a honra, legítima defesa e consunção.
+  description: Estudos de Direito Penal sobre teoria do crime, iter criminis, tentativa, arrependimento posterior, erro de tipo, concurso de pessoas, concurso de crimes, crimes contra a honra, legítima defesa e consunção.
   summary: Pressupostos do crime, formas de imputação e consequências jurídicas, com leitura sistemática da Parte Geral e aplicação aos tipos penais.
   studies_intro: Conteúdos separados por problema jurídico e finalidade de revisão.
   note_label: Leitura da disciplina
@@ -86,6 +86,13 @@
       chrome_title: Concurso de pessoas
       browser_title: Concurso de pessoas | Direito Penal
       description: Pluralidade de agentes e unidade de crime, com o vínculo psicológico no centro — autor, coautor, partícipe, copartícipe, cúmplice, pequena participação, desvio subjetivo e circunstâncias incomunicáveis.
+    - id: concurso-de-crimes
+      url: /disciplinas/direito-penal/concurso-de-crimes/
+      eyebrow: Arts. 69 a 71 do CP · áudio guiado
+      title: "Concurso de crimes: três formas de calcular"
+      chrome_title: Concurso de crimes
+      browser_title: Concurso de crimes | Direito Penal
+      description: Concurso material, concurso formal próprio e impróprio e crime continuado, organizados pela ordem dos arts. 69, 70 e 71 do Código Penal.
     - id: crimes-contra-a-honra
       url: /disciplinas/direito-penal/crimes-contra-a-honra/
       eyebrow: Mapa CDI · revisão ativa
