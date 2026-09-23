@@ -38,7 +38,7 @@
   code: PEN
   name: Direito Penal
   url: /disciplinas/direito-penal/
-  description: Estudos de Direito Penal sobre teoria do crime, iter criminis, tentativa, arrependimento posterior, erro de tipo, crimes contra a honra, legítima defesa e consunção.
+  description: Estudos de Direito Penal sobre teoria do crime, iter criminis, tentativa, arrependimento posterior, erro de tipo, concurso de pessoas, crimes contra a honra, legítima defesa e consunção.
   summary: Pressupostos do crime, formas de imputação e consequências jurídicas, com leitura sistemática da Parte Geral e aplicação aos tipos penais.
   studies_intro: Conteúdos separados por problema jurídico e finalidade de revisão.
   note_label: Leitura da disciplina
@@ -79,6 +79,13 @@
       chrome_title: Erro de tipo
       browser_title: Erro de tipo | Direito Penal
       description: "Mapa do erro de tipo essencial, perdoável e imperdoável, e das modalidades acidentais: pessoa, execução, terceiro provocador e resultado diverso."
+    - id: concurso-de-pessoas
+      url: /disciplinas/direito-penal/concurso-de-pessoas/
+      eyebrow: Arts. 29 a 31 do CP · áudio guiado
+      title: "Concurso de pessoas: autor, partícipe e o liame"
+      chrome_title: Concurso de pessoas
+      browser_title: Concurso de pessoas | Direito Penal
+      description: Pluralidade de agentes e unidade de crime, com o vínculo psicológico no centro — autor, coautor, partícipe, copartícipe, cúmplice, pequena participação, desvio subjetivo e circunstâncias incomunicáveis.
     - id: crimes-contra-a-honra
       url: /disciplinas/direito-penal/crimes-contra-a-honra/
       eyebrow: Mapa CDI · revisão ativa

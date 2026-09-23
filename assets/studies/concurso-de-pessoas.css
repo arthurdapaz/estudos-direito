@@ -1,0 +1,247 @@
+/* Concurso de pessoas — liame subjetivo, papéis dos agentes e arts. 29 a 31. */
+
+*, *::before, *::after { box-sizing: border-box; }
+html, body { min-width: 0; }
+body { margin: 0; }
+a { color: inherit; text-decoration: none; }
+button { font: inherit; color: inherit; }
+audio { display: none; }
+
+.skip-link {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  z-index: 40;
+  padding: 11px 14px;
+  background: #0d0d0f;
+  color: #fff;
+  transform: translateY(-160%);
+}
+.skip-link:focus { transform: translateY(0); }
+
+.audio-bar {
+  position: sticky;
+  top: 8px;
+  z-index: 20;
+  display: grid;
+  grid-template-columns: 44px auto 44px minmax(0, 1fr);
+  gap: 8px;
+  align-items: center;
+  margin: 0 0 clamp(48px, 7vw, 80px);
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(13, 13, 15, 0.14);
+  background: rgba(247, 247, 248, 0.96);
+}
+.audio-bar button { min-width: 44px; min-height: 44px; border: 0; background: transparent; cursor: pointer; }
+.audio-bar .primary { min-width: 148px; padding: 0 14px; background: #0d0d0f; color: #fff; font: 600 0.78rem/1 "Barlow Condensed", sans-serif; letter-spacing: 0.06em; text-transform: uppercase; }
+.audio-status { min-width: 0; padding: 0 8px; color: #66656a; font: 0.76rem/1.35 ui-sans-serif, system-ui, sans-serif; }
+
+.section-label { margin: 0 0 12px; color: #c71f2d; font: 600 0.7rem/1 "Barlow Condensed", sans-serif; letter-spacing: 0.12em; text-transform: uppercase; }
+.statute h2, .bond h2, .roles h2, .comparison h2, .quiz h2, .case h2 { margin: 0; font: 600 clamp(2rem, 4vw, 3.2rem)/.95 "Barlow Condensed", sans-serif; letter-spacing: -.015em; }
+
+.formula-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) auto minmax(0, 1.1fr) auto minmax(0, 1.35fr);
+  gap: 12px;
+  align-items: stretch;
+  margin: 0 0 clamp(48px, 7vw, 80px);
+}
+.formula-row article, .formula-row .operator {
+  display: grid;
+  align-content: center;
+  min-height: 120px;
+  padding: 18px;
+}
+.formula-row article { background: #fff; border-top: 3px solid #0d0d0f; }
+.formula-row article span { color: #c71f2d; font: 600 .7rem/1 "Barlow Condensed", sans-serif; letter-spacing: .12em; text-transform: uppercase; }
+.formula-row article strong { margin-top: 10px; font: 600 clamp(1.35rem, 2.4vw, 1.9rem)/1 "Barlow Condensed", sans-serif; }
+.formula-row article p { margin: 8px 0 0; color: #66656a; font-size: .88rem; line-height: 1.45; }
+.formula-row .operator { min-width: 48px; min-height: 0; padding: 0; color: #c71f2d; font: 600 1.8rem/1 "Barlow Condensed", sans-serif; text-align: center; }
+.formula-row .result { border-top-color: #c71f2d; background: #f7e9e9; }
+
+.bond {
+  margin-bottom: clamp(56px, 8vw, 96px);
+  padding: clamp(24px, 4vw, 42px);
+  background: #0d0d0f;
+  color: #fff;
+}
+.bond .section-label { color: #f0b0b0; }
+.bond h2 { color: #fff; max-width: 16ch; }
+.bond-quote {
+  max-width: 62ch;
+  margin: 22px 0 0;
+  font: 400 clamp(1.15rem, 2vw, 1.5rem)/1.45 Georgia, serif;
+}
+.bond p { max-width: 68ch; margin: 18px 0 0; color: #cfc9c9; font-size: .95rem; line-height: 1.55; }
+.bond strong { color: #fff; }
+
+.statute { margin-bottom: clamp(56px, 8vw, 96px); }
+.statute-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; margin-top: 24px; }
+.statute-card { min-width: 0; padding-top: 14px; border-top: 2px solid #0d0d0f; }
+.statute-card:first-child { border-top-color: #c71f2d; }
+.statute-card span { color: #c71f2d; font: 600 .7rem/1 "Barlow Condensed", sans-serif; letter-spacing: .1em; text-transform: uppercase; }
+.statute-card strong { display: block; margin: 10px 0 8px; font: 600 1.35rem/1 "Barlow Condensed", sans-serif; }
+.statute-card p { margin: 0; color: #66656a; font-size: .9rem; line-height: 1.5; }
+
+.author-defs { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin: 0 0 clamp(56px, 8vw, 96px); }
+.author-defs article { padding: 22px 0 0; border-top: 3px solid #0d0d0f; }
+.author-defs article:last-child { border-top-color: #c71f2d; }
+.author-defs span { color: #c71f2d; font: 600 .7rem/1 "Barlow Condensed", sans-serif; letter-spacing: .12em; text-transform: uppercase; }
+.author-defs h2 { margin: 12px 0 0; font: 600 clamp(1.7rem, 3vw, 2.4rem)/.95 "Barlow Condensed", sans-serif; }
+.author-defs p { margin: 12px 0 0; color: #333337; font-size: 1rem; line-height: 1.55; }
+.author-defs em { display: block; margin-top: 14px; color: #66656a; font-style: normal; font-size: .88rem; line-height: 1.5; }
+
+.section-heading { display: flex; justify-content: space-between; gap: 24px; align-items: baseline; }
+.section-intro { max-width: 48ch; margin: 0; color: #66656a; font-size: .95rem; line-height: 1.5; }
+
+.liame {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px 16px;
+  margin-top: 28px;
+}
+.liame::before {
+  position: absolute;
+  top: 50%;
+  right: 8%;
+  left: 8%;
+  z-index: 0;
+  height: 2px;
+  background: #c71f2d;
+  content: "";
+  transform: translateY(-50%);
+}
+.liame.broken::before {
+  background: repeating-linear-gradient(90deg, #c71f2d 0 10px, transparent 10px 18px);
+  opacity: .45;
+}
+.role-card, .crime-core {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  gap: 8px;
+  align-content: space-between;
+  min-height: 118px;
+  padding: 16px;
+  border: 1px solid rgba(13, 13, 15, 0.14);
+  background: #fff;
+  cursor: pointer;
+  text-align: left;
+}
+.role-card span, .crime-core span { color: #c71f2d; font: 600 .7rem/1 "Barlow Condensed", sans-serif; letter-spacing: .1em; text-transform: uppercase; }
+.role-card strong, .crime-core strong { font: 600 clamp(1.15rem, 1.8vw, 1.45rem)/1.05 "Barlow Condensed", sans-serif; overflow-wrap: anywhere; }
+.role-card em { color: #8a898e; font: 600 .66rem/1 "Barlow Condensed", sans-serif; letter-spacing: .1em; text-transform: uppercase; font-style: normal; }
+.role-card:hover, .role-card.active { border-color: #0d0d0f; background: #f7e9e9; }
+.crime-core {
+  grid-column: 2;
+  grid-row: 2;
+  cursor: default;
+  border: 0;
+  background: #0d0d0f;
+  color: #fff;
+}
+.crime-core span { color: #f0b0b0; }
+.role-card[data-id="autor"] { grid-column: 1; grid-row: 1; }
+.role-card[data-id="coautor"] { grid-column: 3; grid-row: 1; }
+.role-card[data-id="participe"] { grid-column: 1; grid-row: 2; }
+.role-card[data-id="coparticipe"] { grid-column: 3; grid-row: 2; }
+.role-card[data-id="complice"] { grid-column: 1; grid-row: 3; }
+.role-card[data-id="vinculo-psicologico"] { grid-column: 3; grid-row: 3; border-top: 3px solid #c71f2d; }
+
+.detail { margin-top: 16px; padding: clamp(24px, 5vw, 48px); border: 1px solid rgba(13, 13, 15, 0.14); background: #fff; }
+.detail small { display: block; margin-bottom: 12px; color: #c71f2d; font: 600 .7rem/1 "Barlow Condensed", sans-serif; letter-spacing: .12em; text-transform: uppercase; }
+.detail h2 { margin: 0; font: 600 clamp(2.2rem, 5vw, 4rem)/.9 "Barlow Condensed", sans-serif; letter-spacing: -.02em; }
+.detail .lede { max-width: 70ch; margin: 18px 0 0; font-size: clamp(1rem, 1.5vw, 1.1rem); line-height: 1.62; }
+.detail-section { display: inline-block; vertical-align: top; width: calc(50% - 14px); margin: 30px 24px 0 0; }
+.detail-section:nth-of-type(2n) { margin-right: 0; }
+.detail-section h3 { margin: 0; font: 600 1.2rem/1 "Barlow Condensed", sans-serif; }
+.detail ul { display: grid; gap: 11px; max-width: 74ch; margin: 14px 0 0; padding: 0; list-style: none; }
+.detail li { position: relative; padding-left: 20px; color: #333337; font-size: .95rem; line-height: 1.55; }
+.detail li::before { position: absolute; top: .68em; left: 0; width: 9px; height: 2px; background: #c71f2d; content: ""; }
+.controls { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 30px; }
+.button { min-height: 44px; padding: 0 14px; border: 1px solid #97131e; border-radius: 0; background: #fff; color: #97131e; font-weight: 700; cursor: pointer; }
+.button:hover { background: #f7e9e9; }
+.detail .note { margin: 22px 0 0; padding-top: 14px; border-top: 1px solid rgba(13, 13, 15, 0.14); color: #66656a; font-size: .88rem; line-height: 1.55; }
+.key-phrase { margin: 22px 0 0; padding: 16px 18px; border-left: 3px solid #c71f2d; background: #f7e9e9; }
+.key-phrase span { color: #c71f2d; font: 600 .68rem/1 "Barlow Condensed", sans-serif; letter-spacing: .12em; text-transform: uppercase; }
+.key-phrase strong { display: block; margin-top: 8px; font: 600 clamp(1.15rem, 2vw, 1.55rem)/1.2 "Barlow Condensed", sans-serif; }
+
+.topic-row { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; margin-top: 28px; }
+.topic-chip { min-height: 72px; padding: 12px 14px; border: 0; border-top: 2px solid rgba(13, 13, 15, .2); background: transparent; text-align: left; cursor: pointer; }
+.topic-chip span { display: block; color: #8a898e; font: 600 .66rem/1 "Barlow Condensed", sans-serif; letter-spacing: .1em; }
+.topic-chip strong { display: block; margin-top: 6px; font: 600 1.05rem/1.1 "Barlow Condensed", sans-serif; }
+.topic-chip.active, .topic-chip:hover { border-top-color: #c71f2d; background: #f7e9e9; }
+
+.comparison { margin-top: clamp(64px, 9vw, 108px); }
+.compare-table { margin-top: 24px; border-top: 2px solid #0d0d0f; }
+.compare-head, .compare-row { display: grid; grid-template-columns: 1.05fr 1.2fr 1.35fr; gap: 14px; padding: 15px 0; border-bottom: 1px solid rgba(13, 13, 15, 0.14); align-items: start; }
+.compare-head { color: #8a898e; font: 600 .68rem/1.2 "Barlow Condensed", sans-serif; letter-spacing: .1em; text-transform: uppercase; }
+.compare-row { color: #333337; font-size: .9rem; line-height: 1.45; }
+.compare-row strong { color: #0d0d0f; }
+.compare-row.highlighted { background: #f7e9e9; box-shadow: inset 3px 0 #c71f2d; }
+.compare-row.highlighted > *:first-child { padding-left: 12px; }
+
+.case { margin-top: clamp(64px, 9vw, 108px); }
+.case-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 18px; margin-top: 24px; }
+.case-grid article { min-width: 0; padding-top: 14px; border-top: 2px solid #0d0d0f; }
+.case-grid article:first-child { border-top-color: #c71f2d; }
+.case-grid span { color: #8a898e; font: 600 .68rem/1 "Barlow Condensed", sans-serif; letter-spacing: .1em; text-transform: uppercase; }
+.case-grid strong { display: block; margin: 8px 0; font: 600 1.25rem/1 "Barlow Condensed", sans-serif; }
+.case-grid p { margin: 0; color: #66656a; font-size: .88rem; line-height: 1.5; }
+
+.comm { margin-top: clamp(64px, 9vw, 108px); }
+.comm-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; margin-top: 24px; }
+.comm-grid article { padding-top: 14px; border-top: 3px solid #0d0d0f; }
+.comm-grid article:last-child { border-top-color: #c71f2d; }
+.comm-grid h3 { margin: 10px 0 0; font: 600 1.7rem/1 "Barlow Condensed", sans-serif; }
+.comm-grid p { margin: 12px 0 0; color: #66656a; font-size: .92rem; line-height: 1.55; }
+
+.quiz { margin-top: clamp(64px, 9vw, 108px); padding: clamp(24px, 5vw, 48px); background: #0d0d0f; color: #fff; }
+.quiz .section-label { color: #f0b0b0; }
+.quiz h2 { color: #fff !important; }
+.quiz > p:not(.section-label) { max-width: 74ch; margin: 22px 0 18px; color: #e4e2e2; line-height: 1.55; }
+.answer { display: block; width: 100%; max-width: 100%; margin-top: 8px; padding: 12px; border: 1px solid #ffffff35; background: transparent; cursor: pointer; text-align: left; }
+.answer:hover, .answer.correct-answer { border-color: #f0b0b0; }
+.answer.ok { border-color: #8ee6cc; background: #8ee6cc18; }
+.answer.no { border-color: #f0b0b0; background: #c71f2d30; }
+.feedback { min-height: 1.5em; margin: 18px 0 0; color: #f0b0b0 !important; font-size: .92rem; line-height: 1.55; }
+.quiz-nav { display: flex; gap: 8px; margin-top: 22px; }
+.quiz-nav button { width: 44px; height: 44px; border: 1px solid #ffffff45; background: transparent; color: #fff; cursor: pointer; }
+
+.source { margin-top: 36px; color: #66656a; font-size: .76rem; line-height: 1.5; }
+.source a { color: #97131e; font-weight: 800; }
+.source a:hover, .source a:focus-visible { outline: 2px solid #c71f2d; outline-offset: 3px; }
+
+@media (max-width: 980px) {
+  .formula-row { grid-template-columns: 1fr; }
+  .formula-row .operator { min-height: 28px; }
+  .statute-grid, .author-defs, .case-grid, .comm-grid { grid-template-columns: 1fr; }
+  .liame { grid-template-columns: 1fr 1fr; }
+  .liame::before { display: none; }
+  .crime-core, .role-card[data-id="autor"], .role-card[data-id="coautor"], .role-card[data-id="participe"], .role-card[data-id="coparticipe"], .role-card[data-id="complice"], .role-card[data-id="vinculo-psicologico"] {
+    grid-column: auto;
+    grid-row: auto;
+  }
+  .crime-core { grid-column: 1 / -1; min-height: 96px; }
+  .topic-row { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .compare-table { overflow-x: auto; }
+  .compare-head, .compare-row { min-width: 640px; }
+}
+
+@media (max-width: 620px) {
+  .audio-bar { grid-template-columns: 40px minmax(0, 1fr) 40px; }
+  .audio-bar .primary { grid-column: 1 / -1; grid-row: 1; }
+  .audio-bar button:first-child { grid-column: 1; grid-row: 2; }
+  .audio-bar button:nth-child(3) { grid-column: 3; grid-row: 2; }
+  .audio-status { grid-column: 2; grid-row: 2; padding: 0; text-align: center; }
+  .liame { grid-template-columns: 1fr; }
+  .crime-core { grid-column: auto; }
+  .detail-section { display: block; width: auto; margin-right: 0; }
+  .topic-row, .case-grid { grid-template-columns: 1fr; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+}
