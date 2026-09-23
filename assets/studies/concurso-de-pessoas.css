@@ -209,6 +209,23 @@ audio { display: none; }
 .quiz-nav { display: flex; gap: 8px; margin-top: 22px; }
 .quiz-nav button { width: 44px; height: 44px; border: 1px solid #ffffff45; background: transparent; color: #fff; cursor: pointer; }
 
+/* The shared study system sets dark text with !important; keep both dark panels readable. */
+body.study-standard .bond .section-label,
+body.study-standard .quiz .section-label {
+  color: #f0b0b0 !important;
+}
+
+body.study-standard .bond h2,
+body.study-standard .quiz h2 {
+  color: #fff !important;
+}
+
+body.study-standard .bond p,
+body.study-standard .quiz > p:not(.section-label),
+body.study-standard .quiz .feedback {
+  color: #f1e9e9 !important;
+}
+
 .source { margin-top: 36px; color: #66656a; font-size: .76rem; line-height: 1.5; }
 .source a { color: #97131e; font-weight: 800; }
 .source a:hover, .source a:focus-visible { outline: 2px solid #c71f2d; outline-offset: 3px; }
