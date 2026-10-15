@@ -122,8 +122,8 @@
   description: Estudos de Direito Constitucional I sobre poder constituinte, Constituição, direitos fundamentais e organização do Estado.
   summary: "A Constituição como fundamento da ordem jurídica: poder constituinte, princípios fundamentais, direitos e garantias, organização do Estado e distribuição de competências."
   studies_intro: Fundamentos constitucionais organizados para leitura e revisão ativa.
-  note_label: Organização correta
-  note: Este conteúdo pertence exclusivamente a Direito Constitucional I e permanece separado dos materiais de Direito Penal.
+  note_label: Revisão dos cadernos
+  note: Os temas seguem a ordem dos dispositivos constitucionais. A revisão das seis fotos inclui transcrição integral, ajustes jurídicos e identificação do conteúdo expressamente marcado para a prova.
   studies:
     - id: poder-constituinte
       url: /disciplinas/direito-constitucional-i/poder-constituinte/
@@ -146,3 +146,10 @@
       chrome_title: Isonomia e legalidade
       browser_title: Isonomia e legalidade | Direito Constitucional I
       description: Igualdade formal e material, princípio da isonomia, legalidade para particulares, mandados constitucionais de criminalização, Súmula Vinculante 44 e legalidade na Administração Pública.
+    - id: revisao-dos-cadernos
+      url: /disciplinas/direito-constitucional-i/revisao-dos-cadernos/
+      eyebrow: Arts. 1º, 5º, 37 e 103-A · caderno e prova
+      title: "Direitos fundamentais: revisão dos cadernos"
+      chrome_title: Revisão dos cadernos
+      browser_title: Revisão dos cadernos | Direito Constitucional I
+      description: "Transcrição das seis fotos e revisão em ordem constitucional: bioética, legalidade, algemas, ADPF 347, devido processo, defesa, provas, inocência e tratados de direitos humanos."

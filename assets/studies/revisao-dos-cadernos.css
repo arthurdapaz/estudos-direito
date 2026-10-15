@@ -1,0 +1,155 @@
+/* Caderno constitucional: leitura por dispositivo, revisão e fontes. */
+* { box-sizing: border-box; }
+body { margin: 0; }
+html { scroll-behavior: smooth; }
+.skip-link {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+}
+.skip-link:focus {
+  z-index: 100;
+  top: 12px;
+  left: 12px;
+  width: auto;
+  height: auto;
+  padding: 14px 18px;
+  clip-path: none;
+  background: #fff;
+  color: #97131e;
+}
+.notebook a { color: inherit; text-underline-offset: 4px; }
+.notebook .hero h1 { max-width: 13ch; }
+.notebook .hero-copy p { max-width: 48ch; }
+.notebook .reading-tools {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 24px;
+  align-items: center;
+  margin-bottom: 48px;
+}
+.notebook .reading-tools a,
+.notebook .reading-tools button {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+}
+.notebook button { cursor: pointer; }
+.notebook .reading-tools button {
+  padding: 10px 16px;
+  border: 0;
+  background: var(--study-carbon);
+  color: var(--study-paper);
+  font: inherit;
+}
+.notebook .review-layout {
+  display: grid;
+  grid-template-columns: minmax(180px, 0.28fr) minmax(0, 1fr);
+  gap: clamp(32px, 6vw, 80px);
+  align-items: start;
+}
+.notebook .article-index { position: sticky; top: 24px; }
+.notebook .article-index ol { padding: 0; margin: 0; list-style: none; }
+.notebook .article-index a {
+  display: grid;
+  gap: 4px;
+  min-height: 58px;
+  padding: 10px 0;
+  text-decoration: none;
+  font-size: 0.86rem;
+}
+.notebook .article-index a:hover { color: var(--study-red); }
+.notebook .article-index small {
+  color: var(--study-muted);
+  font: 600 0.72rem/1.2 "Barlow Condensed", sans-serif;
+  letter-spacing: 0.06em;
+}
+.notebook .topic { scroll-margin-top: 24px; border-top: 1px solid var(--study-line); }
+.notebook .topic > summary {
+  display: grid;
+  grid-template-columns: 1fr 24px;
+  gap: 12px;
+  padding: 26px 0;
+  cursor: pointer;
+  list-style: none;
+}
+.notebook .topic > summary::-webkit-details-marker { display: none; }
+.notebook .topic > summary::after { content: "+"; font: 500 1.8rem/1 "Barlow Condensed", sans-serif; }
+.notebook .topic[open] > summary::after { content: "−"; }
+.notebook .topic > summary small {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--study-red);
+  font: 600 0.75rem/1.2 "Barlow Condensed", sans-serif;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.notebook .topic > summary h2 { margin: 0; font-size: clamp(1.65rem, 3vw, 2.35rem); line-height: 1.08; }
+.notebook .topic-body { max-width: 76ch; padding-bottom: 46px; }
+.notebook .topic-body p,
+.notebook .topic-body li { line-height: 1.7; }
+.notebook .topic-body h3 { margin-top: 30px; font-size: 1.25rem; }
+.notebook .topic-body li + li { margin-top: 8px; }
+.notebook .topic-body ul,
+.notebook .topic-body ol { padding-left: 22px; }
+.notebook .revision-note {
+  margin-block: 24px;
+  padding: 16px 20px;
+  border-left: 3px solid var(--study-red);
+  background: rgba(199, 31, 45, 0.045);
+}
+.notebook .revision-note p { margin: 0; }
+.notebook .reference { color: var(--study-muted); font-size: 0.8rem; }
+.notebook .table-scroll { overflow-x: auto; }
+.notebook table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+.notebook th,
+.notebook td { padding: 14px 10px; border-bottom: 1px solid var(--study-line); text-align: left; vertical-align: top; line-height: 1.6; }
+.notebook th:first-child,
+.notebook td:first-child { padding-left: 0; }
+.notebook th { font-weight: 600; }
+.notebook .review-checklist,
+.notebook .notebook-appendix,
+.notebook .recall { margin-top: clamp(64px, 8vw, 100px); scroll-margin-top: 24px; }
+.notebook .review-checklist h2,
+.notebook .notebook-appendix h2,
+.notebook .recall h2 { max-width: 24ch; font-size: clamp(2rem, 4vw, 3rem); }
+.notebook .checklist { margin: 24px 0; padding: 0; list-style: none; }
+.notebook .checklist label {
+  display: flex;
+  align-items: start;
+  gap: 14px;
+  min-height: 52px;
+  padding-block: 12px;
+  line-height: 1.55;
+  cursor: pointer;
+}
+.notebook .checklist input { width: 20px; height: 20px; flex-shrink: 0; margin-top: 3px; accent-color: var(--study-red); }
+.notebook .checklist input:checked + span { color: var(--study-muted); text-decoration: line-through; }
+.notebook .recall details { padding-block: 18px; border-top: 1px solid var(--study-line); }
+.notebook .recall summary { min-height: 44px; cursor: pointer; line-height: 1.6; }
+.notebook .recall details p { max-width: 76ch; line-height: 1.7; }
+.notebook .notebook-appendix p { max-width: 76ch; line-height: 1.7; }
+.notebook [hidden] { display: none !important; }
+@media (max-width: 900px) {
+  .notebook .review-layout { grid-template-columns: 1fr; }
+  .notebook .article-index { position: static; }
+  .notebook .article-index ol { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 20px; }
+}
+@media (max-width: 540px) {
+  .notebook .article-index ol { grid-template-columns: 1fr; }
+  .notebook .topic > summary { padding-block: 22px; }
+  .notebook th, .notebook td { padding: 12px 6px; font-size: 0.8rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}
+@media print {
+  .study-site-chrome, .notebook .article-index, .notebook .reading-tools, .notebook .checklist input { display: none; }
+  .notebook .review-layout { display: block; }
+  .notebook .topic { break-inside: auto; }
+  .notebook .topic-body { display: block; }
+  .notebook .topic > summary { break-after: avoid; }
+}
